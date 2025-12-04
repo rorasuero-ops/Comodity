@@ -237,7 +237,8 @@
     .header-right {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      position: relative;
     }
 
     .logo-big {
@@ -260,14 +261,50 @@
       white-space: nowrap;
     }
 
-    .logout-button {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.7);
-      background: transparent;
-      color: #fff;
-      font-size: 12px;
+    .header-user-menu {
+      position: relative;
+    }
+
+    .header-user-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.8);
+      background: rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: bold;
       cursor: pointer;
+    }
+
+    .user-menu-dropdown {
+      position: absolute;
+      top: 40px;
+      right: 0;
+      background: #fff;
+      color: #333;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      padding: 4px 0;
+      min-width: 160px;
+      display: none;
+      z-index: 1200;
+    }
+
+    .user-menu-dropdown button {
+      width: 100%;
+      padding: 8px 12px;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .user-menu-dropdown button:hover {
+      background: #f5f5f5;
     }
 
     /* RULETA */
@@ -346,8 +383,6 @@
       font-size: 15px;
       color: #4e342e;
     }
-
-    /* iconitos alrededor de la ruleta */
 
     .ruleta-segment-icon {
       position: absolute;
@@ -483,7 +518,6 @@
         url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80");
     }
 
-    /* 👉 Ofertas fugaces: usá tu imagen del cupón con rayo */
     .cat-img-5 {
       background-image:
         linear-gradient(120deg, rgba(255,64,129,0.6), rgba(255,235,59,0.15)),
@@ -645,7 +679,7 @@
       cursor: pointer;
     }
 
-    /* popup cupones */
+    /* popup cupones / personales */
 
     .popup-title {
       font-size: 18px;
@@ -700,6 +734,28 @@
 
     .coupon-empty { font-size: 13px; color: var(--text-soft); margin-bottom: 12px; }
 
+    .personal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: left;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .personal-form label {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .personal-form input {
+      width: 100%;
+      padding: 7px 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 13px;
+    }
+
     @keyframes girar {
       from { transform: rotate(0deg); }
       to   { transform: rotate(1440deg); }
@@ -728,9 +784,9 @@
     </div>
 
     <form id="login-form" class="login-form">
-      <div>
+      <div id="group-name">
         <label for="login-name">Nombre</label>
-        <input id="login-name" type="text" placeholder="Ej: Javier Araujo" required />
+        <input id="login-name" type="text" placeholder="Ej: Javier Araujo" />
       </div>
       <div>
         <label for="login-email">Email</label>
@@ -794,7 +850,13 @@
         <div class="logo-big">C</div>
         <div class="title-text">Comodity</div>
       </div>
-      <button class="logout-button" onclick="logout()">Salir</button>
+      <div class="header-user-menu" onclick="toggleUserMenu(event)">
+        <div class="header-user-circle" id="header-user-circle">👤</div>
+        <div class="user-menu-dropdown" id="user-menu-dropdown" onclick="event.stopPropagation()">
+          <button type="button" onclick="openPersonalData()">Datos personales</button>
+          <button type="button" onclick="logout()">Salir</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -829,7 +891,6 @@
 
   <div class="categorias-title">Explorá por categoría</div>
   <div class="categorias">
-    <!-- Commodities -->
     <div class="categoria">
       <div class="cat-img cat-img-1">
         <div class="cat-discount-badge">
@@ -840,7 +901,6 @@
       <div class="cat-bottom"><span>Commodities</span></div>
     </div>
 
-    <!-- Hotelería -->
     <div class="categoria">
       <div class="cat-img cat-img-2">
         <div class="cat-discount-badge">
@@ -850,7 +910,6 @@
       <div class="cat-bottom"><span>Hotelería &amp; Viajes</span></div>
     </div>
 
-    <!-- Comida -->
     <div class="categoria">
       <div class="cat-img cat-img-3">
         <div class="cat-discount-badge">
@@ -860,7 +919,6 @@
       <div class="cat-bottom"><span>Comida</span></div>
     </div>
 
-    <!-- Productos -->
     <div class="categoria">
       <div class="cat-img cat-img-4">
         <div class="cat-discount-badge">
@@ -870,7 +928,6 @@
       <div class="cat-bottom"><span>Productos</span></div>
     </div>
 
-    <!-- Ofertas fugaces -->
     <div class="categoria">
       <div class="cat-img cat-img-5">
         <div class="cat-discount-badge">
@@ -914,8 +971,36 @@
   </div>
 </div>
 
+<!-- POPUP DATOS PERSONALES -->
+<div id="personal-overlay" class="overlay">
+  <div class="popup">
+    <div class="popup-title">
+      <span>👤</span><span>Datos personales</span>
+    </div>
+    <form id="personal-form" class="personal-form">
+      <div>
+        <label for="personal-name">Nombre completo</label>
+        <input id="personal-name" type="text" />
+      </div>
+      <div>
+        <label for="personal-address">Dirección</label>
+        <input id="personal-address" type="text" />
+      </div>
+      <div>
+        <label for="personal-birthdate">Fecha de nacimiento</label>
+        <input id="personal-birthdate" type="date" />
+      </div>
+      <div>
+        <label for="personal-phone">Teléfono</label>
+        <input id="personal-phone" type="tel" />
+      </div>
+      <button type="submit" class="reward-close">Guardar</button>
+      <button type="button" class="popup-close" style="margin-top:8px;" onclick="closePersonalData()">Cerrar</button>
+    </form>
+  </div>
+</div>
+
 <script>
-  /* Estado general */
   let saldoLibre = 0;
   let saldoLight = 0;
   let cupones = [];
@@ -927,7 +1012,10 @@
   let currentUserName = null;
   let isRegisterMode = false;
 
-  /* Lógica de premios */
+  let personalAddress = "";
+  let personalBirthDate = "";
+  let personalPhone = "";
+
   const outcomes = [
     { label: "Sin premio, suerte a la próxima 😢", type: "none", prob: 0.30 },
     { label: "$25 saldo libre", type: "saldoLibre", amount: 25, prob: 0.20 },
@@ -937,8 +1025,6 @@
     { label: "$20 saldo lightning para gastar en FerreBuceo", amount: 20, type: "saldoLightFerre", prob: 0.10 }
   ];
 
-  /* LOGIN / REGISTRO UI */
-
   function setRegisterMode(register) {
     isRegisterMode = register;
     const title   = document.getElementById("login-title");
@@ -946,6 +1032,8 @@
     const submit  = document.getElementById("login-submit");
     const swReg   = document.getElementById("switch-register");
     const swLog   = document.getElementById("switch-login");
+    const groupName = document.getElementById("group-name");
+    const nameInput = document.getElementById("login-name");
 
     if (register) {
       title.textContent  = "Creá tu cuenta en Comodity";
@@ -953,21 +1041,56 @@
       submit.textContent = "Crear cuenta";
       swReg.style.display = "none";
       swLog.style.display = "block";
+      groupName.style.display = "block";
+      nameInput.required = true;
     } else {
       title.textContent  = "Ingresá a Comodity";
       sub.textContent    = "Girá la ruleta y acumulá saldo y cupones para tus compras.";
       submit.textContent = "Entrar";
       swReg.style.display = "block";
       swLog.style.display = "none";
+      groupName.style.display = "none";
+      nameInput.required = false;
     }
   }
 
   function applyUserName() {
     const el = document.getElementById("user-name");
     if (el && currentUserName) el.textContent = currentUserName;
+    updateHeaderCircle();
   }
 
-  /* Carga de estado desde Firestore */
+  function updateHeaderCircle() {
+    const circle = document.getElementById("header-user-circle");
+    if (!circle) return;
+    let base = currentUserName;
+    const user = auth.currentUser;
+    if (!base && user) base = user.displayName || user.email || "";
+    if (!base) {
+      circle.textContent = "👤";
+      return;
+    }
+    const parts = base.trim().split(/\s+/);
+    let initials = "";
+    if (parts.length === 1) {
+      initials = parts[0].slice(0, 2);
+    } else {
+      initials = (parts[0][0] || "") + (parts[1][0] || "");
+    }
+    circle.textContent = initials.toUpperCase();
+  }
+
+  function toggleUserMenu(event) {
+    const menu = document.getElementById("user-menu-dropdown");
+    if (!menu) return;
+    const visible = menu.style.display === "block";
+    menu.style.display = visible ? "none" : "block";
+  }
+
+  document.addEventListener("click", () => {
+    const menu = document.getElementById("user-menu-dropdown");
+    if (menu) menu.style.display = "none";
+  });
 
   async function loadUserStateFromFirestore(user) {
     try {
@@ -975,12 +1098,16 @@
       const snap = await docRef.get();
       if (snap.exists) {
         const data = snap.data();
-        saldoLibre        = typeof data.saldoLibre === "number" ? data.saldoLibre : 0;
-        saldoLight        = typeof data.saldoLight === "number" ? data.saldoLight : 0;
-        tiradasRestantes  = typeof data.tiradasRestantes === "number" ? data.tiradasRestantes : 4;
-        cupones           = Array.isArray(data.cupones) ? data.cupones : [];
+        if (typeof data.saldoLibre === "number")    saldoLibre = data.saldoLibre;
+        if (typeof data.saldoLight === "number")    saldoLight = data.saldoLight;
+        if (typeof data.tiradasRestantes === "number") tiradasRestantes = data.tiradasRestantes;
+        if (Array.isArray(data.cupones))           cupones = data.cupones;
+
+        if (data.personalName)       currentUserName   = data.personalName;
+        if (data.personalAddress)    personalAddress   = data.personalAddress;
+        if (data.personalBirthDate)  personalBirthDate = data.personalBirthDate;
+        if (data.personalPhone)      personalPhone     = data.personalPhone;
       } else {
-        // usuario nuevo: crear documento inicial
         saldoLibre = 0;
         saldoLight = 0;
         tiradasRestantes = 4;
@@ -992,9 +1119,14 @@
           saldoLight,
           tiradasRestantes,
           cupones,
+          personalName: currentUserName,
+          personalAddress,
+          personalBirthDate,
+          personalPhone,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
       }
+      applyUserName();
       actualizarSaldos();
       actualizarCuponesCount();
       actualizarTiradas();
@@ -1003,13 +1135,19 @@
     }
   }
 
-  /* Guardar estado en Firestore + localStorage */
-
   function saveState() {
     const user = auth.currentUser;
-    const state = { saldoLibre, saldoLight, cupones, tiradasRestantes };
+    const state = {
+      saldoLibre,
+      saldoLight,
+      cupones,
+      tiradasRestantes,
+      personalName: currentUserName,
+      personalAddress,
+      personalBirthDate,
+      personalPhone
+    };
 
-    // Copia local
     localStorage.setItem("comodityState", JSON.stringify(state));
 
     if (!user) return;
@@ -1024,19 +1162,16 @@
     });
   }
 
-  /* LOGIN REAL CON FIREBASE */
-
   function onLoginSuccess(user, nombreFormulario) {
     currentUserName = nombreFormulario || user.displayName || user.email || "Usuario";
     localStorage.setItem("comodityUser", currentUserName);
-
-    applyUserName();
 
     const loginScreen = document.getElementById("login-screen");
     const app = document.getElementById("app");
     if (loginScreen) loginScreen.style.display = "none";
     if (app) app.style.display = "block";
 
+    applyUserName();
     loadUserStateFromFirestore(user);
   }
 
@@ -1046,21 +1181,25 @@
     const email = document.getElementById("login-email").value.trim();
     const pass  = document.getElementById("login-password").value.trim();
 
-    if (!name || !email || !pass) {
-      alert("Completá nombre, email y contraseña.");
+    if (!email || !pass) {
+      alert("Completá email y contraseña.");
+      return;
+    }
+    if (isRegisterMode && !name) {
+      alert("Completá tu nombre para registrarte.");
       return;
     }
 
     try {
       if (isRegisterMode) {
-        // Registro explícito
         const credNew = await auth.createUserWithEmailAndPassword(email, pass);
-        await credNew.user.updateProfile({ displayName: name });
+        if (name) {
+          await credNew.user.updateProfile({ displayName: name });
+        }
         onLoginSuccess(credNew.user, name);
       } else {
-        // Login
         const cred = await auth.signInWithEmailAndPassword(email, pass);
-        onLoginSuccess(cred.user, name);
+        onLoginSuccess(cred.user, null);
       }
     } catch (err) {
       console.error(err);
@@ -1104,20 +1243,23 @@
       cupones = [];
       tiradasRestantes = 4;
       currentUserName = null;
+      personalAddress = "";
+      personalBirthDate = "";
+      personalPhone = "";
       localStorage.removeItem("comodityUser");
       localStorage.removeItem("comodityState");
 
       document.getElementById("app").style.display = "none";
       document.getElementById("login-screen").style.display = "flex";
-      setRegisterMode(false); // volvemos a modo login
+      setRegisterMode(false);
       document.getElementById("login-form").reset();
+      document.getElementById("user-menu-dropdown").style.display = "none";
     } catch (err) {
       console.error(err);
       alert("Error al cerrar sesión: " + err.message);
     }
   }
 
-  // Si ya estaba logeado antes, entrar directo
   auth.onAuthStateChanged(function(user) {
     if (user) {
       onLoginSuccess(user, user.displayName || user.email);
@@ -1129,7 +1271,57 @@
     }
   });
 
-  /* sonidos */
+  function openPersonalData() {
+    const overlay = document.getElementById("personal-overlay");
+    const nameInput = document.getElementById("personal-name");
+    const addrInput = document.getElementById("personal-address");
+    const birthInput = document.getElementById("personal-birthdate");
+    const phoneInput = document.getElementById("personal-phone");
+
+    nameInput.value  = currentUserName || "";
+    addrInput.value  = personalAddress || "";
+    birthInput.value = personalBirthDate || "";
+    phoneInput.value = personalPhone || "";
+
+    overlay.style.display = "flex";
+    const menu = document.getElementById("user-menu-dropdown");
+    if (menu) menu.style.display = "none";
+  }
+
+  function closePersonalData() {
+    document.getElementById("personal-overlay").style.display = "none";
+  }
+
+  document.getElementById("personal-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const user = auth.currentUser;
+    if (!user) {
+      alert("Tenés que estar logueado.");
+      return;
+    }
+
+    const nameVal  = document.getElementById("personal-name").value.trim();
+    const addrVal  = document.getElementById("personal-address").value.trim();
+    const birthVal = document.getElementById("personal-birthdate").value;
+    const phoneVal = document.getElementById("personal-phone").value.trim();
+
+    if (nameVal) {
+      currentUserName = nameVal;
+      applyUserName();
+      try {
+        await user.updateProfile({ displayName: nameVal });
+      } catch (e) {
+        console.error("Error actualizando displayName:", e);
+      }
+    }
+
+    personalAddress   = addrVal;
+    personalBirthDate = birthVal;
+    personalPhone     = phoneVal;
+
+    saveState();
+    closePersonalData();
+  });
 
   function getAudioCtx() {
     if (!window.AudioContext && !window.webkitAudioContext) return null;
@@ -1211,8 +1403,6 @@
     osc.start(now); osc.stop(now + 0.5);
   }
 
-  /* utilidades */
-
   function getRandomOutcomeWeighted() {
     const r = Math.random();
     let acc = 0;
@@ -1228,17 +1418,17 @@
     document.getElementById("saldo-light").textContent  = saldoLight;
     saveState();
   }
+
   function actualizarCuponesCount() {
     document.getElementById("cupones-count").textContent = cupones.length;
     saveState();
   }
+
   function actualizarTiradas() {
     document.getElementById("tiradas-info").textContent =
       tiradasRestantes + " tiradas restantes";
     saveState();
   }
-
-  /* countdown 12h solo visual */
 
   function formatTime(seconds) {
     const h = Math.floor(seconds / 3600);
@@ -1270,8 +1460,6 @@
     countdownTimer = null;
     document.getElementById("cooldown-info").style.display = "none";
   }
-
-  /* POPUP premios */
 
   function showRewardPopup(kind, outcome) {
     const overlay      = document.getElementById("reward-overlay");
@@ -1333,8 +1521,6 @@
     document.getElementById("reward-overlay").style.display = "none";
   }
 
-  /* Cupones */
-
   function agregarCupon(coupon) {
     cupones.push(coupon);
     actualizarCuponesCount();
@@ -1367,8 +1553,6 @@
   function closeCouponsPopup() {
     document.getElementById("coupons-overlay").style.display = "none";
   }
-
-  /* GIRO RULETA */
 
   function girarRuleta() {
     const ruleta    = document.getElementById("ruleta");
@@ -1434,7 +1618,6 @@
   }
 
   window.addEventListener("load", () => {
-    // Firebase maneja el login persistente con onAuthStateChanged
     setRegisterMode(false);
   });
 </script>
