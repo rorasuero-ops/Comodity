@@ -4,7 +4,6 @@
   <!-- Firebase compat (ideal para HTML puro sin build) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
   <script>
     const firebaseConfig = {
@@ -17,10 +16,9 @@
       measurementId: "G-PYNZCB10T0"
     };
 
-    // Inicializa Firebase, Auth y Firestore
+    // Inicializa Firebase y Auth
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
-    const db   = firebase.firestore();
   </script>
 
   <meta charset="UTF-8" />
@@ -137,24 +135,21 @@
       font-size: 11px;
       color: var(--text-soft);
       text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
     }
 
-    .login-switch {
-      margin-top: 8px;
-      font-size: 12px;
-      text-align: center;
-      color: var(--text-soft);
-    }
-
-    .link-button {
-      background: none;
+    .link-like {
       border: none;
+      background: none;
       padding: 0;
-      margin-left: 4px;
-      color: var(--accent);
+      margin: 0;
+      font-size: 11px;
+      color: #ffffff;
       cursor: pointer;
-      font-size: 12px;
-      font-weight: bold;
+      text-decoration: underline;
     }
 
     /* APP PRINCIPAL */
@@ -194,6 +189,7 @@
       justify-content: center;
       font-size: 18px;
       font-weight: bold;
+      cursor: pointer;
     }
 
     .user-text {
@@ -237,8 +233,7 @@
     .header-right {
       display: flex;
       align-items: center;
-      gap: 10px;
-      position: relative;
+      gap: 8px;
     }
 
     .logo-big {
@@ -261,49 +256,29 @@
       white-space: nowrap;
     }
 
-    .header-user-menu {
-      position: relative;
-    }
+    /* MENU USUARIO (arriba izquierda, al click en avatar) */
 
-    .header-user-circle {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.8);
-      background: rgba(0,0,0,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .user-menu-dropdown {
-      position: absolute;
-      top: 40px;
-      right: 0;
-      background: #fff;
+    .user-menu {
+      position: fixed;
+      top: 56px;
+      left: 16px;
+      background: #ffffff;
       color: #333;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      padding: 4px 0;
-      min-width: 160px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      padding: 6px 0;
       display: none;
-      z-index: 1200;
+      z-index: 1100;
+      min-width: 180px;
+      font-size: 14px;
     }
 
-    .user-menu-dropdown button {
-      width: 100%;
-      padding: 8px 12px;
-      background: none;
-      border: none;
-      text-align: left;
-      font-size: 13px;
+    .user-menu-item {
+      padding: 8px 14px;
       cursor: pointer;
     }
 
-    .user-menu-dropdown button:hover {
+    .user-menu-item:hover {
       background: #f5f5f5;
     }
 
@@ -677,9 +652,10 @@
       border-radius: 999px;
       font-size: 14px;
       cursor: pointer;
+      margin-top: 6px;
     }
 
-    /* popup cupones / personales */
+    /* popup cupones */
 
     .popup-title {
       font-size: 18px;
@@ -734,25 +710,27 @@
 
     .coupon-empty { font-size: 13px; color: var(--text-soft); margin-bottom: 12px; }
 
-    .personal-form {
+    /* Popup datos personales */
+
+    .profile-form {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      margin-top: 10px;
       text-align: left;
       font-size: 13px;
-      margin-top: 6px;
     }
 
-    .personal-form label {
-      font-size: 12px;
-      color: var(--text-soft);
+    .profile-form label {
+      display: block;
     }
 
-    .personal-form input {
+    .profile-form input {
       width: 100%;
-      padding: 7px 8px;
+      padding: 6px 8px;
       border-radius: 8px;
       border: 1px solid #ccc;
+      margin-top: 2px;
       font-size: 13px;
     }
 
@@ -778,13 +756,11 @@
     <div class="login-logo">
       <div class="login-logo-icon">C</div>
     </div>
-    <div class="login-title" id="login-title">Ingresá a Comodity</div>
-    <div class="login-subtitle" id="login-subtitle">
-      Girá la ruleta y acumulá saldo y cupones para tus compras.
-    </div>
+    <div class="login-title">Ingresá a Comodity</div>
+    <div class="login-subtitle">Girá la ruleta y acumulá saldo y cupones para tus compras.</div>
 
     <form id="login-form" class="login-form">
-      <div id="group-name">
+      <div id="login-name-group">
         <label for="login-name">Nombre</label>
         <input id="login-name" type="text" placeholder="Ej: Javier Araujo" />
       </div>
@@ -796,7 +772,7 @@
         <label for="login-password">Contraseña</label>
         <input id="login-password" type="password" placeholder="●●●●●●●●" required />
       </div>
-      <button type="submit" class="login-button" id="login-submit">Entrar</button>
+      <button type="submit" class="login-button" id="login-submit-btn">Entrar</button>
       <button
         type="button"
         class="login-button"
@@ -804,19 +780,11 @@
         onclick="loginWithGoogle()">
         Continuar con Google
       </button>
-
-      <div class="login-switch" id="switch-register">
-        ¿No tenés cuenta?
-        <button type="button" class="link-button" onclick="setRegisterMode(true)">Crear cuenta</button>
-      </div>
-      <div class="login-switch" id="switch-login" style="display:none;">
-        ¿Ya tenés cuenta?
-        <button type="button" class="link-button" onclick="setRegisterMode(false)">Iniciar sesión</button>
-      </div>
     </form>
 
     <div class="login-note">
-      El login usa Firebase Authentication (email/contraseña o Google).
+      <span id="login-mode-message">¿No tenés cuenta?</span>
+      <button type="button" id="toggle-login-mode" class="link-like">Crear cuenta</button>
     </div>
   </div>
 </div>
@@ -825,7 +793,7 @@
 <div id="app">
   <header>
     <div class="header-left">
-      <div class="user-avatar">👤</div>
+      <div class="user-avatar" id="user-avatar">👤</div>
       <div class="user-text">
         <div id="user-name" class="user-name">Invitado</div>
         <div class="user-balances">
@@ -850,15 +818,14 @@
         <div class="logo-big">C</div>
         <div class="title-text">Comodity</div>
       </div>
-      <div class="header-user-menu" onclick="toggleUserMenu(event)">
-        <div class="header-user-circle" id="header-user-circle">👤</div>
-        <div class="user-menu-dropdown" id="user-menu-dropdown" onclick="event.stopPropagation()">
-          <button type="button" onclick="openPersonalData()">Datos personales</button>
-          <button type="button" onclick="logout()">Salir</button>
-        </div>
-      </div>
     </div>
   </header>
+
+  <!-- Menú usuario (click en avatar) -->
+  <div id="user-menu" class="user-menu">
+    <div class="user-menu-item" onclick="openProfileOverlay()">Datos personales</div>
+    <div class="user-menu-item" onclick="logout()">Cerrar sesión</div>
+  </div>
 
   <div class="ruleta-container">
     <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
@@ -891,6 +858,7 @@
 
   <div class="categorias-title">Explorá por categoría</div>
   <div class="categorias">
+    <!-- Commodities -->
     <div class="categoria">
       <div class="cat-img cat-img-1">
         <div class="cat-discount-badge">
@@ -901,6 +869,7 @@
       <div class="cat-bottom"><span>Commodities</span></div>
     </div>
 
+    <!-- Hotelería -->
     <div class="categoria">
       <div class="cat-img cat-img-2">
         <div class="cat-discount-badge">
@@ -910,6 +879,7 @@
       <div class="cat-bottom"><span>Hotelería &amp; Viajes</span></div>
     </div>
 
+    <!-- Comida -->
     <div class="categoria">
       <div class="cat-img cat-img-3">
         <div class="cat-discount-badge">
@@ -919,6 +889,7 @@
       <div class="cat-bottom"><span>Comida</span></div>
     </div>
 
+    <!-- Productos -->
     <div class="categoria">
       <div class="cat-img cat-img-4">
         <div class="cat-discount-badge">
@@ -928,6 +899,7 @@
       <div class="cat-bottom"><span>Productos</span></div>
     </div>
 
+    <!-- Ofertas fugaces -->
     <div class="categoria">
       <div class="cat-img cat-img-5">
         <div class="cat-discount-badge">
@@ -972,35 +944,30 @@
 </div>
 
 <!-- POPUP DATOS PERSONALES -->
-<div id="personal-overlay" class="overlay">
+<div id="profile-overlay" class="overlay">
   <div class="popup">
-    <div class="popup-title">
-      <span>👤</span><span>Datos personales</span>
-    </div>
-    <form id="personal-form" class="personal-form">
-      <div>
-        <label for="personal-name">Nombre completo</label>
-        <input id="personal-name" type="text" />
-      </div>
-      <div>
-        <label for="personal-address">Dirección</label>
-        <input id="personal-address" type="text" />
-      </div>
-      <div>
-        <label for="personal-birthdate">Fecha de nacimiento</label>
-        <input id="personal-birthdate" type="date" />
-      </div>
-      <div>
-        <label for="personal-phone">Teléfono</label>
-        <input id="personal-phone" type="tel" />
-      </div>
+    <div class="reward-title">Datos personales</div>
+    <form id="profile-form" class="profile-form">
+      <label>Nombre completo
+        <input type="text" id="profile-name" />
+      </label>
+      <label>Dirección
+        <input type="text" id="profile-address" />
+      </label>
+      <label>Fecha de nacimiento
+        <input type="date" id="profile-birthdate" />
+      </label>
+      <label>Teléfono
+        <input type="tel" id="profile-phone" />
+      </label>
       <button type="submit" class="reward-close">Guardar</button>
-      <button type="button" class="popup-close" style="margin-top:8px;" onclick="closePersonalData()">Cerrar</button>
+      <button type="button" class="popup-close" onclick="closeProfileOverlay()">Cancelar</button>
     </form>
   </div>
 </div>
 
 <script>
+  /* Estado general */
   let saldoLibre = 0;
   let saldoLight = 0;
   let cupones = [];
@@ -1009,13 +976,21 @@
   let countdownSecondsRemaining = 0;
   let isSpinning = false;
   let audioCtx;
+  let currentUser = null;
   let currentUserName = null;
+
+  // datos adicionales de perfil
+  let profileData = {
+    nombre: "",
+    direccion: "",
+    fechaNacimiento: "",
+    telefono: ""
+  };
+
+  // modo login / registro
   let isRegisterMode = false;
 
-  let personalAddress = "";
-  let personalBirthDate = "";
-  let personalPhone = "";
-
+  /* Lógica de premios */
   const outcomes = [
     { label: "Sin premio, suerte a la próxima 😢", type: "none", prob: 0.30 },
     { label: "$25 saldo libre", type: "saldoLibre", amount: 25, prob: 0.20 },
@@ -1025,195 +1000,171 @@
     { label: "$20 saldo lightning para gastar en FerreBuceo", amount: 20, type: "saldoLightFerre", prob: 0.10 }
   ];
 
-  function setRegisterMode(register) {
-    isRegisterMode = register;
-    const title   = document.getElementById("login-title");
-    const sub     = document.getElementById("login-subtitle");
-    const submit  = document.getElementById("login-submit");
-    const swReg   = document.getElementById("switch-register");
-    const swLog   = document.getElementById("switch-login");
-    const groupName = document.getElementById("group-name");
-    const nameInput = document.getElementById("login-name");
-
-    if (register) {
-      title.textContent  = "Creá tu cuenta en Comodity";
-      sub.textContent    = "Registrate gratis para empezar a girar la ruleta y acumular beneficios.";
-      submit.textContent = "Crear cuenta";
-      swReg.style.display = "none";
-      swLog.style.display = "block";
-      groupName.style.display = "block";
-      nameInput.required = true;
-    } else {
-      title.textContent  = "Ingresá a Comodity";
-      sub.textContent    = "Girá la ruleta y acumulá saldo y cupones para tus compras.";
-      submit.textContent = "Entrar";
-      swReg.style.display = "block";
-      swLog.style.display = "none";
-      groupName.style.display = "none";
-      nameInput.required = false;
-    }
-  }
+  /* LOGIN */
 
   function applyUserName() {
     const el = document.getElementById("user-name");
     if (el && currentUserName) el.textContent = currentUserName;
-    updateHeaderCircle();
   }
 
-  function updateHeaderCircle() {
-    const circle = document.getElementById("header-user-circle");
-    if (!circle) return;
-    let base = currentUserName;
-    const user = auth.currentUser;
-    if (!base && user) base = user.displayName || user.email || "";
-    if (!base) {
-      circle.textContent = "👤";
-      return;
-    }
-    const parts = base.trim().split(/\s+/);
-    let initials = "";
-    if (parts.length === 1) {
-      initials = parts[0].slice(0, 2);
-    } else {
-      initials = (parts[0][0] || "") + (parts[1][0] || "");
-    }
-    circle.textContent = initials.toUpperCase();
+  function getUserKey(suffix) {
+    if (!currentUser) return null;
+    return "comodity_" + suffix + "_" + currentUser.uid;
   }
 
-  function toggleUserMenu(event) {
-    const menu = document.getElementById("user-menu-dropdown");
-    if (!menu) return;
-    const visible = menu.style.display === "block";
-    menu.style.display = visible ? "none" : "block";
+  function saveStateForUser() {
+    const key = getUserKey("state");
+    if (!key) return;
+    const state = { saldoLibre, saldoLight, cupones, tiradasRestantes };
+    localStorage.setItem(key, JSON.stringify(state));
   }
 
-  document.addEventListener("click", () => {
-    const menu = document.getElementById("user-menu-dropdown");
-    if (menu) menu.style.display = "none";
-  });
-
-  async function loadUserStateFromFirestore(user) {
-    try {
-      const docRef = db.collection("users").doc(user.uid);
-      const snap = await docRef.get();
-      if (snap.exists) {
-        const data = snap.data();
-        if (typeof data.saldoLibre === "number")    saldoLibre = data.saldoLibre;
-        if (typeof data.saldoLight === "number")    saldoLight = data.saldoLight;
-        if (typeof data.tiradasRestantes === "number") tiradasRestantes = data.tiradasRestantes;
-        if (Array.isArray(data.cupones))           cupones = data.cupones;
-
-        if (data.personalName)       currentUserName   = data.personalName;
-        if (data.personalAddress)    personalAddress   = data.personalAddress;
-        if (data.personalBirthDate)  personalBirthDate = data.personalBirthDate;
-        if (data.personalPhone)      personalPhone     = data.personalPhone;
-      } else {
-        saldoLibre = 0;
-        saldoLight = 0;
-        tiradasRestantes = 4;
-        cupones = [];
-        await docRef.set({
-          name: currentUserName,
-          email: user.email,
-          saldoLibre,
-          saldoLight,
-          tiradasRestantes,
-          cupones,
-          personalName: currentUserName,
-          personalAddress,
-          personalBirthDate,
-          personalPhone,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-      }
-      applyUserName();
-      actualizarSaldos();
-      actualizarCuponesCount();
-      actualizarTiradas();
-    } catch (e) {
-      console.error("Error cargando estado de usuario:", e);
-    }
-  }
-
-  function saveState() {
-    const user = auth.currentUser;
-    const state = {
-      saldoLibre,
-      saldoLight,
-      cupones,
-      tiradasRestantes,
-      personalName: currentUserName,
-      personalAddress,
-      personalBirthDate,
-      personalPhone
+  function saveProfileForUser() {
+    const key = getUserKey("profile");
+    if (!key) return;
+    const data = {
+      nombre: currentUserName,
+      direccion: profileData.direccion || "",
+      fechaNacimiento: profileData.fechaNacimiento || "",
+      telefono: profileData.telefono || ""
     };
-
-    localStorage.setItem("comodityState", JSON.stringify(state));
-
-    if (!user) return;
-
-    db.collection("users").doc(user.uid).set({
-      name: currentUserName,
-      email: user.email,
-      ...state,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true }).catch(err => {
-      console.error("Error guardando estado:", err);
-    });
+    localStorage.setItem(key, JSON.stringify(data));
   }
 
-  function onLoginSuccess(user, nombreFormulario) {
-    currentUserName = nombreFormulario || user.displayName || user.email || "Usuario";
-    localStorage.setItem("comodityUser", currentUserName);
+  function loadUserData() {
+    if (!currentUser) return;
 
-    const loginScreen = document.getElementById("login-screen");
-    const app = document.getElementById("app");
-    if (loginScreen) loginScreen.style.display = "none";
-    if (app) app.style.display = "block";
+    // estado de la ruleta y saldos
+    const stateKey = getUserKey("state");
+    saldoLibre = 0;
+    saldoLight = 0;
+    cupones = [];
+    tiradasRestantes = 4;
+
+    if (stateKey) {
+      const raw = localStorage.getItem(stateKey);
+      if (raw) {
+        try {
+          const s = JSON.parse(raw);
+          if (typeof s.saldoLibre === "number") saldoLibre = s.saldoLibre;
+          if (typeof s.saldoLight === "number") saldoLight = s.saldoLight;
+          if (Array.isArray(s.cupones)) cupones = s.cupones;
+          if (typeof s.tiradasRestantes === "number") tiradasRestantes = s.tiradasRestantes;
+        } catch (e) {}
+      }
+    }
+
+    // datos de perfil
+    const profileKey = getUserKey("profile");
+    profileData = { nombre: "", direccion: "", fechaNacimiento: "", telefono: "" };
+    if (profileKey) {
+      const rawP = localStorage.getItem(profileKey);
+      if (rawP) {
+        try {
+          const p = JSON.parse(rawP);
+          profileData.nombre = p.nombre || "";
+          profileData.direccion = p.direccion || "";
+          profileData.fechaNacimiento = p.fechaNacimiento || "";
+          profileData.telefono = p.telefono || "";
+          if (profileData.nombre) currentUserName = profileData.nombre;
+        } catch (e) {}
+      }
+    }
 
     applyUserName();
-    loadUserStateFromFirestore(user);
+    actualizarSaldos();
+    actualizarCuponesCount();
+    actualizarTiradas();
   }
 
+  function handleUserLoggedIn(user, nameOverride) {
+    currentUser = user;
+    currentUserName = nameOverride || user.displayName || user.email;
+    applyUserName();
+
+    document.getElementById("login-screen").style.display = "none";
+    document.getElementById("app").style.display = "block";
+
+    loadUserData();
+  }
+
+  function handleLoggedOut() {
+    currentUser = null;
+    currentUserName = null;
+    saldoLibre = 0;
+    saldoLight = 0;
+    cupones = [];
+    tiradasRestantes = 4;
+    document.getElementById("app").style.display = "none";
+    document.getElementById("login-screen").style.display = "flex";
+  }
+
+  // observar cambios de auth (para refrescar al recargar la página, etc.)
+  auth.onAuthStateChanged(function(user) {
+    if (user) {
+      if (currentUser && currentUser.uid === user.uid) return; // ya manejado
+      handleUserLoggedIn(user);
+    } else {
+      handleLoggedOut();
+    }
+  });
+
+  // cambiar entre iniciar sesión y crear cuenta
+  function toggleLoginMode() {
+    isRegisterMode = !isRegisterMode;
+    const nameGroup = document.getElementById("login-name-group");
+    const submitBtn = document.getElementById("login-submit-btn");
+    const msg = document.getElementById("login-mode-message");
+    const toggleBtn = document.getElementById("toggle-login-mode");
+
+    if (isRegisterMode) {
+      nameGroup.style.display = "block";
+      submitBtn.textContent = "Crear cuenta y entrar";
+      msg.textContent = "¿Ya tenés cuenta?";
+      toggleBtn.textContent = "Iniciar sesión";
+    } else {
+      nameGroup.style.display = "none";
+      submitBtn.textContent = "Entrar";
+      msg.textContent = "¿No tenés cuenta?";
+      toggleBtn.textContent = "Crear cuenta";
+    }
+  }
+
+  document.getElementById("toggle-login-mode").addEventListener("click", toggleLoginMode);
+
+  // LOGIN con Nombre (solo registro), Email + Contraseña
   document.getElementById("login-form").addEventListener("submit", async function(e) {
     e.preventDefault();
     const name  = document.getElementById("login-name").value.trim();
     const email = document.getElementById("login-email").value.trim();
     const pass  = document.getElementById("login-password").value.trim();
 
-    if (!email || !pass) {
-      alert("Completá email y contraseña.");
-      return;
-    }
-    if (isRegisterMode && !name) {
-      alert("Completá tu nombre para registrarte.");
-      return;
-    }
-
-    try {
-      if (isRegisterMode) {
-        const credNew = await auth.createUserWithEmailAndPassword(email, pass);
-        if (name) {
-          await credNew.user.updateProfile({ displayName: name });
-        }
-        onLoginSuccess(credNew.user, name);
-      } else {
-        const cred = await auth.signInWithEmailAndPassword(email, pass);
-        onLoginSuccess(cred.user, null);
+    if (isRegisterMode) {
+      if (!name || !email || !pass) {
+        alert("Completá nombre, email y contraseña para crear la cuenta.");
+        return;
       }
-    } catch (err) {
-      console.error(err);
-      if (isRegisterMode) {
-        if (err.code === "auth/email-already-in-use") {
-          alert("Ya existe una cuenta con ese email. Probá iniciar sesión.");
-        } else if (err.code === "auth/weak-password") {
-          alert("La contraseña es muy débil. Probá con una más larga.");
-        } else {
-          alert("Error al crear usuario: " + err.message);
-        }
-      } else {
+      try {
+        const credNew = await auth.createUserWithEmailAndPassword(email, pass);
+        await credNew.user.updateProfile({ displayName: name });
+        handleUserLoggedIn(credNew.user, name);
+        // guardar nombre base en perfil
+        profileData.nombre = name;
+        saveProfileForUser();
+      } catch (err2) {
+        alert("Error al crear usuario: " + err2.message);
+      }
+    } else {
+      if (!email || !pass) {
+        alert("Completá email y contraseña.");
+        return;
+      }
+      try {
+        const cred = await auth.signInWithEmailAndPassword(email, pass);
+        handleUserLoggedIn(cred.user);
+      } catch (err) {
         if (err.code === "auth/user-not-found") {
-          alert("No existe una cuenta con ese email. Podés crear una cuenta nueva.");
+          alert("Usuario no encontrado. Cambiá a 'Crear cuenta' para registrarte.");
         } else if (err.code === "auth/wrong-password") {
           alert("Contraseña incorrecta.");
         } else {
@@ -1223,105 +1174,30 @@
     }
   });
 
+  // LOGIN con Google (Gmail)
   async function loginWithGoogle() {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
       const result = await auth.signInWithPopup(provider);
       const user = result.user;
-      onLoginSuccess(user, user.displayName || user.email);
+      handleUserLoggedIn(user, user.displayName || user.email);
     } catch (err) {
       console.error(err);
       alert("Error al iniciar sesión con Google: " + err.message);
     }
   }
 
+  // LOGOUT
   async function logout() {
     try {
       await auth.signOut();
-      saldoLibre = 0;
-      saldoLight = 0;
-      cupones = [];
-      tiradasRestantes = 4;
-      currentUserName = null;
-      personalAddress = "";
-      personalBirthDate = "";
-      personalPhone = "";
-      localStorage.removeItem("comodityUser");
-      localStorage.removeItem("comodityState");
-
-      document.getElementById("app").style.display = "none";
-      document.getElementById("login-screen").style.display = "flex";
-      setRegisterMode(false);
-      document.getElementById("login-form").reset();
-      document.getElementById("user-menu-dropdown").style.display = "none";
-    } catch (err) {
-      console.error(err);
-      alert("Error al cerrar sesión: " + err.message);
+      document.getElementById("user-menu").style.display = "none";
+    } catch (e) {
+      console.error(e);
     }
   }
 
-  auth.onAuthStateChanged(function(user) {
-    if (user) {
-      onLoginSuccess(user, user.displayName || user.email);
-    } else {
-      const loginScreen = document.getElementById("login-screen");
-      const app = document.getElementById("app");
-      if (loginScreen) loginScreen.style.display = "flex";
-      if (app) app.style.display = "none";
-    }
-  });
-
-  function openPersonalData() {
-    const overlay = document.getElementById("personal-overlay");
-    const nameInput = document.getElementById("personal-name");
-    const addrInput = document.getElementById("personal-address");
-    const birthInput = document.getElementById("personal-birthdate");
-    const phoneInput = document.getElementById("personal-phone");
-
-    nameInput.value  = currentUserName || "";
-    addrInput.value  = personalAddress || "";
-    birthInput.value = personalBirthDate || "";
-    phoneInput.value = personalPhone || "";
-
-    overlay.style.display = "flex";
-    const menu = document.getElementById("user-menu-dropdown");
-    if (menu) menu.style.display = "none";
-  }
-
-  function closePersonalData() {
-    document.getElementById("personal-overlay").style.display = "none";
-  }
-
-  document.getElementById("personal-form").addEventListener("submit", async function(e) {
-    e.preventDefault();
-    const user = auth.currentUser;
-    if (!user) {
-      alert("Tenés que estar logueado.");
-      return;
-    }
-
-    const nameVal  = document.getElementById("personal-name").value.trim();
-    const addrVal  = document.getElementById("personal-address").value.trim();
-    const birthVal = document.getElementById("personal-birthdate").value;
-    const phoneVal = document.getElementById("personal-phone").value.trim();
-
-    if (nameVal) {
-      currentUserName = nameVal;
-      applyUserName();
-      try {
-        await user.updateProfile({ displayName: nameVal });
-      } catch (e) {
-        console.error("Error actualizando displayName:", e);
-      }
-    }
-
-    personalAddress   = addrVal;
-    personalBirthDate = birthVal;
-    personalPhone     = phoneVal;
-
-    saveState();
-    closePersonalData();
-  });
+  /* sonidos */
 
   function getAudioCtx() {
     if (!window.AudioContext && !window.webkitAudioContext) return null;
@@ -1403,6 +1279,8 @@
     osc.start(now); osc.stop(now + 0.5);
   }
 
+  /* utilidades */
+
   function getRandomOutcomeWeighted() {
     const r = Math.random();
     let acc = 0;
@@ -1416,19 +1294,19 @@
   function actualizarSaldos() {
     document.getElementById("saldo-libre").textContent  = saldoLibre;
     document.getElementById("saldo-light").textContent  = saldoLight;
-    saveState();
+    saveStateForUser();
   }
-
   function actualizarCuponesCount() {
     document.getElementById("cupones-count").textContent = cupones.length;
-    saveState();
+    saveStateForUser();
   }
-
   function actualizarTiradas() {
     document.getElementById("tiradas-info").textContent =
       tiradasRestantes + " tiradas restantes";
-    saveState();
+    saveStateForUser();
   }
+
+  /* countdown 12h solo visual */
 
   function formatTime(seconds) {
     const h = Math.floor(seconds / 3600);
@@ -1460,6 +1338,8 @@
     countdownTimer = null;
     document.getElementById("cooldown-info").style.display = "none";
   }
+
+  /* POPUP premios */
 
   function showRewardPopup(kind, outcome) {
     const overlay      = document.getElementById("reward-overlay");
@@ -1521,6 +1401,8 @@
     document.getElementById("reward-overlay").style.display = "none";
   }
 
+  /* Cupones */
+
   function agregarCupon(coupon) {
     cupones.push(coupon);
     actualizarCuponesCount();
@@ -1553,6 +1435,8 @@
   function closeCouponsPopup() {
     document.getElementById("coupons-overlay").style.display = "none";
   }
+
+  /* GIRO RULETA */
 
   function girarRuleta() {
     const ruleta    = document.getElementById("ruleta");
@@ -1617,8 +1501,76 @@
     }, 1500);
   }
 
+  /* Menú usuario (click en avatar) */
+
+  document.getElementById("user-avatar").addEventListener("click", function (e) {
+    e.stopPropagation();
+    const menu = document.getElementById("user-menu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  });
+
+  // cerrar menú si se hace click fuera
+  window.addEventListener("click", function(e) {
+    const menu = document.getElementById("user-menu");
+    if (!e.target.closest("#user-menu") && !e.target.closest("#user-avatar")) {
+      menu.style.display = "none";
+    }
+  });
+
+  /* Datos personales */
+
+  function openProfileOverlay() {
+    const menu = document.getElementById("user-menu");
+    menu.style.display = "none";
+
+    document.getElementById("profile-name").value =
+      profileData.nombre || currentUserName || "";
+    document.getElementById("profile-address").value =
+      profileData.direccion || "";
+    document.getElementById("profile-birthdate").value =
+      profileData.fechaNacimiento || "";
+    document.getElementById("profile-phone").value =
+      profileData.telefono || "";
+
+    document.getElementById("profile-overlay").style.display = "flex";
+  }
+
+  function closeProfileOverlay() {
+    document.getElementById("profile-overlay").style.display = "none";
+  }
+
+  document.getElementById("profile-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const nombre = document.getElementById("profile-name").value.trim();
+    const direccion = document.getElementById("profile-address").value.trim();
+    const fechaNac = document.getElementById("profile-birthdate").value;
+    const telefono = document.getElementById("profile-phone").value.trim();
+
+    if (nombre) {
+      currentUserName = nombre;
+      applyUserName();
+      profileData.nombre = nombre;
+      if (currentUser) {
+        try {
+          await currentUser.updateProfile({ displayName: nombre });
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+
+    profileData.direccion = direccion;
+    profileData.fechaNacimiento = fechaNac;
+    profileData.telefono = telefono;
+
+    saveProfileForUser();
+    closeProfileOverlay();
+  });
+
+  /* init */
   window.addEventListener("load", () => {
-    setRegisterMode(false);
+    // por defecto, modo "iniciar sesión": ocultar campo nombre
+    document.getElementById("login-name-group").style.display = "none";
   });
 </script>
 
