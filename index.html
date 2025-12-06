@@ -16,7 +16,6 @@
       measurementId: "G-PYNZCB10T0"
     };
 
-    // Inicializa Firebase y Auth
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
   </script>
@@ -256,7 +255,7 @@
       white-space: nowrap;
     }
 
-    /* MENU USUARIO (arriba izquierda, al click en avatar) */
+    /* MENU USUARIO */
 
     .user-menu {
       position: fixed;
@@ -281,6 +280,11 @@
     .user-menu-item:hover {
       background: #f5f5f5;
     }
+
+    /* VISTAS */
+
+    #home-view { padding-bottom: 24px; }
+    #phones-view { display:none; padding: 16px 16px 28px; }
 
     /* RULETA */
 
@@ -357,17 +361,17 @@
     }
 
     .logo-center {
-      width: 46px;
-      height: 46px;
-      background: #ffffff;
-      color: #000;
-      font-size: 22px;
-      font-weight: bold;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
+      width: 52px;
+      height: 52px;
+      background: #ffffff;
+      color: #000;
+      font-weight: bold;
+      font-size: 22px;
       clip-path: polygon(15% 0%, 90% 10%, 100% 60%, 55% 100%, 0% 65%);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
     .ruleta-segment-icon {
@@ -453,7 +457,7 @@
 
     .categorias {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr)); /* móvil: 2 por fila */
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
       margin: 0 20px 30px;
     }
@@ -463,34 +467,34 @@
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       cursor: pointer;
-      background: #111; /* marco oscuro para letterbox */
+      background: #000;
     }
 
     .cat-img {
       position: relative;
       height: 110px;
-      background-size: contain;       /* se ve la imagen completa */
+      background-size: cover;     /* estira para llenar el espacio */
       background-position: center;
       background-repeat: no-repeat;
     }
 
-    /* usa las imágenes locales dentro de /img */
+    /* imágenes locales dentro de /img */
 
     .cat-img-comodities {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
         url("img/commodities.jpg");
     }
 
     .cat-img-insumos {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        linear-gradient(120deg, rgba(0,0,0,0.3), rgba(0,0,0,0.0)),
         url("img/insumos.jpg");
     }
 
     .cat-img-cell {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        linear-gradient(120deg, rgba(0,0,0,0.25), rgba(0,0,0,0.0)),
         url("img/cell.jpg");
     }
 
@@ -513,21 +517,33 @@
     }
 
     .cat-img-imperdibles {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
-        url("img/imperdibles.jpg");
+      background: radial-gradient(circle at top, #333, #000);
     }
 
     .cat-img-hoteles {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-        url("img/hoteles.jpg");
+      background: radial-gradient(circle at top, #283593, #000);
     }
 
     .cat-img-muebles {
+      background: radial-gradient(circle at top, #4e342e, #000);
+    }
+
+    .cat-img-comida {
       background-image:
         linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-        url("img/muebles.jpg");
+        url("img/comida.jpg");
+    }
+
+    .cat-img-deportes {
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        url("img/deportes.jpg");
+    }
+
+    .cat-img-electrodomesticos {
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        url("img/electro.jpg");
     }
 
     .cat-discount-badge {
@@ -592,7 +608,7 @@
       background: var(--card-bg);
       border-radius: 18px;
       padding: 18px 20px 16px;
-      max-width: 360px;
+      max-width: 340px;
       width: calc(100% - 40px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
       text-align: center;
@@ -642,21 +658,21 @@
 
     .reward-coins {
       position: relative;
-      height: 60px;
+      height: 70px;
       margin-bottom: 10px;
       pointer-events: none;
     }
 
     .coin {
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
-      border: 2px solid rgba(0,0,0,0.25);
+      border: 3px solid rgba(0,0,0,0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
+      font-size: 13px;
       font-weight: bold;
       animation: coin-fall 0.9s ease-out forwards;
       opacity: 0;
@@ -667,9 +683,9 @@
     .coin-neutral{ background: #fff;    color: #424242; }
 
     @keyframes coin-fall {
-      0%   { transform: translateY(-30px) scale(0.7); opacity: 0; }
+      0%   { transform: translateY(-40px) scale(0.7); opacity: 0; }
       40%  { opacity: 1; }
-      100% { transform: translateY(20px) scale(1); opacity: 0; }
+      100% { transform: translateY(25px) scale(1); opacity: 0; }
     }
 
     .reward-close,
@@ -750,9 +766,7 @@
       font-size: 13px;
     }
 
-    .profile-form label {
-      display: block;
-    }
+    .profile-form label { display: block; }
 
     .profile-form input {
       width: 100%;
@@ -763,6 +777,153 @@
       font-size: 13px;
     }
 
+    /* VISTA CELULARES */
+
+    .phones-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .phones-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .back-button {
+      border: none;
+      background: #e0e0e0;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .phones-subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .phones-grid {
+      display: grid;
+      grid-template-columns: repeat(1,minmax(0,1fr));
+      gap: 12px;
+    }
+
+    .phone-card {
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-img-wrap {
+      background: #000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height: 170px;
+    }
+
+    .phone-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .phone-body {
+      padding: 10px 12px 12px;
+      font-size: 13px;
+    }
+
+    .phone-name {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .phone-prices {
+      display:flex;
+      align-items:center;
+      gap:6px;
+      margin-bottom:4px;
+    }
+
+    .phone-old-price {
+      font-size: 12px;
+      color:#777;
+      text-decoration: line-through;
+    }
+
+    .phone-price {
+      font-size: 14px;
+      font-weight:bold;
+      color:#1b5e20;
+    }
+
+    .phone-discount-pill {
+      background:#7b1fa2;
+      color:#fff;
+      border-radius:999px;
+      padding:2px 8px;
+      font-size:11px;
+      margin-bottom:4px;
+      display:inline-block;
+    }
+
+    .phone-timer {
+      font-size:12px;
+      color:var(--accent);
+      font-weight:bold;
+      margin-top:4px;
+    }
+
+    .phone-meta {
+      font-size:11px;
+      color:var(--text-soft);
+      margin-top:4px;
+    }
+
+    .phone-detail-popup {
+      max-width: 380px;
+      text-align:left;
+    }
+
+    .phone-detail-title {
+      font-size: 18px;
+      font-weight:bold;
+      margin-bottom:6px;
+    }
+
+    .phone-detail-img {
+      text-align:center;
+      margin-bottom:8px;
+    }
+
+    .phone-detail-img img {
+      max-width:100%;
+      max-height:220px;
+      object-fit:contain;
+    }
+
+    .phone-detail-section-title {
+      font-size:13px;
+      font-weight:bold;
+      margin-top:6px;
+    }
+
+    .phone-detail-text {
+      font-size:13px;
+      color:var(--text-soft);
+    }
+
+    /* ANIMACIÓN RULETA */
+
     @keyframes girar {
       from { transform: rotate(0deg); }
       to   { transform: rotate(1440deg); }
@@ -770,151 +931,15 @@
 
     .spin { animation: girar 1.5s ease-out; }
 
-    /* Sección productos (celulares) */
-
-    .page {
-      padding-bottom: 30px;
-    }
-
-    .products-section {
-      margin: 20px;
-    }
-
-    .products-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .products-title {
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    .back-button {
-      border: none;
-      background: #eee;
-      border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 13px;
-      cursor: pointer;
-    }
-
-    .products-note {
-      font-size: 11px;
-      color: var(--text-soft);
-      margin-bottom: 6px;
-    }
-
-    .products-timer {
-      font-size: 12px;
-      color: var(--accent);
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-
-    .product-card {
-      display: flex;
-      background: #fff;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-      cursor: pointer;
-    }
-
-    .product-img {
-      flex: 0 0 110px;
-      height: 110px;
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-color: #000;
-    }
-
-    .product-info {
-      padding: 8px 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 4px;
-    }
-
-    .product-name {
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .product-prices {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .product-price-old {
-      font-size: 13px;
-      color: #777;
-      text-decoration: line-through;
-    }
-
-    .product-price-new {
-      font-size: 15px;
-      color: #2e7d32;
-      font-weight: bold;
-    }
-
-    .product-discount-tag {
-      display: inline-block;
-      margin-top: 2px;
-      padding: 2px 6px;
-      border-radius: 999px;
-      background: #7b1fa2;
-      color: #fff;
-      font-size: 10px;
-      font-weight: bold;
-    }
-
-    .product-source {
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    /* Detalle de producto (overlay) */
-    .product-detail-title {
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-    .product-detail-price {
-      margin-bottom: 6px;
-    }
-    .product-detail-line {
-      font-size: 13px;
-      margin-bottom: 4px;
-      color: var(--text-soft);
-    }
-
-    @media (min-width: 520px) {
-      .products-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
+    /* RESPONSIVE */
 
     @media (min-width: 768px) {
       header { padding-left: 24px; padding-right: 24px; }
       .ruleta-container { max-width: 520px; margin: 24px auto; }
-      .categorias {
-        max-width: 900px;
-        margin: 0 auto 40px;
-        grid-template-columns: repeat(4, minmax(0, 1fr)); /* PC: 4 por fila */
-      }
-      .products-section { max-width: 520px; margin: 24px auto 40px; }
+      .categorias { max-width: 960px; margin: 0 auto 40px; grid-template-columns: repeat(4,minmax(0,1fr)); }
+      .cat-img { height: 140px; } /* ~25% más grandes */
+      #phones-view { max-width: 960px; margin: 0 auto 32px; }
+      .phones-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
     }
   </style>
 </head>
@@ -997,9 +1022,8 @@
     <div class="user-menu-item" onclick="logout()">Cerrar sesión</div>
   </div>
 
-  <!-- HOME PAGE (ruleta + categorías) -->
-  <div id="home-page" class="page">
-    <!-- RULETA -->
+  <!-- HOME VIEW -->
+  <div id="home-view">
     <div class="ruleta-container">
       <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
       <div class="ruleta-wrapper">
@@ -1009,7 +1033,7 @@
             <div class="logo-center">C</div>
           </div>
 
-          <!-- 8 iconos -->
+          <!-- 8 iconos: 3 monedas amarillas, 3 azules, 2 % -->
           <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
           <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
           <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
@@ -1054,8 +1078,8 @@
         <div class="cat-bottom"><span>Insumos constructivos</span></div>
       </div>
 
-      <!-- Celulares (click para abrir página nueva) -->
-      <div class="categoria" onclick="mostrarCelulares()">
+      <!-- Celulares -->
+      <div class="categoria" onclick="openPhonesView()">
         <div class="cat-img cat-img-cell">
           <div class="cat-discount-badge">
             hasta<br><span class="off">40% OFF</span>
@@ -1094,7 +1118,7 @@
         <div class="cat-bottom"><span>Experiencias</span></div>
       </div>
 
-      <!-- Imperdibles < 1000 -->
+      <!-- Imperdibles -->
       <div class="categoria">
         <div class="cat-img cat-img-imperdibles">
           <div class="cat-discount-badge">
@@ -1114,7 +1138,7 @@
         <div class="cat-bottom"><span>Hoteles y viajes</span></div>
       </div>
 
-      <!-- Muebles y artículos del hogar -->
+      <!-- Muebles -->
       <div class="categoria">
         <div class="cat-img cat-img-muebles">
           <div class="cat-discount-badge">
@@ -1123,25 +1147,49 @@
         </div>
         <div class="cat-bottom"><span>Muebles y artículos del hogar</span></div>
       </div>
+
+      <!-- Comida -->
+      <div class="categoria">
+        <div class="cat-img cat-img-comida">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">35% OFF</span>
+          </div>
+        </div>
+        <div class="cat-bottom"><span>Comida</span></div>
+      </div>
+
+      <!-- Deportes y Fitness -->
+      <div class="categoria">
+        <div class="cat-img cat-img-deportes">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">30% OFF</span>
+          </div>
+        </div>
+        <div class="cat-bottom"><span>Deportes y fitness</span></div>
+      </div>
+
+      <!-- Electrodomésticos -->
+      <div class="categoria">
+        <div class="cat-img cat-img-electrodomesticos">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">35% OFF</span>
+          </div>
+        </div>
+        <div class="cat-bottom"><span>Electrodomésticos</span></div>
+      </div>
     </div>
   </div>
 
-  <!-- PÁGINA DE CELULARES -->
-  <div id="cell-page" class="page" style="display:none;">
-    <div class="products-section">
-      <div class="products-header">
-        <div class="products-title">Celulares destacados</div>
-        <button class="back-button" onclick="volverAlHome()">← Volver</button>
-      </div>
-      <div class="products-note">
-        Precios de referencia aproximados basados en Mercado Libre. Solo a modo demostrativo.
-      </div>
-      <div class="products-timer">
-        Oferta válida por <span id="cell-timer">00:00:00</span> hs.
-      </div>
-
-      <div id="products-grid" class="products-grid"></div>
+  <!-- VISTA CELULARES -->
+  <div id="phones-view">
+    <div class="phones-header">
+      <button class="back-button" onclick="showHomeView()">← Volver</button>
+      <div class="phones-title">Ofertas de celulares</div>
     </div>
+    <div class="phones-subtitle">
+      Ejemplo de 4 celulares con 20% OFF y tiempo limitado hasta el final del día.
+    </div>
+    <div id="phones-grid" class="phones-grid"></div>
   </div>
 </div>
 
@@ -1200,16 +1248,11 @@
   </div>
 </div>
 
-<!-- POPUP DETALLE PRODUCTO -->
-<div id="product-overlay" class="overlay">
-  <div class="popup">
-    <div id="detail-name" class="product-detail-title"></div>
-    <div id="detail-price" class="product-detail-price"></div>
-    <div id="detail-seller" class="product-detail-line"></div>
-    <div id="detail-rating" class="product-detail-line"></div>
-    <div id="detail-location" class="product-detail-line"></div>
-    <div id="detail-shipping" class="product-detail-line"></div>
-    <button class="popup-close" onclick="closeProductOverlay()">Cerrar</button>
+<!-- POPUP DETALLE CELULAR -->
+<div id="phone-detail-overlay" class="overlay">
+  <div class="popup phone-detail-popup">
+    <div id="phone-detail-content"></div>
+    <button class="popup-close" onclick="closePhoneDetail()">Cerrar</button>
   </div>
 </div>
 
@@ -1237,77 +1280,57 @@
   // modo login / registro
   let isRegisterMode = false;
 
-  // Timer cel-page
-  let cellTimerInterval = null;
-
-  /* Productos de celulares (demo) */
-  const cellProducts = [
+  // celulares demo
+  const phoneDeals = [
     {
-      name: "iPhone 13 128GB",
-      price: 34990,
-      seller: "TechWorld UY",
-      rating: "4.8 / 5 · 234 opiniones",
+      id: "p1",
+      name: "iPhone 15 128 GB",
+      price: 42990,
+      image: "img/cell.jpg",
+      vendor: "TechHouse",
       location: "Montevideo",
-      shipping: "Envío gratis a todo el país",
-      image: "img/cell.jpg"
+      rating: 4.8,
+      reviews: 132,
+      description: "Pantalla Super Retina XDR 6,1\", chip A16 Bionic, cámara dual avanzada y carga rápida."
     },
     {
-      name: "Samsung Galaxy A15 128GB",
-      price: 9990,
-      seller: "Celucenter",
-      rating: "4.6 / 5 · 180 opiniones",
-      location: "Canelones",
-      shipping: "Retiro en sucursal y envío standard"
+      id: "p2",
+      name: "Samsung Galaxy S24 256 GB",
+      price: 38990,
+      image: "img/cell.jpg",
+      vendor: "Galaxy Store UY",
+      location: "Ciudad de la Costa",
+      rating: 4.7,
+      reviews: 98,
+      description: "Pantalla Dynamic AMOLED 2X, triple cámara con zoom, 5G y batería de larga duración."
     },
     {
-      name: "Xiaomi Redmi Note 13 256GB",
-      price: 12990,
-      seller: "MiStore Uruguay",
-      rating: "4.7 / 5 · 320 opiniones",
+      id: "p3",
+      name: "Xiaomi Redmi Note 13 5G",
+      price: 18990,
+      image: "img/cell.jpg",
+      vendor: "Mi Store Uruguay",
       location: "Montevideo",
-      shipping: "Envío en 24 hs a Montevideo"
+      rating: 4.6,
+      reviews: 210,
+      description: "Excelente relación precio/calidad, 5G, batería grande y cámara de alta resolución."
     },
     {
-      name: "Motorola Moto G54 128GB",
-      price: 8990,
-      seller: "MotoHouse UY",
-      rating: "4.5 / 5 · 150 opiniones",
-      location: "Maldonado",
-      shipping: "Envío a todo el país por agencia"
+      id: "p4",
+      name: "Motorola Moto G54 256 GB",
+      price: 15990,
+      image: "img/cell.jpg",
+      vendor: "Moto Oficial UY",
+      location: "Las Piedras",
+      rating: 4.5,
+      reviews: 75,
+      description: "Pantalla fluida, sonido estéreo, batería de todo el día y Android casi puro."
     }
   ];
 
-  function precioFormateado(num) {
-    return num.toLocaleString("es-UY", {
-      style: "currency",
-      currency: "UYU",
-      maximumFractionDigits: 0
-    });
-  }
-
-  function renderCellProducts() {
-    const grid = document.getElementById("products-grid");
-    grid.innerHTML = "";
-    cellProducts.forEach((p, idx) => {
-      const desc = Math.round(p.price * 0.8); // 20% OFF
-      const card = document.createElement("div");
-      card.className = "product-card";
-      card.onclick = () => openProductOverlay(idx);
-      card.innerHTML = `
-        <div class="product-img" style="background-image:url('${p.image}');"></div>
-        <div class="product-info">
-          <div class="product-name">${p.name}</div>
-          <div class="product-prices">
-            <div class="product-price-old">${precioFormateado(p.price)}</div>
-            <div class="product-price-new">${precioFormateado(desc)}</div>
-          </div>
-          <div class="product-discount-tag">20% OFF hoy</div>
-          <div class="product-source">Referencia Mercado Libre Uruguay</div>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-  }
+  // fin del día para los contadores de ofertas
+  let dealsEndTime = null;
+  let dealsTimerInterval = null;
 
   /* Lógica de premios */
   const outcomes = [
@@ -1353,7 +1376,6 @@
   function loadUserData() {
     if (!currentUser) return;
 
-    // estado de la ruleta y saldos
     const stateKey = getUserKey("state");
     saldoLibre = 0;
     saldoLight = 0;
@@ -1373,7 +1395,6 @@
       }
     }
 
-    // datos de perfil
     const profileKey = getUserKey("profile");
     profileData = { nombre: "", direccion: "", fechaNacimiento: "", telefono: "" };
     if (profileKey) {
@@ -1405,6 +1426,7 @@
     document.getElementById("app").style.display = "block";
 
     loadUserData();
+    showHomeView();
   }
 
   function handleLoggedOut() {
@@ -1418,17 +1440,15 @@
     document.getElementById("login-screen").style.display = "flex";
   }
 
-  // observar cambios de auth
   auth.onAuthStateChanged(function(user) {
     if (user) {
-      if (currentUser && currentUser.uid === user.uid) return; // ya manejado
+      if (currentUser && currentUser.uid === user.uid) return;
       handleUserLoggedIn(user);
     } else {
       handleLoggedOut();
     }
   });
 
-  // cambiar entre iniciar sesión y crear cuenta
   function toggleLoginMode() {
     isRegisterMode = !isRegisterMode;
     const nameGroup = document.getElementById("login-name-group");
@@ -1451,7 +1471,6 @@
 
   document.getElementById("toggle-login-mode").addEventListener("click", toggleLoginMode);
 
-  // LOGIN
   document.getElementById("login-form").addEventListener("submit", async function(e) {
     e.preventDefault();
     const name  = document.getElementById("login-name").value.trim();
@@ -1492,7 +1511,6 @@
     }
   });
 
-  // LOGIN con Google (Gmail)
   async function loginWithGoogle() {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -1505,7 +1523,6 @@
     }
   }
 
-  // LOGOUT
   async function logout() {
     try {
       await auth.signOut();
@@ -1582,6 +1599,27 @@
     });
   }
 
+  // sonido específico de monedas cayendo
+  function playCoinRainSound() {
+    const ctx = getAudioCtx(); if (!ctx) return;
+    const now = ctx.currentTime;
+    for (let i = 0; i < 10; i++) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const start = now + i * 0.05;
+      const end = start + 0.25;
+      osc.type = "triangle";
+      const baseFreq = 900 - i * 40;
+      osc.frequency.setValueAtTime(baseFreq, start);
+      osc.frequency.linearRampToValueAtTime(baseFreq - 150, end);
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(0.35, start + 0.02);
+      gain.gain.linearRampToValueAtTime(0, end);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(start); osc.stop(end);
+    }
+  }
+
   function playLoseSound() {
     const ctx = getAudioCtx(); if (!ctx) return;
     const now = ctx.currentTime;
@@ -1624,7 +1662,7 @@
     saveStateForUser();
   }
 
-  /* countdown 12h visual ruleta */
+  /* countdown 12h de la ruleta (visual) */
 
   function formatTime(seconds) {
     const h = Math.floor(seconds / 3600);
@@ -1701,14 +1739,16 @@
     companyWrap.style.display = showCompany ? "inline-flex" : "none";
 
     coinsEl.innerHTML = "";
-    for (let i=0;i<7;i++){
+    for (let i=0;i<10;i++){
       const c = document.createElement("div");
       c.className = "coin " + coinClass;
       const offsetX = (Math.random()-0.5)*80;
       const delay = Math.random()*0.2;
       c.style.left = (50 + offsetX/2)+"%";
       c.style.animationDelay = delay+"s";
-      c.textContent = kind==="descuento" ? "%" : (kind.startsWith("lightning") ? "⚡" : "$");
+      c.textContent =
+        kind==="descuento" ? "%" :
+        (kind.startsWith("lightning") ? "⚡" : "$");
       coinsEl.appendChild(c);
     }
 
@@ -1787,16 +1827,19 @@
         saldoLibre += outcome.amount;
         actualizarSaldos();
         playWinSound();
+        playCoinRainSound();
         showRewardPopup("libre", outcome);
       } else if (outcome.type === "saldoLibreJackpot" && outcome.amount) {
         saldoLibre += outcome.amount;
         actualizarSaldos();
         playJackpotSound();
+        playCoinRainSound();
         showRewardPopup("jackpot", outcome);
       } else if ((outcome.type === "saldoLightMueble" || outcome.type === "saldoLightFerre") && outcome.amount) {
         saldoLight += outcome.amount;
         actualizarSaldos();
         playWinSound();
+        playCoinRainSound();
         if (outcome.type === "saldoLightMueble") {
           showRewardPopup("lightning-mueble", outcome);
         } else {
@@ -1827,7 +1870,6 @@
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
   });
 
-  // cerrar menú si se hace click fuera
   window.addEventListener("click", function(e) {
     const menu = document.getElementById("user-menu");
     if (!e.target.closest("#user-menu") && !e.target.closest("#user-avatar")) {
@@ -1885,80 +1927,133 @@
     closeProfileOverlay();
   });
 
-  /* Navegación: Home <-> Celulares */
+  /* VISTAS HOME / CELULARES */
 
-  function mostrarCelulares() {
-    document.getElementById("home-page").style.display = "none";
-    document.getElementById("cell-page").style.display = "block";
-    renderCellProducts();
-    startCellTimer();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  function showHomeView() {
+    document.getElementById("home-view").style.display = "block";
+    document.getElementById("phones-view").style.display = "none";
   }
 
-  function volverAlHome() {
-    document.getElementById("cell-page").style.display = "none";
-    document.getElementById("home-page").style.display = "block";
-    stopCellTimer();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  function openPhonesView() {
+    document.getElementById("home-view").style.display = "none";
+    document.getElementById("phones-view").style.display = "block";
+    initPhonesGrid();
+    initDealsCountdown();
   }
 
-  /* Temporizador de ofertas (hasta fin del día local) */
+  /* CELULARES: grid + timers + detalle */
 
-  function startCellTimer() {
-    const label = document.getElementById("cell-timer");
-    if (!label) return;
-    if (cellTimerInterval) clearInterval(cellTimerInterval);
+  function initPhonesGrid() {
+    const grid = document.getElementById("phones-grid");
+    if (!grid) return;
+    if (grid.dataset.built === "true") return; // lo armamos una sola vez
 
-    function update() {
-      const now = new Date();
-      const end = new Date();
-      end.setHours(23, 59, 59, 999);
-      if (end < now) {
-        end.setDate(end.getDate() + 1);
-      }
-      const diffMs = end - now;
-      let seconds = Math.floor(diffMs / 1000);
-      if (seconds < 0) seconds = 0;
-      label.textContent = formatTime(seconds);
-    }
+    grid.innerHTML = "";
+    phoneDeals.forEach(p => {
+      const originalPrice = Math.round(p.price / 0.8);
+      const card = document.createElement("div");
+      card.className = "phone-card";
+      card.onclick = () => openPhoneDetail(p.id);
+      card.innerHTML = `
+        <div class="phone-img-wrap">
+          <img src="${p.image}" alt="${p.name}">
+        </div>
+        <div class="phone-body">
+          <div class="phone-name">${p.name}</div>
+          <div class="phone-prices">
+            <span class="phone-old-price">$${originalPrice.toLocaleString("es-UY")}</span>
+            <span class="phone-price">$${p.price.toLocaleString("es-UY")}</span>
+          </div>
+          <span class="phone-discount-pill">20% OFF</span>
+          <div class="phone-timer deal-timer" data-product-id="${p.id}">
+            <!-- se completa por JS -->
+          </div>
+          <div class="phone-meta">
+            Vendido por ${p.vendor} • ${p.location} • ⭐ ${p.rating} (${p.reviews} reseñas)
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
 
-    update();
-    cellTimerInterval = setInterval(update, 1000);
+    grid.dataset.built = "true";
   }
 
-  function stopCellTimer() {
-    if (cellTimerInterval) clearInterval(cellTimerInterval);
-    cellTimerInterval = null;
+  function initDealsCountdown() {
+    const now = new Date();
+    dealsEndTime = new Date();
+    dealsEndTime.setHours(23, 59, 59, 999); // fin del día local (Uruguay)
+    if (dealsTimerInterval) clearInterval(dealsTimerInterval);
+    updateDealTimers();
+    dealsTimerInterval = setInterval(updateDealTimers, 1000);
   }
 
-  /* Overlay detalle de producto */
+  function updateDealTimers() {
+    if (!dealsEndTime) return;
+    const now = new Date();
+    let diff = dealsEndTime - now;
+    if (diff < 0) diff = 0;
 
-  function openProductOverlay(index) {
-    const p = cellProducts[index];
-    const desc = Math.round(p.price * 0.8);
+    const totalSeconds = Math.floor(diff / 1000);
+    const h = Math.floor(totalSeconds / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = totalSeconds % 60;
+    const text = `Termina hoy en ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
 
-    document.getElementById("detail-name").textContent = p.name;
-    document.getElementById("detail-price").textContent =
-      `${precioFormateado(desc)} (20% OFF, antes ${precioFormateado(p.price)})`;
-    document.getElementById("detail-seller").textContent =
-      `Vendedor: ${p.seller}`;
-    document.getElementById("detail-rating").textContent =
-      `Reputación: ${p.rating}`;
-    document.getElementById("detail-location").textContent =
-      `Ubicación: ${p.location}`;
-    document.getElementById("detail-shipping").textContent =
-      `Envío: ${p.shipping}`;
-
-    document.getElementById("product-overlay").style.display = "flex";
+    document.querySelectorAll(".deal-timer").forEach(el => {
+      el.textContent = text;
+    });
   }
 
-  function closeProductOverlay() {
-    document.getElementById("product-overlay").style.display = "none";
+  function openPhoneDetail(id) {
+    const phone = phoneDeals.find(p => p.id === id);
+    if (!phone) return;
+    const originalPrice = Math.round(phone.price / 0.8);
+    const container = document.getElementById("phone-detail-content");
+    const now = new Date();
+    const end = dealsEndTime || new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23,59,59,999);
+    let diff = end - now;
+    if (diff < 0) diff = 0;
+    const totalSeconds = Math.floor(diff / 1000);
+    const h = Math.floor(totalSeconds / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = totalSeconds % 60;
+    const timerText = `Termina hoy en ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
+    container.innerHTML = `
+      <div class="phone-detail-title">${phone.name}</div>
+      <div class="phone-detail-img">
+        <img src="${phone.image}" alt="${phone.name}">
+      </div>
+      <div class="phone-prices">
+        <span class="phone-old-price">$${originalPrice.toLocaleString("es-UY")}</span>
+        <span class="phone-price">$${phone.price.toLocaleString("es-UY")}</span>
+      </div>
+      <span class="phone-discount-pill">20% OFF solo por hoy</span>
+      <div class="phone-timer" style="margin-top:6px;">${timerText}</div>
+
+      <div class="phone-detail-section-title">Vendedor</div>
+      <div class="phone-detail-text">
+        ${phone.vendor} • ${phone.location}<br>
+        Calificación ⭐ ${phone.rating} (${phone.reviews} reseñas verificadas)<br>
+        Envío a todo Uruguay en 24-72 hs.
+      </div>
+
+      <div class="phone-detail-section-title">Descripción</div>
+      <div class="phone-detail-text">
+        ${phone.description}
+      </div>
+    `;
+
+    document.getElementById("phone-detail-overlay").style.display = "flex";
+  }
+
+  function closePhoneDetail() {
+    document.getElementById("phone-detail-overlay").style.display = "none";
   }
 
   /* init */
   window.addEventListener("load", () => {
-    // por defecto, modo "iniciar sesión": ocultar campo nombre
     document.getElementById("login-name-group").style.display = "none";
   });
 </script>
