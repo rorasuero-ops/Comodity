@@ -453,7 +453,7 @@
 
     .categorias {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr)); /* móvil: 2 por fila */
       gap: 12px;
       margin: 0 20px 30px;
     }
@@ -463,7 +463,7 @@
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       cursor: pointer;
-      background: #111; /* marco oscuro para el letterbox */
+      background: #111; /* marco oscuro para letterbox */
     }
 
     .cat-img {
@@ -592,7 +592,7 @@
       background: var(--card-bg);
       border-radius: 18px;
       padding: 18px 20px 16px;
-      max-width: 340px;
+      max-width: 360px;
       width: calc(100% - 40px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
       text-align: center;
@@ -772,20 +772,47 @@
 
     /* Sección productos (celulares) */
 
+    .page {
+      padding-bottom: 30px;
+    }
+
     .products-section {
-      margin: 0 20px 40px;
+      margin: 20px;
+    }
+
+    .products-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
     .products-title {
       font-size: 16px;
       font-weight: bold;
-      margin-bottom: 10px;
+    }
+
+    .back-button {
+      border: none;
+      background: #eee;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 13px;
+      cursor: pointer;
     }
 
     .products-note {
       font-size: 11px;
       color: var(--text-soft);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    .products-timer {
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-weight: bold;
     }
 
     .products-grid {
@@ -800,6 +827,7 @@
       border-radius: 14px;
       overflow: hidden;
       box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      cursor: pointer;
     }
 
     .product-img {
@@ -824,14 +852,51 @@
       font-weight: bold;
     }
 
-    .product-price {
-      font-size: 14px;
+    .product-prices {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .product-price-old {
+      font-size: 13px;
+      color: #777;
+      text-decoration: line-through;
+    }
+
+    .product-price-new {
+      font-size: 15px;
       color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .product-discount-tag {
+      display: inline-block;
+      margin-top: 2px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #7b1fa2;
+      color: #fff;
+      font-size: 10px;
       font-weight: bold;
     }
 
     .product-source {
       font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    /* Detalle de producto (overlay) */
+    .product-detail-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    .product-detail-price {
+      margin-bottom: 6px;
+    }
+    .product-detail-line {
+      font-size: 13px;
+      margin-bottom: 4px;
       color: var(--text-soft);
     }
 
@@ -844,8 +909,12 @@
     @media (min-width: 768px) {
       header { padding-left: 24px; padding-right: 24px; }
       .ruleta-container { max-width: 520px; margin: 24px auto; }
-      .categorias { max-width: 520px; margin: 0 auto 40px; }
-      .products-section { max-width: 520px; margin: 0 auto 40px; }
+      .categorias {
+        max-width: 900px;
+        margin: 0 auto 40px;
+        grid-template-columns: repeat(4, minmax(0, 1fr)); /* PC: 4 por fila */
+      }
+      .products-section { max-width: 520px; margin: 24px auto 40px; }
     }
   </style>
 </head>
@@ -928,174 +997,150 @@
     <div class="user-menu-item" onclick="logout()">Cerrar sesión</div>
   </div>
 
-  <!-- RULETA -->
-  <div class="ruleta-container">
-    <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
-    <div class="ruleta-wrapper">
-      <div class="ruleta" id="ruleta">
-        <div class="pointer"></div>
-        <div class="ruleta-center">
-          <div class="logo-center">C</div>
+  <!-- HOME PAGE (ruleta + categorías) -->
+  <div id="home-page" class="page">
+    <!-- RULETA -->
+    <div class="ruleta-container">
+      <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
+      <div class="ruleta-wrapper">
+        <div class="ruleta" id="ruleta">
+          <div class="pointer"></div>
+          <div class="ruleta-center">
+            <div class="logo-center">C</div>
+          </div>
+
+          <!-- 8 iconos -->
+          <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
+          <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
+          <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
+          <div class="ruleta-segment-icon wheel-coin-yellow seg-4">$</div>
+          <div class="ruleta-segment-icon wheel-percent     seg-5">%</div>
+          <div class="ruleta-segment-icon wheel-coin-blue   seg-6">$</div>
+          <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
+          <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
         </div>
 
-        <!-- 8 iconos: 3 monedas amarillas, 3 azules, 2 % -->
-        <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
-        <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
-        <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
-        <div class="ruleta-segment-icon wheel-coin-yellow seg-4">$</div>
-        <div class="ruleta-segment-icon wheel-percent     seg-5">%</div>
-        <div class="ruleta-segment-icon wheel-coin-blue   seg-6">$</div>
-        <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
-        <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
+        <button class="btn-girar" id="btn-girar" onclick="girarRuleta()">
+          Girar ruleta
+        </button>
+      </div>
+      <p id="resultado"></p>
+      <p id="tiradas-info" class="tiradas-info">4 tiradas restantes</p>
+      <p id="cooldown-info" class="cooldown-info" style="display:none;">
+        Próxima recarga en <span id="cooldown-seconds">12:00:00</span>
+      </p>
+    </div>
+
+    <!-- CATEGORÍAS -->
+    <div class="categorias">
+      <!-- Commodities -->
+      <div class="categoria">
+        <div class="cat-img cat-img-comodities">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">50% OFF</span>
+          </div>
+          <div class="cat-logo-comodity">C</div>
+        </div>
+        <div class="cat-bottom"><span>Commodities</span></div>
       </div>
 
-      <button class="btn-girar" id="btn-girar" onclick="girarRuleta()">
-        Girar ruleta
-      </button>
+      <!-- Insumos constructivos -->
+      <div class="categoria">
+        <div class="cat-img cat-img-insumos">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">35% OFF</span>
+          </div>
+        </div>
+        <div class="cat-bottom"><span>Insumos constructivos</span></div>
+      </div>
+
+      <!-- Celulares (click para abrir página nueva) -->
+      <div class="categoria" onclick="mostrarCelulares()">
+        <div class="cat-img cat-img-cell">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">40% OFF</span>
+          </div>
+        </div>
+        <div class="cat-bottom"><span>Celulares</span></div>
+      </div>
+
+      <!-- Electrónica, Audio y Video -->
+      <div class="categoria">
+        <div class="cat-img cat-img-electronica">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">45% OFF</span>
+          </div>
+        </div>
+        <div class="cat-bottom"><span>Electrónica, audio y video</span></div>
+      </div>
+
+      <!-- Ropa -->
+      <div class="categoria">
+        <div class="cat-img cat-img-ropa">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">30% OFF</span>
+          </div>
+        </div>
+        <div class="cat-bottom"><span>Ropa</span></div>
+      </div>
+
+      <!-- Experiencias -->
+      <div class="categoria">
+        <div class="cat-img cat-img-experiencias">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">60% OFF</span>
+          </div>
+        </div>
+        <div class="cat-bottom"><span>Experiencias</span></div>
+      </div>
+
+      <!-- Imperdibles < 1000 -->
+      <div class="categoria">
+        <div class="cat-img cat-img-imperdibles">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">70% OFF</span>
+          </div>
+        </div>
+        <div class="cat-bottom"><span>Imperdibles &lt; $1000</span></div>
+      </div>
+
+      <!-- Hoteles y viajes -->
+      <div class="categoria">
+        <div class="cat-img cat-img-hoteles">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">35% OFF</span>
+          </div>
+        </div>
+        <div class="cat-bottom"><span>Hoteles y viajes</span></div>
+      </div>
+
+      <!-- Muebles y artículos del hogar -->
+      <div class="categoria">
+        <div class="cat-img cat-img-muebles">
+          <div class="cat-discount-badge">
+            hasta<br><span class="off">40% OFF</span>
+          </div>
+        </div>
+        <div class="cat-bottom"><span>Muebles y artículos del hogar</span></div>
+      </div>
     </div>
-    <p id="resultado"></p>
-    <p id="tiradas-info" class="tiradas-info">4 tiradas restantes</p>
-    <p id="cooldown-info" class="cooldown-info" style="display:none;">
-      Próxima recarga en <span id="cooldown-seconds">12:00:00</span>
-    </p>
   </div>
 
-  <!-- CATEGORÍAS -->
-  <div class="categorias">
-    <!-- Commodities -->
-    <div class="categoria">
-      <div class="cat-img cat-img-comodities">
-        <div class="cat-discount-badge">
-          hasta<br><span class="off">50% OFF</span>
-        </div>
-        <div class="cat-logo-comodity">C</div>
+  <!-- PÁGINA DE CELULARES -->
+  <div id="cell-page" class="page" style="display:none;">
+    <div class="products-section">
+      <div class="products-header">
+        <div class="products-title">Celulares destacados</div>
+        <button class="back-button" onclick="volverAlHome()">← Volver</button>
       </div>
-      <div class="cat-bottom"><span>Commodities</span></div>
-    </div>
-
-    <!-- Insumos constructivos -->
-    <div class="categoria">
-      <div class="cat-img cat-img-insumos">
-        <div class="cat-discount-badge">
-          hasta<br><span class="off">35% OFF</span>
-        </div>
+      <div class="products-note">
+        Precios de referencia aproximados basados en Mercado Libre. Solo a modo demostrativo.
       </div>
-      <div class="cat-bottom"><span>Insumos constructivos</span></div>
-    </div>
-
-    <!-- Celulares (click para mostrar productos) -->
-    <div class="categoria" onclick="mostrarCelulares()">
-      <div class="cat-img cat-img-cell">
-        <div class="cat-discount-badge">
-          hasta<br><span class="off">40% OFF</span>
-        </div>
-      </div>
-      <div class="cat-bottom"><span>Celulares</span></div>
-    </div>
-
-    <!-- Electrónica, Audio y Video -->
-    <div class="categoria">
-      <div class="cat-img cat-img-electronica">
-        <div class="cat-discount-badge">
-          hasta<br><span class="off">45% OFF</span>
-        </div>
-      </div>
-      <div class="cat-bottom"><span>Electrónica, audio y video</span></div>
-    </div>
-
-    <!-- Ropa -->
-    <div class="categoria">
-      <div class="cat-img cat-img-ropa">
-        <div class="cat-discount-badge">
-          hasta<br><span class="off">30% OFF</span>
-        </div>
-      </div>
-      <div class="cat-bottom"><span>Ropa</span></div>
-    </div>
-
-    <!-- Experiencias -->
-    <div class="categoria">
-      <div class="cat-img cat-img-experiencias">
-        <div class="cat-discount-badge">
-          hasta<br><span class="off">60% OFF</span>
-        </div>
-      </div>
-      <div class="cat-bottom"><span>Experiencias</span></div>
-    </div>
-
-    <!-- Imperdibles < 1000 -->
-    <div class="categoria">
-      <div class="cat-img cat-img-imperdibles">
-        <div class="cat-discount-badge">
-          hasta<br><span class="off">70% OFF</span>
-        </div>
-      </div>
-      <div class="cat-bottom"><span>Imperdibles &lt; $1000</span></div>
-    </div>
-
-    <!-- Hoteles y viajes -->
-    <div class="categoria">
-      <div class="cat-img cat-img-hoteles">
-        <div class="cat-discount-badge">
-          hasta<br><span class="off">35% OFF</span>
-        </div>
-      </div>
-      <div class="cat-bottom"><span>Hoteles y viajes</span></div>
-    </div>
-
-    <!-- Muebles y artículos del hogar -->
-    <div class="categoria">
-      <div class="cat-img cat-img-muebles">
-        <div class="cat-discount-badge">
-          hasta<br><span class="off">40% OFF</span>
-        </div>
-      </div>
-      <div class="cat-bottom"><span>Muebles y artículos del hogar</span></div>
-    </div>
-  </div>
-
-  <!-- SECCIÓN PRODUCTOS CELULARES -->
-  <div id="products-section" class="products-section" style="display:none;">
-    <div class="products-title">Celulares destacados</div>
-    <div class="products-note">
-      Precios de referencia aproximados basados en Mercado Libre. Solo a modo demostrativo.
-    </div>
-    <div class="products-grid">
-      <div class="product-card">
-        <div class="product-img" style="background-image:url('img/cell.jpg');"></div>
-        <div class="product-info">
-          <div class="product-name">iPhone 13 128GB</div>
-          <div class="product-price">$ 34.990</div>
-          <div class="product-source">Referencia Mercado Libre Uruguay</div>
-        </div>
+      <div class="products-timer">
+        Oferta válida por <span id="cell-timer">00:00:00</span> hs.
       </div>
 
-      <div class="product-card">
-        <div class="product-img" style="background-image:url('img/cell.jpg');"></div>
-        <div class="product-info">
-          <div class="product-name">Samsung Galaxy A15 128GB</div>
-          <div class="product-price">$ 9.990</div>
-          <div class="product-source">Referencia Mercado Libre Uruguay</div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img" style="background-image:url('img/cell.jpg');"></div>
-        <div class="product-info">
-          <div class="product-name">Xiaomi Redmi Note 13 256GB</div>
-          <div class="product-price">$ 12.990</div>
-          <div class="product-source">Referencia Mercado Libre Uruguay</div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img" style="background-image:url('img/cell.jpg');"></div>
-        <div class="product-info">
-          <div class="product-name">Motorola Moto G54 128GB</div>
-          <div class="product-price">$ 8.990</div>
-          <div class="product-source">Referencia Mercado Libre Uruguay</div>
-        </div>
-      </div>
+      <div id="products-grid" class="products-grid"></div>
     </div>
   </div>
 </div>
@@ -1155,6 +1200,19 @@
   </div>
 </div>
 
+<!-- POPUP DETALLE PRODUCTO -->
+<div id="product-overlay" class="overlay">
+  <div class="popup">
+    <div id="detail-name" class="product-detail-title"></div>
+    <div id="detail-price" class="product-detail-price"></div>
+    <div id="detail-seller" class="product-detail-line"></div>
+    <div id="detail-rating" class="product-detail-line"></div>
+    <div id="detail-location" class="product-detail-line"></div>
+    <div id="detail-shipping" class="product-detail-line"></div>
+    <button class="popup-close" onclick="closeProductOverlay()">Cerrar</button>
+  </div>
+</div>
+
 <script>
   /* Estado general */
   let saldoLibre = 0;
@@ -1178,6 +1236,78 @@
 
   // modo login / registro
   let isRegisterMode = false;
+
+  // Timer cel-page
+  let cellTimerInterval = null;
+
+  /* Productos de celulares (demo) */
+  const cellProducts = [
+    {
+      name: "iPhone 13 128GB",
+      price: 34990,
+      seller: "TechWorld UY",
+      rating: "4.8 / 5 · 234 opiniones",
+      location: "Montevideo",
+      shipping: "Envío gratis a todo el país",
+      image: "img/cell.jpg"
+    },
+    {
+      name: "Samsung Galaxy A15 128GB",
+      price: 9990,
+      seller: "Celucenter",
+      rating: "4.6 / 5 · 180 opiniones",
+      location: "Canelones",
+      shipping: "Retiro en sucursal y envío standard"
+    },
+    {
+      name: "Xiaomi Redmi Note 13 256GB",
+      price: 12990,
+      seller: "MiStore Uruguay",
+      rating: "4.7 / 5 · 320 opiniones",
+      location: "Montevideo",
+      shipping: "Envío en 24 hs a Montevideo"
+    },
+    {
+      name: "Motorola Moto G54 128GB",
+      price: 8990,
+      seller: "MotoHouse UY",
+      rating: "4.5 / 5 · 150 opiniones",
+      location: "Maldonado",
+      shipping: "Envío a todo el país por agencia"
+    }
+  ];
+
+  function precioFormateado(num) {
+    return num.toLocaleString("es-UY", {
+      style: "currency",
+      currency: "UYU",
+      maximumFractionDigits: 0
+    });
+  }
+
+  function renderCellProducts() {
+    const grid = document.getElementById("products-grid");
+    grid.innerHTML = "";
+    cellProducts.forEach((p, idx) => {
+      const desc = Math.round(p.price * 0.8); // 20% OFF
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.onclick = () => openProductOverlay(idx);
+      card.innerHTML = `
+        <div class="product-img" style="background-image:url('${p.image}');"></div>
+        <div class="product-info">
+          <div class="product-name">${p.name}</div>
+          <div class="product-prices">
+            <div class="product-price-old">${precioFormateado(p.price)}</div>
+            <div class="product-price-new">${precioFormateado(desc)}</div>
+          </div>
+          <div class="product-discount-tag">20% OFF hoy</div>
+          <div class="product-source">Referencia Mercado Libre Uruguay</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
 
   /* Lógica de premios */
   const outcomes = [
@@ -1321,7 +1451,7 @@
 
   document.getElementById("toggle-login-mode").addEventListener("click", toggleLoginMode);
 
-  // LOGIN con Nombre (solo registro), Email + Contraseña
+  // LOGIN
   document.getElementById("login-form").addEventListener("submit", async function(e) {
     e.preventDefault();
     const name  = document.getElementById("login-name").value.trim();
@@ -1494,7 +1624,7 @@
     saveStateForUser();
   }
 
-  /* countdown 12h solo visual */
+  /* countdown 12h visual ruleta */
 
   function formatTime(seconds) {
     const h = Math.floor(seconds / 3600);
@@ -1755,12 +1885,75 @@
     closeProfileOverlay();
   });
 
-  /* Mostrar sección de celulares */
+  /* Navegación: Home <-> Celulares */
 
   function mostrarCelulares() {
-    const section = document.getElementById("products-section");
-    section.style.display = "block";
-    section.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("home-page").style.display = "none";
+    document.getElementById("cell-page").style.display = "block";
+    renderCellProducts();
+    startCellTimer();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function volverAlHome() {
+    document.getElementById("cell-page").style.display = "none";
+    document.getElementById("home-page").style.display = "block";
+    stopCellTimer();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* Temporizador de ofertas (hasta fin del día local) */
+
+  function startCellTimer() {
+    const label = document.getElementById("cell-timer");
+    if (!label) return;
+    if (cellTimerInterval) clearInterval(cellTimerInterval);
+
+    function update() {
+      const now = new Date();
+      const end = new Date();
+      end.setHours(23, 59, 59, 999);
+      if (end < now) {
+        end.setDate(end.getDate() + 1);
+      }
+      const diffMs = end - now;
+      let seconds = Math.floor(diffMs / 1000);
+      if (seconds < 0) seconds = 0;
+      label.textContent = formatTime(seconds);
+    }
+
+    update();
+    cellTimerInterval = setInterval(update, 1000);
+  }
+
+  function stopCellTimer() {
+    if (cellTimerInterval) clearInterval(cellTimerInterval);
+    cellTimerInterval = null;
+  }
+
+  /* Overlay detalle de producto */
+
+  function openProductOverlay(index) {
+    const p = cellProducts[index];
+    const desc = Math.round(p.price * 0.8);
+
+    document.getElementById("detail-name").textContent = p.name;
+    document.getElementById("detail-price").textContent =
+      `${precioFormateado(desc)} (20% OFF, antes ${precioFormateado(p.price)})`;
+    document.getElementById("detail-seller").textContent =
+      `Vendedor: ${p.seller}`;
+    document.getElementById("detail-rating").textContent =
+      `Reputación: ${p.rating}`;
+    document.getElementById("detail-location").textContent =
+      `Ubicación: ${p.location}`;
+    document.getElementById("detail-shipping").textContent =
+      `Envío: ${p.shipping}`;
+
+    document.getElementById("product-overlay").style.display = "flex";
+  }
+
+  function closeProductOverlay() {
+    document.getElementById("product-overlay").style.display = "none";
   }
 
   /* init */
