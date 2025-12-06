@@ -3,7 +3,7 @@
 <head>
   <!-- Firebase compat (ideal para HTML puro sin build) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>f
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
   <script>
     const firebaseConfig = {
@@ -256,7 +256,7 @@
       white-space: nowrap;
     }
 
-    /* MENU USUARIO */
+    /* MENU USUARIO (arriba izquierda, al click en avatar) */
 
     .user-menu {
       position: fixed;
@@ -356,19 +356,18 @@
       justify-content: center;
     }
 
-    /* LOGO EN EL CENTRO DE LA RULETA */
     .logo-center {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
       width: 46px;
       height: 46px;
       background: #ffffff;
       color: #000;
       font-size: 22px;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       clip-path: polygon(15% 0%, 90% 10%, 100% 60%, 55% 100%, 0% 65%);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
     }
 
     .ruleta-segment-icon {
@@ -464,45 +463,71 @@
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       cursor: pointer;
-      background: #e0e0e0;
+      background: #111; /* marco oscuro para el letterbox */
     }
 
-    /* IMPORTANTE: sin anidado raro, y con contain para ver la imagen completa */
     .cat-img {
-  position: relative;
-  height: 110px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%; /* llena el espacio aunque distorsione */
-   /* se estira para llenar todo el espacio */
-  background-color: #000;   /* opcional, podés quitarlo si querés */
-}
+      position: relative;
+      height: 110px;
+      background-size: contain;       /* se ve la imagen completa */
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
-
-    /* Imágenes locales dentro de /img */
+    /* usa las imágenes locales dentro de /img */
 
     .cat-img-comodities {
-      background-image: url("img/commodities.jpg");
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
+        url("img/commodities.jpg");
     }
 
     .cat-img-insumos {
-      background-image: url("img/insumos.jpg");
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        url("img/insumos.jpg");
     }
 
     .cat-img-cell {
-      background-image: url("img/cell.jpg");
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        url("img/cell.jpg");
     }
 
     .cat-img-electronica {
-      background-image: url("img/tv.jpg");
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        url("img/tv.jpg");
     }
 
     .cat-img-ropa {
-      background-image: url("img/ropa.jpg");
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        url("img/ropa.jpg");
     }
 
     .cat-img-experiencias {
-      background-image: url("img/kart.jpg");
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        url("img/kart.jpg");
+    }
+
+    .cat-img-imperdibles {
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
+        url("img/imperdibles.jpg");
+    }
+
+    .cat-img-hoteles {
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        url("img/hoteles.jpg");
+    }
+
+    .cat-img-muebles {
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        url("img/muebles.jpg");
     }
 
     .cat-discount-badge {
@@ -745,10 +770,82 @@
 
     .spin { animation: girar 1.5s ease-out; }
 
+    /* Sección productos (celulares) */
+
+    .products-section {
+      margin: 0 20px 40px;
+    }
+
+    .products-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .products-note {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .product-card {
+      display: flex;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    .product-img {
+      flex: 0 0 110px;
+      height: 110px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #000;
+    }
+
+    .product-info {
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .product-price {
+      font-size: 14px;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .product-source {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    @media (min-width: 520px) {
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
     @media (min-width: 768px) {
       header { padding-left: 24px; padding-right: 24px; }
       .ruleta-container { max-width: 520px; margin: 24px auto; }
       .categorias { max-width: 520px; margin: 0 auto 40px; }
+      .products-section { max-width: 520px; margin: 0 auto 40px; }
     }
   </style>
 </head>
@@ -831,6 +928,7 @@
     <div class="user-menu-item" onclick="logout()">Cerrar sesión</div>
   </div>
 
+  <!-- RULETA -->
   <div class="ruleta-container">
     <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
     <div class="ruleta-wrapper">
@@ -885,8 +983,8 @@
       <div class="cat-bottom"><span>Insumos constructivos</span></div>
     </div>
 
-    <!-- Celulares -->
-    <div class="categoria">
+    <!-- Celulares (click para mostrar productos) -->
+    <div class="categoria" onclick="mostrarCelulares()">
       <div class="cat-img cat-img-cell">
         <div class="cat-discount-badge">
           hasta<br><span class="off">40% OFF</span>
@@ -923,6 +1021,81 @@
         </div>
       </div>
       <div class="cat-bottom"><span>Experiencias</span></div>
+    </div>
+
+    <!-- Imperdibles < 1000 -->
+    <div class="categoria">
+      <div class="cat-img cat-img-imperdibles">
+        <div class="cat-discount-badge">
+          hasta<br><span class="off">70% OFF</span>
+        </div>
+      </div>
+      <div class="cat-bottom"><span>Imperdibles &lt; $1000</span></div>
+    </div>
+
+    <!-- Hoteles y viajes -->
+    <div class="categoria">
+      <div class="cat-img cat-img-hoteles">
+        <div class="cat-discount-badge">
+          hasta<br><span class="off">35% OFF</span>
+        </div>
+      </div>
+      <div class="cat-bottom"><span>Hoteles y viajes</span></div>
+    </div>
+
+    <!-- Muebles y artículos del hogar -->
+    <div class="categoria">
+      <div class="cat-img cat-img-muebles">
+        <div class="cat-discount-badge">
+          hasta<br><span class="off">40% OFF</span>
+        </div>
+      </div>
+      <div class="cat-bottom"><span>Muebles y artículos del hogar</span></div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN PRODUCTOS CELULARES -->
+  <div id="products-section" class="products-section" style="display:none;">
+    <div class="products-title">Celulares destacados</div>
+    <div class="products-note">
+      Precios de referencia aproximados basados en Mercado Libre. Solo a modo demostrativo.
+    </div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-img" style="background-image:url('img/cell.jpg');"></div>
+        <div class="product-info">
+          <div class="product-name">iPhone 13 128GB</div>
+          <div class="product-price">$ 34.990</div>
+          <div class="product-source">Referencia Mercado Libre Uruguay</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background-image:url('img/cell.jpg');"></div>
+        <div class="product-info">
+          <div class="product-name">Samsung Galaxy A15 128GB</div>
+          <div class="product-price">$ 9.990</div>
+          <div class="product-source">Referencia Mercado Libre Uruguay</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background-image:url('img/cell.jpg');"></div>
+        <div class="product-info">
+          <div class="product-name">Xiaomi Redmi Note 13 256GB</div>
+          <div class="product-price">$ 12.990</div>
+          <div class="product-source">Referencia Mercado Libre Uruguay</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background-image:url('img/cell.jpg');"></div>
+        <div class="product-info">
+          <div class="product-name">Motorola Moto G54 128GB</div>
+          <div class="product-price">$ 8.990</div>
+          <div class="product-source">Referencia Mercado Libre Uruguay</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1148,7 +1321,7 @@
 
   document.getElementById("toggle-login-mode").addEventListener("click", toggleLoginMode);
 
-  // LOGIN con Nombre (registro), Email + Contraseña
+  // LOGIN con Nombre (solo registro), Email + Contraseña
   document.getElementById("login-form").addEventListener("submit", async function(e) {
     e.preventDefault();
     const name  = document.getElementById("login-name").value.trim();
@@ -1189,7 +1362,7 @@
     }
   });
 
-  // LOGIN con Google
+  // LOGIN con Google (Gmail)
   async function loginWithGoogle() {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -1581,6 +1754,14 @@
     saveProfileForUser();
     closeProfileOverlay();
   });
+
+  /* Mostrar sección de celulares */
+
+  function mostrarCelulares() {
+    const section = document.getElementById("products-section");
+    section.style.display = "block";
+    section.scrollIntoView({ behavior: "smooth" });
+  }
 
   /* init */
   window.addEventListener("load", () => {
