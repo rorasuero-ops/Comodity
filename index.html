@@ -16,6 +16,7 @@
       measurementId: "G-PYNZCB10T0"
     };
 
+    // Inicializa Firebase y Auth
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
   </script>
@@ -281,10 +282,19 @@
       background: #f5f5f5;
     }
 
-    /* VISTAS */
+    /* PANTALLAS PRINCIPALES */
 
-    #home-view { padding-bottom: 24px; }
-    #phones-view { display:none; padding: 16px 16px 28px; }
+    main {
+      padding-bottom: 24px;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
 
     /* RULETA */
 
@@ -361,17 +371,17 @@
     }
 
     .logo-center {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
       width: 52px;
       height: 52px;
       background: #ffffff;
       color: #000;
+      font-size: 26px;
       font-weight: bold;
-      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       clip-path: polygon(15% 0%, 90% 10%, 100% 60%, 55% 100%, 0% 65%);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
     }
 
     .ruleta-segment-icon {
@@ -467,34 +477,40 @@
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       cursor: pointer;
-      background: #000;
+      background: #e0e0e0;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .categoria:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
     }
 
     .cat-img {
       position: relative;
       height: 110px;
-      background-size: cover;     /* estira para llenar el espacio */
+      background-size: cover; /* se “estira” para ocupar todo el espacio */
       background-position: center;
       background-repeat: no-repeat;
     }
 
-    /* imágenes locales dentro de /img */
+    /* IMÁGENES CATEGORÍAS (subirlas a /img/) */
 
     .cat-img-comodities {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
         url("img/commodities.jpg");
     }
 
     .cat-img-insumos {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.3), rgba(0,0,0,0.0)),
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
         url("img/insumos.jpg");
     }
 
     .cat-img-cell {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.25), rgba(0,0,0,0.0)),
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
         url("img/cell.jpg");
     }
 
@@ -517,33 +533,39 @@
     }
 
     .cat-img-imperdibles {
-      background: radial-gradient(circle at top, #333, #000);
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
+        url("img/imperdibles.jpg");
     }
 
     .cat-img-hoteles {
-      background: radial-gradient(circle at top, #283593, #000);
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
+        url("img/hoteles.jpg");
     }
 
     .cat-img-muebles {
-      background: radial-gradient(circle at top, #4e342e, #000);
-    }
-
-    .cat-img-comida {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-        url("img/comida.jpg");
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
+        url("img/muebles.jpg");
     }
 
     .cat-img-deportes {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
         url("img/deportes.jpg");
     }
 
-    .cat-img-electrodomesticos {
+    .cat-img-comida {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-        url("img/electro.jpg");
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
+        url("img/comida.jpg");
+    }
+
+    .cat-img-electro {
+      background-image:
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
+        url("img/electrodomesticos.jpg");
     }
 
     .cat-discount-badge {
@@ -563,9 +585,16 @@
       color: #fff;
       box-shadow: 0 2px 6px rgba(0,0,0,0.4);
       text-align: center;
+      animation: discount-pulse 1.4s ease-in-out infinite;
     }
 
     .cat-discount-badge .off { font-size: 12px; }
+
+    @keyframes discount-pulse {
+      0%   { transform: scale(1);   box-shadow: 0 2px 6px rgba(0,0,0,0.4); }
+      50%  { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.55); }
+      100% { transform: scale(1);   box-shadow: 0 2px 6px rgba(0,0,0,0.4); }
+    }
 
     .cat-bottom {
       background: #3c3c3c;
@@ -592,7 +621,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
-    /* overlays popups */
+    /* OVERLAYS POPUPS */
 
     .overlay {
       position: fixed;
@@ -656,36 +685,73 @@
     .company-mueble { background: linear-gradient(135deg, #3949ab, #1e88e5); }
     .company-ferre  { background: linear-gradient(135deg, #00897b, #43a047); }
 
+    /* Área donde caen las monedas */
     .reward-coins {
       position: relative;
-      height: 70px;
+      height: 110px;
       margin-bottom: 10px;
       pointer-events: none;
+      overflow: visible;
     }
 
     .coin {
       position: absolute;
-      width: 26px;
-      height: 26px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      border: 3px solid rgba(0,0,0,0.25);
+      border: 2px solid rgba(0,0,0,0.35);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 16px;
       font-weight: bold;
-      animation: coin-fall 0.9s ease-out forwards;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.45);
+      animation: coin-rain 0.9s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
       opacity: 0;
+      transform-origin: center;
     }
 
-    .coin-yellow { background: #ffeb3b; color: #795548; }
-    .coin-blue   { background: #64b5f6; color: #0d47a1; }
-    .coin-neutral{ background: #fff;    color: #424242; }
+    .coin-yellow {
+      background: radial-gradient(circle, #fffde7 0%, #ffeb3b 45%, #fbc02d 100%);
+      color: #6d4c41;
+    }
 
-    @keyframes coin-fall {
-      0%   { transform: translateY(-40px) scale(0.7); opacity: 0; }
-      40%  { opacity: 1; }
-      100% { transform: translateY(25px) scale(1); opacity: 0; }
+    .coin-blue {
+      background: radial-gradient(circle, #e3f2fd 0%, #64b5f6 45%, #1e88e5 100%);
+      color: #0d47a1;
+    }
+
+    .coin-neutral {
+      background: radial-gradient(circle, #fafafa 0%, #eeeeee 45%, #bdbdbd 100%);
+      color: #424242;
+    }
+
+    .coin::after {
+      content: "";
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.9), transparent 60%);
+      pointer-events: none;
+    }
+
+    @keyframes coin-rain {
+      0% {
+        transform: translate(var(--coin-x, 0), -40px) scale(0.6) rotate(0deg);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      70% {
+        transform: translate(var(--coin-x, 0), 40px) scale(1) rotate(260deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--coin-x, 0), 65px) scale(0.9) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     .reward-close,
@@ -766,7 +832,9 @@
       font-size: 13px;
     }
 
-    .profile-form label { display: block; }
+    .profile-form label {
+      display: block;
+    }
 
     .profile-form input {
       width: 100%;
@@ -777,149 +845,148 @@
       font-size: 13px;
     }
 
-    /* VISTA CELULARES */
+    /* CELULARES - PANTALLA INTERNA */
 
-    .phones-header {
+    .back-bar {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 8px;
-      margin-bottom: 10px;
+      padding: 14px 20px 4px;
+      font-size: 14px;
+      color: var(--text-soft);
     }
 
-    .phones-title {
-      font-size: 18px;
+    .back-link {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      padding: 4px 0;
+    }
+
+    .cellphones-title {
+      margin: 4px 20px 12px;
+      font-size: 20px;
       font-weight: bold;
     }
 
-    .back-button {
-      border: none;
-      background: #e0e0e0;
-      border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 13px;
-      cursor: pointer;
-    }
-
-    .phones-subtitle {
+    .cellphones-subtitle {
+      margin: 0 20px 14px;
       font-size: 13px;
       color: var(--text-soft);
-      margin-bottom: 12px;
     }
 
-    .phones-grid {
+    .cellphones-grid {
       display: grid;
-      grid-template-columns: repeat(1,minmax(0,1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
+      margin: 0 20px 26px;
     }
 
-    .phone-card {
-      background: #ffffff;
+    .cell-card {
+      background: #fff;
       border-radius: 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.14);
       overflow: hidden;
       cursor: pointer;
       display: flex;
       flex-direction: column;
     }
 
-    .phone-img-wrap {
-      background: #000;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height: 170px;
+    .cell-img-wrap {
+      background: #fafafa;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .phone-img-wrap img {
+    .cell-img-wrap img {
       max-width: 100%;
-      max-height: 100%;
+      max-height: 120px;
       object-fit: contain;
+      display: block;
     }
 
-    .phone-body {
-      padding: 10px 12px 12px;
+    .cell-body {
+      padding: 8px 10px 10px;
       font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    .phone-name {
+    .cell-name {
       font-weight: bold;
-      margin-bottom: 4px;
+      min-height: 34px;
     }
 
-    .phone-prices {
-      display:flex;
-      align-items:center;
-      gap:6px;
-      margin-bottom:4px;
+    .cell-prices {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
     }
 
-    .phone-old-price {
+    .cell-price-old {
       font-size: 12px;
-      color:#777;
+      color: #888;
       text-decoration: line-through;
     }
 
-    .phone-price {
-      font-size: 14px;
-      font-weight:bold;
-      color:#1b5e20;
+    .cell-price-now {
+      font-size: 15px;
+      font-weight: bold;
+      color: #2e7d32;
     }
 
-    .phone-discount-pill {
-      background:#7b1fa2;
-      color:#fff;
-      border-radius:999px;
-      padding:2px 8px;
-      font-size:11px;
-      margin-bottom:4px;
-      display:inline-block;
+    .cell-discount-pill {
+      margin-top: 2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff9800, #f57c00);
+      padding: 3px 7px;
+      border-radius: 999px;
     }
 
-    .phone-timer {
-      font-size:12px;
-      color:var(--accent);
-      font-weight:bold;
-      margin-top:4px;
+    .cell-timer {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: bold;
     }
 
-    .phone-meta {
-      font-size:11px;
-      color:var(--text-soft);
-      margin-top:4px;
+    /* Popup detalle celular */
+
+    .cell-detail-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 6px;
     }
 
-    .phone-detail-popup {
-      max-width: 380px;
-      text-align:left;
+    .cell-detail-img {
+      max-width: 90%;
+      max-height: 180px;
+      object-fit: contain;
+      margin-bottom: 10px;
     }
 
-    .phone-detail-title {
-      font-size: 18px;
-      font-weight:bold;
-      margin-bottom:6px;
+    .cell-detail-text {
+      text-align: left;
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
     }
 
-    .phone-detail-img {
-      text-align:center;
-      margin-bottom:8px;
-    }
-
-    .phone-detail-img img {
-      max-width:100%;
-      max-height:220px;
-      object-fit:contain;
-    }
-
-    .phone-detail-section-title {
-      font-size:13px;
-      font-weight:bold;
-      margin-top:6px;
-    }
-
-    .phone-detail-text {
-      font-size:13px;
-      color:var(--text-soft);
+    .cell-detail-text strong {
+      color: var(--text-main);
     }
 
     /* ANIMACIÓN RULETA */
@@ -936,10 +1003,23 @@
     @media (min-width: 768px) {
       header { padding-left: 24px; padding-right: 24px; }
       .ruleta-container { max-width: 520px; margin: 24px auto; }
-      .categorias { max-width: 960px; margin: 0 auto 40px; grid-template-columns: repeat(4,minmax(0,1fr)); }
-      .cat-img { height: 140px; } /* ~25% más grandes */
-      #phones-view { max-width: 960px; margin: 0 auto 32px; }
-      .phones-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .categorias {
+        max-width: 900px;
+        margin: 0 auto 40px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .categoria {
+        transform: scale(1.1); /* ~25% más grande */
+      }
+      .cat-img {
+        height: 135px;
+      }
+      .cellphones-grid {
+        max-width: 900px;
+        margin: 0 auto 26px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
     }
   </style>
 </head>
@@ -1022,175 +1102,182 @@
     <div class="user-menu-item" onclick="logout()">Cerrar sesión</div>
   </div>
 
-  <!-- HOME VIEW -->
-  <div id="home-view">
-    <div class="ruleta-container">
-      <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
-      <div class="ruleta-wrapper">
-        <div class="ruleta" id="ruleta">
-          <div class="pointer"></div>
-          <div class="ruleta-center">
-            <div class="logo-center">C</div>
+  <main>
+    <!-- PANTALLA HOME -->
+    <div id="home-screen" class="screen active">
+      <div class="ruleta-container">
+        <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
+        <div class="ruleta-wrapper">
+          <div class="ruleta" id="ruleta">
+            <div class="pointer"></div>
+            <div class="ruleta-center">
+              <div class="logo-center">C</div>
+            </div>
+
+            <!-- 8 iconos: 3 monedas amarillas, 3 azules, 2 % -->
+            <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
+            <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
+            <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
+            <div class="ruleta-segment-icon wheel-coin-yellow seg-4">$</div>
+            <div class="ruleta-segment-icon wheel-percent     seg-5">%</div>
+            <div class="ruleta-segment-icon wheel-coin-blue   seg-6">$</div>
+            <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
+            <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
           </div>
 
-          <!-- 8 iconos: 3 monedas amarillas, 3 azules, 2 % -->
-          <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
-          <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
-          <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
-          <div class="ruleta-segment-icon wheel-coin-yellow seg-4">$</div>
-          <div class="ruleta-segment-icon wheel-percent     seg-5">%</div>
-          <div class="ruleta-segment-icon wheel-coin-blue   seg-6">$</div>
-          <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
-          <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
+          <button class="btn-girar" id="btn-girar" onclick="girarRuleta()">
+            Girar ruleta
+          </button>
+        </div>
+        <p id="resultado"></p>
+        <p id="tiradas-info" class="tiradas-info">4 tiradas restantes</p>
+        <p id="cooldown-info" class="cooldown-info" style="display:none;">
+          Próxima recarga en <span id="cooldown-seconds">12:00:00</span>
+        </p>
+      </div>
+
+      <!-- CATEGORÍAS -->
+      <div class="categorias">
+        <!-- Commodities -->
+        <div class="categoria" data-cat="commodities">
+          <div class="cat-img cat-img-comodities">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">50% OFF</span>
+            </div>
+            <div class="cat-logo-comodity">C</div>
+          </div>
+          <div class="cat-bottom"><span>Commodities</span></div>
         </div>
 
-        <button class="btn-girar" id="btn-girar" onclick="girarRuleta()">
-          Girar ruleta
+        <!-- Insumos constructivos -->
+        <div class="categoria" data-cat="insumos">
+          <div class="cat-img cat-img-insumos">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">35% OFF</span>
+            </div>
+          </div>
+          <div class="cat-bottom"><span>Insumos constructivos</span></div>
+        </div>
+
+        <!-- Celulares -->
+        <div class="categoria" data-cat="celulares">
+          <div class="cat-img cat-img-cell">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">40% OFF</span>
+            </div>
+          </div>
+          <div class="cat-bottom"><span>Celulares</span></div>
+        </div>
+
+        <!-- Electrónica, Audio y Video -->
+        <div class="categoria" data-cat="electronica">
+          <div class="cat-img cat-img-electronica">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">45% OFF</span>
+            </div>
+          </div>
+          <div class="cat-bottom"><span>Electrónica, audio y video</span></div>
+        </div>
+
+        <!-- Ropa -->
+        <div class="categoria" data-cat="ropa">
+          <div class="cat-img cat-img-ropa">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">30% OFF</span>
+            </div>
+          </div>
+          <div class="cat-bottom"><span>Ropa</span></div>
+        </div>
+
+        <!-- Experiencias -->
+        <div class="categoria" data-cat="experiencias">
+          <div class="cat-img cat-img-experiencias">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">60% OFF</span>
+            </div>
+          </div>
+          <div class="cat-bottom"><span>Experiencias</span></div>
+        </div>
+
+        <!-- Imperdibles < 1000 -->
+        <div class="categoria" data-cat="imperdibles">
+          <div class="cat-img cat-img-imperdibles">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">70% OFF</span>
+            </div>
+          </div>
+          <div class="cat-bottom"><span>Imperdibles &lt; $1000</span></div>
+        </div>
+
+        <!-- Hoteles y viajes -->
+        <div class="categoria" data-cat="hoteles">
+          <div class="cat-img cat-img-hoteles">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">55% OFF</span>
+            </div>
+          </div>
+          <div class="cat-bottom"><span>Hoteles y viajes</span></div>
+        </div>
+
+        <!-- Muebles y artículos del hogar -->
+        <div class="categoria" data-cat="muebles">
+          <div class="cat-img cat-img-muebles">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">45% OFF</span>
+            </div>
+          </div>
+          <div class="cat-bottom"><span>Muebles y hogar</span></div>
+        </div>
+
+        <!-- Deportes y Fitness -->
+        <div class="categoria" data-cat="deportes">
+          <div class="cat-img cat-img-deportes">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">40% OFF</span>
+            </div>
+          </div>
+          <div class="cat-bottom"><span>Deportes y fitness</span></div>
+        </div>
+
+        <!-- Comida -->
+        <div class="categoria" data-cat="comida">
+          <div class="cat-img cat-img-comida">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">35% OFF</span>
+            </div>
+          </div>
+          <div class="cat-bottom"><span>Comida</span></div>
+        </div>
+
+        <!-- Electrodomésticos -->
+        <div class="categoria" data-cat="electro">
+          <div class="cat-img cat-img-electro">
+            <div class="cat-discount-badge">
+              hasta<br><span class="off">40% OFF</span>
+            </div>
+          </div>
+          <div class="cat-bottom"><span>Electrodomésticos</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANTALLA CELULARES -->
+    <div id="cellphones-screen" class="screen">
+      <div class="back-bar">
+        <button class="back-link" onclick="goToHome()">
+          ← Volver
         </button>
       </div>
-      <p id="resultado"></p>
-      <p id="tiradas-info" class="tiradas-info">4 tiradas restantes</p>
-      <p id="cooldown-info" class="cooldown-info" style="display:none;">
-        Próxima recarga en <span id="cooldown-seconds">12:00:00</span>
-      </p>
-    </div>
-
-    <!-- CATEGORÍAS -->
-    <div class="categorias">
-      <!-- Commodities -->
-      <div class="categoria">
-        <div class="cat-img cat-img-comodities">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">50% OFF</span>
-          </div>
-          <div class="cat-logo-comodity">C</div>
-        </div>
-        <div class="cat-bottom"><span>Commodities</span></div>
+      <div class="cellphones-title">Celulares en oferta</div>
+      <div class="cellphones-subtitle">
+        Ofertas con 20% OFF por tiempo limitado. El descuento termina al final del día.
       </div>
 
-      <!-- Insumos constructivos -->
-      <div class="categoria">
-        <div class="cat-img cat-img-insumos">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">35% OFF</span>
-          </div>
-        </div>
-        <div class="cat-bottom"><span>Insumos constructivos</span></div>
-      </div>
-
-      <!-- Celulares -->
-      <div class="categoria" onclick="openPhonesView()">
-        <div class="cat-img cat-img-cell">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">40% OFF</span>
-          </div>
-        </div>
-        <div class="cat-bottom"><span>Celulares</span></div>
-      </div>
-
-      <!-- Electrónica, Audio y Video -->
-      <div class="categoria">
-        <div class="cat-img cat-img-electronica">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">45% OFF</span>
-          </div>
-        </div>
-        <div class="cat-bottom"><span>Electrónica, audio y video</span></div>
-      </div>
-
-      <!-- Ropa -->
-      <div class="categoria">
-        <div class="cat-img cat-img-ropa">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">30% OFF</span>
-          </div>
-        </div>
-        <div class="cat-bottom"><span>Ropa</span></div>
-      </div>
-
-      <!-- Experiencias -->
-      <div class="categoria">
-        <div class="cat-img cat-img-experiencias">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">60% OFF</span>
-          </div>
-        </div>
-        <div class="cat-bottom"><span>Experiencias</span></div>
-      </div>
-
-      <!-- Imperdibles -->
-      <div class="categoria">
-        <div class="cat-img cat-img-imperdibles">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">70% OFF</span>
-          </div>
-        </div>
-        <div class="cat-bottom"><span>Imperdibles &lt; $1000</span></div>
-      </div>
-
-      <!-- Hoteles y viajes -->
-      <div class="categoria">
-        <div class="cat-img cat-img-hoteles">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">35% OFF</span>
-          </div>
-        </div>
-        <div class="cat-bottom"><span>Hoteles y viajes</span></div>
-      </div>
-
-      <!-- Muebles -->
-      <div class="categoria">
-        <div class="cat-img cat-img-muebles">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">40% OFF</span>
-          </div>
-        </div>
-        <div class="cat-bottom"><span>Muebles y artículos del hogar</span></div>
-      </div>
-
-      <!-- Comida -->
-      <div class="categoria">
-        <div class="cat-img cat-img-comida">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">35% OFF</span>
-          </div>
-        </div>
-        <div class="cat-bottom"><span>Comida</span></div>
-      </div>
-
-      <!-- Deportes y Fitness -->
-      <div class="categoria">
-        <div class="cat-img cat-img-deportes">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">30% OFF</span>
-          </div>
-        </div>
-        <div class="cat-bottom"><span>Deportes y fitness</span></div>
-      </div>
-
-      <!-- Electrodomésticos -->
-      <div class="categoria">
-        <div class="cat-img cat-img-electrodomesticos">
-          <div class="cat-discount-badge">
-            hasta<br><span class="off">35% OFF</span>
-          </div>
-        </div>
-        <div class="cat-bottom"><span>Electrodomésticos</span></div>
+      <div class="cellphones-grid" id="cellphones-grid">
+        <!-- Se llenan por JS -->
       </div>
     </div>
-  </div>
-
-  <!-- VISTA CELULARES -->
-  <div id="phones-view">
-    <div class="phones-header">
-      <button class="back-button" onclick="showHomeView()">← Volver</button>
-      <div class="phones-title">Ofertas de celulares</div>
-    </div>
-    <div class="phones-subtitle">
-      Ejemplo de 4 celulares con 20% OFF y tiempo limitado hasta el final del día.
-    </div>
-    <div id="phones-grid" class="phones-grid"></div>
-  </div>
+  </main>
 </div>
 
 <!-- POPUP RECOMPENSAS -->
@@ -1249,10 +1336,13 @@
 </div>
 
 <!-- POPUP DETALLE CELULAR -->
-<div id="phone-detail-overlay" class="overlay">
-  <div class="popup phone-detail-popup">
-    <div id="phone-detail-content"></div>
-    <button class="popup-close" onclick="closePhoneDetail()">Cerrar</button>
+<div id="cell-detail-overlay" class="overlay">
+  <div class="popup">
+    <div id="cell-detail-title" class="cell-detail-title"></div>
+    <img id="cell-detail-img" class="cell-detail-img" src="" alt="">
+    <div id="cell-detail-prices" class="cell-detail-text"></div>
+    <div id="cell-detail-extra" class="cell-detail-text"></div>
+    <button class="popup-close" onclick="closeCellDetail()">Cerrar</button>
   </div>
 </div>
 
@@ -1280,57 +1370,8 @@
   // modo login / registro
   let isRegisterMode = false;
 
-  // celulares demo
-  const phoneDeals = [
-    {
-      id: "p1",
-      name: "iPhone 15 128 GB",
-      price: 42990,
-      image: "img/cell.jpg",
-      vendor: "TechHouse",
-      location: "Montevideo",
-      rating: 4.8,
-      reviews: 132,
-      description: "Pantalla Super Retina XDR 6,1\", chip A16 Bionic, cámara dual avanzada y carga rápida."
-    },
-    {
-      id: "p2",
-      name: "Samsung Galaxy S24 256 GB",
-      price: 38990,
-      image: "img/cell.jpg",
-      vendor: "Galaxy Store UY",
-      location: "Ciudad de la Costa",
-      rating: 4.7,
-      reviews: 98,
-      description: "Pantalla Dynamic AMOLED 2X, triple cámara con zoom, 5G y batería de larga duración."
-    },
-    {
-      id: "p3",
-      name: "Xiaomi Redmi Note 13 5G",
-      price: 18990,
-      image: "img/cell.jpg",
-      vendor: "Mi Store Uruguay",
-      location: "Montevideo",
-      rating: 4.6,
-      reviews: 210,
-      description: "Excelente relación precio/calidad, 5G, batería grande y cámara de alta resolución."
-    },
-    {
-      id: "p4",
-      name: "Motorola Moto G54 256 GB",
-      price: 15990,
-      image: "img/cell.jpg",
-      vendor: "Moto Oficial UY",
-      location: "Las Piedras",
-      rating: 4.5,
-      reviews: 75,
-      description: "Pantalla fluida, sonido estéreo, batería de todo el día y Android casi puro."
-    }
-  ];
-
-  // fin del día para los contadores de ofertas
-  let dealsEndTime = null;
-  let dealsTimerInterval = null;
+  // timers celulares
+  let cellIntervals = [];
 
   /* Lógica de premios */
   const outcomes = [
@@ -1376,6 +1417,7 @@
   function loadUserData() {
     if (!currentUser) return;
 
+    // estado de la ruleta y saldos
     const stateKey = getUserKey("state");
     saldoLibre = 0;
     saldoLight = 0;
@@ -1395,6 +1437,7 @@
       }
     }
 
+    // datos de perfil
     const profileKey = getUserKey("profile");
     profileData = { nombre: "", direccion: "", fechaNacimiento: "", telefono: "" };
     if (profileKey) {
@@ -1426,7 +1469,6 @@
     document.getElementById("app").style.display = "block";
 
     loadUserData();
-    showHomeView();
   }
 
   function handleLoggedOut() {
@@ -1440,15 +1482,17 @@
     document.getElementById("login-screen").style.display = "flex";
   }
 
+  // observar cambios de auth (para refrescar al recargar la página, etc.)
   auth.onAuthStateChanged(function(user) {
     if (user) {
-      if (currentUser && currentUser.uid === user.uid) return;
+      if (currentUser && currentUser.uid === user.uid) return; // ya manejado
       handleUserLoggedIn(user);
     } else {
       handleLoggedOut();
     }
   });
 
+  // cambiar entre iniciar sesión y crear cuenta
   function toggleLoginMode() {
     isRegisterMode = !isRegisterMode;
     const nameGroup = document.getElementById("login-name-group");
@@ -1471,6 +1515,7 @@
 
   document.getElementById("toggle-login-mode").addEventListener("click", toggleLoginMode);
 
+  // LOGIN con Nombre (solo registro), Email + Contraseña
   document.getElementById("login-form").addEventListener("submit", async function(e) {
     e.preventDefault();
     const name  = document.getElementById("login-name").value.trim();
@@ -1511,6 +1556,7 @@
     }
   });
 
+  // LOGIN con Google (Gmail)
   async function loginWithGoogle() {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -1523,6 +1569,7 @@
     }
   }
 
+  // LOGOUT
   async function logout() {
     try {
       await auth.signOut();
@@ -1599,27 +1646,6 @@
     });
   }
 
-  // sonido específico de monedas cayendo
-  function playCoinRainSound() {
-    const ctx = getAudioCtx(); if (!ctx) return;
-    const now = ctx.currentTime;
-    for (let i = 0; i < 10; i++) {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      const start = now + i * 0.05;
-      const end = start + 0.25;
-      osc.type = "triangle";
-      const baseFreq = 900 - i * 40;
-      osc.frequency.setValueAtTime(baseFreq, start);
-      osc.frequency.linearRampToValueAtTime(baseFreq - 150, end);
-      gain.gain.setValueAtTime(0, start);
-      gain.gain.linearRampToValueAtTime(0.35, start + 0.02);
-      gain.gain.linearRampToValueAtTime(0, end);
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.start(start); osc.stop(end);
-    }
-  }
-
   function playLoseSound() {
     const ctx = getAudioCtx(); if (!ctx) return;
     const now = ctx.currentTime;
@@ -1633,6 +1659,37 @@
     gain.gain.linearRampToValueAtTime(0.0, now + 0.5);
     osc.connect(gain); gain.connect(ctx.destination);
     osc.start(now); osc.stop(now + 0.5);
+  }
+
+  // sonido de “lluvia” de monedas
+  function playCoinRainSound() {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+
+    const now = ctx.currentTime;
+
+    for (let i = 0; i < 8; i++) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      const start = now + i * 0.05;
+      const end   = start + 0.25;
+
+      const baseFreq = 900 + Math.random() * 600;
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(baseFreq, start);
+      osc.frequency.exponentialRampToValueAtTime(baseFreq * 1.4, end);
+
+      gain.gain.setValueAtTime(0.0, start);
+      gain.gain.linearRampToValueAtTime(0.45, start + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.02, end);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(start);
+      osc.stop(end);
+    }
   }
 
   /* utilidades */
@@ -1662,7 +1719,7 @@
     saveStateForUser();
   }
 
-  /* countdown 12h de la ruleta (visual) */
+  /* countdown 12h solo visual */
 
   function formatTime(seconds) {
     const h = Math.floor(seconds / 3600);
@@ -1738,21 +1795,37 @@
     descEl.textContent  = outcome.label;
     companyWrap.style.display = showCompany ? "inline-flex" : "none";
 
+    // monedas
     coinsEl.innerHTML = "";
-    for (let i=0;i<10;i++){
+    const coinCount = 10;
+
+    for (let i = 0; i < coinCount; i++) {
       const c = document.createElement("div");
       c.className = "coin " + coinClass;
-      const offsetX = (Math.random()-0.5)*80;
-      const delay = Math.random()*0.2;
-      c.style.left = (50 + offsetX/2)+"%";
-      c.style.animationDelay = delay+"s";
-      c.textContent =
-        kind==="descuento" ? "%" :
-        (kind.startsWith("lightning") ? "⚡" : "$");
+
+      const offsetX = (Math.random() - 0.5) * 120;
+      c.style.setProperty("--coin-x", offsetX + "px");
+
+      const delay = Math.random() * 0.25;
+      c.style.animationDelay = delay + "s";
+
+      c.textContent = kind === "descuento"
+        ? "%"
+        : (kind.startsWith("lightning") ? "⚡" : "$");
+
       coinsEl.appendChild(c);
     }
 
     overlay.style.display = "flex";
+
+    if (
+      kind === "libre" ||
+      kind === "jackpot" ||
+      kind === "lightning-mueble" ||
+      kind === "lightning-ferre"
+    ) {
+      playCoinRainSound();
+    }
   }
 
   function closeRewardPopup() {
@@ -1827,19 +1900,16 @@
         saldoLibre += outcome.amount;
         actualizarSaldos();
         playWinSound();
-        playCoinRainSound();
         showRewardPopup("libre", outcome);
       } else if (outcome.type === "saldoLibreJackpot" && outcome.amount) {
         saldoLibre += outcome.amount;
         actualizarSaldos();
         playJackpotSound();
-        playCoinRainSound();
         showRewardPopup("jackpot", outcome);
       } else if ((outcome.type === "saldoLightMueble" || outcome.type === "saldoLightFerre") && outcome.amount) {
         saldoLight += outcome.amount;
         actualizarSaldos();
         playWinSound();
-        playCoinRainSound();
         if (outcome.type === "saldoLightMueble") {
           showRewardPopup("lightning-mueble", outcome);
         } else {
@@ -1870,6 +1940,7 @@
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
   });
 
+  // cerrar menú si se hace click fuera
   window.addEventListener("click", function(e) {
     const menu = document.getElementById("user-menu");
     if (!e.target.closest("#user-menu") && !e.target.closest("#user-avatar")) {
@@ -1927,133 +1998,175 @@
     closeProfileOverlay();
   });
 
-  /* VISTAS HOME / CELULARES */
+  /* Navegación pantallas */
 
-  function showHomeView() {
-    document.getElementById("home-view").style.display = "block";
-    document.getElementById("phones-view").style.display = "none";
+  function showScreen(id) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    const el = document.getElementById(id);
+    if (el) el.classList.add("active");
   }
 
-  function openPhonesView() {
-    document.getElementById("home-view").style.display = "none";
-    document.getElementById("phones-view").style.display = "block";
-    initPhonesGrid();
-    initDealsCountdown();
+  function goToHome() {
+    // limpiar timers de celulares
+    cellIntervals.forEach(i => clearInterval(i));
+    cellIntervals = [];
+    showScreen("home-screen");
   }
 
-  /* CELULARES: grid + timers + detalle */
+  function goToCellphones() {
+    showScreen("cellphones-screen");
+    renderCellphones();
+  }
 
-  function initPhonesGrid() {
-    const grid = document.getElementById("phones-grid");
-    if (!grid) return;
-    if (grid.dataset.built === "true") return; // lo armamos una sola vez
+  // click en categorías
+  document.addEventListener("click", function(e) {
+    const cat = e.target.closest(".categoria");
+    if (!cat) return;
+    const type = cat.getAttribute("data-cat");
+    if (type === "celulares") {
+      goToCellphones();
+    } else {
+      alert("Esta categoría estará disponible próximamente en Comodity 👀");
+    }
+  });
 
+  /* CELULARES - datos de ejemplo */
+
+  const cellphones = [
+    {
+      id: "cell1",
+      name: "Samsung Galaxy S23 256GB",
+      img: "https://images.samsung.com/is/image/samsung/p6pim/latin/2302/gallery/latin-galaxy-s23-s911-sm-s911bzidgto-534859593?$650_519_PNG$",
+      priceNow: 29999
+    },
+    {
+      id: "cell2",
+      name: "iPhone 14 128GB",
+      img: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-blue-select-202209?wid=940&hei=1112&fmt=png-alpha&.v=1661027786801",
+      priceNow: 38999
+    },
+    {
+      id: "cell3",
+      name: "Xiaomi Redmi Note 13 Pro",
+      img: "https://i01.appmifile.com/webfile/globalimg/products/pc/redmi-note-13-pro-5g/specs01.png",
+      priceNow: 21999
+    },
+    {
+      id: "cell4",
+      name: "Motorola Edge 40 Neo",
+      img: "https://motorolaus.vtexassets.com/arquivos/ids/162093-800-auto?v=638293436464900000&width=800&height=auto&aspect=true",
+      priceNow: 18999
+    }
+  ];
+
+  function getOriginalPriceFromDiscount(nowPrice, discountPercent) {
+    return Math.round(nowPrice / (1 - discountPercent / 100));
+  }
+
+  function formatPrice(uy) {
+    return uy.toLocaleString("es-UY", { minimumFractionDigits: 0 });
+  }
+
+  function getEndOfDayTimestamp() {
+    const now = new Date();
+    const end = new Date(now);
+    end.setHours(23, 59, 59, 999);
+    return end.getTime();
+  }
+
+  function renderCellphones() {
+    const grid = document.getElementById("cellphones-grid");
     grid.innerHTML = "";
-    phoneDeals.forEach(p => {
-      const originalPrice = Math.round(p.price / 0.8);
+    cellIntervals.forEach(i => clearInterval(i));
+    cellIntervals = [];
+
+    const deadline = getEndOfDayTimestamp();
+
+    cellphones.forEach(cell => {
+      const priceNow = cell.priceNow;
+      const priceOld = getOriginalPriceFromDiscount(priceNow, 20);
+
       const card = document.createElement("div");
-      card.className = "phone-card";
-      card.onclick = () => openPhoneDetail(p.id);
+      card.className = "cell-card";
+      card.setAttribute("data-id", cell.id);
+
       card.innerHTML = `
-        <div class="phone-img-wrap">
-          <img src="${p.image}" alt="${p.name}">
+        <div class="cell-img-wrap">
+          <img src="${cell.img}" alt="${cell.name}">
         </div>
-        <div class="phone-body">
-          <div class="phone-name">${p.name}</div>
-          <div class="phone-prices">
-            <span class="phone-old-price">$${originalPrice.toLocaleString("es-UY")}</span>
-            <span class="phone-price">$${p.price.toLocaleString("es-UY")}</span>
+        <div class="cell-body">
+          <div class="cell-name">${cell.name}</div>
+          <div class="cell-prices">
+            <div class="cell-price-old">$${formatPrice(priceOld)}</div>
+            <div class="cell-price-now">$${formatPrice(priceNow)}</div>
           </div>
-          <span class="phone-discount-pill">20% OFF</span>
-          <div class="phone-timer deal-timer" data-product-id="${p.id}">
-            <!-- se completa por JS -->
+          <div class="cell-discount-pill">
+            <span>🔥</span><span>20% OFF hoy</span>
           </div>
-          <div class="phone-meta">
-            Vendido por ${p.vendor} • ${p.location} • ⭐ ${p.rating} (${p.reviews} reseñas)
+          <div class="cell-timer" data-deadline="${deadline}">
+            Termina en --
           </div>
         </div>
       `;
+
+      card.addEventListener("click", () => {
+        openCellDetail(cell, priceOld);
+      });
+
       grid.appendChild(card);
     });
 
-    grid.dataset.built = "true";
-  }
-
-  function initDealsCountdown() {
-    const now = new Date();
-    dealsEndTime = new Date();
-    dealsEndTime.setHours(23, 59, 59, 999); // fin del día local (Uruguay)
-    if (dealsTimerInterval) clearInterval(dealsTimerInterval);
-    updateDealTimers();
-    dealsTimerInterval = setInterval(updateDealTimers, 1000);
-  }
-
-  function updateDealTimers() {
-    if (!dealsEndTime) return;
-    const now = new Date();
-    let diff = dealsEndTime - now;
-    if (diff < 0) diff = 0;
-
-    const totalSeconds = Math.floor(diff / 1000);
-    const h = Math.floor(totalSeconds / 3600);
-    const m = Math.floor((totalSeconds % 3600) / 60);
-    const s = totalSeconds % 60;
-    const text = `Termina hoy en ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-
-    document.querySelectorAll(".deal-timer").forEach(el => {
-      el.textContent = text;
+    // iniciar timers individuales
+    document.querySelectorAll(".cell-timer").forEach(timerEl => {
+      const dl = parseInt(timerEl.getAttribute("data-deadline"), 10);
+      const interval = setInterval(() => {
+        const now = Date.now();
+        let diff = Math.max(0, dl - now);
+        const h = Math.floor(diff / (1000 * 60 * 60));
+        diff %= (1000 * 60 * 60);
+        const m = Math.floor(diff / (1000 * 60));
+        diff %= (1000 * 60);
+        const s = Math.floor(diff / 1000);
+        timerEl.textContent = `Termina en ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+      }, 1000);
+      cellIntervals.push(interval);
     });
   }
 
-  function openPhoneDetail(id) {
-    const phone = phoneDeals.find(p => p.id === id);
-    if (!phone) return;
-    const originalPrice = Math.round(phone.price / 0.8);
-    const container = document.getElementById("phone-detail-content");
-    const now = new Date();
-    const end = dealsEndTime || new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23,59,59,999);
-    let diff = end - now;
-    if (diff < 0) diff = 0;
-    const totalSeconds = Math.floor(diff / 1000);
-    const h = Math.floor(totalSeconds / 3600);
-    const m = Math.floor((totalSeconds % 3600) / 60);
-    const s = totalSeconds % 60;
-    const timerText = `Termina hoy en ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+  function openCellDetail(cell, priceOld) {
+    const overlay = document.getElementById("cell-detail-overlay");
+    const tEl = document.getElementById("cell-detail-title");
+    const imgEl = document.getElementById("cell-detail-img");
+    const pricesEl = document.getElementById("cell-detail-prices");
+    const extraEl = document.getElementById("cell-detail-extra");
 
-    container.innerHTML = `
-      <div class="phone-detail-title">${phone.name}</div>
-      <div class="phone-detail-img">
-        <img src="${phone.image}" alt="${phone.name}">
-      </div>
-      <div class="phone-prices">
-        <span class="phone-old-price">$${originalPrice.toLocaleString("es-UY")}</span>
-        <span class="phone-price">$${phone.price.toLocaleString("es-UY")}</span>
-      </div>
-      <span class="phone-discount-pill">20% OFF solo por hoy</span>
-      <div class="phone-timer" style="margin-top:6px;">${timerText}</div>
+    tEl.textContent = cell.name;
+    imgEl.src = cell.img;
 
-      <div class="phone-detail-section-title">Vendedor</div>
-      <div class="phone-detail-text">
-        ${phone.vendor} • ${phone.location}<br>
-        Calificación ⭐ ${phone.rating} (${phone.reviews} reseñas verificadas)<br>
-        Envío a todo Uruguay en 24-72 hs.
-      </div>
-
-      <div class="phone-detail-section-title">Descripción</div>
-      <div class="phone-detail-text">
-        ${phone.description}
-      </div>
+    const nowPrice = cell.priceNow;
+    pricesEl.innerHTML = `
+      <div><strong>Precio actual:</strong> $${formatPrice(nowPrice)} (20% OFF)</div>
+      <div>Antes: <span style="text-decoration:line-through;color:#888;">$${formatPrice(priceOld)}</span></div>
     `;
 
-    document.getElementById("phone-detail-overlay").style.display = "flex";
+    extraEl.innerHTML = `
+      <div><strong>Vendedor:</strong> Comodity Store Oficial</div>
+      <div><strong>Reputación:</strong> ★★★★☆ (4.8/5) • 1.250 ventas concretadas</div>
+      <div><strong>Ubicación:</strong> Montevideo, Uruguay</div>
+      <div><strong>Envío:</strong> Gratis en compras superiores a $2.000 • Llega entre 24 y 48 hs</div>
+      <div><strong>Medios de pago:</strong> Tarjetas de crédito, débito y billeteras digitales.</div>
+    `;
+
+    overlay.style.display = "flex";
   }
 
-  function closePhoneDetail() {
-    document.getElementById("phone-detail-overlay").style.display = "none";
+  function closeCellDetail() {
+    document.getElementById("cell-detail-overlay").style.display = "none";
   }
 
   /* init */
   window.addEventListener("load", () => {
+    // por defecto, modo "iniciar sesión": ocultar campo nombre
     document.getElementById("login-name-group").style.display = "none";
   });
 </script>
