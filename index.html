@@ -282,6 +282,169 @@
       background: #f5f5f5;
     }
 
+    /* ========= BANNER SUPERIOR ========= */
+
+    #top-banner {
+      padding: 8px 12px 4px;
+    }
+
+    .banner-inner {
+      border: 2px solid var(--primary);
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 10px 12px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .banner-slides {
+      position: relative;
+      overflow: hidden;
+      min-height: 110px;
+    }
+
+    .banner-slide {
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .banner-slide.active {
+      display: flex;
+    }
+
+    .banner-left {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .banner-right {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .banner-right img {
+      max-height: 80px;
+      max-width: 120px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .banner-tag {
+      display: inline-flex;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: bold;
+      background: rgba(244, 67, 54, 0.08);
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .banner-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .banner-date {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+
+    .banner-sub {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .banner-offers-grid {
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .banner-offer-card {
+      border-radius: 10px;
+      padding: 6px 8px;
+      font-size: 11px;
+      background: #fff8e1;
+      border: 1px dashed #ffb300;
+    }
+
+    .banner-offer-title {
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .banner-offer-price {
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .banner-offer-price small {
+      color: #888;
+      text-decoration: line-through;
+    }
+
+    .banner-offer-timer {
+      font-size: 11px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .banner-cta {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+      white-space: nowrap;
+    }
+
+    .banner-dots {
+      margin-top: 6px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .banner-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .banner-dot.active {
+      background: var(--accent);
+    }
+
+    @media (min-width: 768px) {
+      #top-banner {
+        padding: 12px 24px 8px;
+      }
+      .banner-inner {
+        padding: 12px 16px;
+      }
+      .banner-offers-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)); /* una oferta por columna */
+      }
+      .banner-right img {
+        max-height: 100px;
+        max-width: 160px;
+      }
+    }
+
     /* PANTALLAS PRINCIPALES */
 
     main {
@@ -309,7 +472,7 @@
     .ruleta-title {
       font-size: 18px;
       margin-top: 0;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
       color: var(--text-soft);
       text-align: center;
     }
@@ -463,226 +626,6 @@
       font-weight: bold;
     }
 
-    /* ============ BANNER COMODITY CLARO =========== */
-
-    .comodity-banner {
-      width: 100%;
-      background: linear-gradient(90deg, #fff7ed, #fee2e2);
-      border: 1px solid #fecaca;
-      border-radius: 14px;
-      padding: 8px 10px;
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      color: #1f2933;
-    }
-
-    .comodity-banner-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.72rem;
-    }
-
-    .comodity-banner-chip {
-      padding: 2px 8px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      font-weight: 500;
-    }
-
-    .comodity-banner-dots {
-      display: flex;
-      gap: 4px;
-    }
-
-    .comodity-banner-dot {
-      width: 6px;
-      height: 6px;
-      background: #cbd5e1;
-      border-radius: 999px;
-      transition: 0.2s;
-    }
-
-    .comodity-banner-dot.active {
-      background: #fb923c;
-      transform: scale(1.4);
-    }
-
-    .comodity-banner-slide {
-      display: none;
-      min-height: 72px;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .comodity-banner-slide.active {
-      display: flex;
-    }
-
-    .comodity-banner-left {
-      flex: 1.2;
-      min-width: 0;
-    }
-
-    .comodity-banner-right {
-      flex: 0.9;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .comodity-banner-eyebrow {
-      font-size: 0.65rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #9a3412;
-    }
-
-    .comodity-banner-title {
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-top: 2px;
-      color: #111827;
-    }
-
-    .comodity-banner-text {
-      font-size: 0.75rem;
-      color: #374151;
-      margin-top: 2px;
-    }
-
-    .comodity-banner-pill {
-      margin-top: 4px;
-      padding: 3px 8px;
-      background: white;
-      border-radius: 999px;
-      border: 1px solid #fecaca;
-      font-size: 0.72rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .comodity-tv-card {
-      width: 110px;
-      height: 60px;
-      border-radius: 12px;
-      background: #e0f2fe;
-      border: 1px solid #93c5fd;
-      padding: 4px;
-      position: relative;
-    }
-
-    .comodity-tv-inner {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      border-radius: 9px;
-      border: 1px solid #93c5fd;
-      font-size: 0.7rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 4px;
-    }
-
-    .comodity-tv-badge {
-      position: absolute;
-      bottom: 3px;
-      right: 4px;
-      font-size: 0.6rem;
-      background: #0369a1;
-      color: white;
-      padding: 1px 6px;
-      border-radius: 999px;
-    }
-
-    .comodity-banner-right-grid {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 4px;
-    }
-
-    .comodity-prod {
-      background: white;
-      border: 1px solid #fecaca;
-      padding: 4px 6px;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .comodity-prod-name {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #111827;
-    }
-
-    .comodity-prod-price {
-      display: flex;
-      gap: 4px;
-      align-items: baseline;
-      font-size: 0.75rem;
-    }
-
-    .comodity-prod-price-main {
-      font-weight: 700;
-      color: #b91c1c;
-    }
-
-    .comodity-prod-price-old {
-      font-size: 0.65rem;
-      color: #9ca3af;
-      text-decoration: line-through;
-    }
-
-    .comodity-prod-count {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.65rem;
-      color: #475569;
-    }
-
-    .comodity-prod-time {
-      font-variant-numeric: tabular-nums;
-      font-weight: 600;
-    }
-
-    .comodity-woman-card {
-      width: 110px;
-      height: 60px;
-      background: #e0f2fe;
-      border: 1px dashed #93c5fd;
-      border-radius: 12px;
-      padding: 4px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 0.68rem;
-      color: #0f172a;
-    }
-
-    .comodity-woman-badge {
-      position: absolute;
-      bottom: 3px;
-      right: 4px;
-      font-size: 0.6rem;
-      background: #1d4ed8;
-      color: white;
-      padding: 1px 6px;
-      border-radius: 999px;
-    }
-
     /* CATEGORÍAS */
 
     .categorias {
@@ -709,7 +652,7 @@
     .cat-img {
       position: relative;
       height: 110px;
-      background-size: cover; /* se “estira” para ocupar todo el espacio */
+      background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
     }
@@ -1209,6 +1152,75 @@
       color: var(--text-main);
     }
 
+    /* PANTALLA REFERIDOS */
+
+    .referral-container {
+      padding: 8px 20px 24px;
+    }
+
+    .referral-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .referral-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .referral-box {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 1px solid #ffcdd2;
+    }
+
+    .referral-label {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .referral-link-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .referral-input {
+      flex: 1;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 12px;
+    }
+
+    .referral-copy-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .referral-steps {
+      padding-left: 16px;
+      margin: 0;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .referral-steps li {
+      margin-bottom: 4px;
+    }
+
     /* ANIMACIÓN RULETA */
 
     @keyframes girar {
@@ -1230,7 +1242,7 @@
         gap: 14px;
       }
       .categoria {
-        transform: scale(1.1); /* ~25% más grande */
+        transform: scale(1.1);
       }
       .cat-img {
         height: 135px;
@@ -1316,6 +1328,105 @@
     </div>
   </header>
 
+  <!-- BANNER SUPERIOR NUEVO -->
+  <div id="top-banner">
+    <div class="banner-inner">
+      <div class="banner-slides">
+        <!-- Slide 1: Próximo sorteo Smart TV -->
+        <div class="banner-slide banner-slide-1 active">
+          <div class="banner-left">
+            <div class="banner-tag">Próximo sorteo</div>
+            <div class="banner-title">Smart TV TCL 50"</div>
+            <div class="banner-date" id="raffle-date"></div>
+            <div class="banner-sub">
+              Participás automáticamente usando tus tiradas diarias en Comodity.
+            </div>
+          </div>
+          <div class="banner-right">
+            <!-- Cambiá esta imagen por la que quieras -->
+            <img src="img/smarttv-50.jpg" alt="Smart TV TCL 50 pulgadas">
+          </div>
+        </div>
+
+        <!-- Slide 2: Ofertas exclusivas de Comodity -->
+        <div class="banner-slide banner-slide-2">
+          <div class="banner-left">
+            <div class="banner-tag">Ofertas exclusivas de Comodity!</div>
+            <div class="banner-sub">
+              Solo disponibles si comprás desde Comodity. Stock súper limitado.
+            </div>
+            <div class="banner-offers-grid">
+              <!-- 1 oferta por columna (en escritorio 4 columnas) -->
+              <div class="banner-offer-card">
+                <div class="banner-offer-title">Auriculares inalámbricos</div>
+                <div class="banner-offer-price">$179</div>
+                <div class="banner-offer-timer" id="offer-timer-auris">
+                  Termina en --
+                </div>
+              </div>
+              <div class="banner-offer-card">
+                <div class="banner-offer-title">Membresía Fiter 3 meses</div>
+                <div class="banner-offer-price">
+                  $1.290/mes <small>antes $1.900</small>
+                </div>
+                <div class="banner-offer-timer" id="offer-timer-fiter">
+                  Termina en --
+                </div>
+              </div>
+              <div class="banner-offer-card">
+                <div class="banner-offer-title">Zapatillas para correr</div>
+                <div class="banner-offer-price">
+                  $899 <small>antes $2.000</small>
+                </div>
+                <div class="banner-offer-timer" id="offer-timer-zapas">
+                  Termina en --
+                </div>
+              </div>
+              <div class="banner-offer-card">
+                <div class="banner-offer-title">Smart TV TCL 50"</div>
+                <div class="banner-offer-price">USD 325</div>
+                <div class="banner-offer-timer" id="offer-timer-tv">
+                  Termina en --
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="banner-right">
+            <!-- Imagen genérica de ofertas / productos, fácil de cambiar -->
+            <img src="img/ofertas.jpg" alt="Ofertas Comodity">
+          </div>
+        </div>
+
+        <!-- Slide 3: Invitá a un amigo -->
+        <div class="banner-slide banner-slide-3">
+          <div class="banner-left">
+            <div class="banner-tag">Invitá y ganen más</div>
+            <div class="banner-title">
+              Invitá a un amigo y ambos ganan 8 tiradas gratis
+            </div>
+            <div class="banner-sub">
+              Compartí tu link personal. Cuando tu amigo se registre y gire la ruleta
+              por primera vez, los dos reciben 8 tiradas extra automáticamente.
+            </div>
+            <button class="banner-cta" onclick="openReferralScreen()">
+              Invitar
+            </button>
+          </div>
+          <div class="banner-right">
+            <!-- Imagen de personas invitando / compartiendo -->
+            <img src="img/referral.jpg" alt="Invitá a tus amigos">
+          </div>
+        </div>
+      </div>
+
+      <div class="banner-dots">
+        <span class="banner-dot active" data-slide="0"></span>
+        <span class="banner-dot" data-slide="1"></span>
+        <span class="banner-dot" data-slide="2"></span>
+      </div>
+    </div>
+  </div>
+
   <!-- Menú usuario (click en avatar) -->
   <div id="user-menu" class="user-menu">
     <div class="user-menu-item" onclick="openProfileOverlay()">Datos personales</div>
@@ -1327,118 +1438,6 @@
     <div id="home-screen" class="screen active">
       <div class="ruleta-container">
         <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
-
-        <!-- BANNER COMODITY -->
-        <div class="comodity-banner">
-          <div class="comodity-banner-header">
-            <span class="comodity-banner-chip">Promos Comodity</span>
-            <div class="comodity-banner-dots">
-              <span class="comodity-banner-dot" data-banner-dot="0"></span>
-              <span class="comodity-banner-dot" data-banner-dot="1"></span>
-              <span class="comodity-banner-dot" data-banner-dot="2"></span>
-            </div>
-          </div>
-
-          <!-- SLIDE 1: Próximo sorteo Smart TV -->
-          <div class="comodity-banner-slide" data-banner-slide="0">
-            <div class="comodity-banner-left">
-              <div class="comodity-banner-eyebrow">Próximo sorteo</div>
-              <div class="comodity-banner-title">Smart TV TCL 50''</div>
-              <div class="comodity-banner-text">
-                Participás solo por usar Comodity. Más giros, más chances de ganarla.
-              </div>
-              <div class="comodity-banner-pill">
-                📅 Sorteo: <span id="comodity-next-draw-date"></span>
-              </div>
-            </div>
-            <div class="comodity-banner-right">
-              <div class="comodity-tv-card">
-                <div class="comodity-tv-inner">Smart TV<br />TCL 50''</div>
-                <span class="comodity-tv-badge">4K HDR</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- SLIDE 2: Ofertas con countdown -->
-          <div class="comodity-banner-slide" data-banner-slide="1">
-            <div class="comodity-banner-left">
-              <div class="comodity-banner-eyebrow">Ofertas</div>
-              <div class="comodity-banner-title">Expiran pronto ⏳</div>
-              <div class="comodity-banner-text">
-                Solo si entrás desde Comodity.
-              </div>
-            </div>
-            <div class="comodity-banner-right comodity-banner-right-grid">
-              <div class="comodity-prod" data-countdown-id="auris">
-                <div class="comodity-prod-name">Auriculares inalámbricos</div>
-                <div class="comodity-prod-price">
-                  <span class="comodity-prod-price-main">$179</span>
-                </div>
-                <div class="comodity-prod-count">
-                  <span>Termina en</span>
-                  <span class="comodity-prod-time"></span>
-                </div>
-              </div>
-
-              <div class="comodity-prod" data-countdown-id="fiter">
-                <div class="comodity-prod-name">Membresía Fiter 3 meses</div>
-                <div class="comodity-prod-price">
-                  <span class="comodity-prod-price-main">$1290</span>
-                  <span class="comodity-prod-price-old">$1900</span>
-                </div>
-                <div class="comodity-prod-count">
-                  <span>Termina en</span>
-                  <span class="comodity-prod-time"></span>
-                </div>
-              </div>
-
-              <div class="comodity-prod" data-countdown-id="zapatillas">
-                <div class="comodity-prod-name">Zapatillas de correr</div>
-                <div class="comodity-prod-price">
-                  <span class="comodity-prod-price-main">$899</span>
-                  <span class="comodity-prod-price-old">$2000</span>
-                </div>
-                <div class="comodity-prod-count">
-                  <span>Termina en</span>
-                  <span class="comodity-prod-time"></span>
-                </div>
-              </div>
-
-              <div class="comodity-prod" data-countdown-id="tv50">
-                <div class="comodity-prod-name">Smart TV TCL 50''</div>
-                <div class="comodity-prod-price">
-                  <span class="comodity-prod-price-main">USD 325</span>
-                </div>
-                <div class="comodity-prod-count">
-                  <span>Termina en</span>
-                  <span class="comodity-prod-time"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- SLIDE 3: Comercios -->
-          <div class="comodity-banner-slide" data-banner-slide="2">
-            <div class="comodity-banner-left">
-              <div class="comodity-banner-eyebrow">Para comercios</div>
-              <div class="comodity-banner-title">¿Tenés un negocio?</div>
-              <div class="comodity-banner-text">
-                Te mandamos clientes listos para comprar y solo pagás si la venta se concreta.
-              </div>
-              <div class="comodity-banner-pill">
-                📲 Escribinos y armamos tu campaña.
-              </div>
-            </div>
-            <div class="comodity-banner-right">
-              <div class="comodity-woman-card">
-                📞 “Quiero anunciarme en Comodity”
-                <span class="comodity-woman-badge">Soporte 1 a 1</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- FIN BANNER -->
-
         <div class="ruleta-wrapper">
           <div class="ruleta" id="ruleta">
             <div class="pointer"></div>
@@ -1609,6 +1608,35 @@
         <!-- Se llenan por JS -->
       </div>
     </div>
+
+    <!-- PANTALLA REFERIDOS -->
+    <div id="referral-screen" class="screen">
+      <div class="back-bar">
+        <button class="back-link" onclick="goToHome()">
+          ← Volver
+        </button>
+      </div>
+      <div class="referral-container">
+        <div class="referral-title">Invitá amigos y ganen tiradas extra</div>
+        <div class="referral-text">
+          Compartí tu link personal de Comodity. Cada vez que un amigo se registra
+          con tu link y gira la ruleta por primera vez, ambos reciben
+          <strong>8 tiradas gratis</strong>.
+        </div>
+        <div class="referral-box">
+          <span class="referral-label">Tu link personal</span>
+          <div class="referral-link-row">
+            <input id="referral-link" class="referral-input" readonly>
+            <button class="referral-copy-btn" onclick="copyReferralLink()">Copiar</button>
+          </div>
+          <ul class="referral-steps">
+            <li>1. Compartí tu link por WhatsApp, redes o email.</li>
+            <li>2. Tu amigo se registra y gira la ruleta al menos una vez.</li>
+            <li>3. Automáticamente suman 8 tiradas extra cada uno.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -1705,6 +1733,11 @@
   // timers celulares
   let cellIntervals = [];
 
+  // banner
+  let bannerCurrent = 0;
+  let bannerInterval = null;
+  const BANNER_SLIDES = 3;
+
   /* Lógica de premios */
   const outcomes = [
     { label: "Sin premio, suerte a la próxima 😢", type: "none", prob: 0.30 },
@@ -1790,6 +1823,7 @@
     actualizarSaldos();
     actualizarCuponesCount();
     actualizarTiradas();
+    updateReferralLink();
   }
 
   function handleUserLoggedIn(user, nameOverride) {
@@ -1814,7 +1848,7 @@
     document.getElementById("login-screen").style.display = "flex";
   }
 
-  // observar cambios de auth
+  // observar cambios de auth (para refrescar al recargar la página, etc.)
   auth.onAuthStateChanged(function(user) {
     if (user) {
       if (currentUser && currentUser.uid === user.uid) return;
@@ -1824,6 +1858,7 @@
     }
   });
 
+  // cambiar entre iniciar sesión y crear cuenta
   function toggleLoginMode() {
     isRegisterMode = !isRegisterMode;
     const nameGroup = document.getElementById("login-name-group");
@@ -1846,6 +1881,7 @@
 
   document.getElementById("toggle-login-mode").addEventListener("click", toggleLoginMode);
 
+  // LOGIN con Nombre (solo registro), Email + Contraseña
   document.getElementById("login-form").addEventListener("submit", async function(e) {
     e.preventDefault();
     const name  = document.getElementById("login-name").value.trim();
@@ -1886,6 +1922,7 @@
     }
   });
 
+  // LOGIN con Google (Gmail)
   async function loginWithGoogle() {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -1898,6 +1935,7 @@
     }
   }
 
+  // LOGOUT
   async function logout() {
     try {
       await auth.signOut();
@@ -1989,6 +2027,7 @@
     osc.start(now); osc.stop(now + 0.5);
   }
 
+  // sonido de “lluvia” de monedas
   function playCoinRainSound() {
     const ctx = getAudioCtx();
     if (!ctx) return;
@@ -2019,6 +2058,8 @@
     }
   }
 
+  /* utilidades */
+
   function getRandomOutcomeWeighted() {
     const r = Math.random();
     let acc = 0;
@@ -2043,6 +2084,8 @@
       tiradasRestantes + " tiradas restantes";
     saveStateForUser();
   }
+
+  /* countdown 12h solo visual */
 
   function formatTime(seconds) {
     const h = Math.floor(seconds / 3600);
@@ -2074,6 +2117,8 @@
     countdownTimer = null;
     document.getElementById("cooldown-info").style.display = "none";
   }
+
+  /* POPUP premios */
 
   function showRewardPopup(kind, outcome) {
     const overlay      = document.getElementById("reward-overlay");
@@ -2116,6 +2161,7 @@
     descEl.textContent  = outcome.label;
     companyWrap.style.display = showCompany ? "inline-flex" : "none";
 
+    // monedas
     coinsEl.innerHTML = "";
     const coinCount = 10;
 
@@ -2152,6 +2198,8 @@
     document.getElementById("reward-overlay").style.display = "none";
   }
 
+  /* Cupones */
+
   function agregarCupon(coupon) {
     cupones.push(coupon);
     actualizarCuponesCount();
@@ -2184,6 +2232,8 @@
   function closeCouponsPopup() {
     document.getElementById("coupons-overlay").style.display = "none";
   }
+
+  /* GIRO RULETA */
 
   function girarRuleta() {
     const ruleta    = document.getElementById("ruleta");
@@ -2248,18 +2298,23 @@
     }, 1500);
   }
 
+  /* Menú usuario (click en avatar) */
+
   document.getElementById("user-avatar").addEventListener("click", function (e) {
     e.stopPropagation();
     const menu = document.getElementById("user-menu");
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
   });
 
+  // cerrar menú si se hace click fuera
   window.addEventListener("click", function(e) {
     const menu = document.getElementById("user-menu");
     if (!e.target.closest("#user-menu") && !e.target.closest("#user-avatar")) {
       menu.style.display = "none";
     }
   });
+
+  /* Datos personales */
 
   function openProfileOverlay() {
     const menu = document.getElementById("user-menu");
@@ -2309,6 +2364,8 @@
     closeProfileOverlay();
   });
 
+  /* Navegación pantallas */
+
   function showScreen(id) {
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
     const el = document.getElementById(id);
@@ -2316,6 +2373,7 @@
   }
 
   function goToHome() {
+    // limpiar timers de celulares
     cellIntervals.forEach(i => clearInterval(i));
     cellIntervals = [];
     showScreen("home-screen");
@@ -2326,6 +2384,12 @@
     renderCellphones();
   }
 
+  function openReferralScreen() {
+    showScreen("referral-screen");
+    updateReferralLink();
+  }
+
+  // click en categorías
   document.addEventListener("click", function(e) {
     const cat = e.target.closest(".categoria");
     if (!cat) return;
@@ -2336,6 +2400,8 @@
       alert("Esta categoría estará disponible próximamente en Comodity 👀");
     }
   });
+
+  /* CELULARES - datos de ejemplo */
 
   const cellphones = [
     {
@@ -2377,6 +2443,13 @@
     const end = new Date(now);
     end.setHours(23, 59, 59, 999);
     return end.getTime();
+  }
+
+  function getTomorrowEndTimestamp() {
+    const now = new Date();
+    now.setDate(now.getDate() + 1);
+    now.setHours(23, 59, 59, 999);
+    return now.getTime();
   }
 
   function renderCellphones() {
@@ -2421,6 +2494,7 @@
       grid.appendChild(card);
     });
 
+    // iniciar timers individuales
     document.querySelectorAll(".cell-timer").forEach(timerEl => {
       const dl = parseInt(timerEl.getAttribute("data-deadline"), 10);
       const interval = setInterval(() => {
@@ -2468,96 +2542,119 @@
     document.getElementById("cell-detail-overlay").style.display = "none";
   }
 
-  /* BANNER PROMOS COMODITY */
+  /* ====== BANNER: lógica de slides y timers ====== */
 
-  function initComodityBanner() {
-    const slides = Array.from(document.querySelectorAll("[data-banner-slide]"));
-    const dots = Array.from(document.querySelectorAll("[data-banner-dot]"));
-    if (!slides.length) return;
+  function setBannerSlide(index) {
+    bannerCurrent = index;
+    const slides = document.querySelectorAll(".banner-slide");
+    const dots = document.querySelectorAll(".banner-dot");
+    slides.forEach((s, i) => {
+      s.classList.toggle("active", i === index);
+    });
+    dots.forEach((d, i) => {
+      d.classList.toggle("active", i === index);
+    });
+  }
 
-    let slideIndex = 0;
+  function nextBannerSlide() {
+    const next = (bannerCurrent + 1) % BANNER_SLIDES;
+    setBannerSlide(next);
+  }
 
-    function showSlide(i) {
-      slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
-      dots.forEach((d, idx) => d.classList.toggle("active", idx === i));
-    }
+  function initBannerRaffleDate() {
+    const el = document.getElementById("raffle-date");
+    if (!el) return;
+    const d = new Date();
+    d.setDate(d.getDate() + 14);
+    const fmt = new Intl.DateTimeFormat("es-UY", {
+      weekday: "long",
+      day: "numeric",
+      month: "long"
+    });
+    el.textContent = "Se sortea el " + fmt.format(d);
+  }
 
-    showSlide(0);
-    setInterval(() => {
-      slideIndex = (slideIndex + 1) % slides.length;
-      showSlide(slideIndex);
-    }, 8000);
+  function initBannerOfferTimers() {
+    const timers = [
+      { id: "offer-timer-auris", deadline: getTomorrowEndTimestamp() },
+      { id: "offer-timer-fiter", deadline: Date.now() + 70 * 60 * 60 * 1000 },
+      { id: "offer-timer-zapas", deadline: Date.now() + 30 * 60 * 60 * 1000 },
+      { id: "offer-timer-tv",    deadline: Date.now() + 16 * 60 * 60 * 1000 }
+    ];
 
-    // fecha sorteo = hoy + 14 días
-    const dateEl = document.getElementById("comodity-next-draw-date");
-    if (dateEl) {
-      const d = new Date();
-      d.setDate(d.getDate() + 14);
-      dateEl.textContent = d.toLocaleDateString("es-UY", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
+    timers.forEach(t => {
+      const el = document.getElementById(t.id);
+      if (!el) return;
+      const update = () => {
+        let diff = Math.max(0, t.deadline - Date.now());
+        const h = Math.floor(diff / 3600000);
+        diff %= 3600000;
+        const m = Math.floor(diff / 60000);
+        diff %= 60000;
+        const s = Math.floor(diff / 1000);
+        el.textContent = `Termina en ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+      };
+      update();
+      setInterval(update, 1000);
+    });
+  }
+
+  function initBanner() {
+    setBannerSlide(0);
+    initBannerRaffleDate();
+    initBannerOfferTimers();
+
+    const dots = document.querySelectorAll(".banner-dot");
+    dots.forEach(dot => {
+      dot.addEventListener("click", () => {
+        const idx = parseInt(dot.getAttribute("data-slide"), 10);
+        setBannerSlide(idx);
+        if (bannerInterval) {
+          clearInterval(bannerInterval);
+          bannerInterval = setInterval(nextBannerSlide, 8000);
+        }
       });
+    });
+
+    bannerInterval = setInterval(nextBannerSlide, 8000);
+  }
+
+  /* REFERIDOS */
+
+  function getReferralLink() {
+    const base = window.location.origin + window.location.pathname;
+    if (currentUser && currentUser.uid) {
+      return `${base}?ref=${encodeURIComponent(currentUser.uid)}`;
     }
+    return `${base}?ref=demo-usuario`;
+  }
 
-    // countdown productos
-    const nowBase = new Date();
-    const tomorrowEnd = new Date(
-      nowBase.getFullYear(),
-      nowBase.getMonth(),
-      nowBase.getDate() + 1,
-      23, 59, 59
-    );
+  function updateReferralLink() {
+    const input = document.getElementById("referral-link");
+    if (!input) return;
+    input.value = getReferralLink();
+  }
 
-    const deadlines = {
-      auris: tomorrowEnd,
-      fiter: new Date(nowBase.getTime() + 70 * 3600 * 1000),
-      zapatillas: new Date(nowBase.getTime() + 30 * 3600 * 1000),
-      tv50: new Date(nowBase.getTime() + 16 * 3600 * 1000)
-    };
-
-    const countdownItems = Object.entries(deadlines)
-      .map(([id, deadline]) => {
-        const el = document.querySelector(
-          `[data-countdown-id="${id}"] .comodity-prod-time`
-        );
-        return el ? { el, deadline } : null;
-      })
-      .filter(Boolean);
-
-    function formatDiff(ms) {
-      if (ms <= 0) return "Finaliza";
-      const totalSec = Math.floor(ms / 1000);
-      const d = Math.floor(totalSec / 86400);
-      const h = Math.floor((totalSec % 86400) / 3600);
-      const m = Math.floor((totalSec % 3600) / 60);
-      const s = totalSec % 60;
-
-      let txt = "";
-      if (d > 0) txt += d + "d ";
-      txt += String(h).padStart(2,"0") + "h ";
-      txt += String(m).padStart(2,"0") + "m ";
-      txt += String(s).padStart(2,"0") + "s";
-      return txt;
-    }
-
-    function tickBannerCountdown() {
-      const now = new Date();
-      countdownItems.forEach(({ el, deadline }) => {
-        el.textContent = formatDiff(deadline - now);
-      });
-    }
-
-    if (countdownItems.length) {
-      tickBannerCountdown();
-      setInterval(tickBannerCountdown, 1000);
+  function copyReferralLink() {
+    const input = document.getElementById("referral-link");
+    if (!input || !input.value) return;
+    input.select();
+    input.setSelectionRange(0, 99999);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(input.value)
+        .then(() => alert("Link copiado para compartir"))
+        .catch(() => alert("Copiá el link manualmente si el copiado falló."));
+    } else {
+      alert("Copiá el link manualmente si el copiado falló.");
     }
   }
 
   /* init */
   window.addEventListener("load", () => {
+    // por defecto, modo "iniciar sesión": ocultar campo nombre
     document.getElementById("login-name-group").style.display = "none";
-    initComodityBanner();
+    initBanner();
+    updateReferralLink();
   });
 </script>
 
