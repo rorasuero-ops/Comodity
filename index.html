@@ -256,7 +256,7 @@
       white-space: nowrap;
     }
 
-    /* MENU USUARIO (arriba izquierda, al click en avatar) */
+    /* MENU USUARIO */
 
     .user-menu {
       position: fixed;
@@ -354,9 +354,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    /* LOGO EN EL CENTRO DE LA RULETA */
+    .logo-center {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      background: #ffffff;
+      color: #000;
+      font-size: 22px;
       font-weight: bold;
-      font-size: 15px;
-      color: #4e342e;
+      clip-path: polygon(15% 0%, 90% 10%, 100% 60%, 55% 100%, 0% 65%);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.35);
     }
 
     .ruleta-segment-icon {
@@ -455,60 +467,41 @@
       background: #e0e0e0;
     }
 
+    /* IMPORTANTE: sin anidado raro, y con contain para ver la imagen completa */
     .cat-img {
       position: relative;
       height: 110px;
-      .cat-img {
-    height: 110px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
       background-position: center;
       background-repeat: no-repeat;
+      background-size: contain;  /* clave: muestra la imagen completa */
+      background-color: #000;   /* fondo oscuro detrás de la imagen */
     }
 
-    /* usa las imágenes locales que subís al repo */
+    /* Imágenes locales dentro de /img */
 
-   /* usa las imágenes locales dentro de /img */
+    .cat-img-comodities {
+      background-image: url("img/commodities.jpg");
+    }
 
-.cat-img-comodities {
-  background-image:
-    linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
-    url("img/commodities.jpg");
-}
+    .cat-img-insumos {
+      background-image: url("img/insumos.jpg");
+    }
 
-.cat-img-insumos {
-  background-image:
-    linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-    url("img/insumos.jpg");
-}
+    .cat-img-cell {
+      background-image: url("img/cell.jpg");
+    }
 
-.cat-img-cell {
-  background-image:
-    linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-    url("img/cell.jpg");
-}
+    .cat-img-electronica {
+      background-image: url("img/tv.jpg");
+    }
 
-.cat-img-electronica {
-  background-image:
-    linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-    url("img/tv.jpg");
-}
+    .cat-img-ropa {
+      background-image: url("img/ropa.jpg");
+    }
 
-.cat-img-ropa {
-  background-image:
-    linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-    url("img/ropa.jpg");
-}
-
-.cat-img-experiencias {
-  background-image:
-    linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-    url("img/kart.jpg");
-}
-
+    .cat-img-experiencias {
+      background-image: url("img/kart.jpg");
+    }
 
     .cat-discount-badge {
       position: absolute;
@@ -841,7 +834,9 @@
     <div class="ruleta-wrapper">
       <div class="ruleta" id="ruleta">
         <div class="pointer"></div>
-        <div class="ruleta-center">🎁 Spin</div>
+        <div class="ruleta-center">
+          <div class="logo-center">C</div>
+        </div>
 
         <!-- 8 iconos: 3 monedas amarillas, 3 azules, 2 % -->
         <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
@@ -865,7 +860,7 @@
     </p>
   </div>
 
-  <!-- CATEGORÍAS (sin texto de "Explorá por categoría") -->
+  <!-- CATEGORÍAS -->
   <div class="categorias">
     <!-- Commodities -->
     <div class="categoria">
@@ -1118,7 +1113,7 @@
     document.getElementById("login-screen").style.display = "flex";
   }
 
-  // observar cambios de auth (para refrescar al recargar la página, etc.)
+  // observar cambios de auth
   auth.onAuthStateChanged(function(user) {
     if (user) {
       if (currentUser && currentUser.uid === user.uid) return; // ya manejado
@@ -1151,7 +1146,7 @@
 
   document.getElementById("toggle-login-mode").addEventListener("click", toggleLoginMode);
 
-  // LOGIN con Nombre (solo registro), Email + Contraseña
+  // LOGIN con Nombre (registro), Email + Contraseña
   document.getElementById("login-form").addEventListener("submit", async function(e) {
     e.preventDefault();
     const name  = document.getElementById("login-name").value.trim();
@@ -1167,7 +1162,6 @@
         const credNew = await auth.createUserWithEmailAndPassword(email, pass);
         await credNew.user.updateProfile({ displayName: name });
         handleUserLoggedIn(credNew.user, name);
-        // guardar nombre base en perfil
         profileData.nombre = name;
         saveProfileForUser();
       } catch (err2) {
@@ -1193,7 +1187,7 @@
     }
   });
 
-  // LOGIN con Google (Gmail)
+  // LOGIN con Google
   async function loginWithGoogle() {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
