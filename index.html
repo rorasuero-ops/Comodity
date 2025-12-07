@@ -1510,10 +1510,11 @@
         <div class="title-text">Comodity</div>
       </div>
 
-      <!-- 🔐 BOTÓN ADMIN (INICIALMENTE OCULTO) -->
-      <a id="admin-link" href="admin.html" class="admin-link" style="display:none;">
-        Admin
-      </a>
+      <!-- BOTÓN ADMIN SIEMPRE VISIBLE -->
+<a id="admin-link" href="admin.html" class="admin-link">
+  Admin
+</a>
+
     </div>
   </header>
 
@@ -2002,21 +2003,12 @@
     actualizarCuponesCount();
     actualizarTiradas();
   }
-
+  
 function handleUserLoggedIn(user, nameOverride) {
   currentUser = user;
   currentUserName = nameOverride || user.displayName || user.email;
-  applyUserHeader();
 
-  const adminLink = document.getElementById("admin-link");
-  if (adminLink) {
-    // Mostrar Admin solo para tu mail
-    if (user.email === "javier.araujo995@gmail.com") {
-      adminLink.style.display = "inline-flex";
-    } else {
-      adminLink.style.display = "none";
-    }
-  }
+  applyUserHeader();
 
   document.getElementById("login-screen").style.display = "none";
   document.getElementById("app").style.display = "block";
@@ -2028,23 +2020,18 @@ function handleUserLoggedIn(user, nameOverride) {
 
 
 
-  function handleLoggedOut() {
-    currentUser = null;
-    currentUserName = null;
-    saldoLibre = 0;
-    saldoLight = 0;
-    cupones = [];
-    tiradasRestantes = 4;
 
-    // 🔐 Ocultar botón Admin siempre que se cierre sesión
-    const adminLink = document.getElementById("admin-link");
-    if (adminLink) {
-      adminLink.style.display = "none";
-    }
+ function handleLoggedOut() {
+  currentUser = null;
+  currentUserName = null;
+  saldoLibre = 0;
+  saldoLight = 0;
+  cupones = [];
+  tiradasRestantes = 4;
 
-    document.getElementById("app").style.display = "none";
-    document.getElementById("login-screen").style.display = "flex";
-  }
+  document.getElementById("app").style.display = "none";
+  document.getElementById("login-screen").style.display = "flex";
+}
 
 
   auth.onAuthStateChanged(function(user) {
