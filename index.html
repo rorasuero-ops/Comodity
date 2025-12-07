@@ -2003,27 +2003,29 @@
     actualizarTiradas();
   }
 
-    function handleUserLoggedIn(user, nameOverride) {
-    currentUser = user;
-    currentUserName = nameOverride || user.displayName || user.email;
-    applyUserHeader();
+   function handleUserLoggedIn(user, nameOverride) {
+  currentUser = user;
+  currentUserName = nameOverride || user.displayName || user.email;
+  applyUserHeader();
 
-    // 🔐 Mostrar / ocultar botón Admin según el email
-    const adminLink = document.getElementById("admin-link");
-    if (adminLink) {
-      if (user.email === "javier.araujo995@gmail.com") {
-        adminLink.style.display = "inline-flex";
-      } else {
-        adminLink.style.display = "none";
-      }
-    }
+  const adminLink = document.getElementById("admin-link");
+  console.log("Usuario logueado:", user ? user.email : null);
 
-    document.getElementById("login-screen").style.display = "none";
-    document.getElementById("app").style.display = "block";
-
-    loadUserData();
-    generateReferralLink();
+  if (adminLink) {
+    console.log("Encontré admin-link, lo muestro");
+    // 🔧 DEBUG: mostrar SIEMPRE el botón Admin si hay usuario
+    adminLink.style.display = "inline-flex";
+  } else {
+    console.log("NO encontré el elemento admin-link en el DOM");
   }
+
+  document.getElementById("login-screen").style.display = "none";
+  document.getElementById("app").style.display = "block";
+
+  loadUserData();
+  generateReferralLink();
+}
+
 
 
   function handleLoggedOut() {
