@@ -2802,7 +2802,7 @@
       const snap = await db
         .collection("publicaciones")
         .where("categoria", "==", catKey)
-        .orderBy("creadoEn", "desc")
+      
         .get();
 
       if (snap.empty) {
