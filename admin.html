@@ -2,184 +2,166 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Admin Comodity</title>
-
-  <!-- Firebase compat -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-
-  <script>
-    // Misma config que en tu index
-    const firebaseConfig = {
-      apiKey: "AIzaSyC7QcScbqc5dWL4WCatnemf_KGCaZtjCT4",
-      authDomain: "comodity-9a7be.firebaseapp.com",
-      projectId: "comodity-9a7be",
-      storageBucket: "comodity-9a7be.firebasestorage.app",
-      messagingSenderId: "560121634288",
-      appId: "1:560121634288:web:e02bdad21bd4ee06255135",
-      measurementId: "G-PYNZCB10T0"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    const ADMIN_EMAIL = "javier.araujo995@gmail.com";
-
-    window.addEventListener("load", () => {
-      const loadingEl     = document.getElementById("admin-loading");
-      const noAccessEl    = document.getElementById("admin-no-access");
-      const contentEl     = document.getElementById("admin-content");
-      const userEmailSpan = document.getElementById("admin-user-email");
-
-      auth.onAuthStateChanged(user => {
-        loadingEl.style.display = "none";
-
-        if (!user) {
-          // ❌ No logueado: NO redirigimos automáticamente, solo mostramos mensaje
-          noAccessEl.style.display = "block";
-          noAccessEl.innerHTML = `
-            No estás logueado.<br>
-            <a href="index.html">Volver a Comodity</a>
-          `;
-          contentEl.style.display = "none";
-          return;
-        }
-
-        if (user.email !== ADMIN_EMAIL) {
-          // ❌ Logueado pero no admin
-          noAccessEl.style.display = "block";
-          noAccessEl.innerHTML = `
-            No tenés permisos para ver esta página.<br>
-            <a href="index.html">Volver a Comodity</a>
-          `;
-          contentEl.style.display = "none";
-          return;
-        }
-
-        // ✅ Es el admin
-        userEmailSpan.textContent = user.email;
-        noAccessEl.style.display = "none";
-        contentEl.style.display = "block";
-      });
-    });
-
-    async function adminLogout() {
-      try {
-        await auth.signOut();
-        window.location.href = "index.html";
-      } catch (e) {
-        console.error(e);
-        alert("Error al cerrar sesión: " + e.message);
-      }
-    }
-  </script>
+  <title>Comodity – Admin publicaciones</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
+    :root {
+      --primary: #f44336;
+      --primary-dark: #c62828;
+      --bg: #f5f5f5;
+      --card: #ffffff;
+      --text-main: #222;
+      --text-soft: #666;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background:#f5f5f5;
-      color:#222;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
     }
+
+    /* HEADER */
     .admin-header {
-      background:#f44336;
-      color:#fff;
-      padding:12px 16px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
+
     .admin-title {
-      font-size:18px;
-      font-weight:bold;
+      font-size: 18px;
+      font-weight: bold;
     }
+
+    .admin-header a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    /* MAIN CARD */
     .admin-main {
-      max-width:900px;
-      margin:20px auto;
-      background:#fff;
-      border-radius:12px;
-      padding:16px 18px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.15);
+      max-width: 1100px;
+      margin: 20px auto;
+      background: var(--card);
+      border-radius: 12px;
+      padding: 18px 20px 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
-    .btn {
-      padding:6px 12px;
-      border-radius:999px;
-      border:none;
-      cursor:pointer;
-      font-size:13px;
-      font-weight:bold;
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 6px;
     }
-    .btn-logout {
-      background:#fff;
-      color:#f44336;
-    }
+
     .small {
-      font-size:13px;
-      color:#555;
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 16px;
     }
-    label {
-      display:block;
-      margin:8px 0 4px;
-      font-size:13px;
+
+    /* FORM */
+    form label {
+      display: block;
+      margin: 8px 0 4px;
+      font-size: 13px;
+      font-weight: 600;
     }
-    input, textarea {
-      width:100%;
-      padding:6px 8px;
-      font-size:13px;
-      border-radius:8px;
-      border:1px solid #ccc;
-      box-sizing:border-box;
+
+    form input,
+    form textarea,
+    form select {
+      width: 100%;
+      padding: 7px 9px;
+      font-size: 13px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
     }
-    textarea {
-      resize:vertical;
-      min-height:60px;
+
+    form textarea {
+      resize: vertical;
+      min-height: 70px;
     }
-  </style>
-</head>
-<body>
 
-  <header class="admin-header">
-    <div class="admin-title">Panel Admin – Comodity</div>
-    <div class="small">
-      <span id="admin-user-email"></span>
-      &nbsp;|&nbsp;
-      <button class="btn btn-logout" onclick="adminLogout()">Cerrar sesión</button>
-    </div>
-  </header>
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px 14px;
+      margin-bottom: 10px;
+    }
 
-  <div id="admin-loading" class="admin-main">
-    Verificando sesión...
-  </div>
+    .btn-primary {
+      margin-top: 12px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
 
-  <div id="admin-no-access" class="admin-main" style="display:none;"></div>
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
 
-  <div id="admin-content" class="admin-main" style="display:none;">
-    <h2>Configurar promociones / premios</h2>
-    <p class="small">
-      Acá después podemos armar todo el CRUD de ofertas, probabilidad de premios, etc.
-    </p>
+    /* LISTADO */
+    .list-title {
+      margin-top: 24px;
+      margin-bottom: 8px;
+      font-size: 16px;
+      font-weight: 700;
+    }
 
-    <form id="admin-form">
-      <label>Nombre de la promo</label>
-      <input type="text" id="promo-name" placeholder="Ej: 30% en PizzaRocket" />
+    .empty-msg {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
 
-      <label>Descripción</label>
-      <textarea id="promo-desc" placeholder="Detalle interno o texto que va a ver el usuario"></textarea>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 4px;
+    }
 
-      <label>Categoría</label>
-      <input type="text" id="promo-category" placeholder="Ej: comida, electro, etc." />
+    thead {
+      background: #fafafa;
+    }
 
-      <label>Descuento / monto</label>
-      <input type="text" id="promo-value" placeholder="Ej: 30% o $80" />
+    th, td {
+      border-bottom: 1px solid #eee;
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
 
-      <label>Probabilidad en ruleta (0 a 1)</label>
-      <input type="number" step="0.01" min="0" max="1" id="promo-prob" value="0.10" />
+    th {
+      font-weight: 600;
+      color: var(--text-soft);
+      font-size: 12px;
+    }
 
-      <button type="button" class="btn" style="margin-top:10px;background:#f44336;color:#fff;">
-        Guardar (simulado)
-      </button>
-    </form>
-  </div>
+    .thumb-img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #eee;
+    }
 
-</body>
-</html>
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #ffe0e0;
+      color: #b71c1c;
+      font-size: 11px;
