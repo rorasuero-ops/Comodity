@@ -55,7 +55,7 @@
 
         const nombre       = document.getElementById("pub-nombre").value.trim();
         const descripcion  = document.getElementById("pub-desc").value.trim();
-        const categoria    = document.getElementById("pub-cat").value.trim();
+        const categoria    = document.getElementById("pub-cat").value.trim(); // ahora viene del <select>
         const fotoUrl      = document.getElementById("pub-foto").value.trim();
         const precioAntes  = parseFloat(document.getElementById("pub-precio-antes").value || "0");
         const precioDesp   = parseFloat(document.getElementById("pub-precio-despues").value || "0");
@@ -251,8 +251,21 @@
       <label>Descripción</label>
       <textarea id="pub-desc" placeholder="Detalle que va a ver el usuario"></textarea>
 
-      <label>Categoría (coincide con data-cat de la app) *</label>
-      <input type="text" id="pub-cat" placeholder="Ej: comida, celulares, muebles, electro, hoteles..." required />
+      <label>Categoría *</label>
+      <select id="pub-cat" required>
+        <option value="commodities">Commodities</option>
+        <option value="insumos">Insumos constructivos</option>
+        <option value="celulares">Celulares</option>
+        <option value="electronica">Electrónica, audio y video</option>
+        <option value="ropa">Ropa</option>
+        <option value="experiencias">Experiencias</option>
+        <option value="imperdibles">Imperdibles &lt; $1000</option>
+        <option value="hoteles">Hoteles y viajes</option>
+        <option value="muebles">Muebles y hogar</option>
+        <option value="deportes">Deportes y fitness</option>
+        <option value="comida">Comida</option>
+        <option value="electro">Electrodomésticos</option>
+      </select>
 
       <label>URL de la foto (por ahora un link a la imagen)</label>
       <input type="text" id="pub-foto" placeholder="https://..." />
