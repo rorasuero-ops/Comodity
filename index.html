@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Firebase compat (ideal para HTML puro sin build) -->
+  <!-- Firebase compat -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
@@ -19,7 +19,7 @@
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
-    const db   = firebase.firestore(); //
+    const db   = firebase.firestore();
   </script>
 
   <meta charset="UTF-8" />
@@ -68,10 +68,6 @@
       text-align: center;
     }
 
-    .login-logo {
-      margin-bottom: 10px;
-    }
-
     .login-logo-icon {
       display: inline-flex;
       align-items: center;
@@ -86,11 +82,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
-    .login-title {
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 8px;
-    }
+    .login-title { font-size: 20px; font-weight: bold; margin-top: 8px; }
 
     .login-subtitle {
       font-size: 13px;
@@ -160,9 +152,7 @@
 
     /* APP PRINCIPAL */
 
-    #app {
-      display: none;
-    }
+    #app { display: none; }
 
     header {
       background: var(--primary);
@@ -199,11 +189,7 @@
       background-position: center;
     }
 
-    .user-text {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
+    .user-text { display: flex; flex-direction: column; gap: 3px; }
 
     .user-name {
       font-weight: bold;
@@ -228,19 +214,12 @@
       white-space: nowrap;
     }
 
-    .badge-balance strong {
-      font-weight: 700;
-      letter-spacing: .02em;
-    }
+    .badge-balance strong { font-weight: 700; }
 
     .badge-balance .label {
       font-size: 11px;
       text-transform: uppercase;
     }
-
-    .icon-badge { font-size: 14px; }
-
-    .badge-balance .value { font-weight: bold; }
 
     .badge-coupons {
       cursor: pointer;
@@ -252,7 +231,7 @@
       border: 1px solid rgba(255,255,255,0.6);
     }
 
-       .admin-link {
+    .admin-link {
       padding: 6px 12px;
       border-radius: 999px;
       background: #ffffff;
@@ -264,11 +243,7 @@
       cursor: pointer;
     }
 
-    .admin-link:hover {
-      background: #ffe3df;
-    }
-
-    }
+    .admin-link:hover { background: #ffe3df; }
 
     .logo-big {
       display: inline-flex;
@@ -312,18 +287,14 @@
       cursor: pointer;
     }
 
-    .user-menu-item:hover {
-      background: #f5f5f5;
-    }
+    .user-menu-item:hover { background: #f5f5f5; }
 
-    main {
-      padding-bottom: 24px;
-    }
+    main { padding-bottom: 24px; }
 
     .screen { display: none; }
     .screen.active { display: block; }
 
-    /* ----- LAYOUT HOME TOP (banners + ruleta) ----- */
+    /* HOME TOP */
 
     .home-top {
       display: grid;
@@ -350,12 +321,9 @@
       font-weight: 800;
       margin: 0 0 6px;
       color: #222;
-      letter-spacing: .01em;
     }
 
-    .home-card-title span {
-      color: var(--primary);
-    }
+    .home-card-title span { color: var(--primary); }
 
     .home-card-subtitle {
       font-size: 13px;
@@ -369,18 +337,7 @@
       gap: 10px;
     }
 
-    .raffle-text-block {
-      flex: 1;
-    }
-
-    .raffle-conditions {
-      margin-top: 4px;
-      font-size: 11px;
-      color: var(--accent);
-      text-decoration: underline;
-      cursor: pointer;
-      display: inline-block;
-    }
+    .raffle-text-block { flex: 1; }
 
     .raffle-tv-img {
       flex: 0 0 50%;
@@ -396,88 +353,7 @@
       margin-top: 3px;
     }
 
-    /* INVITAR AMIGO */
-
-    .invite-main {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .invite-btn {
-      margin-top: 4px;
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: none;
-      background: var(--accent);
-      color: #fff;
-      font-size: 13px;
-      font-weight: bold;
-      cursor: pointer;
-      align-self: flex-start;
-    }
-
-    .invite-bottom {
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .mini-wheel {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      position: relative;
-      background:
-        radial-gradient(circle at 30% 0%, rgba(255,255,255,0.35), transparent 55%),
-        radial-gradient(circle at 50% 120%, rgba(255,215,0,0.35), transparent 60%),
-        conic-gradient(
-          #1b1b1b 0deg 45deg,
-          #6d4c41 45deg 90deg,
-          #1b1b1b 90deg 135deg,
-          #6d4c41 135deg 180deg,
-          #1b1b1b 180deg 225deg,
-          #6d4c41 225deg 270deg,
-          #1b1b1b 270deg 315deg,
-          #6d4c41 315deg 360deg
-        );
-      box-shadow: 0 3px 10px rgba(0,0,0,0.35);
-      animation: mini-spin 4s linear infinite;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .mini-wheel-center {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: bold;
-      color: #000;
-      clip-path: polygon(15% 0%, 90% 10%, 100% 60%, 55% 100%, 0% 65%);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-    }
-
-    @keyframes mini-spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
-    .invite-woman {
-      width: 115px;
-      height: 135px;
-      border-radius: 12px;
-      object-fit: cover;
-      background: #eee;
-    }
-
-    /* RULETA CENTRAL */
+    /* RULETA */
 
     .ruleta-container {
       background: var(--card-bg);
@@ -651,87 +527,11 @@
       font-weight: bold;
     }
 
-    /* BANNER OFERTAS DERECHA */
-
-    .offers-title {
-      font-size: 15px;
-      font-weight: 800;
-      margin: 0 0 6px;
-      color: #222;
-    }
-
-    .offers-subtitle {
-      font-size: 12px;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-    }
-
-    .offers-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .offer-item {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      background: #f7f7f7;
-      border-radius: 12px;
-      padding: 6px;
-    }
-
-    .offer-img {
-      width: 80px;
-      height: 80px;
-      border-radius: 10px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .offer-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      font-size: 12px;
-    }
-
-    .offer-name {
-      font-weight: 700;
-      font-size: 15px;
-    }
-
-    .offer-prices {
-      font-size: 15px;
-    }
-
-    .offer-prices span.old {
-      text-decoration: line-through;
-      color: #888;
-      margin-right: 4px;
-      font-size: 14px;
-    }
-
-    .offer-prices span.now {
-      font-weight: 700;
-      color: #2e7d32;
-      font-size: 17px;
-    }
-
-    .offer-timer {
-      margin-top: 4px;
-      font-family: "Roboto Mono", monospace;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
     /* CATEGORÍAS */
 
     .categorias {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
       margin: 8px 16px 30px;
     }
@@ -750,114 +550,6 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.2);
     }
 
-    .cat-img {
-      position: relative;
-      height: 110px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    .cat-img-comodities {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
-        url("img/commodities.jpg");
-    }
-
-    .cat-img-insumos {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-        url("img/insumos.jpg");
-    }
-
-    .cat-img-cell {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-        url("img/cell.jpg");
-    }
-
-    .cat-img-electronica {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-        url("img/tv.jpg");
-    }
-
-    .cat-img-ropa {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-        url("img/ropa.jpg");
-    }
-
-    .cat-img-experiencias {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
-        url("img/kart.jpg");
-    }
-
-    .cat-img-imperdibles {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
-        url("img/imperdibles menos de 1000.jpg");
-    }
-
-    .cat-img-hoteles {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
-        url("img/Hoteles y viajes.jpg");
-    }
-
-    .cat-img-muebles {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
-        url("img/muebles y articulos del hogar.jpg");
-    }
-
-    .cat-img-deportes {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
-        url("img/deportes.jpg");
-    }
-
-    .cat-img-comida {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
-        url("img/comida.jpg");
-    }
-
-    .cat-img-electro {
-      background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
-        url("img/electrodomesticos.jpg");
-    }
-
-    .cat-discount-badge {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: #7b1fa2;
-      border-radius: 50%;
-      width: 46px;
-      height: 46px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: bold;
-      color: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-      text-align: center;
-      animation: discount-pulse 1.4s ease-in-out infinite;
-    }
-
-    .cat-discount-badge .off { font-size: 12px; }
-
-    @keyframes discount-pulse {
-      0%   { transform: scale(1);   box-shadow: 0 2px 6px rgba(0,0,0,0.4); }
-      50%  { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.55); }
-      100% { transform: scale(1);   box-shadow: 0 2px 6px rgba(0,0,0,0.4); }
-    }
-
     .cat-bottom {
       background: #3c3c3c;
       padding: 8px 10px;
@@ -866,24 +558,7 @@
       text-align: center;
     }
 
-    .cat-logo-comodity {
-      position: absolute;
-      left: 8px;
-      bottom: 8px;
-      width: 30px;
-      height: 30px;
-      background: #fff;
-      color: #000;
-      font-weight: bold;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      clip-path: polygon(15% 0%, 90% 10%, 100% 60%, 55% 100%, 0% 65%);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    }
-
-    /* OVERLAYS POPUPS GENERALES */
+    /* OVERLAYS GENERALES */
 
     .overlay {
       position: fixed;
@@ -906,114 +581,6 @@
       position: relative;
     }
 
-    .reward-icon {
-      font-size: 40px;
-      margin-bottom: 6px;
-    }
-
-    .reward-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
-
-    .reward-desc {
-      font-size: 14px;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .reward-company {
-      font-size: 13px;
-      margin-bottom: 6px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .company-logo {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      font-size: 11px;
-      font-weight: bold;
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .company-pizza  { background: linear-gradient(135deg, #ffb300, #f57c00); }
-    .company-mueble { background: linear-gradient(135deg, #3949ab, #1e88e5); }
-    .company-ferre  { background: linear-gradient(135deg, #00897b, #43a047); }
-
-    .reward-coins {
-      position: relative;
-      height: 110px;
-      margin-bottom: 10px;
-      pointer-events: none;
-      overflow: visible;
-    }
-
-    .coin {
-      position: absolute;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2px solid rgba(0,0,0,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: bold;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.45);
-      animation: coin-rain 0.9s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
-      opacity: 0;
-      transform-origin: center;
-    }
-
-    .coin-yellow {
-      background: radial-gradient(circle, #fffde7 0%, #ffeb3b 45%, #fbc02d 100%);
-      color: #6d4c41;
-    }
-
-    .coin-blue {
-      background: radial-gradient(circle, #e3f2fd 0%, #64b5f6 45%, #1e88e5 100%);
-      color: #0d47a1;
-    }
-
-    .coin-neutral {
-      background: radial-gradient(circle, #fafafa 0%, #eeeeee 45%, #bdbdbd 100%);
-      color: #424242;
-    }
-
-    .coin::after {
-      content: "";
-      position: absolute;
-      width: 60%;
-      height: 60%;
-      border-radius: 50%;
-      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.9), transparent 60%);
-      pointer-events: none;
-    }
-
-    @keyframes coin-rain {
-      0% {
-        transform: translate(var(--coin-x, 0), -40px) scale(0.6) rotate(0deg);
-        opacity: 0;
-      }
-      20% { opacity: 1; }
-      70% {
-        transform: translate(var(--coin-x, 0), 40px) scale(1) rotate(260deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(var(--coin-x, 0), 65px) scale(0.9) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    .reward-close,
     .popup-close {
       border: none;
       background: var(--accent);
@@ -1025,92 +592,120 @@
       margin-top: 6px;
     }
 
-    .popup-title {
+    /* PANTALLA CELULARES Y CATEGORÍA FIRESTORE */
+
+    .back-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px 4px;
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .back-link {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .cellphones-title {
       font-size: 18px;
       font-weight: bold;
-      margin-bottom: 6px;
-      display: flex;
-      justify-content: center;
-      gap: 6px;
+      padding: 0 20px;
+      margin-top: 0;
     }
 
-    .popup-subtitle {
+    .cellphones-subtitle {
       font-size: 13px;
       color: var(--text-soft);
-      margin-bottom: 10px;
+      padding: 0 20px 10px;
     }
 
-    .coupons-list {
-      max-height: 220px;
-      overflow-y: auto;
-      text-align: left;
-      margin-bottom: 10px;
+    .cellphones-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      padding: 0 16px 20px;
     }
 
-    .coupon-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 6px;
-      border-radius: 10px;
-      background: rgba(0,0,0,0.02);
-      margin-bottom: 6px;
-    }
-
-    .coupon-logo {
-      width: 32px;
-      height: 22px;
-      border-radius: 6px;
-      border: 2px dashed rgba(0,0,0,0.35);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: bold;
-      background: #fff8e1;
-    }
-
-    .coupon-text { display: flex; flex-direction: column; gap: 1px; }
-
-    .coupon-brand { font-size: 13px; font-weight: bold; }
-
-    .coupon-desc { font-size: 12px; color: var(--text-soft); }
-
-    .coupon-empty { font-size: 13px; color: var(--text-soft); margin-bottom: 12px; }
-
-    /* Popup datos personales */
-
-    .profile-form {
+    .cell-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      overflow: hidden;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
+    }
+
+    .cell-img-wrap {
+      height: 160px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cell-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .cell-body {
+      padding: 10px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 13px;
+    }
+
+    .cell-name {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .cell-prices {
+      display: flex;
+      align-items: center;
       gap: 8px;
-      margin-top: 10px;
-      text-align: left;
-      font-size: 13px;
+      font-size: 14px;
     }
 
-    .profile-form label {
-      display: block;
+    .cell-price-old {
+      text-decoration: line-through;
+      color: #888;
     }
 
-    .profile-form input[type="text"],
-    .profile-form input[type="date"],
-    .profile-form input[type="tel"],
-    .profile-form input[type="email"] {
-      width: 100%;
-      padding: 6px 8px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-top: 2px;
-      font-size: 13px;
+    .cell-price-now {
+      color: #2e7d32;
+      font-weight: bold;
+      font-size: 15px;
     }
 
-    .profile-form input[type="file"] {
+    .cell-discount-pill {
       margin-top: 4px;
+      background: #fff3e0;
+      border-radius: 999px;
+      padding: 3px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-size: 12px;
+      color: #e65100;
     }
 
-    /* Popup detalle celular (ya existía) */
+    .cell-timer {
+      margin-top: 2px;
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    /* Popup detalle producto */
 
     .cell-detail-title {
       font-size: 16px;
@@ -1136,1854 +731,650 @@
       color: var(--text-main);
     }
 
-    /* CELULARES PANTALLA INTERNA */
-
-    .back-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 20px 4px;
-      font-size: 14px;
-      color: var(--text-soft);
-    }
-
-    .back-link {
-      background: none;
-      border: none;
-      color: var(--accent);
-      font-weight: bold;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 14px;
-      padding: 4px 0;
-    }
-
-    .cellphones-title {
-      margin: 4px 20px 12px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .cellphones-subtitle {
-      margin: 0 20px 14px;
-      font-size: 13px;
-      color: var(--text-soft);
-    }
-
-    .cellphones-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin: 0 20px 26px;
-    }
-
-    .cell-card {
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.14);
-      overflow: hidden;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .cell-img-wrap {
-      background: #fafafa;
-      padding: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cell-img-wrap img {
-      max-width: 100%;
-      max-height: 120px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .cell-body {
-      padding: 8px 10px 10px;
-      font-size: 13px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .cell-name { font-weight: bold; min-height: 34px; }
-
-    .cell-prices {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-    }
-
-    .cell-price-old {
-      font-size: 12px;
-      color: #888;
-      text-decoration: line-through;
-    }
-
-    .cell-price-now {
-      font-size: 15px;
-      font-weight: bold;
-      color: #2e7d32;
-    }
-
-    .cell-discount-pill {
-      margin-top: 2px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      color: #fff;
-      background: linear-gradient(135deg, #ff9800, #f57c00);
-      padding: 3px 7px;
-      border-radius: 999px;
-    }
-
-    .cell-timer {
-      margin-top: 4px;
-      font-size: 11px;
-      color: var(--accent);
-      font-weight: bold;
-    }
-
-    /* Referidos screen */
-
-    #referrals-screen {
-      padding: 16px 18px 26px;
-    }
-
-    .ref-title {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .ref-subtitle {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 12px;
-    }
-
-    .ref-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 12px 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-      margin-bottom: 12px;
-    }
-
-    .ref-label {
-      font-size: 12px;
-      margin-bottom: 4px;
-      color: var(--text-soft);
-    }
-
-    .ref-link-row {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .ref-link-input {
-      flex: 1;
-      padding: 6px 8px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 12px;
-    }
-
-    .ref-copy-btn {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: none;
-      background: var(--accent);
-      color: #fff;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .ref-wheel-wrapper {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .ref-mini-ruleta {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 30% 0%, rgba(255,255,255,0.35), transparent 55%),
-        radial-gradient(circle at 50% 120%, rgba(255,215,0,0.35), transparent 60%),
-        conic-gradient(#1b1b1b 0deg 45deg,#6d4c41 45deg 90deg,#1b1b1b 90deg 135deg,#6d4c41 135deg 180deg,#1b1b1b 180deg 225deg,#6d4c41 225deg 270deg,#1b1b1b 270deg 315deg,#6d4c41 315deg 360deg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: mini-spin 5s linear infinite;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.35);
-    }
-
-    .ref-mini-center {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      clip-path: polygon(15% 0%, 90% 10%, 100% 60%, 55% 100%, 0% 65%);
-      font-weight: 700;
-    }
-
-    /* Lightning popup */
-
-    .lightning-list {
-      list-style: none;
-      padding-left: 0;
-      text-align: left;
-      font-size: 13px;
-      margin: 0 0 10px;
-    }
-
-    .lightning-list li {
-      margin-bottom: 4px;
-    }
-
-    /* Animación ruleta principal */
-
-    @keyframes girar {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(1440deg); }
-    }
-
-    .spin { animation: girar 1.5s ease-out; }
-
     /* RESPONSIVE */
 
-    @media (min-width: 768px) {
-      header { padding-left: 24px; padding-right: 24px; }
-
+    @media (max-width: 900px) {
+      .home-top {
+        grid-template-columns: 1fr;
+      }
       .categorias {
-        max-width: 900px;
-        margin: 8px auto 40px;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 14px;
-      }
-
-      .categoria { transform: scale(1.08); }
-
-      .cat-img { height: 135px; }
-
-      .cellphones-grid {
-        max-width: 900px;
-        margin: 0 auto 26px;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-
-      .home-top {
-        max-width: 1100px;
-        margin: 18px auto 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
-
-    @media (max-width: 768px) {
-      .home-top {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .raffle-main {
-        flex-direction: row;
-      }
-      .raffle-tv-img {
-        height: 120px;
-        max-width: 45%;
-      }
-    }
-    /* ----------------------------- */
-/*  REORDENAR HOME SOLO EN MOBILE */
-/* ----------------------------- */
-@media (max-width: 768px) {
-
-  .home-top {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px;
-  }
-
-  /* Orden específico: ruleta → sorteo → ofertas → categorías → invitar */
-  .ruleta-container {
-    order: 1 !important;
-  }
-
-  /* Sorteo TV (primer card de la columna izquierda) */
-  .home-column:nth-child(1) .home-card:nth-child(1) {
-    order: 2 !important;
-  }
-
-  /* Ofertas (columna derecha) */
-  .home-column:nth-child(3) {
-    order: 3 !important;
-  }
-
-  /* Categorías */
-  .categorias {
-    order: 4 !important;
-  }
-
-  /* Invitar amigo (segunda card de la columna izquierda) */
-  .home-column:nth-child(1) .home-card:nth-child(2) {
-    order: 5 !important;
-  }
-}
-
   </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="login-screen">
-  <div class="login-card">
-    <div class="login-logo">
-      <div class="login-logo-icon">C</div>
-    </div>
-    <div class="login-title">Ingresá a Comodity</div>
-    <div class="login-subtitle">Girá la ruleta y acumulá saldo y cupones para tus compras.</div>
+  <!-- LOGIN -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="login-logo-icon">C</div>
+      </div>
+      <div class="login-title">Comodity</div>
+      <div class="login-subtitle">
+        Iniciá sesión para acceder a tus ruletas, premios y cupones.
+      </div>
 
-    <form id="login-form" class="login-form">
-      <div id="login-name-group">
-        <label for="login-name">Nombre</label>
-        <input id="login-name" type="text" placeholder="Ej: Javier Araujo" />
-      </div>
-      <div>
-        <label for="login-email">Email</label>
-        <input id="login-email" type="email" placeholder="tucorreo@example.com" required />
-      </div>
-      <div>
-        <label for="login-password">Contraseña</label>
-        <input id="login-password" type="password" placeholder="●●●●●●●●" required />
-      </div>
-      <button type="submit" class="login-button" id="login-submit-btn">Entrar</button>
-      <button type="button" class="login-button google" onclick="loginWithGoogle()">
-        Continuar con Google
+      <form id="login-form" class="login-form">
+        <div>
+          <label for="login-email">Email</label>
+          <input id="login-email" type="email" placeholder="tucorreo@ejemplo.com" />
+        </div>
+        <div>
+          <label for="login-pass">Contraseña</label>
+          <input id="login-pass" type="password" placeholder="********" />
+        </div>
+        <button type="submit" class="login-button">Entrar</button>
+      </form>
+
+      <button id="google-btn" class="login-button google">
+        Entrar con Google
       </button>
-    </form>
 
-    <div class="login-note">
-      <span id="login-mode-message">¿No tenés cuenta?</span>
-      <button type="button" id="toggle-login-mode" class="link-like">Crear cuenta</button>
+      <div class="login-note">
+        <span>Solo para uso interno de pruebas.</span>
+        <button class="link-like" id="skip-login">Saltar login</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- APP -->
-<div id="app">
-   <header>
-    <div class="header-left">
-      <div class="user-avatar" id="user-avatar">👤</div>
-      <div class="user-text">
-        <div id="user-name" class="user-name">Invitado</div>
-        <div class="user-balances">
-          <div class="badge-balance">
-            <span class="icon-badge">$</span>
-            <span class="label">Libre:</span>
-            <strong>$<span id="saldo-libre" class="value">0</span></strong>
-          </div>
-          <div class="badge-balance badge-lightning" onclick="openLightningInfo()">
-            <span class="icon-badge">⚡</span>
-            <span class="label">Lightning:</span>
-            <strong>$<span id="saldo-light" class="value">0</span></strong>
-          </div>
-          <div class="badge-balance badge-coupons" onclick="openCouponsPopup()">
-            <span class="icon-badge">🎟️</span>
-            <span class="label">Cupones:</span>
-            <strong><span id="cupones-count" class="value">0</span></strong>
+  <!-- APP PRINCIPAL -->
+  <div id="app">
+    <header>
+      <div class="header-left">
+        <div id="user-avatar" class="user-avatar">C</div>
+        <div class="user-text">
+          <div id="user-name" class="user-name">Usuario</div>
+          <div class="user-balances">
+            <div class="badge-balance">
+              <span class="label">Libre</span>
+              <span class="value" id="saldo-libre">$150</span>
+            </div>
+            <div class="badge-balance badge-lightning" id="open-lightning">
+              <span class="label">Lightning</span>
+              <span class="value" id="saldo-lightning">$80</span>
+            </div>
+            <div class="badge-balance badge-coupons" id="open-coupons">
+              <span class="label">Cupones</span>
+              <span class="value" id="cupones-count">2</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="header-right">
-      <div style="display:flex;align-items:center;gap:8px;">
-        <div class="logo-big">C</div>
-        <div class="title-text">Comodity</div>
+      <div class="header-right">
+        <button class="admin-link" onclick="window.location.href='admin.html'">Admin</button>
       </div>
+    </header>
 
-      <!-- BOTÓN ADMIN SIEMPRE VISIBLE -->
-<a id="admin-link" href="admin.html" class="admin-link">
-  Admin
-</a>
-
+    <!-- Menú usuario -->
+    <div id="user-menu" class="user-menu">
+      <div class="user-menu-item" id="open-profile">Mis datos</div>
+      <div class="user-menu-item" id="logout-btn">Cerrar sesión</div>
     </div>
-  </header>
 
-
-  <!-- Menú usuario -->
-  <div id="user-menu" class="user-menu">
-    <div class="user-menu-item" onclick="openProfileOverlay()">Datos personales</div>
-    <div class="user-menu-item" onclick="openReferralsScreen()">Invitar amigos</div>
-    <div class="user-menu-item" onclick="logout()">Cerrar sesión</div>
-  </div>
-
-  <main>
-    <!-- HOME -->
-    <div id="home-screen" class="screen active">
-
-      <div class="home-top">
-        <!-- Columna izquierda: sorteo + invitar -->
-        <div class="home-column">
-          <!-- Sorteo -->
-          <div class="home-card">
-            <h3 class="home-card-title">
-              Próximo sorteo <span>Smart TV TCL 50"</span>
-            </h3>
-            <div class="raffle-main">
-              <div class="raffle-text-block">
-                <div class="home-card-subtitle">
-                  Jugá a la ruleta todos los días y participá del sorteo.
-                </div>
-                <div class="raffle-date" id="raffle-date-label"></div>
-                <a href="#" class="raffle-conditions">Ver condiciones</a>
+    <main>
+      <!-- HOME -->
+      <div id="home-screen" class="screen active">
+        <div class="home-top">
+          <!-- Columna izquierda: sorteo TV -->
+          <div class="home-column">
+            <div class="home-card">
+              <div class="home-card-title">
+                Próximo sorteo <span>Smart TV TCL 50"</span>
               </div>
-              <img src="img/banner_tcl.jpg" alt="Smart TV TCL" class="raffle-tv-img">
-            </div>
-          </div>
-
-          <!-- Invitar amigo -->
-          <div class="home-card">
-            <h3 class="home-card-title">
-              Invitá a un amigo y ganen <span>8 tiradas gratis</span>
-            </h3>
-            <div class="invite-main">
               <div class="home-card-subtitle">
-                Compartí tu link. Cuando tu amigo se registre y juegue, los dos reciben tiradas extra.
+                Cada tirada en la ruleta suma chances para el sorteo.
               </div>
-              <button class="invite-btn" onclick="openReferralsScreen()">Invitar</button>
-              <div class="invite-bottom">
-                <div class="mini-wheel">
-                  <div class="mini-wheel-center">C</div>
+              <div class="raffle-main">
+                <div class="raffle-text-block">
+                  <p style="margin:0;font-size:13px;">
+                    Participás automáticamente con tu usuario de Comodity.
+                  </p>
+                  <div class="raffle-date" id="raffle-date-text">
+                    El sorteo es en 2 semanas 🎁
+                  </div>
                 </div>
-                <img src="img/banner_mujer1.jpg" alt="Usuario feliz" class="invite-woman">
+                <img src="img/tv.jpg" alt="Smart TV" class="raffle-tv-img">
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna central: ruleta -->
+          <div class="home-column">
+            <div class="ruleta-container">
+              <p class="ruleta-title">
+                Girá la ruleta para ganar saldo Lightning, saldo libre, descuentos y cupones especiales.
+              </p>
+              <div class="ruleta-wrapper">
+                <div class="ruleta" id="ruleta">
+                  <div class="pointer"></div>
+                  <div class="ruleta-center">
+                    <div class="logo-center">C</div>
+                  </div>
+
+                  <div class="ruleta-segment-icon seg-1 wheel-coin-yellow">L</div>
+                  <div class="ruleta-segment-icon seg-2 wheel-coin-blue">⚡</div>
+                  <div class="ruleta-segment-icon seg-3 wheel-percent">-30%</div>
+                  <div class="ruleta-segment-icon seg-4 wheel-coin-yellow">L</div>
+                  <div class="ruleta-segment-icon seg-5 wheel-coin-blue">⚡</div>
+                  <div class="ruleta-segment-icon seg-6 wheel-percent">-20%</div>
+                  <div class="ruleta-segment-icon seg-7 wheel-coin-yellow">L</div>
+                  <div class="ruleta-segment-icon seg-8 wheel-coin-blue">⚡</div>
+                </div>
+
+                <button id="btn-girar" class="btn-girar">Girar ruleta</button>
+                <div id="resultado"></div>
+                <div class="tiradas-info" id="tiradas-info"></div>
+                <div class="cooldown-info" id="cooldown-info"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha: ofertas fijas (demo) -->
+          <div class="home-column">
+            <div class="home-card">
+              <div class="home-card-title">Ofertas fugaces</div>
+              <div class="home-card-subtitle">
+                Ejemplos de ofertas que después vas a poder cargar desde el admin.
+              </div>
+
+              <div class="offers-list">
+                <div class="offer-item">
+                  <img src="img/pizza.jpg" class="offer-img" alt="Pizza">
+                  <div class="offer-info">
+                    <div class="offer-name">2x1 en PizzaRocket</div>
+                    <div class="offer-prices">
+                      <span class="old">$ 590</span>
+                      <span class="now">$ 320</span>
+                    </div>
+                    <div class="offer-timer">Termina en 16 h</div>
+                  </div>
+                </div>
+
+                <div class="offer-item">
+                  <img src="img/zapas.jpg" class="offer-img" alt="Zapatillas">
+                  <div class="offer-info">
+                    <div class="offer-name">Zapatillas running</div>
+                    <div class="offer-prices">
+                      <span class="old">$ 2.100</span>
+                      <span class="now">$ 899</span>
+                    </div>
+                    <div class="offer-timer">Termina en 30 h</div>
+                  </div>
+                </div>
+
+                <div class="offer-item">
+                  <img src="img/gym.jpg" class="offer-img" alt="Gym">
+                  <div class="offer-info">
+                    <div class="offer-name">Membresía Fiter 3 meses</div>
+                    <div class="offer-prices">
+                      <span class="old">$ 5.700</span>
+                      <span class="now">$ 3.870</span>
+                    </div>
+                    <div class="offer-timer">Termina en 70 h</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Columna centro: ruleta -->
-        <div class="ruleta-container">
-          <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
-          <div class="ruleta-wrapper">
-            <div class="ruleta" id="ruleta">
-              <div class="pointer"></div>
-              <div class="ruleta-center">
-                <div class="logo-center">C</div>
-              </div>
-
-              <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
-              <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
-              <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
-              <div class="ruleta-segment-icon wheel-coin-yellow seg-4">$</div>
-              <div class="ruleta-segment-icon wheel-percent     seg-5">%</div>
-              <div class="ruleta-segment-icon wheel-coin-blue   seg-6">$</div>
-              <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
-              <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
-            </div>
-
-            <button class="btn-girar" id="btn-girar" onclick="girarRuleta()">
-              Girar ruleta
-            </button>
+        <!-- CATEGORÍAS -->
+        <div class="categorias">
+          <div class="categoria" data-cat="muebles">
+            <div class="cat-bottom">Muebles y hogar</div>
           </div>
-          <p id="resultado"></p>
-          <p id="tiradas-info" class="tiradas-info">4 tiradas restantes</p>
-          <p id="cooldown-info" class="cooldown-info" style="display:none;">
-            Próxima recarga en <span id="cooldown-seconds">12:00:00</span>
-          </p>
-        </div>
-
-        <!-- Columna derecha: Ofertas -->
-        <div class="home-column">
-          <div class="home-card">
-            <h3 class="offers-title">Ofertas exclusivas de Comodity</h3>
-            <div class="offers-subtitle">
-              Descuentos temporales que solo encontrás jugando a la ruleta.
-            </div>
-            <div class="offers-list">
-              <!-- Zapatillas -->
-              <div class="offer-item">
-                <img src="img/banner_zapatillas.jpg" class="offer-img" alt="Zapatillas running">
-                <div class="offer-info">
-                  <div class="offer-name">Zapatillas de running</div>
-                  <div class="offer-prices">
-                    <span class="old">$ 2.000</span>
-                    <span class="now">$ 899</span>
-                  </div>
-                  <div class="offer-timer" data-seconds="86400"></div>
-                </div>
-              </div>
-              <!-- Auriculares -->
-              <div class="offer-item">
-                <img src="img/banner_auriculares.jpg" class="offer-img" alt="Auriculares inalámbricos">
-                <div class="offer-info">
-                  <div class="offer-name">Auriculares inalámbricos</div>
-                  <div class="offer-prices">
-                    <span class="old">$ 450</span>
-                    <span class="now">$ 179</span>
-                  </div>
-                  <div class="offer-timer" data-seconds="252000"></div> <!-- 70h -->
-                </div>
-              </div>
-              <!-- Fiter -->
-              <div class="offer-item">
-                <img src="img/banner_fiter.jpg" class="offer-img" alt="Membresía Fiter">
-                <div class="offer-info">
-                  <div class="offer-name">Membresía Fiter 3 meses</div>
-                  <div class="offer-prices">
-                    <span class="old">$ 1.900/mes</span>
-                    <span class="now">$ 1.290/mes</span>
-                  </div>
-                  <div class="offer-timer" data-seconds="108000"></div> <!-- 30h -->
-                </div>
-              </div>
-              <!-- Smart TV -->
-              <div class="offer-item">
-                <img src="img/banner_tcl.jpg" class="offer-img" alt="Smart TV TCL">
-                <div class="offer-info">
-                  <div class="offer-name">Smart TV TCL 50" oferta relámpago</div>
-                  <div class="offer-prices">
-                    <span class="old">$ 499</span>
-                    <span class="now">$ 325</span>
-                  </div>
-                  <div class="offer-timer" data-seconds="57600"></div> <!-- 16h -->
-                </div>
-              </div>
-            </div>
+          <div class="categoria" data-cat="deportes">
+            <div class="cat-bottom">Deportes y fitness</div>
+          </div>
+          <div class="categoria" data-cat="comida">
+            <div class="cat-bottom">Comida</div>
+          </div>
+          <div class="categoria" data-cat="electro">
+            <div class="cat-bottom">Electrodomésticos</div>
           </div>
         </div>
       </div>
 
-      <!-- CATEGORÍAS -->
-      <div class="categorias">
-        <div class="categoria" data-cat="commodities">
-          <div class="cat-img cat-img-comodities">
-            <div class="cat-discount-badge">hasta<br><span class="off">50% OFF</span></div>
-            <div class="cat-logo-comodity">C</div>
-          </div>
-          <div class="cat-bottom"><span>Commodities</span></div>
+      <!-- PANTALLA CELULARES (DEMO) -->
+      <div id="cellphones-screen" class="screen">
+        <div class="back-bar">
+          <button class="back-link" onclick="goToHome()">← Volver</button>
         </div>
-
-        <div class="categoria" data-cat="insumos">
-          <div class="cat-img cat-img-insumos">
-            <div class="cat-discount-badge">hasta<br><span class="off">35% OFF</span></div>
-          </div>
-          <div class="cat-bottom"><span>Insumos constructivos</span></div>
+        <div class="cellphones-title">Celulares en oferta</div>
+        <div class="cellphones-subtitle">
+          Ejemplo de pantalla fija de celulares. Más adelante también puede venir de Firestore.
         </div>
-
-        <div class="categoria" data-cat="celulares">
-          <div class="cat-img cat-img-cell">
-            <div class="cat-discount-badge">hasta<br><span class="off">40% OFF</span></div>
-          </div>
-          <div class="cat-bottom"><span>Celulares</span></div>
-        </div>
-
-        <div class="categoria" data-cat="electronica">
-          <div class="cat-img cat-img-electronica">
-            <div class="cat-discount-badge">hasta<br><span class="off">45% OFF</span></div>
-          </div>
-          <div class="cat-bottom"><span>Electrónica, audio y video</span></div>
-        </div>
-
-        <div class="categoria" data-cat="ropa">
-          <div class="cat-img cat-img-ropa">
-            <div class="cat-discount-badge">hasta<br><span class="off">30% OFF</span></div>
-          </div>
-          <div class="cat-bottom"><span>Ropa</span></div>
-        </div>
-
-        <div class="categoria" data-cat="experiencias">
-          <div class="cat-img cat-img-experiencias">
-            <div class="cat-discount-badge">hasta<br><span class="off">60% OFF</span></div>
-          </div>
-          <div class="cat-bottom"><span>Experiencias</span></div>
-        </div>
-
-        <div class="categoria" data-cat="imperdibles">
-          <div class="cat-img cat-img-imperdibles">
-            <div class="cat-discount-badge">hasta<br><span class="off">70% OFF</span></div>
-          </div>
-          <div class="cat-bottom"><span>Imperdibles &lt; $1000</span></div>
-        </div>
-
-        <div class="categoria" data-cat="hoteles">
-          <div class="cat-img cat-img-hoteles">
-            <div class="cat-discount-badge">hasta<br><span class="off">55% OFF</span></div>
-          </div>
-          <div class="cat-bottom"><span>Hoteles y viajes</span></div>
-        </div>
-
-        <div class="categoria" data-cat="muebles">
-          <div class="cat-img cat-img-muebles">
-            <div class="cat-discount-badge">hasta<br><span class="off">45% OFF</span></div>
-          </div>
-          <div class="cat-bottom"><span>Muebles y hogar</span></div>
-        </div>
-
-        <div class="categoria" data-cat="deportes">
-          <div class="cat-img cat-img-deportes">
-            <div class="cat-discount-badge">hasta<br><span class="off">40% OFF</span></div>
-          </div>
-          <div class="cat-bottom"><span>Deportes y fitness</span></div>
-        </div>
-
-        <div class="categoria" data-cat="comida">
-          <div class="cat-img cat-img-comida">
-            <div class="cat-discount-badge">hasta<br><span class="off">35% OFF</span></div>
-          </div>
-          <div class="cat-bottom"><span>Comida</span></div>
-        </div>
-
-        <div class="categoria" data-cat="electro">
-          <div class="cat-img cat-img-electro">
-            <div class="cat-discount-badge">hasta<br><span class="off">40% OFF</span></div>
-          </div>
-          <div class="cat-bottom"><span>Electrodomésticos</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pantalla Celulares -->
-    <div id="cellphones-screen" class="screen">
-      <div class="back-bar">
-        <button class="back-link" onclick="goToHome()">← Volver</button>
-      </div>
-      <div class="cellphones-title">Celulares en oferta</div>
-      <div class="cellphones-subtitle">
-        Ofertas con 20% OFF por tiempo limitado. El descuento termina al final del día.
-      </div>
-      <div class="cellphones-grid" id="cellphones-grid"></div>
-    </div>
-async function loadCategoryFromFirestore(catKey, catLabel) {
-  showScreen("category-screen");
-
-  const titleEl = document.getElementById("category-title");
-  const subEl   = document.getElementById("category-subtitle");
-  const grid    = document.getElementById("category-grid");
-
-  titleEl.textContent = catLabel;
-  subEl.textContent   = "Ofertas en " + catLabel + " cargadas desde el panel admin.";
-  grid.innerHTML      = "<p>Cargando publicaciones...</p>";
-
-  try {
-    const snap = await db
-      .collection("publicaciones")
-      .where("categoria", "==", catKey)
-      .orderBy("creadoEn", "desc")
-      .get();
-
-    if (snap.empty) {
-      grid.innerHTML = "<p style='padding:8px;'>Todavía no hay publicaciones para esta categoría.</p>";
-      return;
-    }
-
-    grid.innerHTML = "";
-
-    snap.forEach(doc => {
-      const d = doc.data();
-
-      const card = document.createElement("div");
-      card.className = "cell-card";
-
-      const precioAntes = d.precioAntes ? d.precioAntes.toLocaleString("es-UY") : null;
-      const precioDesp  = d.precioDespues ? d.precioDespues.toLocaleString("es-UY") : null;
-
-      card.innerHTML = `
-        <div class="cell-img-wrap">
-          <img src="${d.fotoUrl || "https://via.placeholder.com/200x200?text=Comodity"}" alt="${d.nombre || ""}">
-        </div>
-        <div class="cell-body">
-          <div class="cell-name">${d.nombre || ""}</div>
-          <div class="cell-prices">
-            ${precioAntes ? `<div class="cell-price-old">$${precioAntes}</div>` : ""}
-            ${precioDesp  ? `<div class="cell-price-now">$${precioDesp}</div>` : ""}
-          </div>
-          <div class="cell-discount-pill">
-            <span>🔥</span>
-            <span>${d.vendedor ? d.vendedor : "Comercio asociado"}</span>
-          </div>
-          <div class="cell-timer">
-            Restan aprox. ${d.horasRestantes || 24} h
-          </div>
-        </div>
-      `;
-
-      card.addEventListener("click", () => {
-        openCategoryDetail(d);
-      });
-
-      grid.appendChild(card);
-    });
-
-  } catch (err) {
-    console.error(err);
-    grid.innerHTML = "<p style='padding:8px;'>Error al cargar publicaciones.</p>";
-  }
-}
-
-function openCategoryDetail(d) {
-  const overlay = document.getElementById("cell-detail-overlay");
-  const tEl     = document.getElementById("cell-detail-title");
-  const imgEl   = document.getElementById("cell-detail-img");
-  const pricesEl= document.getElementById("cell-detail-prices");
-  const extraEl = document.getElementById("cell-detail-extra");
-
-  tEl.textContent = d.nombre || "";
-  imgEl.src = d.fotoUrl || "https://via.placeholder.com/400x300?text=Comodity";
-
-  const precioAntes = d.precioAntes ? d.precioAntes.toLocaleString("es-UY") : null;
-  const precioDesp  = d.precioDespues ? d.precioDespues.toLocaleString("es-UY") : null;
-
-  pricesEl.innerHTML = `
-    ${precioDesp ? `<div><strong>Precio actual:</strong> $${precioDesp}</div>` : ""}
-    ${precioAntes ? `<div>Antes: <span style="text-decoration:line-through;color:#888;">$${precioAntes}</span></div>` : ""}
-  `;
-
-  extraEl.innerHTML = `
-    <div><strong>Vendedor:</strong> ${d.vendedor || "Comercio asociado"}</div>
-    <div><strong>Descripción:</strong> ${d.descripcion || "Oferta especial de Comodity."}</div>
-    <div><strong>Duración:</strong> Aproximadamente ${d.horasRestantes || 24} horas desde su publicación.</div>
-  `;
-
-  overlay.style.display = "flex";
-}
-
-    <!-- Pantalla Referidos -->
-    <div id="referrals-screen" class="screen">
-      <div class="back-bar">
-        <button class="back-link" onclick="goToHome()">← Volver</button>
-      </div>
-      <div class="ref-title">Invitá amigos y ganen tiradas extra</div>
-      <div class="ref-subtitle">
-        Compartí tu link único. Cuando tus amigos se registran y juegan, ambos reciben 8 tiradas gratis.
+        <div class="cellphones-grid" id="cellphones-grid"></div>
       </div>
 
-      <div class="ref-card">
-        <div class="ref-label">Tu link de invitación</div>
-        <div class="ref-link-row">
-          <input id="ref-link-input" class="ref-link-input" readonly>
-          <button class="ref-copy-btn" onclick="copyReferralLink()">Copiar</button>
+      <!-- PANTALLA GENÉRICA DE CATEGORÍA (FIRESTORE) -->
+      <div id="category-screen" class="screen">
+        <div class="back-bar">
+          <button class="back-link" onclick="goToHome()">← Volver</button>
         </div>
-      </div>
-  <div id="category-screen" class="screen">
-      <div class="back-bar">
-        <button class="back-link" onclick="goToHome()">← Volver</button>
-      </div>
-      <div class="cellphones-title" id="category-title">Categoría</div>
-      <div class="cellphones-subtitle" id="category-subtitle">
-        Ofertas cargadas desde el panel admin.
-      </div>
-      <div class="cellphones-grid" id="category-grid"></div>
-    </div>
-      <div class="ref-card">
-        <div class="ref-label">Cómo funciona</div>
-        <div class="cell-detail-text">
-          1. Compartí tu link con amigos.<br>
-          2. Cuando se registran y juegan la ruleta, ambos reciben tiradas extra.<br>
-          3. Cuantos más amigos invites, más tiradas podés acumular.
-        </div>
+        <div id="category-title" class="cellphones-title"></div>
+        <div id="category-subtitle" class="cellphones-subtitle"></div>
+        <div id="category-grid" class="cellphones-grid"></div>
       </div>
 
-      <div class="ref-wheel-wrapper">
-        <div class="ref-mini-ruleta">
-          <div class="ref-mini-center">C</div>
+      <!-- PANTALLA REFERIDOS / DEMO -->
+      <div id="referrals-screen" class="screen">
+        <div class="back-bar">
+          <button class="back-link" onclick="goToHome()">← Volver</button>
+        </div>
+        <div class="cellphones-title">Invitá amigos</div>
+        <div class="cellphones-subtitle">
+          Más adelante acá podemos armar todo el flujo de referidos.
         </div>
       </div>
-    </div>
-  </main>
-</div>
-
-<!-- POPUPS -->
-
-<div id="reward-overlay" class="overlay">
-  <div class="popup">
-    <div id="reward-icon" class="reward-icon">💰</div>
-    <div id="reward-title" class="reward-title">¡Premio!</div>
-    <div id="reward-desc" class="reward-desc">Ganaste algo.</div>
-    <div id="reward-company" class="reward-company" style="display:none;">
-      <span id="reward-company-logo" class="company-logo">BR</span>
-      <span id="reward-company-text"></span>
-    </div>
-    <div id="reward-coins" class="reward-coins"></div>
-    <button class="reward-close" onclick="closeRewardPopup()">Aceptar</button>
+    </main>
   </div>
-</div>
 
-<div id="coupons-overlay" class="overlay">
-  <div class="popup">
-    <div class="popup-title"><span>🎟️</span><span>Mis cupones</span></div>
-    <div class="popup-subtitle">Cupones de descuento que ganaste en la ruleta.</div>
-    <div id="coupons-empty" class="coupon-empty">
-      Todavía no tenés cupones. Probá suerte girando la ruleta.
+  <!-- Popup detalle producto / celular -->
+  <div id="cell-detail-overlay" class="overlay">
+    <div class="popup" style="max-width:380px;">
+      <h3 id="cell-detail-title" class="cell-detail-title"></h3>
+      <img id="cell-detail-img" class="cell-detail-img" src="" alt="">
+      <div id="cell-detail-prices" class="cell-detail-text"></div>
+      <div id="cell-detail-extra" class="cell-detail-text"></div>
+      <button class="popup-close" onclick="closeCellDetail()">Cerrar</button>
     </div>
-    <div id="coupons-list" class="coupons-list"></div>
-    <button class="popup-close" onclick="closeCouponsPopup()">Cerrar</button>
   </div>
-</div>
 
-<div id="profile-overlay" class="overlay">
-  <div class="popup">
-    <div class="reward-title">Datos personales</div>
-    <form id="profile-form" class="profile-form">
-      <label>Nombre completo
-        <input type="text" id="profile-name" />
-      </label>
-      <label>Email
-        <input type="email" id="profile-email" />
-      </label>
-      <label>Dirección
-        <input type="text" id="profile-address" />
-      </label>
-      <label>Fecha de nacimiento
-        <input type="date" id="profile-birthdate" />
-      </label>
-      <label>Teléfono
-        <input type="tel" id="profile-phone" />
-      </label>
-      <label>Foto de perfil
-        <input type="file" id="profile-photo" accept="image/*" />
-      </label>
-      <button type="submit" class="reward-close">Guardar</button>
-      <button type="button" class="popup-close" onclick="closeProfileOverlay()">Cancelar</button>
-    </form>
-  </div>
-</div>
-
-<div id="cell-detail-overlay" class="overlay">
-  <div class="popup">
-    <div id="cell-detail-title" class="cell-detail-title"></div>
-    <img id="cell-detail-img" class="cell-detail-img" src="" alt="">
-    <div id="cell-detail-prices" class="cell-detail-text"></div>
-    <div id="cell-detail-extra" class="cell-detail-text"></div>
-    <button class="popup-close" onclick="closeCellDetail()">Cerrar</button>
-  </div>
-</div>
-
-<div id="lightning-overlay" class="overlay">
-  <div class="popup">
-    <div class="popup-title"><span>⚡</span><span>Saldo Lightning</span></div>
-    <div class="popup-subtitle">
-      Tu saldo lightning se usa en comercios asociados seleccionados dentro de Comodity.
+  <!-- Popup cupones -->
+  <div id="coupons-overlay" class="overlay">
+    <div class="popup">
+      <div class="popup-title">Cupones disponibles</div>
+      <div class="popup-subtitle">Ejemplo de listado de cupones del usuario.</div>
+      <div id="coupons-list" class="coupons-list">
+        <!-- se llena por JS -->
+      </div>
+      <button class="popup-close" onclick="closeCoupons()">Cerrar</button>
     </div>
-    <ul class="lightning-list">
-      <li><strong>MuebleBox</strong> – muebles y hogar.</li>
-      <li><strong>FerreBuceo</strong> – herramientas y ferretería.</li>
-      <li><strong>PizzaRocket</strong> – comida rápida seleccionada.</li>
-    </ul>
-    <button class="popup-close" onclick="closeLightningInfo()">Cerrar</button>
   </div>
-</div>
 
-<script>
-  let saldoLibre = 0;
-  let saldoLight = 0;
-  let cupones = [];
-  let tiradasRestantes = 4;
-  let countdownTimer = null;
-  let countdownSecondsRemaining = 0;
-  let isSpinning = false;
-  let audioCtx;
-  let currentUser = null;
-  let currentUserName = null;
+  <!-- Popup lightning (solo texto por ahora) -->
+  <div id="lightning-overlay" class="overlay">
+    <div class="popup">
+      <div class="popup-title">Saldo Lightning</div>
+      <div class="popup-subtitle">
+        Acá después podés explicar mejor cómo se usa el saldo Lightning.
+      </div>
+      <p style="font-size:13px;color:#555;">
+        Por ahora solo es demostrativo.
+      </p>
+      <button class="popup-close" onclick="closeLightning()">Cerrar</button>
+    </div>
+  </div>
 
-  let profileData = {
-    nombre: "",
-    email: "",
-    direccion: "",
-    fechaNacimiento: "",
-    telefono: "",
-    photoDataUrl: ""
-  };
+  <!-- Popup perfil -->
+  <div id="profile-overlay" class="overlay">
+    <div class="popup">
+      <div class="popup-title">Mis datos</div>
+      <div class="popup-subtitle">
+        Más adelante se puede guardar en Firestore / Realtime DB.
+      </div>
+      <div class="profile-form">
+        <label>Nombre completo
+          <input type="text" id="profile-name" />
+        </label>
+        <label>Teléfono
+          <input type="tel" id="profile-phone" />
+        </label>
+      </div>
+      <button class="popup-close" onclick="closeProfile()">Cerrar</button>
+    </div>
+  </div>
 
-  let isRegisterMode = false;
-  let cellIntervals = [];
-
-  const outcomes = [
-    { label: "Sin premio, suerte a la próxima 😢", type: "none", prob: 0.30 },
-    { label: "$25 saldo libre", type: "saldoLibre", amount: 25, prob: 0.20 },
-    { label: "$150 saldo libre", type: "saldoLibreJackpot", amount: 150, prob: 0.10 },
-    { label: "30% de descuento en PizzaRocket", type: "descuentoPizza", prob: 0.20 },
-    { label: "$80 saldo lightning para gastar en MuebleBox", type: "saldoLightMueble", amount: 80, prob: 0.10 },
-    { label: "$20 saldo lightning para gastar en FerreBuceo", amount: 20, type: "saldoLightFerre", prob: 0.10 }
-  ];
-
-  function applyUserHeader() {
-    const nameEl = document.getElementById("user-name");
-    const avatarEl = document.getElementById("user-avatar");
-    if (nameEl) nameEl.textContent = currentUserName || "Invitado";
-
-    if (avatarEl) {
-      if (profileData.photoDataUrl) {
-        avatarEl.style.backgroundImage = `url(${profileData.photoDataUrl})`;
-        avatarEl.textContent = "";
-      } else {
-        avatarEl.style.backgroundImage = "none";
-        const initial = currentUserName && currentUserName.trim()
-          ? currentUserName.trim().charAt(0).toUpperCase()
-          : "👤";
-        avatarEl.textContent = initial;
-      }
-    }
-  }
-
-  function getUserKey(suffix) {
-    if (!currentUser) return null;
-    return "comodity_" + suffix + "_" + currentUser.uid;
-  }
-
-  function saveStateForUser() {
-    const key = getUserKey("state");
-    if (!key) return;
-    const state = { saldoLibre, saldoLight, cupones, tiradasRestantes };
-    localStorage.setItem(key, JSON.stringify(state));
-  }
-
-  function saveProfileForUser() {
-    const key = getUserKey("profile");
-    if (!key) return;
-    const data = {
-      nombre: currentUserName,
-      email: profileData.email || "",
-      direccion: profileData.direccion || "",
-      fechaNacimiento: profileData.fechaNacimiento || "",
-      telefono: profileData.telefono || "",
-      photoDataUrl: profileData.photoDataUrl || ""
-    };
-    localStorage.setItem(key, JSON.stringify(data));
-  }
-
-  function loadUserData() {
-    if (!currentUser) return;
-
-    const stateKey = getUserKey("state");
-    saldoLibre = 0;
-    saldoLight = 0;
-    cupones = [];
-    tiradasRestantes = 4;
-
-    if (stateKey) {
-      const raw = localStorage.getItem(stateKey);
-      if (raw) {
-        try {
-          const s = JSON.parse(raw);
-          if (typeof s.saldoLibre === "number") saldoLibre = s.saldoLibre;
-          if (typeof s.saldoLight === "number") saldoLight = s.saldoLight;
-          if (Array.isArray(s.cupones)) cupones = s.cupones;
-          if (typeof s.tiradasRestantes === "number") tiradasRestantes = s.tiradasRestantes;
-        } catch {}
-      }
+  <script>
+    // Utilidades de pantallas
+    function showScreen(id) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
     }
 
-    const profileKey = getUserKey("profile");
-    profileData = { nombre: "", email: "", direccion: "", fechaNacimiento: "", telefono: "", photoDataUrl: "" };
-    if (profileKey) {
-      const rawP = localStorage.getItem(profileKey);
-      if (rawP) {
-        try {
-          const p = JSON.parse(rawP);
-          profileData.nombre = p.nombre || "";
-          profileData.email = p.email || "";
-          profileData.direccion = p.direccion || "";
-          profileData.fechaNacimiento = p.fechaNacimiento || "";
-          profileData.telefono = p.telefono || "";
-          profileData.photoDataUrl = p.photoDataUrl || "";
-          if (profileData.nombre) currentUserName = profileData.nombre;
-        } catch {}
-      }
+    function goToHome() {
+      showScreen("home-screen");
     }
 
-    applyUserHeader();
-    actualizarSaldos();
-    actualizarCuponesCount();
-    actualizarTiradas();
-  }
-  
-function handleUserLoggedIn(user, nameOverride) {
-  currentUser = user;
-  currentUserName = nameOverride || user.displayName || user.email;
-
-  applyUserHeader();
-
-  document.getElementById("login-screen").style.display = "none";
-  document.getElementById("app").style.display = "block";
-
-  loadUserData();
-  generateReferralLink();
-}
-
-
-
-
-
- function handleLoggedOut() {
-  currentUser = null;
-  currentUserName = null;
-  saldoLibre = 0;
-  saldoLight = 0;
-  cupones = [];
-  tiradasRestantes = 4;
-
-  document.getElementById("app").style.display = "none";
-  document.getElementById("login-screen").style.display = "flex";
-}
-
-
-  auth.onAuthStateChanged(function(user) {
-    if (user) {
-      handleUserLoggedIn(user);
-    } else {
-      handleLoggedOut();
+    function goToCellphones() {
+      showScreen("cellphones-screen");
     }
-  });
 
+    // LOGIN
 
+    const loginScreen  = document.getElementById("login-screen");
+    const appRoot      = document.getElementById("app");
+    const loginForm    = document.getElementById("login-form");
+    const googleBtn    = document.getElementById("google-btn");
+    const skipLoginBtn = document.getElementById("skip-login");
 
-  function toggleLoginMode() {
-    isRegisterMode = !isRegisterMode;
-    const nameGroup = document.getElementById("login-name-group");
-    const submitBtn = document.getElementById("login-submit-btn");
-    const msg = document.getElementById("login-mode-message");
-    const toggleBtn = document.getElementById("toggle-login-mode");
-
-    if (isRegisterMode) {
-      nameGroup.style.display = "block";
-      submitBtn.textContent = "Crear cuenta y entrar";
-      msg.textContent = "¿Ya tenés cuenta?";
-      toggleBtn.textContent = "Iniciar sesión";
-    } else {
-      nameGroup.style.display = "none";
-      submitBtn.textContent = "Entrar";
-      msg.textContent = "¿No tenés cuenta?";
-      toggleBtn.textContent = "Crear cuenta";
-    }
-  }
-
-  document.getElementById("toggle-login-mode").addEventListener("click", toggleLoginMode);
-
-  document.getElementById("login-form").addEventListener("submit", async function(e) {
-    e.preventDefault();
-    const name  = document.getElementById("login-name").value.trim();
-    const email = document.getElementById("login-email").value.trim();
-    const pass  = document.getElementById("login-password").value.trim();
-
-    if (isRegisterMode) {
-      if (!name || !email || !pass) {
-        alert("Completá nombre, email y contraseña para crear la cuenta.");
-        return;
-      }
-      try {
-        const credNew = await auth.createUserWithEmailAndPassword(email, pass);
-        await credNew.user.updateProfile({ displayName: name });
-        profileData.nombre = name;
-        profileData.email = email;
-        handleUserLoggedIn(credNew.user, name);
-        saveProfileForUser();
-      } catch (err2) {
-        alert("Error al crear usuario: " + err2.message);
-      }
-    } else {
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value.trim();
+      const pass  = document.getElementById("login-pass").value.trim();
       if (!email || !pass) {
         alert("Completá email y contraseña.");
         return;
       }
       try {
-        const cred = await auth.signInWithEmailAndPassword(email, pass);
-        handleUserLoggedIn(cred.user);
+        await auth.signInWithEmailAndPassword(email, pass);
       } catch (err) {
-        if (err.code === "auth/user-not-found") {
-          alert("Usuario no encontrado. Cambiá a 'Crear cuenta' para registrarte.");
-        } else if (err.code === "auth/wrong-password") {
-          alert("Contraseña incorrecta.");
-        } else {
-          alert("Error al iniciar sesión: " + err.message);
-        }
+        console.error(err);
+        alert("Error de login: " + err.message);
       }
-    }
-  });
-
-  async function loginWithGoogle() {
-    try {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      const result = await auth.signInWithPopup(provider);
-      const user = result.user;
-      handleUserLoggedIn(user, user.displayName || user.email);
-    } catch (err) {
-      console.error(err);
-      alert("Error al iniciar sesión con Google: " + err.message);
-    }
-  }
-
-  async function logout() {
-    try {
-      await auth.signOut();
-      document.getElementById("user-menu").style.display = "none";
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  function getAudioCtx() {
-    if (!window.AudioContext && !window.webkitAudioContext) return null;
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === "suspended") audioCtx.resume();
-    return audioCtx;
-  }
-
-  function playSpinSoundSequence() {
-    const ctx = getAudioCtx(); if (!ctx) return;
-    const now = ctx.currentTime;
-    for (let i = 0; i < 7; i++) {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = "triangle";
-      const start = now + i * 0.08;
-      const end   = start + 0.07;
-      const f1 = 600 + i * 80;
-      const f2 = f1 + 120;
-      osc.frequency.setValueAtTime(f1, start);
-      osc.frequency.linearRampToValueAtTime(f2, end);
-      gain.gain.setValueAtTime(0.0, start);
-      gain.gain.linearRampToValueAtTime(0.28, start + 0.02);
-      gain.gain.linearRampToValueAtTime(0.0, end);
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.start(start); osc.stop(end);
-    }
-  }
-
-  function playWinSound() {
-    const ctx = getAudioCtx(); if (!ctx) return;
-    const now = ctx.currentTime;
-    [523.25, 659.25, 783.99].forEach((f, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      const start = now + i * 0.03;
-      const end   = start + 0.35;
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(f, start);
-      gain.gain.setValueAtTime(0.0, start);
-      gain.gain.linearRampToValueAtTime(0.4, start + 0.05);
-      gain.gain.linearRampToValueAtTime(0.0, end);
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.start(start); osc.stop(end);
     });
-  }
 
-  function playJackpotSound() {
-    const ctx = getAudioCtx(); if (!ctx) return;
-    const now = ctx.currentTime;
-    [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      const start = now + i * 0.12;
-      const end   = start + 0.4;
-      osc.type = "square";
-      osc.frequency.setValueAtTime(f, start);
-      osc.frequency.linearRampToValueAtTime(f + 60, end);
-      gain.gain.setValueAtTime(0.0, start);
-      gain.gain.linearRampToValueAtTime(0.45, start + 0.05);
-      gain.gain.linearRampToValueAtTime(0.0, end);
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.start(start); osc.stop(end);
-    });
-  }
-
-  function playLoseSound() {
-    const ctx = getAudioCtx(); if (!ctx) return;
-    const now = ctx.currentTime;
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = "sawtooth";
-    osc.frequency.setValueAtTime(440, now);
-    osc.frequency.linearRampToValueAtTime(220, now + 0.5);
-    gain.gain.setValueAtTime(0.0, now);
-    gain.gain.linearRampToValueAtTime(0.3, now + 0.05);
-    gain.gain.linearRampToValueAtTime(0.0, now + 0.5);
-    osc.connect(gain); gain.connect(ctx.destination);
-    osc.start(now); osc.stop(now + 0.5);
-  }
-
-  function playCoinRainSound() {
-    const ctx = getAudioCtx();
-    if (!ctx) return;
-
-    const now = ctx.currentTime;
-
-    for (let i = 0; i < 8; i++) {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      const start = now + i * 0.05;
-      const end   = start + 0.25;
-
-      const baseFreq = 900 + Math.random() * 600;
-      osc.type = "triangle";
-      osc.frequency.setValueAtTime(baseFreq, start);
-      osc.frequency.exponentialRampToValueAtTime(baseFreq * 1.4, end);
-
-      gain.gain.setValueAtTime(0.0, start);
-      gain.gain.linearRampToValueAtTime(0.45, start + 0.03);
-      gain.gain.exponentialRampToValueAtTime(0.02, end);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.start(start);
-      osc.stop(end);
-    }
-  }
-
-  function getRandomOutcomeWeighted() {
-    const r = Math.random();
-    let acc = 0;
-    for (const o of outcomes) {
-      acc += o.prob;
-      if (r <= acc) return o;
-    }
-    return outcomes[outcomes.length - 1];
-  }
-
-  function actualizarSaldos() {
-    document.getElementById("saldo-libre").textContent  = saldoLibre;
-    document.getElementById("saldo-light").textContent  = saldoLight;
-    saveStateForUser();
-  }
-
-  function actualizarCuponesCount() {
-    document.getElementById("cupones-count").textContent = cupones.length;
-    saveStateForUser();
-  }
-
-  function actualizarTiradas() {
-    document.getElementById("tiradas-info").textContent =
-      tiradasRestantes + " tiradas restantes";
-    saveStateForUser();
-  }
-
-  function formatTime(seconds) {
-    const h = Math.floor(seconds / 3600);
-    const m = Math.floor((seconds % 3600) / 60);
-    const s = seconds % 60;
-    return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-  }
-
-  function startCountdown12h() {
-    const info  = document.getElementById("cooldown-info");
-    const label = document.getElementById("cooldown-seconds");
-    if (countdownTimer) clearInterval(countdownTimer);
-    countdownSecondsRemaining = 12 * 60 * 60;
-    info.style.display = "block";
-    label.textContent = formatTime(countdownSecondsRemaining);
-    countdownTimer = setInterval(() => {
-      countdownSecondsRemaining--;
-      if (countdownSecondsRemaining < 0) countdownSecondsRemaining = 0;
-      label.textContent = formatTime(countdownSecondsRemaining);
-      if (countdownSecondsRemaining <= 0) {
-        clearInterval(countdownTimer);
-        countdownTimer = null;
+    googleBtn.addEventListener("click", async () => {
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        await auth.signInWithPopup(provider);
+      } catch (err) {
+        console.error(err);
+        alert("Error con Google: " + err.message);
       }
-    }, 1000);
-  }
+    });
 
-  function stopCountdown() {
-    if (countdownTimer) clearInterval(countdownTimer);
-    countdownTimer = null;
-    document.getElementById("cooldown-info").style.display = "none";
-  }
+    skipLoginBtn.addEventListener("click", () => {
+      loginScreen.style.display = "none";
+      appRoot.style.display = "block";
+    });
 
-  function showRewardPopup(kind, outcome) {
-    const overlay      = document.getElementById("reward-overlay");
-    const iconEl       = document.getElementById("reward-icon");
-    const titleEl      = document.getElementById("reward-title");
-    const descEl       = document.getElementById("reward-desc");
-    const coinsEl      = document.getElementById("reward-coins");
-    const companyWrap  = document.getElementById("reward-company");
-    const companyLogo  = document.getElementById("reward-company-logo");
-    const companyText  = document.getElementById("reward-company-text");
-
-    let icon = "💰";
-    let title = "¡Premio!";
-    let coinClass = "coin-yellow";
-    let showCompany = false;
-
-    if (kind === "libre") {
-      icon = "💰"; title = "¡Saldo libre ganado!"; coinClass="coin-yellow";
-    } else if (kind === "jackpot") {
-      icon = "🏆"; title = "¡JACKPOT de saldo libre!"; coinClass="coin-yellow";
-    } else if (kind === "descuento") {
-      icon = "％"; title = "¡Descuento desbloqueado!"; coinClass="coin-neutral"; showCompany = true;
-      companyLogo.textContent = "PR";
-      companyLogo.className = "company-logo company-pizza";
-      companyText.textContent = "PizzaRocket";
-    } else if (kind === "lightning-mueble") {
-      icon = "⚡"; title = "Saldo lightning MuebleBox"; coinClass="coin-blue"; showCompany = true;
-      companyLogo.textContent = "MB";
-      companyLogo.className = "company-logo company-mueble";
-      companyText.textContent = "MuebleBox";
-    } else if (kind === "lightning-ferre") {
-      icon = "⚡"; title = "Saldo lightning FerreBuceo"; coinClass="coin-blue"; showCompany = true;
-      companyLogo.textContent = "FB";
-      companyLogo.className = "company-logo company-ferre";
-      companyText.textContent = "FerreBuceo";
-    }
-
-    iconEl.textContent = icon;
-    titleEl.textContent = title;
-    descEl.textContent  = outcome.label;
-    companyWrap.style.display = showCompany ? "inline-flex" : "none";
-
-    coinsEl.innerHTML = "";
-    const coinCount = 10;
-
-    for (let i = 0; i < coinCount; i++) {
-      const c = document.createElement("div");
-      c.className = "coin " + coinClass;
-      const offsetX = (Math.random() - 0.5) * 120;
-      c.style.setProperty("--coin-x", offsetX + "px");
-      const delay = Math.random() * 0.25;
-      c.style.animationDelay = delay + "s";
-      c.textContent = kind === "descuento"
-        ? "%"
-        : (kind.startsWith("lightning") ? "⚡" : "$");
-      coinsEl.appendChild(c);
-    }
-
-    overlay.style.display = "flex";
-
-    if (
-      kind === "libre" ||
-      kind === "jackpot" ||
-      kind === "lightning-mueble" ||
-      kind === "lightning-ferre"
-    ) {
-      playCoinRainSound();
-    }
-  }
-
-  function closeRewardPopup() {
-    document.getElementById("reward-overlay").style.display = "none";
-  }
-
-  function agregarCupon(coupon) {
-    cupones.push(coupon);
-    actualizarCuponesCount();
-  }
-
-  function openCouponsPopup() {
-    const overlay = document.getElementById("coupons-overlay");
-    const listEl  = document.getElementById("coupons-list");
-    const emptyEl = document.getElementById("coupons-empty");
-    listEl.innerHTML = "";
-    if (cupones.length === 0) {
-      emptyEl.style.display = "block";
-    } else {
-      emptyEl.style.display = "none";
-      cupones.forEach(c => {
-        const item = document.createElement("div");
-        item.className = "coupon-item";
-        item.innerHTML = `
-          <div class="coupon-logo">%</div>
-          <div class="coupon-text">
-            <div class="coupon-brand">${c.brand}</div>
-            <div class="coupon-desc">${c.description}</div>
-          </div>`;
-        listEl.appendChild(item);
-      });
-    }
-    overlay.style.display = "flex";
-  }
-
-  function closeCouponsPopup() {
-    document.getElementById("coupons-overlay").style.display = "none";
-  }
-
-  function girarRuleta() {
-    const ruleta    = document.getElementById("ruleta");
-    const resultado = document.getElementById("resultado");
-    const btn       = document.getElementById("btn-girar");
-    if (isSpinning) return;
-    isSpinning = true;
-
-    if (tiradasRestantes <= 0) {
-      tiradasRestantes = 4;
-      stopCountdown();
-    }
-    tiradasRestantes--;
-    actualizarTiradas();
-
-    resultado.innerText = "Girando...";
-    btn.disabled = true;
-
-    ruleta.classList.remove("spin");
-    void ruleta.offsetWidth;
-    ruleta.classList.add("spin");
-
-    playSpinSoundSequence();
-    const outcome = getRandomOutcomeWeighted();
-
-    setTimeout(() => {
-      resultado.innerText = "Resultado: " + outcome.label;
-
-      if (outcome.type === "saldoLibre" && outcome.amount) {
-        saldoLibre += outcome.amount;
-        actualizarSaldos();
-        playWinSound();
-        showRewardPopup("libre", outcome);
-      } else if (outcome.type === "saldoLibreJackpot" && outcome.amount) {
-        saldoLibre += outcome.amount;
-        actualizarSaldos();
-        playJackpotSound();
-        showRewardPopup("jackpot", outcome);
-      } else if ((outcome.type === "saldoLightMueble" || outcome.type === "saldoLightFerre") && outcome.amount) {
-        saldoLight += outcome.amount;
-        actualizarSaldos();
-        playWinSound();
-        if (outcome.type === "saldoLightMueble") {
-          showRewardPopup("lightning-mueble", outcome);
-        } else {
-          showRewardPopup("lightning-ferre", outcome);
-        }
-      } else if (outcome.type === "descuentoPizza") {
-        agregarCupon({ brand: "PizzaRocket", description: "30% de descuento en PizzaRocket" });
-        playWinSound();
-        showRewardPopup("descuento", outcome);
-      } else if (outcome.type === "none") {
-        playLoseSound();
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        loginScreen.style.display = "none";
+        appRoot.style.display     = "block";
+        document.getElementById("user-name").textContent = user.displayName || user.email || "Usuario";
+        document.getElementById("user-avatar").textContent = (user.displayName || user.email || "U")[0].toUpperCase();
       } else {
-        playWinSound();
+        // si no hay usuario, dejamos visible el login
+        loginScreen.style.display = "flex";
+        appRoot.style.display     = "none";
+      }
+    });
+
+    // Menú usuario
+    const userAvatarEl = document.getElementById("user-avatar");
+    const userMenuEl   = document.getElementById("user-menu");
+    const logoutBtn    = document.getElementById("logout-btn");
+    const openProfileBtn = document.getElementById("open-profile");
+
+    userAvatarEl.addEventListener("click", () => {
+      userMenuEl.style.display = (userMenuEl.style.display === "block") ? "none" : "block";
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!userMenuEl.contains(e.target) && e.target !== userAvatarEl) {
+        userMenuEl.style.display = "none";
+      }
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        await auth.signOut();
+      } catch (err) {
+        console.error(err);
+      }
+    });
+
+    // RULETA (versión simplificada, misma idea que antes)
+
+    const btnGirarEl     = document.getElementById("btn-girar");
+    const ruletaEl       = document.getElementById("ruleta");
+    const resultadoEl    = document.getElementById("resultado");
+    const tiradasInfoEl  = document.getElementById("tiradas-info");
+    const cooldownInfoEl = document.getElementById("cooldown-info");
+
+    let tiradasDisponibles = 3;
+    let enCooldown = false;
+    let ruletaGirando = false;
+
+    function actualizarTiradasUI() {
+      tiradasInfoEl.textContent = `Tiradas disponibles hoy: ${tiradasDisponibles}`;
+    }
+    actualizarTiradasUI();
+
+    function simularResultado(angle) {
+      // 8 segmentos (45° cada uno)
+      const adjusted = (360 - (angle % 360)) % 360;
+      const segment = Math.floor(adjusted / 45); // 0..7
+      const resultados = [
+        "Ganaste 100 Lightning ⚡",
+        "Ganaste 50 saldo libre 💸",
+        "Cupón 30% descuento 🎉",
+        "Ganaste 150 Lightning ⚡",
+        "Ganaste 80 saldo libre 💸",
+        "Cupón 20% descuento 🎉",
+        "Sin premio, pero sumás chance para la TV 📺",
+        "Ganaste 50 Lightning ⚡"
+      ];
+      return resultados[segment] || "Premio misterioso 👀";
+    }
+
+    btnGirarEl.addEventListener("click", () => {
+      if (ruletaGirando || enCooldown) return;
+
+      if (tiradasDisponibles <= 0) {
+        cooldownInfoEl.textContent = "Ya usaste todas las tiradas de hoy.";
+        return;
       }
 
-      if (tiradasRestantes <= 0) startCountdown12h();
+      ruletaGirando = true;
+      btnGirarEl.disabled = true;
+      resultadoEl.textContent = "";
 
-      btn.disabled = false;
-      isSpinning   = false;
-    }, 1500);
-  }
+      const vueltas = 6;
+      const destino = Math.random() * 360;
+      const totalAngle = vueltas * 360 + destino;
 
-  document.getElementById("user-avatar").addEventListener("click", function (e) {
-    e.stopPropagation();
-    const menu = document.getElementById("user-menu");
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
-  });
+      ruletaEl.style.transition = "transform 3.2s cubic-bezier(0.2, 0.9, 0.25, 1)";
+      ruletaEl.style.transform  = `rotate(${totalAngle}deg)`;
 
-  window.addEventListener("click", function(e) {
-    const menu = document.getElementById("user-menu");
-    if (!e.target.closest("#user-menu") && !e.target.closest("#user-avatar")) {
-      menu.style.display = "none";
-    }
-  });
+      setTimeout(() => {
+        ruletaGirando = false;
+        btnGirarEl.disabled = false;
+        tiradasDisponibles -= 1;
+        actualizarTiradasUI();
 
-  function openProfileOverlay() {
-    const menu = document.getElementById("user-menu");
-    menu.style.display = "none";
+        const mensaje = simularResultado(destino);
+        resultadoEl.textContent = mensaje;
 
-    document.getElementById("profile-name").value =
-      profileData.nombre || currentUserName || "";
-    document.getElementById("profile-email").value =
-      profileData.email || (currentUser ? currentUser.email : "");
-    document.getElementById("profile-address").value =
-      profileData.direccion || "";
-    document.getElementById("profile-birthdate").value =
-      profileData.fechaNacimiento || "";
-    document.getElementById("profile-phone").value =
-      profileData.telefono || "";
-
-    document.getElementById("profile-overlay").style.display = "flex";
-  }
-
-  function closeProfileOverlay() {
-    document.getElementById("profile-overlay").style.display = "none";
-  }
-
-  document.getElementById("profile-form").addEventListener("submit", async function(e) {
-    e.preventDefault();
-    const nombre = document.getElementById("profile-name").value.trim();
-    const email = document.getElementById("profile-email").value.trim();
-    const direccion = document.getElementById("profile-address").value.trim();
-    const fechaNac = document.getElementById("profile-birthdate").value;
-    const telefono = document.getElementById("profile-phone").value.trim();
-
-    if (nombre) {
-      currentUserName = nombre;
-      profileData.nombre = nombre;
-      if (currentUser) {
-        try {
-          await currentUser.updateProfile({ displayName: nombre });
-        } catch (e) {
-          console.error(e);
+        if (tiradasDisponibles <= 0) {
+          enCooldown = true;
+          cooldownInfoEl.textContent = "Mañana vas a tener nuevas tiradas.";
         }
+      }, 3300);
+    });
+
+    // CATEGORÍAS - clics
+
+    document.addEventListener("click", function(e) {
+      const cat = e.target.closest(".categoria");
+      if (!cat) return;
+
+      const type = cat.getAttribute("data-cat");
+      const labels = {
+        muebles: "Muebles y hogar",
+        deportes: "Deportes y fitness",
+        comida: "Comida",
+        electro: "Electrodomésticos",
+        celulares: "Celulares"
+      };
+
+      if (type === "celulares") {
+        goToCellphones();
+      } else {
+        loadCategoryFromFirestore(type, labels[type] || "Categoría");
+      }
+    });
+
+    // FIRESTORE: cargar publicaciones de categoría
+
+    async function loadCategoryFromFirestore(catKey, catLabel) {
+      showScreen("category-screen");
+
+      const titleEl = document.getElementById("category-title");
+      const subEl   = document.getElementById("category-subtitle");
+      const grid    = document.getElementById("category-grid");
+
+      titleEl.textContent = catLabel;
+      subEl.textContent   = "Ofertas en " + catLabel + " cargadas desde el panel admin.";
+      grid.innerHTML      = "<p>Cargando publicaciones...</p>";
+
+      try {
+        const snap = await db
+          .collection("publicaciones")
+          .where("categoria", "==", catKey)
+          .orderBy("creadoEn", "desc")
+          .get();
+
+        if (snap.empty) {
+          grid.innerHTML = "<p style='padding:8px;'>Todavía no hay publicaciones para esta categoría.</p>";
+          return;
+        }
+
+        grid.innerHTML = "";
+
+        snap.forEach(doc => {
+          const d = doc.data();
+
+          const card = document.createElement("div");
+          card.className = "cell-card";
+
+          const precioAntes = d.precioAntes != null
+            ? d.precioAntes.toLocaleString("es-UY")
+            : null;
+          const precioDesp  = d.precioDespues != null
+            ? d.precioDespues.toLocaleString("es-UY")
+            : null;
+
+          card.innerHTML = `
+            <div class="cell-img-wrap">
+              <img src="${d.fotoUrl || "https://via.placeholder.com/200x200?text=Comodity"}" alt="${d.nombre || ""}">
+            </div>
+            <div class="cell-body">
+              <div class="cell-name">${d.nombre || ""}</div>
+              <div class="cell-prices">
+                ${precioAntes ? `<div class="cell-price-old">$${precioAntes}</div>` : ""}
+                ${precioDesp  ? `<div class="cell-price-now">$${precioDesp}</div>` : ""}
+              </div>
+              <div class="cell-discount-pill">
+                <span>🔥</span>
+                <span>${d.vendedor || "Comercio asociado"}</span>
+              </div>
+              <div class="cell-timer">
+                Restan aprox. ${d.horasRestantes || 24} h
+              </div>
+            </div>
+          `;
+
+          card.addEventListener("click", () => {
+            openCategoryDetail(d);
+          });
+
+          grid.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error(err);
+        grid.innerHTML = "<p style='padding:8px;'>Error al cargar publicaciones.</p>";
       }
     }
 
-    profileData.email = email;
-    profileData.direccion = direccion;
-    profileData.fechaNacimiento = fechaNac;
-    profileData.telefono = telefono;
+    function openCategoryDetail(d) {
+      const overlay = document.getElementById("cell-detail-overlay");
+      const tEl     = document.getElementById("cell-detail-title");
+      const imgEl   = document.getElementById("cell-detail-img");
+      const pricesEl= document.getElementById("cell-detail-prices");
+      const extraEl = document.getElementById("cell-detail-extra");
 
-    applyUserHeader();
-    saveProfileForUser();
-    closeProfileOverlay();
-  });
+      tEl.textContent = d.nombre || "";
+      imgEl.src = d.fotoUrl || "https://via.placeholder.com/400x300?text=Comodity";
 
-  document.getElementById("profile-photo").addEventListener("change", function(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-      profileData.photoDataUrl = ev.target.result;
-      saveProfileForUser();
-      applyUserHeader();
-    };
-    reader.readAsDataURL(file);
-  });
+      const precioAntes = d.precioAntes != null
+        ? d.precioAntes.toLocaleString("es-UY")
+        : null;
+      const precioDesp  = d.precioDespues != null
+        ? d.precioDespues.toLocaleString("es-UY")
+        : null;
 
-  function showScreen(id) {
-    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-    const el = document.getElementById(id);
-    if (el) el.classList.add("active");
-  }
+      pricesEl.innerHTML = `
+        ${precioDesp ? `<div><strong>Precio actual:</strong> $${precioDesp}</div>` : ""}
+        ${precioAntes ? `<div>Antes: <span style="text-decoration:line-through;color:#888;">$${precioAntes}</span></div>` : ""}
+      `;
 
-  function goToHome() {
-    cellIntervals.forEach(i => clearInterval(i));
-    cellIntervals = [];
-    showScreen("home-screen");
-  }
+      extraEl.innerHTML = `
+        <div><strong>Vendedor:</strong> ${d.vendedor || "Comercio asociado"}</div>
+        <div><strong>Descripción:</strong> ${d.descripcion || "Oferta especial de Comodity."}</div>
+        <div><strong>Duración:</strong> Aproximadamente ${d.horasRestantes || 24} horas desde su publicación.</div>
+      `;
 
-  function goToCellphones() {
-    showScreen("cellphones-screen");
-    renderCellphones();
-  }
-
-  function openReferralsScreen() {
-    generateReferralLink();
-    showScreen("referrals-screen");
-  }
-
-  // Mapa clave interna -> texto para el título
-const CATEGORY_LABELS = {
-  commodities:  "Commodities",
-  insumos:      "Insumos constructivos",
-  celulares:    "Celulares",
-  electronica:  "Electrónica, audio y video",
-  ropa:         "Ropa",
-  experiencias: "Experiencias",
-  imperdibles:  "Imperdibles < $1000",
-  hoteles:      "Hoteles y viajes",
-  muebles:      "Muebles y hogar",
-  deportes:     "Deportes y fitness",
-  comida:       "Comida",
-  electro:      "Electrodomésticos"
-};
-
-document.addEventListener("click", function(e) {
-  const cat = e.target.closest(".categoria");
-  if (!cat) return;
-
-  const key = cat.getAttribute("data-cat");
-  if (!key) return;
-
-  // Celulares sigue usando la pantalla especial que ya tenés
-  if (key === "celulares") {
-    goToCellphones();
-    return;
-  }
-
-  const label = CATEGORY_LABELS[key] || key;
-  loadCategoryFromFirestore(key, label);   // 👈 AHORA SÍ LEE DE FIRESTORE
-});
-
-
-
-  const cellphones = [
-    {
-      id: "cell1",
-      name: "Samsung Galaxy S23 256GB",
-      img: "https://images.samsung.com/is/image/samsung/p6pim/latin/2302/gallery/latin-galaxy-s23-s911-sm-s911bzidgto-534859593?$650_519_PNG$",
-      priceNow: 29999
-    },
-    {
-      id: "cell2",
-      name: "iPhone 14 128GB",
-      img: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-blue-select-202209?wid=940&hei=1112&fmt=png-alpha&.v=1661027786801",
-      priceNow: 38999
-    },
-    {
-      id: "cell3",
-      name: "Xiaomi Redmi Note 13 Pro",
-      img: "https://i01.appmifile.com/webfile/globalimg/products/pc/redmi-note-13-pro-5g/specs01.png",
-      priceNow: 21999
-    },
-    {
-      id: "cell4",
-      name: "Motorola Edge 40 Neo",
-      img: "https://motorolaus.vtexassets.com/arquivos/ids/162093-800-auto?v=638293436464900000&width=800&height=auto&aspect=true",
-      priceNow: 18999
+      overlay.style.display = "flex";
     }
-  ];
 
-  function getOriginalPriceFromDiscount(nowPrice, discountPercent) {
-    return Math.round(nowPrice / (1 - discountPercent / 100));
-  }
+    function closeCellDetail() {
+      document.getElementById("cell-detail-overlay").style.display = "none";
+    }
 
-  function formatPrice(uy) {
-    return uy.toLocaleString("es-UY", { minimumFractionDigits: 0 });
-  }
+    // POPUPS cupones, lightning, perfil
 
-  function getEndOfDayTimestamp() {
-    const now = new Date();
-    const end = new Date(now);
-    end.setHours(23, 59, 59, 999);
-    return end.getTime();
-  }
+    const couponsOverlay   = document.getElementById("coupons-overlay");
+    const couponsListEl    = document.getElementById("coupons-list");
+    const openCouponsBadge = document.getElementById("open-coupons");
 
-  function renderCellphones() {
-    const grid = document.getElementById("cellphones-grid");
-    grid.innerHTML = "";
-    cellIntervals.forEach(i => clearInterval(i));
-    cellIntervals = [];
-
-    const deadline = getEndOfDayTimestamp();
-
-    cellphones.forEach(cell => {
-      const priceNow = cell.priceNow;
-      const priceOld = getOriginalPriceFromDiscount(priceNow, 20);
-
-      const card = document.createElement("div");
-      card.className = "cell-card";
-      card.setAttribute("data-id", cell.id);
-
-      card.innerHTML = `
-        <div class="cell-img-wrap">
-          <img src="${cell.img}" alt="${cell.name}">
+    openCouponsBadge.addEventListener("click", () => {
+      couponsListEl.innerHTML = `
+        <div class="coupon-item">
+          <div class="coupon-logo">PZ</div>
+          <div class="coupon-text">
+            <div class="coupon-brand">PizzaRocket</div>
+            <div class="coupon-desc">25% OFF en local o delivery.</div>
+          </div>
         </div>
-        <div class="cell-body">
-          <div class="cell-name">${cell.name}</div>
-          <div class="cell-prices">
-            <div class="cell-price-old">$${formatPrice(priceOld)}</div>
-            <div class="cell-price-now">$${formatPrice(priceNow)}</div>
-          </div>
-          <div class="cell-discount-pill">
-            <span>🔥</span><span>20% OFF hoy</span>
-          </div>
-          <div class="cell-timer" data-deadline="${deadline}">
-            --
+        <div class="coupon-item">
+          <div class="coupon-logo">MB</div>
+          <div class="coupon-text">
+            <div class="coupon-brand">MuebleBox</div>
+            <div class="coupon-desc">10% OFF en muebles seleccionados.</div>
           </div>
         </div>
       `;
-
-      card.addEventListener("click", () => {
-        openCellDetail(cell, priceOld);
-      });
-
-      grid.appendChild(card);
+      couponsOverlay.style.display = "flex";
     });
 
-    document.querySelectorAll(".cell-timer").forEach(timerEl => {
-      const dl = parseInt(timerEl.getAttribute("data-deadline"), 10);
-      const interval = setInterval(() => {
-        const now = Date.now();
-        let diff = Math.max(0, dl - now);
-        const h = Math.floor(diff / (1000 * 60 * 60));
-        diff %= (1000 * 60 * 60);
-        const m = Math.floor(diff / (1000 * 60));
-        diff %= (1000 * 60);
-        const s = Math.floor(diff / 1000);
-        timerEl.textContent = `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-      }, 1000);
-      cellIntervals.push(interval);
-    });
-  }
-
-  function openCellDetail(cell, priceOld) {
-    const overlay = document.getElementById("cell-detail-overlay");
-    const tEl = document.getElementById("cell-detail-title");
-    const imgEl = document.getElementById("cell-detail-img");
-    const pricesEl = document.getElementById("cell-detail-prices");
-    const extraEl = document.getElementById("cell-detail-extra");
-
-    tEl.textContent = cell.name;
-    imgEl.src = cell.img;
-
-    const nowPrice = cell.priceNow;
-    pricesEl.innerHTML = `
-      <div><strong>Precio actual:</strong> $${formatPrice(nowPrice)} (20% OFF)</div>
-      <div>Antes: <span style="text-decoration:line-through;color:#888;">$${formatPrice(priceOld)}</span></div>
-    `;
-
-    extraEl.innerHTML = `
-      <div><strong>Vendedor:</strong> Comodity Store Oficial</div>
-      <div><strong>Reputación:</strong> ★★★★☆ (4.8/5) • 1.250 ventas concretadas</div>
-      <div><strong>Ubicación:</strong> Montevideo, Uruguay</div>
-      <div><strong>Envío:</strong> Gratis en compras superiores a $2.000 • Llega entre 24 y 48 hs</div>
-      <div><strong>Medios de pago:</strong> Tarjetas de crédito, débito y billeteras digitales.</div>
-    `;
-
-    overlay.style.display = "flex";
-  }
-
-  function closeCellDetail() {
-    document.getElementById("cell-detail-overlay").style.display = "none";
-  }
-
-  function openLightningInfo() {
-    document.getElementById("lightning-overlay").style.display = "flex";
-  }
-
-  function closeLightningInfo() {
-    document.getElementById("lightning-overlay").style.display = "none";
-  }
-
-  function generateReferralLink() {
-    const input = document.getElementById("ref-link-input");
-    if (!input) return;
-    const base = window.location.origin || "https://comodity.app";
-    const uid = currentUser ? currentUser.uid : "demo";
-    input.value = base + "/invite?ref=" + uid;
-  }
-
-  function copyReferralLink() {
-    const input = document.getElementById("ref-link-input");
-    if (!input || !input.value) return;
-    input.select();
-    input.setSelectionRange(0, 99999);
-    document.execCommand("copy");
-    alert("Link copiado al portapapeles");
-  }
-
-  function initOfferCountdowns() {
-    document.querySelectorAll(".offer-timer").forEach(timerEl => {
-      let remaining = parseInt(timerEl.getAttribute("data-seconds"), 10);
-      if (isNaN(remaining) || remaining <= 0) remaining = 3600;
-      timerEl.textContent = formatTime(remaining);
-      const interval = setInterval(() => {
-        remaining--;
-        if (remaining < 0) remaining = 0;
-        timerEl.textContent = formatTime(remaining);
-        if (remaining === 0) clearInterval(interval);
-      }, 1000);
-    });
-  }
-
-  function initRaffleDate() {
-    const label = document.getElementById("raffle-date-label");
-    if (!label) return;
-    const now = new Date();
-    const draw = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
-    const opts = { day: "2-digit", month: "2-digit", year: "numeric" };
-    label.textContent = "Sorteo: " + draw.toLocaleDateString("es-UY", opts);
-  }
-
-  window.addEventListener("load", () => {
-    document.getElementById("login-name-group").style.display = "none";
-    initOfferCountdowns();
-    initRaffleDate();
-    generateReferralLink();
-  });
-  async function loadCategoryFromFirestore(catKey, catLabel) {
-  showScreen("category-screen");
-
-  const titleEl = document.getElementById("category-title");
-  const subEl   = document.getElementById("category-subtitle");
-  const grid    = document.getElementById("category-grid");
-
-  titleEl.textContent = catLabel;
-  subEl.textContent   = "Ofertas en " + catLabel + " cargadas desde el panel admin.";
-  grid.innerHTML      = "<p>Cargando publicaciones...</p>";
-
-  try {
-    const snap = await db
-      .collection("publicaciones")
-      .where("categoria", "==", catKey)   // debe coincidir con lo que escribís en el admin (comida, muebles, etc.)
-      .orderBy("creadoEn", "desc")
-      .get();
-
-    if (snap.empty) {
-      grid.innerHTML = "<p style='padding:8px;'>Todavía no hay publicaciones para esta categoría.</p>";
-      return;
+    function closeCoupons() {
+      couponsOverlay.style.display = "none";
     }
 
-    grid.innerHTML = "";
-
-    snap.forEach(doc => {
-      const d = doc.data();
-
-      const card = document.createElement("div");
-      card.className = "cell-card";
-
-      const precioAntes = d.precioAntes ? d.precioAntes.toLocaleString("es-UY") : null;
-      const precioDesp  = d.precioDespues ? d.precioDespues.toLocaleString("es-UY") : null;
-
-      card.innerHTML = `
-        <div class="cell-img-wrap">
-          <img src="${d.fotoUrl || "https://via.placeholder.com/200x200?text=Comodity"}" alt="${d.nombre || ""}">
-        </div>
-        <div class="cell-body">
-          <div class="cell-name">${d.nombre || ""}</div>
-          <div class="cell-prices">
-            ${precioAntes ? `<div class="cell-price-old">$${precioAntes}</div>` : ""}
-            ${precioDesp  ? `<div class="cell-price-now">$${precioDesp}</div>` : ""}
-          </div>
-          <div class="cell-discount-pill">
-            <span>🔥</span>
-            <span>${d.vendedor ? d.vendedor : "Comercio asociado"}</span>
-          </div>
-          <div class="cell-timer">
-            Restan aprox. ${d.horasRestantes || 24} h
-          </div>
-        </div>
-      `;
-
-      // Al hacer click, mostramos el popup de detalle reutilizando el que ya tenés
-      card.addEventListener("click", () => {
-        openCategoryDetail(d);
-      });
-
-      grid.appendChild(card);
+    const lightningOverlay = document.getElementById("lightning-overlay");
+    document.getElementById("open-lightning").addEventListener("click", () => {
+      lightningOverlay.style.display = "flex";
     });
 
-  } catch (err) {
-    console.error(err);
-    grid.innerHTML = "<p style='padding:8px;'>Error al cargar publicaciones.</p>";
-  }
-}
+    function closeLightning() {
+      lightningOverlay.style.display = "none";
+    }
 
-function openCategoryDetail(d) {
-  const overlay = document.getElementById("cell-detail-overlay");
-  const tEl     = document.getElementById("cell-detail-title");
-  const imgEl   = document.getElementById("cell-detail-img");
-  const pricesEl= document.getElementById("cell-detail-prices");
-  const extraEl = document.getElementById("cell-detail-extra");
+    const profileOverlay = document.getElementById("profile-overlay");
+    openProfileBtn.addEventListener("click", () => {
+      profileOverlay.style.display = "flex";
+      userMenuEl.style.display = "none";
+    });
 
-  tEl.textContent = d.nombre || "";
-  imgEl.src = d.fotoUrl || "https://via.placeholder.com/400x300?text=Comodity";
+    function closeProfile() {
+      profileOverlay.style.display = "none";
+    }
 
-  const precioAntes = d.precioAntes ? d.precioAntes.toLocaleString("es-UY") : null;
-  const precioDesp  = d.precioDespues ? d.precioDespues.toLocaleString("es-UY") : null;
-
-  pricesEl.innerHTML = `
-    ${precioDesp ? `<div><strong>Precio actual:</strong> $${precioDesp}</div>` : ""}
-    ${precioAntes ? `<div>Antes: <span style="text-decoration:line-through;color:#888;">$${precioAntes}</span></div>` : ""}
-  `;
-
-  extraEl.innerHTML = `
-    <div><strong>Vendedor:</strong> ${d.vendedor || "Comercio asociado"}</div>
-    <div><strong>Descripción:</strong> ${d.descripcion || "Oferta especial de Comodity."}</div>
-    <div><strong>Duración:</strong> Aproximadamente ${d.horasRestantes || 24} horas desde su publicación.</div>
-  `;
-
-  overlay.style.display = "flex";
-}
-
-</script>
-
+    // Exponer funciones que se usan en onclicks del HTML
+    window.goToHome          = goToHome;
+    window.goToCellphones    = goToCellphones;
+    window.closeCellDetail   = closeCellDetail;
+    window.closeCoupons      = closeCoupons;
+    window.closeLightning    = closeLightning;
+    window.closeProfile      = closeProfile;
+  </script>
 </body>
 </html>
