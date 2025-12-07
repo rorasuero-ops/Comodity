@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>Admin Comodity</title>
 
-  <!-- Firebase -->
+  <!-- Firebase compat -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
-  <!-- Tu config -->
   <script>
+    // Misma config que en tu index
     const firebaseConfig = {
       apiKey: "AIzaSyC7QcScbqc5dWL4WCatnemf_KGCaZtjCT4",
       authDomain: "comodity-9a7be.firebaseapp.com",
@@ -24,163 +22,164 @@
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
-    const db = firebase.firestore();
+
+    const ADMIN_EMAIL = "javier.araujo995@gmail.com";
+
+    window.addEventListener("load", () => {
+      const loadingEl     = document.getElementById("admin-loading");
+      const noAccessEl    = document.getElementById("admin-no-access");
+      const contentEl     = document.getElementById("admin-content");
+      const userEmailSpan = document.getElementById("admin-user-email");
+
+      auth.onAuthStateChanged(user => {
+        loadingEl.style.display = "none";
+
+        if (!user) {
+          // ❌ No logueado: NO redirigimos automáticamente, solo mostramos mensaje
+          noAccessEl.style.display = "block";
+          noAccessEl.innerHTML = `
+            No estás logueado.<br>
+            <a href="index.html">Volver a Comodity</a>
+          `;
+          contentEl.style.display = "none";
+          return;
+        }
+
+        if (user.email !== ADMIN_EMAIL) {
+          // ❌ Logueado pero no admin
+          noAccessEl.style.display = "block";
+          noAccessEl.innerHTML = `
+            No tenés permisos para ver esta página.<br>
+            <a href="index.html">Volver a Comodity</a>
+          `;
+          contentEl.style.display = "none";
+          return;
+        }
+
+        // ✅ Es el admin
+        userEmailSpan.textContent = user.email;
+        noAccessEl.style.display = "none";
+        contentEl.style.display = "block";
+      });
+    });
+
+    async function adminLogout() {
+      try {
+        await auth.signOut();
+        window.location.href = "index.html";
+      } catch (e) {
+        console.error(e);
+        alert("Error al cerrar sesión: " + e.message);
+      }
+    }
   </script>
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
       margin: 0;
+      background:#f5f5f5;
+      color:#222;
     }
-
-    header {
-      background: #f34336;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 20px;
-      font-weight: bold;
+    .admin-header {
+      background:#f44336;
+      color:#fff;
+      padding:12px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
-
-    .container {
-      max-width: 850px;
-      margin: 40px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    .admin-title {
+      font-size:18px;
+      font-weight:bold;
     }
-
-    h2 {
-      margin-top: 0;
-      color: #f34336;
+    .admin-main {
+      max-width:900px;
+      margin:20px auto;
+      background:#fff;
+      border-radius:12px;
+      padding:16px 18px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.15);
     }
-
+    .btn {
+      padding:6px 12px;
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      font-size:13px;
+      font-weight:bold;
+    }
+    .btn-logout {
+      background:#fff;
+      color:#f44336;
+    }
+    .small {
+      font-size:13px;
+      color:#555;
+    }
     label {
-      display: block;
-      font-weight: bold;
-      margin-top: 15px;
+      display:block;
+      margin:8px 0 4px;
+      font-size:13px;
     }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
+    input, textarea {
+      width:100%;
+      padding:6px 8px;
+      font-size:13px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      box-sizing:border-box;
     }
-
-    button {
-      background: #f34336;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      color: white;
-      font-size: 16px;
-      margin-top: 25px;
-      cursor: pointer;
-      width: 100%;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background: #d93c31;
-    }
-
-    #status {
-      margin-top: 20px;
-      font-weight: bold;
+    textarea {
+      resize:vertical;
+      min-height:60px;
     }
   </style>
 </head>
-
 <body>
 
-<header>
-  Panel Admin — Comodity
-  <button id="logout-btn" style="background:white;color:#f34336;padding:8px 12px;border-radius:6px;font-size:14px;font-weight:bold;border:none;cursor:pointer;">
-    Cerrar sesión
-  </button>
-</header>
+  <header class="admin-header">
+    <div class="admin-title">Panel Admin – Comodity</div>
+    <div class="small">
+      <span id="admin-user-email"></span>
+      &nbsp;|&nbsp;
+      <button class="btn btn-logout" onclick="adminLogout()">Cerrar sesión</button>
+    </div>
+  </header>
 
-<div class="container">
-  <h2>Cargar nueva publicación</h2>
+  <div id="admin-loading" class="admin-main">
+    Verificando sesión...
+  </div>
 
-  <form id="product-form">
+  <div id="admin-no-access" class="admin-main" style="display:none;"></div>
 
-    <label>Título del producto</label>
-    <input type="text" id="title" required>
+  <div id="admin-content" class="admin-main" style="display:none;">
+    <h2>Configurar promociones / premios</h2>
+    <p class="small">
+      Acá después podemos armar todo el CRUD de ofertas, probabilidad de premios, etc.
+    </p>
 
-    <label>Categoría</label>
-    <select id="category">
-      <option value="comodities">Commodities</option>
-      <option value="insumos">Insumos constructivos</option>
-      <option value="celulares">Celulares</option>
-      <option value="electro">Electrónica / TV</option>
-    </select>
+    <form id="admin-form">
+      <label>Nombre de la promo</label>
+      <input type="text" id="promo-name" placeholder="Ej: 30% en PizzaRocket" />
 
-    <label>Precio original (opcional)</label>
-    <input type="number" id="priceOriginal">
+      <label>Descripción</label>
+      <textarea id="promo-desc" placeholder="Detalle interno o texto que va a ver el usuario"></textarea>
 
-    <label>Precio oferta</label>
-    <input type="number" id="pricePromo" required>
+      <label>Categoría</label>
+      <input type="text" id="promo-category" placeholder="Ej: comida, electro, etc." />
 
-    <label>URL de imagen</label>
-    <input type="url" id="imageUrl" required>
+      <label>Descuento / monto</label>
+      <input type="text" id="promo-value" placeholder="Ej: 30% o $80" />
 
-    <label>Fecha límite (opcional)</label>
-    <input type="datetime-local" id="expiresAt">
+      <label>Probabilidad en ruleta (0 a 1)</label>
+      <input type="number" step="0.01" min="0" max="1" id="promo-prob" value="0.10" />
 
-    <button type="submit">Guardar publicación</button>
-  </form>
-
-  <div id="status"></div>
-</div>
-
-<script>
-  // proteger el admin
-  auth.onAuthStateChanged(user => {
-    if (!user || user.email !== "javier.araujo995@gmail.com") {
-      window.location.href = "index.html";
-    }
-  });
-
-  const form = document.getElementById("product-form");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const data = {
-      title: title.value,
-      category: category.value,
-      priceOriginal: Number(priceOriginal.value || 0),
-      pricePromo: Number(pricePromo.value),
-      imageUrl: imageUrl.value,
-      createdAt: new Date().toISOString(),
-      active: true
-    };
-
-    if (expiresAt.value) {
-      data.expiresAt = new Date(expiresAt.value).toISOString();
-    }
-
-    try {
-      await db.collection("products").add(data);
-      status.textContent = "✔ Publicación guardada correctamente.";
-      form.reset();
-    } catch (err) {
-      console.error(err);
-      status.textContent = "❌ Error al guardar.";
-    }
-  });
-
-  // logout
-  document.getElementById("logout-btn").onclick = () => auth.signOut();
-</script>
+      <button type="button" class="btn" style="margin-top:10px;background:#f44336;color:#fff;">
+        Guardar (simulado)
+      </button>
+    </form>
+  </div>
 
 </body>
 </html>
