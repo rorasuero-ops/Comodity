@@ -2003,20 +2003,19 @@
     actualizarTiradas();
   }
 
-   function handleUserLoggedIn(user, nameOverride) {
+function handleUserLoggedIn(user, nameOverride) {
   currentUser = user;
   currentUserName = nameOverride || user.displayName || user.email;
   applyUserHeader();
 
   const adminLink = document.getElementById("admin-link");
-  console.log("Usuario logueado:", user ? user.email : null);
-
   if (adminLink) {
-    console.log("Encontré admin-link, lo muestro");
-    // 🔧 DEBUG: mostrar SIEMPRE el botón Admin si hay usuario
-    adminLink.style.display = "inline-flex";
-  } else {
-    console.log("NO encontré el elemento admin-link en el DOM");
+    // Mostrar Admin solo para tu mail
+    if (user.email === "javier.araujo995@gmail.com") {
+      adminLink.style.display = "inline-flex";
+    } else {
+      adminLink.style.display = "none";
+    }
   }
 
   document.getElementById("login-screen").style.display = "none";
@@ -2025,6 +2024,7 @@
   loadUserData();
   generateReferralLink();
 }
+
 
 
 
