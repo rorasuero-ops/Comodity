@@ -1389,6 +1389,43 @@
         max-width: 45%;
       }
     }
+    /* ----------------------------- */
+/*  REORDENAR HOME SOLO EN MOBILE */
+/* ----------------------------- */
+@media (max-width: 768px) {
+
+  .home-top {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px;
+  }
+
+  /* Orden específico: ruleta → sorteo → ofertas → categorías → invitar */
+  .ruleta-container {
+    order: 1 !important;
+  }
+
+  /* Sorteo TV (primer card de la columna izquierda) */
+  .home-column:nth-child(1) .home-card:nth-child(1) {
+    order: 2 !important;
+  }
+
+  /* Ofertas (columna derecha) */
+  .home-column:nth-child(3) {
+    order: 3 !important;
+  }
+
+  /* Categorías */
+  .categorias {
+    order: 4 !important;
+  }
+
+  /* Invitar amigo (segunda card de la columna izquierda) */
+  .home-column:nth-child(1) .home-card:nth-child(2) {
+    order: 5 !important;
+  }
+}
+
   </style>
 </head>
 <body>
