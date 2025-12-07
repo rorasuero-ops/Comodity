@@ -2003,10 +2003,20 @@
     actualizarTiradas();
   }
 
-  function handleUserLoggedIn(user, nameOverride) {
+    function handleUserLoggedIn(user, nameOverride) {
     currentUser = user;
     currentUserName = nameOverride || user.displayName || user.email;
     applyUserHeader();
+
+    // 🔐 Mostrar / ocultar botón Admin según el email
+    const adminLink = document.getElementById("admin-link");
+    if (adminLink) {
+      if (user.email === "javier.araujo995@gmail.com") {
+        adminLink.style.display = "inline-flex";
+      } else {
+        adminLink.style.display = "none";
+      }
+    }
 
     document.getElementById("login-screen").style.display = "none";
     document.getElementById("app").style.display = "block";
@@ -2015,6 +2025,7 @@
     generateReferralLink();
   }
 
+
   function handleLoggedOut() {
     currentUser = null;
     currentUserName = null;
@@ -2022,39 +2033,26 @@
     saldoLight = 0;
     cupones = [];
     tiradasRestantes = 4;
+
+    // 🔐 Ocultar botón Admin siempre que se cierre sesión
+    const adminLink = document.getElementById("admin-link");
+    if (adminLink) {
+      adminLink.style.display = "none";
+    }
+
     document.getElementById("app").style.display = "none";
     document.getElementById("login-screen").style.display = "flex";
   }
 
-   auth.onAuthStateChanged(function(user) {
-    const adminLink = document.getElementById("admin-link");
 
+  auth.onAuthStateChanged(function(user) {
     if (user) {
-      // evitar re-inicializar si es el mismo usuario
-      if (currentUser && currentUser.uid === user.uid) {
-        // igual actualizamos visibilidad del admin
-        if (adminLink) {
-          adminLink.style.display =
-            user.email === "javier.araujo995@gmail.com" ? "inline-flex" : "none";
-        }
-        return;
-      }
-
       handleUserLoggedIn(user);
-
-      // mostrar/ocultar botón Admin según el email
-      if (adminLink) {
-        adminLink.style.display =
-          user.email === "javier.araujo995@gmail.com" ? "inline-flex" : "none";
-      }
     } else {
-      // usuario deslogueado → ocultar admin
-      if (adminLink) {
-        adminLink.style.display = "none";
-      }
       handleLoggedOut();
     }
   });
+
 
 
   function toggleLoginMode() {
