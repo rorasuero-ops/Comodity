@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Comodity</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+  <!-- Tu config -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC7QcScbqc5dWL4WCatnemf_KGCaZtjCT4",
+      authDomain: "comodity-9a7be.firebaseapp.com",
+      projectId: "comodity-9a7be",
+      storageBucket: "comodity-9a7be.firebasestorage.app",
+      messagingSenderId: "560121634288",
+      appId: "1:560121634288:web:e02bdad21bd4ee06255135",
+      measurementId: "G-PYNZCB10T0"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+    }
+
+    header {
+      background: #f34336;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #f34336;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    button {
+      background: #f34336;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      margin-top: 25px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #d93c31;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  Panel Admin — Comodity
+  <button id="logout-btn" style="background:white;color:#f34336;padding:8px 12px;border-radius:6px;font-size:14px;font-weight:bold;border:none;cursor:pointer;">
+    Cerrar sesión
+  </button>
+</header>
+
+<div class="container">
+  <h2>Cargar nueva publicación</h2>
+
+  <form id="product-form">
+
+    <label>Título del producto</label>
+    <input type="text" id="title" required>
+
+    <label>Categoría</label>
+    <select id="category">
+      <option value="comodities">Commodities</option>
+      <option value="insumos">Insumos constructivos</option>
+      <option value="celulares">Celulares</option>
+      <option value="electro">Electrónica / TV</option>
+    </select>
+
+    <label>Precio original (opcional)</label>
+    <input type="number" id="priceOriginal">
+
+    <label>Precio oferta</label>
+    <input type="number" id="pricePromo" required>
+
+    <label>URL de imagen</label>
+    <input type="url" id="imageUrl" required>
+
+    <label>Fecha límite (opcional)</label>
+    <input type="datetime-local" id="expiresAt">
+
+    <button type="submit">Guardar publicación</button>
+  </form>
+
+  <div id="status"></div>
+</div>
+
+<script>
+  // proteger el admin
+  auth.onAuthStateChanged(user => {
+    if (!user || user.email !== "javier.araujo995@gmail.com") {
+      window.location.href = "index.html";
+    }
+  });
+
+  const form = document.getElementById("product-form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      title: title.value,
+      category: category.value,
+      priceOriginal: Number(priceOriginal.value || 0),
+      pricePromo: Number(pricePromo.value),
+      imageUrl: imageUrl.value,
+      createdAt: new Date().toISOString(),
+      active: true
+    };
+
+    if (expiresAt.value) {
+      data.expiresAt = new Date(expiresAt.value).toISOString();
+    }
+
+    try {
+      await db.collection("products").add(data);
+      status.textContent = "✔ Publicación guardada correctamente.";
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      status.textContent = "❌ Error al guardar.";
+    }
+  });
+
+  // logout
+  document.getElementById("logout-btn").onclick = () => auth.signOut();
+</script>
+
+</body>
+</html>
