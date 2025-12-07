@@ -129,6 +129,11 @@
       cursor: pointer;
     }
 
+    .login-button.google {
+      margin-top: 10px;
+      background: #4285f4;
+    }
+
     .login-note {
       margin-top: 8px;
       font-size: 11px;
@@ -157,8 +162,6 @@
       display: none;
     }
 
-    /* HEADER */
-
     header {
       background: var(--primary);
       padding: 12px 16px;
@@ -178,8 +181,8 @@
     }
 
     .user-avatar {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: #fff;
       color: #000;
@@ -189,9 +192,9 @@
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
+      overflow: hidden;
       background-size: cover;
       background-position: center;
-      overflow: hidden;
     }
 
     .user-text {
@@ -216,32 +219,26 @@
     .badge-balance {
       background: rgba(255,255,255,0.16);
       border-radius: 999px;
-      padding: 3px 9px;
+      padding: 2px 8px;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       white-space: nowrap;
     }
 
-    .badge-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
+    .badge-balance strong {
+      font-weight: 700;
+      letter-spacing: .02em;
     }
 
-    .badge-label {
-      font-size: 10px;
+    .badge-balance .label {
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      font-weight: 700;
     }
 
-    .badge-value {
-      font-size: 13px;
-      font-weight: 700;
-    }
+    .icon-badge { font-size: 14px; }
 
-    .icon-badge { font-size: 13px; }
+    .badge-balance .value { font-weight: bold; }
 
     .badge-coupons {
       cursor: pointer;
@@ -250,7 +247,7 @@
 
     .badge-lightning {
       cursor: pointer;
-      border: 1px dashed rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.6);
     }
 
     .header-right {
@@ -279,7 +276,7 @@
       white-space: nowrap;
     }
 
-    /* MENÚ USUARIO */
+    /* Menú usuario */
 
     .user-menu {
       position: fixed;
@@ -292,7 +289,7 @@
       padding: 6px 0;
       display: none;
       z-index: 1100;
-      min-width: 190px;
+      min-width: 180px;
       font-size: 14px;
     }
 
@@ -305,8 +302,6 @@
       background: #f5f5f5;
     }
 
-    /* PANTALLAS PRINCIPALES */
-
     main {
       padding-bottom: 24px;
     }
@@ -314,53 +309,188 @@
     .screen { display: none; }
     .screen.active { display: block; }
 
-    /* RULETA + COLUMNAS */
+    /* ----- LAYOUT HOME TOP (banners + ruleta) ----- */
+
+    .home-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr) minmax(0, 1.2fr);
+      gap: 14px;
+      margin: 16px 16px 8px;
+    }
+
+    .home-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .home-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      padding: 12px 14px;
+    }
+
+    .home-card-title {
+      font-size: 16px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      color: #222;
+      letter-spacing: .01em;
+    }
+
+    .home-card-title span {
+      color: var(--primary);
+    }
+
+    .home-card-subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .raffle-main {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .raffle-text-block {
+      flex: 1;
+    }
+
+    .raffle-conditions {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: underline;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .raffle-tv-img {
+      flex: 0 0 50%;
+      max-width: 50%;
+      border-radius: 12px;
+      object-fit: cover;
+      height: 140px;
+    }
+
+    .raffle-date {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-top: 3px;
+    }
+
+    /* INVITAR AMIGO */
+
+    .invite-main {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .invite-btn {
+      margin-top: 4px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+
+    .invite-bottom {
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mini-wheel {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(255,255,255,0.35), transparent 55%),
+        radial-gradient(circle at 50% 120%, rgba(255,215,0,0.35), transparent 60%),
+        conic-gradient(
+          #1b1b1b 0deg 45deg,
+          #6d4c41 45deg 90deg,
+          #1b1b1b 90deg 135deg,
+          #6d4c41 135deg 180deg,
+          #1b1b1b 180deg 225deg,
+          #6d4c41 225deg 270deg,
+          #1b1b1b 270deg 315deg,
+          #6d4c41 315deg 360deg
+        );
+      box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+      animation: mini-spin 4s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mini-wheel-center {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #000;
+      clip-path: polygon(15% 0%, 90% 10%, 100% 60%, 55% 100%, 0% 65%);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+
+    @keyframes mini-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .invite-woman {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    /* RULETA CENTRAL */
 
     .ruleta-container {
       background: var(--card-bg);
-      margin: 20px;
-      padding: 18px 18px 20px;
+      padding: 16px 16px 18px;
       border-radius: 16px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    }
-
-    .ruleta-title {
-      font-size: 18px;
-      margin: 0 0 14px;
-      color: var(--text-soft);
-      text-align: center;
-    }
-
-    .ruleta-layout {
-      display: flex;
-      gap: 12px;
-      align-items: stretch;
-    }
-
-    .ruleta-left,
-    .ruleta-right {
-      flex: 1;
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 10px 10px 12px;
-      border: 1px solid #f0f0f0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      font-size: 13px;
-    }
-
-    .ruleta-main {
-      flex: 0 0 270px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-start;
+    }
+
+    .ruleta-title {
+      font-size: 17px;
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: var(--text-soft);
+      text-align: center;
+      font-weight: 600;
     }
 
     .ruleta-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 18px;
-      margin-top: 4px;
+      gap: 14px;
+      margin-top: 3px;
     }
 
     .ruleta {
@@ -385,6 +515,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: 6px;
     }
 
     .pointer {
@@ -394,15 +525,15 @@
       border-right: 14px solid transparent;
       border-bottom: 26px solid #fdd835;
       position: absolute;
-      top: -30px;
+      top: -32px;
       left: 50%;
       transform: translateX(-50%);
       filter: drop-shadow(0 2px 3px rgba(0,0,0,0.6));
     }
 
     .ruleta-center {
-      width: 78px;
-      height: 78px;
+      width: 82px;
+      height: 82px;
       border-radius: 50%;
       background: radial-gradient(circle, #fffde7 0%, #fbc02d 55%, #f57f17 100%);
       border: 3px solid #3e2723;
@@ -413,8 +544,8 @@
     }
 
     .logo-center {
-      width: 52px;
-      height: 52px;
+      width: 54px;
+      height: 54px;
       background: #ffffff;
       color: #000;
       font-size: 26px;
@@ -470,13 +601,13 @@
     .btn-girar {
       background: var(--accent);
       color: #fff;
-      padding: 13px 20px;
+      padding: 12px 20px;
       font-size: 18px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       width: 100%;
-      max-width: 280px;
+      max-width: 260px;
       font-weight: bold;
       box-shadow: 0 3px 8px rgba(0,0,0,0.2);
       margin-top: 4px;
@@ -485,14 +616,14 @@
     .btn-girar:disabled { opacity: 0.6; cursor: not-allowed; }
 
     #resultado {
-      margin-top: 12px;
-      font-size: 18px;
+      margin-top: 8px;
+      font-size: 16px;
       font-weight: bold;
       text-align: center;
     }
 
     .tiradas-info {
-      margin-top: 12px;
+      margin-top: 8px;
       text-align: center;
       font-size: 14px;
       color: var(--text-soft);
@@ -506,159 +637,78 @@
       font-weight: bold;
     }
 
-    /* COLUMNAS LATERALES */
+    /* BANNER OFERTAS DERECHA */
 
-    .sorteo-title {
-      font-weight: 700;
-      margin-bottom: 4px;
-      font-size: 14px;
+    .offers-title {
+      font-size: 16px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      color: #222;
     }
 
-    .sorteo-sub {
-      font-size: 12px;
-      color: var(--text-soft);
-      margin-bottom: 6px;
-    }
-
-    .sorteo-tv-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .sorteo-tv-img {
-      width: 70px;
-      height: 50px;
-      border-radius: 8px;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .sorteo-tv-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .sorteo-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: #ffe0b2;
-      border-radius: 999px;
-      padding: 3px 8px;
-      font-size: 11px;
-      margin-bottom: 4px;
-    }
-
-    .invite-card {
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px dashed #eee;
-    }
-
-    .invite-text {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .invite-small {
+    .offers-subtitle {
       font-size: 12px;
       color: var(--text-soft);
       margin-bottom: 8px;
     }
 
-    .btn-secondary {
-      border: none;
-      background: #fff4e5;
-      color: var(--accent);
-      font-weight: 700;
-      border-radius: 999px;
-      padding: 7px 14px;
-      font-size: 13px;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    }
-
-    /* Ofertas banner derecha */
-
-    .banner-offers-title {
-      font-weight: 700;
-      margin-bottom: 6px;
-      font-size: 14px;
-    }
-
-    .banner-offers-sub {
-      font-size: 12px;
-      color: var(--text-soft);
-      margin-bottom: 6px;
-    }
-
-    .banner-offers-list {
+    .offers-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .banner-offer-card {
+    .offer-item {
       display: flex;
       gap: 8px;
-      padding: 6px;
-      border-radius: 10px;
-      background: #fafafa;
       align-items: center;
+      background: #f7f7f7;
+      border-radius: 12px;
+      padding: 6px;
     }
 
-    .banner-offer-img-wrap {
-      width: 70px;
-      height: 56px;
-      border-radius: 8px;
-      overflow: hidden;
-      flex-shrink: 0;
-      background: #fff;
-    }
-
-    .banner-offer-img-wrap img {
-      width: 100%;
-      height: 100%;
+    .offer-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
       object-fit: cover;
+      flex-shrink: 0;
     }
 
-    .banner-offer-text {
+    .offer-info {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
       font-size: 12px;
     }
 
-    .banner-offer-name {
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .banner-offer-price {
-      display: flex;
-      align-items: baseline;
-      gap: 4px;
-      margin-bottom: 2px;
-    }
-
-    .banner-price-now {
+    .offer-name {
       font-weight: 700;
-      color: #2e7d32;
       font-size: 13px;
     }
 
-    .banner-price-old {
-      font-size: 11px;
-      color: #888;
-      text-decoration: line-through;
+    .offer-prices {
+      font-size: 12px;
     }
 
-    .banner-timer {
-      font-size: 11px;
+    .offer-prices span.old {
+      text-decoration: line-through;
+      color: #888;
+      margin-right: 4px;
+    }
+
+    .offer-prices span.now {
+      font-weight: 700;
+      color: #2e7d32;
+    }
+
+    .offer-timer {
+      margin-top: 4px;
+      font-family: "Roboto Mono", monospace;
+      font-size: 13px;
+      font-weight: 700;
       color: var(--accent);
-      font-weight: 600;
     }
 
     /* CATEGORÍAS */
@@ -667,7 +717,7 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
-      margin: 0 20px 30px;
+      margin: 8px 16px 30px;
     }
 
     .categoria {
@@ -694,62 +744,73 @@
 
     .cat-img-comodities {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0)),
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
         url("img/commodities.jpg");
     }
+
     .cat-img-insumos {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0)),
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
         url("img/insumos.jpg");
     }
+
     .cat-img-cell {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0)),
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
         url("img/cell.jpg");
     }
+
     .cat-img-electronica {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0)),
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
         url("img/tv.jpg");
     }
+
     .cat-img-ropa {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0)),
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
         url("img/ropa.jpg");
     }
+
     .cat-img-experiencias {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0)),
+        linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.0)),
         url("img/kart.jpg");
     }
+
     .cat-img-imperdibles {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0)),
-        url("img/imperdibles menos de 1000.jpg");
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
+        url("img/imperdibles.jpg");
     }
+
     .cat-img-hoteles {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0)),
-        url("img/Hoteles y viajes.jpg");
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
+        url("img/hoteles.jpg");
     }
+
     .cat-img-muebles {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0)),
-        url("img/muebles y articulos del hogar.jpg");
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
+        url("img/muebles.jpg");
     }
+
     .cat-img-deportes {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0)),
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
         url("img/deportes.jpg");
     }
+
     .cat-img-comida {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0)),
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
         url("img/comida.jpg");
     }
+
     .cat-img-electro {
       background-image:
-        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0)),
+        linear-gradient(120deg, rgba(0,0,0,0.45), rgba(0,0,0,0.0)),
         url("img/electrodomesticos.jpg");
     }
 
@@ -806,7 +867,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
-    /* OVERLAYS POPUPS */
+    /* OVERLAYS POPUPS GENERALES */
 
     .overlay {
       position: fixed;
@@ -1001,17 +1062,6 @@
 
     .coupon-empty { font-size: 13px; color: var(--text-soft); margin-bottom: 12px; }
 
-    /* Lightning info */
-
-    .lightning-list {
-      text-align: left;
-      font-size: 13px;
-      margin: 8px 0 4px;
-      padding-left: 18px;
-    }
-
-    .lightning-list li { margin-bottom: 4px; }
-
     /* Popup datos personales */
 
     .profile-form {
@@ -1029,7 +1079,8 @@
 
     .profile-form input[type="text"],
     .profile-form input[type="date"],
-    .profile-form input[type="tel"] {
+    .profile-form input[type="tel"],
+    .profile-form input[type="email"] {
       width: 100%;
       padding: 6px 8px;
       border-radius: 8px;
@@ -1043,7 +1094,33 @@
       font-size: 12px;
     }
 
-    /* CELULARES - PANTALLA INTERNA */
+    /* Popup detalle celular (ya existía) */
+
+    .cell-detail-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .cell-detail-img {
+      max-width: 90%;
+      max-height: 180px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .cell-detail-text {
+      text-align: left;
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .cell-detail-text strong {
+      color: var(--text-main);
+    }
+
+    /* CELULARES PANTALLA INTERNA */
 
     .back-bar {
       display: flex;
@@ -1119,10 +1196,7 @@
       gap: 4px;
     }
 
-    .cell-name {
-      font-weight: bold;
-      min-height: 34px;
-    }
+    .cell-name { font-weight: bold; min-height: 34px; }
 
     .cell-prices {
       display: flex;
@@ -1161,178 +1235,156 @@
       font-weight: bold;
     }
 
-    .cell-detail-title {
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 6px;
+    /* Referidos screen */
+
+    #referrals-screen {
+      padding: 16px 18px 26px;
     }
 
-    .cell-detail-img {
-      max-width: 90%;
-      max-height: 180px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
-
-    .cell-detail-text {
-      text-align: left;
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .cell-detail-text strong {
-      color: var(--text-main);
-    }
-
-    /* PANTALLA INVITAR */
-
-    .invite-container {
-      margin: 10px 20px 26px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 16px;
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .invite-left {
-      flex: 1 1 220px;
-      font-size: 13px;
-    }
-
-    .invite-right {
-      flex: 0 0 230px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .invite-title {
+    .ref-title {
       font-size: 20px;
       font-weight: 700;
       margin-bottom: 6px;
     }
 
-    .invite-text-main {
-      font-size: 14px;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .invite-benefit {
-      background: #fff4e5;
-      border-radius: 10px;
-      padding: 8px 10px;
+    .ref-subtitle {
       font-size: 13px;
-      margin-bottom: 10px;
-      border-left: 3px solid var(--accent);
+      color: var(--text-soft);
+      margin-bottom: 12px;
     }
 
-    .invite-link-block label {
+    .ref-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      margin-bottom: 12px;
+    }
+
+    .ref-label {
       font-size: 12px;
+      margin-bottom: 4px;
       color: var(--text-soft);
     }
 
-    .invite-link-row {
+    .ref-link-row {
       display: flex;
       gap: 6px;
-      margin-top: 4px;
+      align-items: center;
     }
 
-    .invite-link-row input {
+    .ref-link-input {
       flex: 1;
       padding: 6px 8px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid #ccc;
       font-size: 12px;
     }
 
-    .btn-copy {
+    .ref-copy-btn {
+      padding: 6px 10px;
+      border-radius: 999px;
       border: none;
       background: var(--accent);
       color: #fff;
       font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 8px;
       cursor: pointer;
     }
 
-    .invite-note {
-      margin-top: 8px;
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .invite-ruleta-wrapper {
+    .ref-wheel-wrapper {
+      margin-top: 10px;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
+      justify-content: center;
     }
 
-    .invite-ruleta {
-      width: 180px;
-      height: 180px;
-      animation: girarLento 12s linear infinite;
+    .ref-mini-ruleta {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(255,255,255,0.35), transparent 55%),
+        radial-gradient(circle at 50% 120%, rgba(255,215,0,0.35), transparent 60%),
+        conic-gradient(#1b1b1b 0deg 45deg,#6d4c41 45deg 90deg,#1b1b1b 90deg 135deg,#6d4c41 135deg 180deg,#1b1b1b 180deg 225deg,#6d4c41 225deg 270deg,#1b1b1b 270deg 315deg,#6d4c41 315deg 360deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: mini-spin 5s linear infinite;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.35);
     }
+
+    .ref-mini-center {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      clip-path: polygon(15% 0%, 90% 10%, 100% 60%, 55% 100%, 0% 65%);
+      font-weight: 700;
+    }
+
+    /* Lightning popup */
+
+    .lightning-list {
+      list-style: none;
+      padding-left: 0;
+      text-align: left;
+      font-size: 13px;
+      margin: 0 0 10px;
+    }
+
+    .lightning-list li {
+      margin-bottom: 4px;
+    }
+
+    /* Animación ruleta principal */
 
     @keyframes girar {
       from { transform: rotate(0deg); }
       to   { transform: rotate(1440deg); }
     }
 
-    @keyframes girarLento {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
     .spin { animation: girar 1.5s ease-out; }
 
     /* RESPONSIVE */
 
-    @media (max-width: 767px) {
-      .ruleta-layout {
-        flex-direction: column;
-      }
-      .ruleta-main {
-        order: -1;
-        align-self: center;
-      }
-      .ruleta-container {
-        margin: 12px;
-      }
-      .categorias {
-        margin: 0 12px 26px;
-      }
-      .invite-container {
-        margin: 10px 12px 26px;
-      }
-    }
-
     @media (min-width: 768px) {
       header { padding-left: 24px; padding-right: 24px; }
-      .ruleta-container { max-width: 980px; margin: 24px auto 20px; }
+
       .categorias {
         max-width: 900px;
-        margin: 0 auto 40px;
+        margin: 8px auto 40px;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 14px;
       }
-      .categoria {
-        transform: scale(1.1);
-      }
+
+      .categoria { transform: scale(1.08); }
+
       .cat-img { height: 135px; }
+
       .cellphones-grid {
         max-width: 900px;
         margin: 0 auto 26px;
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
-      .invite-container {
-        max-width: 900px;
-        margin: 10px auto 26px;
+
+      .home-top {
+        max-width: 1100px;
+        margin: 18px auto 10px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .home-top {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .raffle-main {
+        flex-direction: row;
+      }
+      .raffle-tv-img {
+        height: 120px;
+        max-width: 45%;
       }
     }
   </style>
@@ -1362,11 +1414,7 @@
         <input id="login-password" type="password" placeholder="●●●●●●●●" required />
       </div>
       <button type="submit" class="login-button" id="login-submit-btn">Entrar</button>
-      <button
-        type="button"
-        class="login-button"
-        style="margin-top:10px;background:#4285F4"
-        onclick="loginWithGoogle()">
+      <button type="button" class="login-button google" onclick="loginWithGoogle()">
         Continuar con Google
       </button>
     </form>
@@ -1388,24 +1436,18 @@
         <div class="user-balances">
           <div class="badge-balance">
             <span class="icon-badge">$</span>
-            <div class="badge-text">
-              <div class="badge-label">Saldo libre</div>
-              <div class="badge-value">$<span id="saldo-libre" class="value">0</span></div>
-            </div>
+            <span class="label">Libre:</span>
+            <strong>$<span id="saldo-libre" class="value">0</span></strong>
           </div>
-          <div class="badge-balance badge-lightning" id="badge-lightning">
+          <div class="badge-balance badge-lightning" onclick="openLightningInfo()">
             <span class="icon-badge">⚡</span>
-            <div class="badge-text">
-              <div class="badge-label">Lightning</div>
-              <div class="badge-value">$<span id="saldo-light" class="value">0</span></div>
-            </div>
+            <span class="label">Lightning:</span>
+            <strong>$<span id="saldo-light" class="value">0</span></strong>
           </div>
           <div class="badge-balance badge-coupons" onclick="openCouponsPopup()">
             <span class="icon-badge">🎟️</span>
-            <div class="badge-text">
-              <div class="badge-label">Cupones</div>
-              <div class="badge-value"><span id="cupones-count" class="value">0</span></div>
-            </div>
+            <span class="label">Cupones:</span>
+            <strong><span id="cupones-count" class="value">0</span></strong>
           </div>
         </div>
       </div>
@@ -1422,81 +1464,141 @@
   <!-- Menú usuario -->
   <div id="user-menu" class="user-menu">
     <div class="user-menu-item" onclick="openProfileOverlay()">Datos personales</div>
-    <div class="user-menu-item" onclick="openInvitePage()">Invitar amigos</div>
+    <div class="user-menu-item" onclick="openReferralsScreen()">Invitar amigos</div>
     <div class="user-menu-item" onclick="logout()">Cerrar sesión</div>
   </div>
 
   <main>
     <!-- HOME -->
     <div id="home-screen" class="screen active">
-      <div class="ruleta-container">
-        <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
 
-        <div class="ruleta-layout">
-          <!-- Izquierda: sorteo + invitar -->
-          <div class="ruleta-left">
-            <div class="sorteo-title">🎁 Próximo sorteo Smart TV TCL 50"</div>
-            <div class="sorteo-sub">Participás automáticamente girando la ruleta todos los días.</div>
-
-            <div class="sorteo-tv-box">
-              <div class="sorteo-tv-img">
-                <img src="img/banner_tcl.jpg" alt="Smart TV TCL">
-              </div>
-              <div>
-                <div class="sorteo-pill">
-                  <span>📆</span><span>Cada 2 semanas</span>
+      <div class="home-top">
+        <!-- Columna izquierda: sorteo + invitar -->
+        <div class="home-column">
+          <!-- Sorteo -->
+          <div class="home-card">
+            <h3 class="home-card-title">
+              Próximo sorteo <span>Smart TV TCL 50"</span>
+            </h3>
+            <div class="raffle-main">
+              <div class="raffle-text-block">
+                <div class="home-card-subtitle">
+                  Jugá a la ruleta todos los días y participá del sorteo.
                 </div>
-                <div style="font-size:12px;color:var(--text-soft);">
-                  Cuantas más tiradas hagas, más chances tenés de ganar.
-                </div>
+                <div class="raffle-date" id="raffle-date-label"></div>
+                <a href="#" class="raffle-conditions">Ver condiciones</a>
               </div>
-            </div>
-
-            <div class="invite-card">
-              <div class="invite-text">Invitá a un amigo y ambos ganan 8 tiradas gratis</div>
-              <div class="invite-small">
-                Compartí tu link personal y cuando tu amigo se registre, los dos reciben tiradas extra.
-              </div>
-              <button class="btn-secondary" onclick="openInvitePage()">Invitar amigos</button>
+              <img src="img/banner_tcl.jpg" alt="Smart TV TCL" class="raffle-tv-img">
             </div>
           </div>
 
-          <!-- Centro: ruleta -->
-          <div class="ruleta-main">
-            <div class="ruleta-wrapper">
-              <div class="ruleta" id="ruleta">
-                <div class="pointer"></div>
-                <div class="ruleta-center">
-                  <div class="logo-center">C</div>
+          <!-- Invitar amigo -->
+          <div class="home-card">
+            <h3 class="home-card-title">
+              Invitá a un amigo y ganen <span>8 tiradas gratis</span>
+            </h3>
+            <div class="invite-main">
+              <div class="home-card-subtitle">
+                Compartí tu link. Cuando tu amigo se registre y juegue, los dos reciben tiradas extra.
+              </div>
+              <button class="invite-btn" onclick="openReferralsScreen()">Invitar</button>
+              <div class="invite-bottom">
+                <div class="mini-wheel">
+                  <div class="mini-wheel-center">C</div>
                 </div>
+                <img src="img/invite_woman.jpg" alt="Usuario feliz" class="invite-woman">
+              </div>
+            </div>
+          </div>
+        </div>
 
-                <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
-                <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
-                <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
-                <div class="ruleta-segment-icon wheel-coin-yellow seg-4">$</div>
-                <div class="ruleta-segment-icon wheel-percent     seg-5">%</div>
-                <div class="ruleta-segment-icon wheel-coin-blue   seg-6">$</div>
-                <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
-                <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
+        <!-- Columna centro: ruleta -->
+        <div class="ruleta-container">
+          <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
+          <div class="ruleta-wrapper">
+            <div class="ruleta" id="ruleta">
+              <div class="pointer"></div>
+              <div class="ruleta-center">
+                <div class="logo-center">C</div>
               </div>
 
-              <button class="btn-girar" id="btn-girar" onclick="girarRuleta()">
-                Girar ruleta
-              </button>
+              <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
+              <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
+              <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
+              <div class="ruleta-segment-icon wheel-coin-yellow seg-4">$</div>
+              <div class="ruleta-segment-icon wheel-percent     seg-5">%</div>
+              <div class="ruleta-segment-icon wheel-coin-blue   seg-6">$</div>
+              <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
+              <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
             </div>
-            <p id="resultado"></p>
-            <p id="tiradas-info" class="tiradas-info">4 tiradas restantes</p>
-            <p id="cooldown-info" class="cooldown-info" style="display:none;">
-              Próxima recarga en <span id="cooldown-seconds">12:00:00</span>
-            </p>
-          </div>
 
-          <!-- Derecha: ofertas exclusivas -->
-          <div class="ruleta-right">
-            <div class="banner-offers-title">🔥 Ofertas exclusivas de Comodity</div>
-            <div class="banner-offers-sub">Stock limitado, cada oferta tiene su propio contador.</div>
-            <div id="banner-offers" class="banner-offers-list">
-              <!-- se llena por JS -->
+            <button class="btn-girar" id="btn-girar" onclick="girarRuleta()">
+              Girar ruleta
+            </button>
+          </div>
+          <p id="resultado"></p>
+          <p id="tiradas-info" class="tiradas-info">4 tiradas restantes</p>
+          <p id="cooldown-info" class="cooldown-info" style="display:none;">
+            Próxima recarga en <span id="cooldown-seconds">12:00:00</span>
+          </p>
+        </div>
+
+        <!-- Columna derecha: Ofertas -->
+        <div class="home-column">
+          <div class="home-card">
+            <h3 class="offers-title">Ofertas exclusivas de Comodity</h3>
+            <div class="offers-subtitle">
+              Descuentos temporales que solo encontrás jugando a la ruleta.
+            </div>
+            <div class="offers-list">
+              <!-- Zapatillas -->
+              <div class="offer-item">
+                <img src="img/banner_zapatillas.jpg" class="offer-img" alt="Zapatillas running">
+                <div class="offer-info">
+                  <div class="offer-name">Zapatillas de running</div>
+                  <div class="offer-prices">
+                    <span class="old">$ 2.000</span>
+                    <span class="now">$ 899</span>
+                  </div>
+                  <div class="offer-timer" data-seconds="86400"></div>
+                </div>
+              </div>
+              <!-- Auriculares -->
+              <div class="offer-item">
+                <img src="img/banner_auriculares.jpg" class="offer-img" alt="Auriculares inalámbricos">
+                <div class="offer-info">
+                  <div class="offer-name">Auriculares inalámbricos</div>
+                  <div class="offer-prices">
+                    <span class="old">$ 450</span>
+                    <span class="now">$ 179</span>
+                  </div>
+                  <div class="offer-timer" data-seconds="252000"></div> <!-- 70h -->
+                </div>
+              </div>
+              <!-- Fiter -->
+              <div class="offer-item">
+                <img src="img/banner_fiter.jpg" class="offer-img" alt="Membresía Fiter">
+                <div class="offer-info">
+                  <div class="offer-name">Membresía Fiter 3 meses</div>
+                  <div class="offer-prices">
+                    <span class="old">$ 1.900/mes</span>
+                    <span class="now">$ 1.290/mes</span>
+                  </div>
+                  <div class="offer-timer" data-seconds="108000"></div> <!-- 30h -->
+                </div>
+              </div>
+              <!-- Smart TV -->
+              <div class="offer-item">
+                <img src="img/banner_tcl.jpg" class="offer-img" alt="Smart TV TCL">
+                <div class="offer-info">
+                  <div class="offer-name">Smart TV TCL 50" oferta relámpago</div>
+                  <div class="offer-prices">
+                    <span class="old">$ 499</span>
+                    <span class="now">$ 325</span>
+                  </div>
+                  <div class="offer-timer" data-seconds="57600"></div> <!-- 16h -->
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1506,9 +1608,7 @@
       <div class="categorias">
         <div class="categoria" data-cat="commodities">
           <div class="cat-img cat-img-comodities">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">50% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">50% OFF</span></div>
             <div class="cat-logo-comodity">C</div>
           </div>
           <div class="cat-bottom"><span>Commodities</span></div>
@@ -1516,106 +1616,84 @@
 
         <div class="categoria" data-cat="insumos">
           <div class="cat-img cat-img-insumos">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">35% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">35% OFF</span></div>
           </div>
           <div class="cat-bottom"><span>Insumos constructivos</span></div>
         </div>
 
         <div class="categoria" data-cat="celulares">
           <div class="cat-img cat-img-cell">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">40% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">40% OFF</span></div>
           </div>
           <div class="cat-bottom"><span>Celulares</span></div>
         </div>
 
         <div class="categoria" data-cat="electronica">
           <div class="cat-img cat-img-electronica">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">45% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">45% OFF</span></div>
           </div>
           <div class="cat-bottom"><span>Electrónica, audio y video</span></div>
         </div>
 
         <div class="categoria" data-cat="ropa">
           <div class="cat-img cat-img-ropa">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">30% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">30% OFF</span></div>
           </div>
           <div class="cat-bottom"><span>Ropa</span></div>
         </div>
 
         <div class="categoria" data-cat="experiencias">
           <div class="cat-img cat-img-experiencias">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">60% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">60% OFF</span></div>
           </div>
           <div class="cat-bottom"><span>Experiencias</span></div>
         </div>
 
         <div class="categoria" data-cat="imperdibles">
           <div class="cat-img cat-img-imperdibles">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">70% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">70% OFF</span></div>
           </div>
           <div class="cat-bottom"><span>Imperdibles &lt; $1000</span></div>
         </div>
 
         <div class="categoria" data-cat="hoteles">
           <div class="cat-img cat-img-hoteles">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">55% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">55% OFF</span></div>
           </div>
           <div class="cat-bottom"><span>Hoteles y viajes</span></div>
         </div>
 
         <div class="categoria" data-cat="muebles">
           <div class="cat-img cat-img-muebles">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">45% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">45% OFF</span></div>
           </div>
           <div class="cat-bottom"><span>Muebles y hogar</span></div>
         </div>
 
         <div class="categoria" data-cat="deportes">
           <div class="cat-img cat-img-deportes">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">40% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">40% OFF</span></div>
           </div>
           <div class="cat-bottom"><span>Deportes y fitness</span></div>
         </div>
 
         <div class="categoria" data-cat="comida">
           <div class="cat-img cat-img-comida">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">35% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">35% OFF</span></div>
           </div>
           <div class="cat-bottom"><span>Comida</span></div>
         </div>
 
         <div class="categoria" data-cat="electro">
           <div class="cat-img cat-img-electro">
-            <div class="cat-discount-badge">
-              hasta<br><span class="off">40% OFF</span>
-            </div>
+            <div class="cat-discount-badge">hasta<br><span class="off">40% OFF</span></div>
           </div>
           <div class="cat-bottom"><span>Electrodomésticos</span></div>
         </div>
       </div>
     </div>
 
-    <!-- CELULARES -->
+    <!-- Pantalla Celulares -->
     <div id="cellphones-screen" class="screen">
       <div class="back-bar">
         <button class="back-link" onclick="goToHome()">← Volver</button>
@@ -1627,59 +1705,44 @@
       <div class="cellphones-grid" id="cellphones-grid"></div>
     </div>
 
-    <!-- INVITAR -->
-    <div id="invite-screen" class="screen">
+    <!-- Pantalla Referidos -->
+    <div id="referrals-screen" class="screen">
       <div class="back-bar">
         <button class="back-link" onclick="goToHome()">← Volver</button>
       </div>
-      <div class="invite-container">
-        <div class="invite-left">
-          <div class="invite-title">Invitá a tus amigos</div>
-          <div class="invite-text-main">
-            Cuando un amigo se registra con tu link y gira la ruleta, ustedes dos reciben
-            <strong>8 tiradas gratis</strong> para seguir sumando saldo y cupones.
-          </div>
-          <div class="invite-benefit">
-            🎉 Por cada amigo nuevo que se activa: <strong>+8 tiradas para vos y +8 para él.</strong>
-          </div>
-          <div class="invite-link-block">
-            <label for="referral-link">Tu link de invitación</label>
-            <div class="invite-link-row">
-              <input id="referral-link" type="text" readonly value="">
-              <button class="btn-copy" onclick="copyReferral()">Copiar</button>
-            </div>
-          </div>
-          <div class="invite-note">
-            Compartilo por WhatsApp, redes o email. Podés invitar a todos los que quieras.
-          </div>
+      <div class="ref-title">Invitá amigos y ganen tiradas extra</div>
+      <div class="ref-subtitle">
+        Compartí tu link único. Cuando tus amigos se registran y juegan, ambos reciben 8 tiradas gratis.
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-label">Tu link de invitación</div>
+        <div class="ref-link-row">
+          <input id="ref-link-input" class="ref-link-input" readonly>
+          <button class="ref-copy-btn" onclick="copyReferralLink()">Copiar</button>
         </div>
-        <div class="invite-right">
-          <div class="invite-ruleta-wrapper">
-            <div class="ruleta invite-ruleta">
-              <div class="pointer"></div>
-              <div class="ruleta-center">
-                <div class="logo-center">C</div>
-              </div>
-              <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
-              <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
-              <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
-              <div class="ruleta-segment-icon wheel-coin-yellow seg-4">$</div>
-              <div class="ruleta-segment-icon wheel-percent     seg-5">%</div>
-              <div class="ruleta-segment-icon wheel-coin-blue   seg-6">$</div>
-              <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
-              <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
-            </div>
-            <div style="font-size:12px;color:var(--text-soft);text-align:center;">
-              Ruleta decorativa, solo para mostrar la experiencia Comodity.
-            </div>
-          </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-label">Cómo funciona</div>
+        <div class="cell-detail-text">
+          1. Compartí tu link con amigos.<br>
+          2. Cuando se registran y juegan la ruleta, ambos reciben tiradas extra.<br>
+          3. Cuantos más amigos invites, más tiradas podés acumular.
+        </div>
+      </div>
+
+      <div class="ref-wheel-wrapper">
+        <div class="ref-mini-ruleta">
+          <div class="ref-mini-center">C</div>
         </div>
       </div>
     </div>
   </main>
 </div>
 
-<!-- POPUP RECOMPENSAS -->
+<!-- POPUPS -->
+
 <div id="reward-overlay" class="overlay">
   <div class="popup">
     <div id="reward-icon" class="reward-icon">💰</div>
@@ -1694,15 +1757,10 @@
   </div>
 </div>
 
-<!-- POPUP CUPONES -->
 <div id="coupons-overlay" class="overlay">
   <div class="popup">
-    <div class="popup-title">
-      <span>🎟️</span><span>Mis cupones</span>
-    </div>
-    <div class="popup-subtitle">
-      Cupones de descuento que ganaste en la ruleta.
-    </div>
+    <div class="popup-title"><span>🎟️</span><span>Mis cupones</span></div>
+    <div class="popup-subtitle">Cupones de descuento que ganaste en la ruleta.</div>
     <div id="coupons-empty" class="coupon-empty">
       Todavía no tenés cupones. Probá suerte girando la ruleta.
     </div>
@@ -1711,13 +1769,15 @@
   </div>
 </div>
 
-<!-- POPUP DATOS PERSONALES -->
 <div id="profile-overlay" class="overlay">
   <div class="popup">
     <div class="reward-title">Datos personales</div>
     <form id="profile-form" class="profile-form">
       <label>Nombre completo
         <input type="text" id="profile-name" />
+      </label>
+      <label>Email
+        <input type="email" id="profile-email" />
       </label>
       <label>Dirección
         <input type="text" id="profile-address" />
@@ -1729,7 +1789,7 @@
         <input type="tel" id="profile-phone" />
       </label>
       <label>Foto de perfil
-        <input type="file" id="profile-image" accept="image/*" />
+        <input type="file" id="profile-photo" accept="image/*" />
       </label>
       <button type="submit" class="reward-close">Guardar</button>
       <button type="button" class="popup-close" onclick="closeProfileOverlay()">Cancelar</button>
@@ -1737,7 +1797,6 @@
   </div>
 </div>
 
-<!-- POPUP DETALLE CELULAR -->
 <div id="cell-detail-overlay" class="overlay">
   <div class="popup">
     <div id="cell-detail-title" class="cell-detail-title"></div>
@@ -1748,26 +1807,22 @@
   </div>
 </div>
 
-<!-- POPUP LIGHTNING -->
 <div id="lightning-overlay" class="overlay">
   <div class="popup">
-    <div class="popup-title">
-      <span>⚡</span><span>¿Dónde usar tu saldo Lightning?</span>
-    </div>
+    <div class="popup-title"><span>⚡</span><span>Saldo Lightning</span></div>
     <div class="popup-subtitle">
-      Tu saldo Lightning se usa en promociones especiales con comercios asociados.
+      Tu saldo lightning se usa en comercios asociados seleccionados dentro de Comodity.
     </div>
     <ul class="lightning-list">
-      <li><strong>MuebleBox</strong> – muebles y artículos del hogar.</li>
-      <li><strong>FerreBuceo</strong> – ferretería, herramientas y hogar.</li>
-      <li><strong>PizzaRocket</strong> – combos exclusivos de pizza.</li>
+      <li><strong>MuebleBox</strong> – muebles y hogar.</li>
+      <li><strong>FerreBuceo</strong> – herramientas y ferretería.</li>
+      <li><strong>PizzaRocket</strong> – comida rápida seleccionada.</li>
     </ul>
-    <button class="popup-close" onclick="closeLightningOverlay()">Cerrar</button>
+    <button class="popup-close" onclick="closeLightningInfo()">Cerrar</button>
   </div>
 </div>
 
 <script>
-  /* Estado general */
   let saldoLibre = 0;
   let saldoLight = 0;
   let cupones = [];
@@ -1781,15 +1836,15 @@
 
   let profileData = {
     nombre: "",
+    email: "",
     direccion: "",
     fechaNacimiento: "",
     telefono: "",
-    foto: ""
+    photoDataUrl: ""
   };
 
   let isRegisterMode = false;
   let cellIntervals = [];
-  let bannerIntervals = [];
 
   const outcomes = [
     { label: "Sin premio, suerte a la próxima 😢", type: "none", prob: 0.30 },
@@ -1800,22 +1855,22 @@
     { label: "$20 saldo lightning para gastar en FerreBuceo", amount: 20, type: "saldoLightFerre", prob: 0.10 }
   ];
 
-  function applyUserName() {
-    const el = document.getElementById("user-name");
-    if (el && currentUserName) el.textContent = currentUserName;
-  }
+  function applyUserHeader() {
+    const nameEl = document.getElementById("user-name");
+    const avatarEl = document.getElementById("user-avatar");
+    if (nameEl) nameEl.textContent = currentUserName || "Invitado";
 
-  function applyAvatarImage() {
-    const avatar = document.getElementById("user-avatar");
-    if (!avatar) return;
-    if (profileData.foto) {
-      avatar.style.backgroundImage = `url(${profileData.foto})`;
-      avatar.textContent = "";
-    } else {
-      avatar.style.backgroundImage = "none";
-      avatar.textContent = currentUserName
-        ? (currentUserName[0] || "👤").toUpperCase()
-        : "👤";
+    if (avatarEl) {
+      if (profileData.photoDataUrl) {
+        avatarEl.style.backgroundImage = `url(${profileData.photoDataUrl})`;
+        avatarEl.textContent = "";
+      } else {
+        avatarEl.style.backgroundImage = "none";
+        const initial = currentUserName && currentUserName.trim()
+          ? currentUserName.trim().charAt(0).toUpperCase()
+          : "👤";
+        avatarEl.textContent = initial;
+      }
     }
   }
 
@@ -1836,10 +1891,11 @@
     if (!key) return;
     const data = {
       nombre: currentUserName,
+      email: profileData.email || "",
       direccion: profileData.direccion || "",
       fechaNacimiento: profileData.fechaNacimiento || "",
       telefono: profileData.telefono || "",
-      foto: profileData.foto || ""
+      photoDataUrl: profileData.photoDataUrl || ""
     };
     localStorage.setItem(key, JSON.stringify(data));
   }
@@ -1862,42 +1918,44 @@
           if (typeof s.saldoLight === "number") saldoLight = s.saldoLight;
           if (Array.isArray(s.cupones)) cupones = s.cupones;
           if (typeof s.tiradasRestantes === "number") tiradasRestantes = s.tiradasRestantes;
-        } catch (e) {}
+        } catch {}
       }
     }
 
     const profileKey = getUserKey("profile");
-    profileData = { nombre: "", direccion: "", fechaNacimiento: "", telefono: "", foto: "" };
+    profileData = { nombre: "", email: "", direccion: "", fechaNacimiento: "", telefono: "", photoDataUrl: "" };
     if (profileKey) {
       const rawP = localStorage.getItem(profileKey);
       if (rawP) {
         try {
           const p = JSON.parse(rawP);
           profileData.nombre = p.nombre || "";
+          profileData.email = p.email || "";
           profileData.direccion = p.direccion || "";
           profileData.fechaNacimiento = p.fechaNacimiento || "";
           profileData.telefono = p.telefono || "";
-          profileData.foto = p.foto || "";
+          profileData.photoDataUrl = p.photoDataUrl || "";
           if (profileData.nombre) currentUserName = profileData.nombre;
-        } catch (e) {}
+        } catch {}
       }
     }
 
-    applyUserName();
+    applyUserHeader();
     actualizarSaldos();
     actualizarCuponesCount();
     actualizarTiradas();
-    applyAvatarImage();
   }
 
   function handleUserLoggedIn(user, nameOverride) {
     currentUser = user;
     currentUserName = nameOverride || user.displayName || user.email;
-    applyUserName();
+    applyUserHeader();
+
     document.getElementById("login-screen").style.display = "none";
     document.getElementById("app").style.display = "block";
+
     loadUserData();
-    updateReferralLink();
+    generateReferralLink();
   }
 
   function handleLoggedOut() {
@@ -1956,8 +2014,9 @@
       try {
         const credNew = await auth.createUserWithEmailAndPassword(email, pass);
         await credNew.user.updateProfile({ displayName: name });
-        handleUserLoggedIn(credNew.user, name);
         profileData.nombre = name;
+        profileData.email = email;
+        handleUserLoggedIn(credNew.user, name);
         saveProfileForUser();
       } catch (err2) {
         alert("Error al crear usuario: " + err2.message);
@@ -2002,8 +2061,6 @@
       console.error(e);
     }
   }
-
-  /* sonidos */
 
   function getAudioCtx() {
     if (!window.AudioContext && !window.webkitAudioContext) return null;
@@ -2220,17 +2277,13 @@
     for (let i = 0; i < coinCount; i++) {
       const c = document.createElement("div");
       c.className = "coin " + coinClass;
-
       const offsetX = (Math.random() - 0.5) * 120;
       c.style.setProperty("--coin-x", offsetX + "px");
-
       const delay = Math.random() * 0.25;
       c.style.animationDelay = delay + "s";
-
       c.textContent = kind === "descuento"
         ? "%"
         : (kind.startsWith("lightning") ? "⚡" : "$");
-
       coinsEl.appendChild(c);
     }
 
@@ -2365,6 +2418,8 @@
 
     document.getElementById("profile-name").value =
       profileData.nombre || currentUserName || "";
+    document.getElementById("profile-email").value =
+      profileData.email || (currentUser ? currentUser.email : "");
     document.getElementById("profile-address").value =
       profileData.direccion || "";
     document.getElementById("profile-birthdate").value =
@@ -2382,13 +2437,13 @@
   document.getElementById("profile-form").addEventListener("submit", async function(e) {
     e.preventDefault();
     const nombre = document.getElementById("profile-name").value.trim();
+    const email = document.getElementById("profile-email").value.trim();
     const direccion = document.getElementById("profile-address").value.trim();
     const fechaNac = document.getElementById("profile-birthdate").value;
     const telefono = document.getElementById("profile-phone").value.trim();
 
     if (nombre) {
       currentUserName = nombre;
-      applyUserName();
       profileData.nombre = nombre;
       if (currentUser) {
         try {
@@ -2399,29 +2454,27 @@
       }
     }
 
+    profileData.email = email;
     profileData.direccion = direccion;
     profileData.fechaNacimiento = fechaNac;
     profileData.telefono = telefono;
 
+    applyUserHeader();
     saveProfileForUser();
-    applyAvatarImage();
     closeProfileOverlay();
   });
 
-  const profileImgInput = document.getElementById("profile-image");
-  if (profileImgInput) {
-    profileImgInput.addEventListener("change", function(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(ev) {
-        profileData.foto = ev.target.result;
-        applyAvatarImage();
-        saveProfileForUser();
-      };
-      reader.readAsDataURL(file);
-    });
-  }
+  document.getElementById("profile-photo").addEventListener("change", function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      profileData.photoDataUrl = ev.target.result;
+      saveProfileForUser();
+      applyUserHeader();
+    };
+    reader.readAsDataURL(file);
+  });
 
   function showScreen(id) {
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
@@ -2440,9 +2493,9 @@
     renderCellphones();
   }
 
-  function openInvitePage() {
-    showScreen("invite-screen");
-    updateReferralLink();
+  function openReferralsScreen() {
+    generateReferralLink();
+    showScreen("referrals-screen");
   }
 
   document.addEventListener("click", function(e) {
@@ -2528,7 +2581,7 @@
             <span>🔥</span><span>20% OFF hoy</span>
           </div>
           <div class="cell-timer" data-deadline="${deadline}">
-            Termina en --
+            --
           </div>
         </div>
       `;
@@ -2550,7 +2603,7 @@
         const m = Math.floor(diff / (1000 * 60));
         diff %= (1000 * 60);
         const s = Math.floor(diff / 1000);
-        timerEl.textContent = `Termina en ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+        timerEl.textContent = `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
       }, 1000);
       cellIntervals.push(interval);
     });
@@ -2587,138 +2640,59 @@
     document.getElementById("cell-detail-overlay").style.display = "none";
   }
 
-  /* Ofertas del banner derecha */
-
-  const bannerOffersData = [
-    {
-      id: "of1",
-      name: "Auriculares inalámbricos",
-      now: 179,
-      old: 590,
-      hours: 24,
-      img: "img/banner_auriculares.jpg"
-    },
-    {
-      id: "of2",
-      name: "Membresía Fiter 3 meses",
-      now: 1290,
-      old: 1900 * 3,
-      hours: 70,
-      img: "img/banner_fiter.jpg"
-    },
-    {
-      id: "of3",
-      name: "Zapatillas de correr",
-      now: 899,
-      old: 2000,
-      hours: 30,
-      img: "img/banner_zapatillas.jpg"
-    },
-    {
-      id: "of4",
-      name: "Smart TV TCL 50\"",
-      now: 325,
-      old: 480,
-      hours: 16,
-      img: "img/banner_tcl.jpg"
-    }
-  ];
-
-  function renderBannerOffers() {
-    const cont = document.getElementById("banner-offers");
-    if (!cont) return;
-    cont.innerHTML = "";
-    bannerIntervals.forEach(i => clearInterval(i));
-    bannerIntervals = [];
-
-    const now = Date.now();
-    bannerOffersData.forEach(of => {
-      const deadline = now + of.hours * 3600 * 1000;
-      const card = document.createElement("div");
-      card.className = "banner-offer-card";
-      card.innerHTML = `
-        <div class="banner-offer-img-wrap">
-          <img src="${of.img}" alt="${of.name}">
-        </div>
-        <div class="banner-offer-text">
-          <div class="banner-offer-name">${of.name}</div>
-          <div class="banner-offer-price">
-            <span class="banner-price-now">$${of.now}</span>
-            <span class="banner-price-old">$${of.old}</span>
-          </div>
-          <div class="banner-timer" data-deadline="${deadline}">Termina en --</div>
-        </div>
-      `;
-      cont.appendChild(card);
-    });
-
-    cont.querySelectorAll(".banner-timer").forEach(timerEl => {
-      const dl = parseInt(timerEl.getAttribute("data-deadline"), 10);
-      const interval = setInterval(() => {
-        const now = Date.now();
-        let diff = Math.max(0, dl - now);
-        const h = Math.floor(diff / (1000 * 60 * 60));
-        diff %= (1000 * 60 * 60);
-        const m = Math.floor(diff / (1000 * 60));
-        diff %= (1000 * 60);
-        const s = Math.floor(diff / 1000);
-        timerEl.textContent = `Termina en ${String(h).padStart(2,"0")}h ${String(m).padStart(2,"0")}m ${String(s).padStart(2,"0")}s`;
-      }, 1000);
-      bannerIntervals.push(interval);
-    });
-  }
-
-  /* Lightning overlay */
-
-  function openLightningOverlay() {
+  function openLightningInfo() {
     document.getElementById("lightning-overlay").style.display = "flex";
   }
 
-  function closeLightningOverlay() {
+  function closeLightningInfo() {
     document.getElementById("lightning-overlay").style.display = "none";
   }
 
-  const badgeLightning = document.getElementById("badge-lightning");
-  if (badgeLightning) {
-    badgeLightning.addEventListener("click", openLightningOverlay);
-  }
-
-  /* Referral link */
-
-  function getReferralLink() {
+  function generateReferralLink() {
+    const input = document.getElementById("ref-link-input");
+    if (!input) return;
     const base = window.location.origin || "https://comodity.app";
-    const uidPart = currentUser ? currentUser.uid : "invita";
-    return base + "/invitar?ref=" + uidPart;
+    const uid = currentUser ? currentUser.uid : "demo";
+    input.value = base + "/invite?ref=" + uid;
   }
 
-  function updateReferralLink() {
-    const input = document.getElementById("referral-link");
-    if (!input) return;
-    input.value = getReferralLink();
-  }
-
-  function copyReferral() {
-    const input = document.getElementById("referral-link");
-    if (!input) return;
+  function copyReferralLink() {
+    const input = document.getElementById("ref-link-input");
+    if (!input || !input.value) return;
     input.select();
     input.setSelectionRange(0, 99999);
-    const text = input.value;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Link copiado al portapapeles");
-      }).catch(() => {
-        alert("No se pudo copiar automáticamente, copiá el texto manualmente.");
-      });
-    } else {
-      document.execCommand("copy");
-      alert("Link copiado al portapapeles");
-    }
+    document.execCommand("copy");
+    alert("Link copiado al portapapeles");
   }
 
-  /* init */
+  function initOfferCountdowns() {
+    document.querySelectorAll(".offer-timer").forEach(timerEl => {
+      let remaining = parseInt(timerEl.getAttribute("data-seconds"), 10);
+      if (isNaN(remaining) || remaining <= 0) remaining = 3600;
+      timerEl.textContent = formatTime(remaining);
+      const interval = setInterval(() => {
+        remaining--;
+        if (remaining < 0) remaining = 0;
+        timerEl.textContent = formatTime(remaining);
+        if (remaining === 0) clearInterval(interval);
+      }, 1000);
+    });
+  }
+
+  function initRaffleDate() {
+    const label = document.getElementById("raffle-date-label");
+    if (!label) return;
+    const now = new Date();
+    const draw = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+    const opts = { day: "2-digit", month: "2-digit", year: "numeric" };
+    label.textContent = "Sorteo: " + draw.toLocaleDateString("es-UY", opts);
+  }
+
   window.addEventListener("load", () => {
     document.getElementById("login-name-group").style.display = "none";
-    renderBannerOffers();
+    initOfferCountdowns();
+    initRaffleDate();
+    generateReferralLink();
   });
 </script>
 
