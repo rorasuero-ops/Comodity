@@ -16,6 +16,7 @@
       measurementId: "G-PYNZCB10T0"
     };
 
+    // Inicializa Firebase y Auth
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
   </script>
@@ -154,7 +155,7 @@
     /* APP PRINCIPAL */
 
     #app {
-      display: none;
+      display: none; /* se muestra después del login */
     }
 
     /* HEADER */
@@ -189,6 +190,17 @@
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
+
+    #user-avatar-initial {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
     }
 
     .user-text {
@@ -213,16 +225,34 @@
     .badge-balance {
       background: rgba(255,255,255,0.16);
       border-radius: 999px;
-      padding: 2px 8px;
+      padding: 3px 10px;
       display: inline-flex;
       align-items: center;
       gap: 4px;
       white-space: nowrap;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .badge-balance .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      opacity: 0.9;
+    }
+
+    .badge-balance .value {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .badge-light {
+      border: 1px solid rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.25);
+      cursor: pointer;
     }
 
     .icon-badge { font-size: 13px; }
-
-    .badge-balance .value { font-weight: bold; }
 
     .badge-coupons {
       cursor: pointer;
@@ -287,113 +317,42 @@
       padding-bottom: 24px;
     }
 
-    .screen { display: none; }
-    .screen.active { display: block; }
+    .screen {
+      display: none;
+    }
 
-    /* RULETA + LATERALES */
+    .screen.active {
+      display: block;
+    }
+
+    /* RULETA */
 
     .ruleta-container {
       background: var(--card-bg);
       margin: 20px;
-      padding: 16px 16px 20px;
+      padding: 20px;
       border-radius: 16px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
 
     .ruleta-title {
       font-size: 18px;
-      margin: 0 0 12px;
+      margin-top: 0;
+      margin-bottom: 24px;
       color: var(--text-soft);
       text-align: center;
-    }
-
-    .ruleta-layout {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      align-items: stretch;
-    }
-
-    .ruleta-side {
-      border-radius: 12px;
-      border: 1px solid #ffcdd2;
-      background: #fff;
-      padding: 10px 12px;
-      font-size: 13px;
-    }
-
-    .ruleta-side-title {
-      font-weight: bold;
-      font-size: 14px;
-      margin-bottom: 4px;
-      color: var(--accent);
-    }
-
-    .ruleta-side-subtitle {
-      font-size: 12px;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-    }
-
-    .sorteo-img {
-      width: 100%;
-      border-radius: 10px;
-      margin: 6px 0 8px;
-      object-fit: cover;
-      max-height: 120px;
-    }
-
-    .sorteo-date {
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .invite-box {
-      margin-top: 10px;
-      padding-top: 8px;
-      border-top: 1px dashed #ffcdd2;
-    }
-
-    .invite-title {
-      font-weight: bold;
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    .invite-text {
-      font-size: 12px;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-    }
-
-    .btn-small {
-      border: none;
-      border-radius: 999px;
-      padding: 7px 14px;
-      font-size: 13px;
-      cursor: pointer;
-      background: var(--accent);
-      color: #fff;
-      font-weight: bold;
-    }
-
-    .ruleta-center-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
     }
 
     .ruleta-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
     }
 
     .ruleta {
-      width: 290px;
-      height: 290px;
+      width: 260px;
+      height: 260px;
       border-radius: 50%;
       position: relative;
       background:
@@ -413,6 +372,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: 10px;
     }
 
     .pointer {
@@ -507,19 +467,20 @@
       max-width: 280px;
       font-weight: bold;
       box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      margin-top: 14px;
     }
 
     .btn-girar:disabled { opacity: 0.6; cursor: not-allowed; }
 
     #resultado {
-      margin-top: 4px;
-      font-size: 16px;
+      margin-top: 14px;
+      font-size: 18px;
       font-weight: bold;
       text-align: center;
     }
 
     .tiradas-info {
-      margin-top: 6px;
+      margin-top: 8px;
       text-align: center;
       font-size: 14px;
       color: var(--text-soft);
@@ -529,64 +490,6 @@
       margin-top: 4px;
       text-align: center;
       font-size: 13px;
-      color: var(--accent);
-      font-weight: bold;
-    }
-
-    /* LADO DERECHO: OFERTAS */
-
-    .offers-panel-title {
-      font-weight: bold;
-      font-size: 14px;
-      margin-bottom: 4px;
-      color: var(--accent);
-    }
-
-    .offers-panel-subtitle {
-      font-size: 12px;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-    }
-
-    .offer-item {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 8px;
-      padding: 8px 6px;
-      border-radius: 9px;
-      background: #fff5f5;
-      border: 1px dashed #ffcdd2;
-      margin-bottom: 6px;
-      align-items: center;
-    }
-
-    .offer-img {
-      width: 72px;
-      height: 72px;
-      border-radius: 8px;
-      object-fit: cover;
-      background: #eee;
-    }
-
-    .offer-text-title {
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 2px;
-    }
-
-    .offer-text-price {
-      font-size: 13px;
-      margin-bottom: 2px;
-    }
-
-    .offer-text-price span.old {
-      text-decoration: line-through;
-      color: #999;
-      font-size: 12px;
-    }
-
-    .offer-timer {
-      font-size: 11px;
       color: var(--accent);
       font-weight: bold;
     }
@@ -811,6 +714,7 @@
     .company-mueble { background: linear-gradient(135deg, #3949ab, #1e88e5); }
     .company-ferre  { background: linear-gradient(135deg, #00897b, #43a047); }
 
+    /* Área donde caen las monedas */
     .reward-coins {
       position: relative;
       height: 110px;
@@ -1088,6 +992,8 @@
       font-weight: bold;
     }
 
+    /* Popup detalle celular */
+
     .cell-detail-title {
       font-size: 16px;
       font-weight: bold;
@@ -1112,63 +1018,6 @@
       color: var(--text-main);
     }
 
-    /* PANTALLA INVITAR AMIGOS */
-
-    .invite-screen-title {
-      margin: 4px 20px 10px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .invite-screen-text {
-      margin: 0 20px 10px;
-      font-size: 13px;
-      color: var(--text-soft);
-    }
-
-    .invite-card {
-      margin: 0 20px 20px;
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.14);
-      padding: 14px 14px 16px;
-      font-size: 13px;
-    }
-
-    .invite-card h3 {
-      margin: 0 0 6px;
-      font-size: 15px;
-    }
-
-    .invite-link-box {
-      margin-top: 8px;
-      padding: 8px 10px;
-      background: #fafafa;
-      border-radius: 10px;
-      border: 1px dashed #ccc;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      justify-content: space-between;
-      word-break: break-all;
-    }
-
-    .invite-link-text {
-      font-size: 12px;
-      color: #333;
-      flex: 1;
-    }
-
-    .btn-copy {
-      border: none;
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 12px;
-      background: var(--accent);
-      color: #fff;
-      cursor: pointer;
-    }
-
     /* ANIMACIÓN RULETA */
 
     @keyframes girar {
@@ -1178,57 +1027,124 @@
 
     .spin { animation: girar 1.5s ease-out; }
 
+    /* PANTALLA INVITAR AMIGO */
+
+    .invite-layout {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 18px;
+      margin: 10px 20px 30px;
+    }
+
+    .invite-info {
+      flex: 1;
+    }
+
+    .invite-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .invite-link-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .invite-link-row input {
+      flex: 1;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 13px;
+    }
+
+    .btn-secondary {
+      border: none;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #ffffff;
+      color: var(--accent);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .invite-note {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .invite-ruleta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ruleta-decor {
+      width: 180px;
+      height: 180px;
+      margin-top: 0;
+      animation: spin-slow 10s linear infinite;
+    }
+
+    .invite-ruleta-caption {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 6px;
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* popup saldo lightning */
+
+    .lightning-list {
+      text-align: left;
+      font-size: 13px;
+      margin: 8px 0 10px;
+      padding-left: 18px;
+    }
+    .lightning-list li {
+      margin-bottom: 4px;
+    }
+
     /* RESPONSIVE */
 
     @media (min-width: 768px) {
       header { padding-left: 24px; padding-right: 24px; }
-
-      .ruleta-container {
-        max-width: 980px;
-        margin: 24px auto;
-      }
-
-      .ruleta-layout {
-        flex-direction: row;
-        align-items: stretch;
-      }
-
-      .ruleta-side {
-        width: 26%;
-      }
-
-      .ruleta-center-wrapper {
-        width: 48%;
-        border-radius: 12px;
-        padding: 6px 10px 0;
-      }
-
+      .ruleta-container { max-width: 520px; margin: 24px auto; }
       .categorias {
         max-width: 900px;
         margin: 0 auto 40px;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 14px;
       }
-
       .categoria {
         transform: scale(1.1);
       }
-
       .cat-img {
         height: 135px;
       }
-
       .cellphones-grid {
         max-width: 900px;
         margin: 0 auto 26px;
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
+      .invite-layout {
+        flex-direction: row;
+        align-items: center;
+      }
+      .invite-ruleta-wrap {
+        align-items: center;
+        justify-content: center;
+      }
     }
-    /* Ajuste: bajar la ruleta un poco */
-.ruleta {
-  margin-top: 25px !important;
-}
-
   </style>
 </head>
 <body>
@@ -1276,21 +1192,26 @@
 <div id="app">
   <header>
     <div class="header-left">
-      <div class="user-avatar" id="user-avatar">👤</div>
+      <div class="user-avatar" id="user-avatar">
+        <span id="user-avatar-initial">👤</span>
+      </div>
       <div class="user-text">
         <div id="user-name" class="user-name">Invitado</div>
         <div class="user-balances">
           <div class="badge-balance">
             <span class="icon-badge">$</span>
-            Libre: $<span id="saldo-libre" class="value">0</span>
+            <span class="label">SALDO LIBRE</span>
+            $<span id="saldo-libre" class="value">0</span>
           </div>
-          <div class="badge-balance">
+          <div class="badge-balance badge-light" id="badge-lightning">
             <span class="icon-badge">⚡</span>
-            Lightning: $<span id="saldo-light" class="value">0</span>
+            <span class="label">LIGHTNING</span>
+            $<span id="saldo-light" class="value">0</span>
           </div>
           <div class="badge-balance badge-coupons" onclick="openCouponsPopup()">
             <span class="icon-badge">🎟️</span>
-            Cupones: <span id="cupones-count" class="value">0</span>
+            <span class="label">CUPONES</span>
+            <span id="cupones-count" class="value">0</span>
           </div>
         </div>
       </div>
@@ -1304,122 +1225,54 @@
     </div>
   </header>
 
-  <!-- Menú usuario -->
+  <!-- Menú usuario (click en avatar) -->
   <div id="user-menu" class="user-menu">
     <div class="user-menu-item" onclick="openProfileOverlay()">Datos personales</div>
     <div class="user-menu-item" onclick="logout()">Cerrar sesión</div>
   </div>
 
   <main>
-    <!-- HOME -->
+    <!-- PANTALLA HOME -->
     <div id="home-screen" class="screen active">
       <div class="ruleta-container">
         <div class="ruleta-title">Girá la ruleta y ganá beneficios para tus compras</div>
-
-        <div class="ruleta-layout">
-          <!-- IZQUIERDA: SORTEO + INVITAR -->
-          <div class="ruleta-side">
-            <div class="ruleta-side-title">Próximo sorteo</div>
-            <div class="ruleta-side-subtitle">Smart TV TCL 50"</div>
-            <img src="img/banner_tv_tcl.jpg" alt="Smart TV TCL 50" class="sorteo-img">
-            <div class="sorteo-date">
-              Se sortea el <span id="sorteo-date-text"></span>.
+        <div class="ruleta-wrapper">
+          <div class="ruleta" id="ruleta">
+            <div class="pointer"></div>
+            <div class="ruleta-center">
+              <div class="logo-center">C</div>
             </div>
 
-            <div class="invite-box">
-              <div class="invite-title">Invitá a un amigo</div>
-              <div class="invite-text">
-                Invitá amigos a Comodity y <strong>ambos ganan 8 tiradas gratis</strong>
-                para la ruleta.
-              </div>
-              <button class="btn-small" onclick="goToInviteScreen()">Invitar</button>
-            </div>
+            <!-- 8 iconos: 3 monedas amarillas, 3 azules, 2 % -->
+            <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
+            <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
+            <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
+            <div class="ruleta-segment-icon wheel-coin-yellow seg-4">$</div>
+            <div class="ruleta-segment-icon wheel-percent     seg-5">%</div>
+            <div class="ruleta-segment-icon wheel-coin-blue   seg-6">$</div>
+            <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
+            <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
           </div>
 
-          <!-- CENTRO: RULETA -->
-          <div class="ruleta-center-wrapper">
-            <div class="ruleta-wrapper">
-              <div class="ruleta" id="ruleta">
-                <div class="pointer"></div>
-                <div class="ruleta-center">
-                  <div class="logo-center">C</div>
-                </div>
-
-                <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
-                <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
-                <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
-                <div class="ruleta-segment-icon wheel-coin-yellow seg-4">$</div>
-                <div class="ruleta-segment-icon wheel-percent     seg-5">%</div>
-                <div class="ruleta-segment-icon wheel-coin-blue   seg-6">$</div>
-                <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
-                <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
-              </div>
-
-              <button class="btn-girar" id="btn-girar" onclick="girarRuleta()">
-                Girar ruleta
-              </button>
-            </div>
-            <p id="resultado"></p>
-            <p id="tiradas-info" class="tiradas-info">4 tiradas restantes</p>
-            <p id="cooldown-info" class="cooldown-info" style="display:none;">
-              Próxima recarga en <span id="cooldown-seconds">12:00:00</span>
-            </p>
-          </div>
-
-          <!-- DERECHA: OFERTAS CON TIMER -->
-          <div class="ruleta-side">
-            <div class="offers-panel-title">Ofertas exclusivas de Comodity</div>
-            <div class="offers-panel-subtitle">Aprovechalas antes de que se acaben:</div>
-
-            <div class="offer-item">
-              <img src="img/offer_auriculares.jpg" alt="Auriculares inalámbricos" class="offer-img">
-              <div>
-                <div class="offer-text-title">Auriculares inalámbricos</div>
-                <div class="offer-text-price">
-                  $179 <span class="old">$320</span>
-                </div>
-                <div class="offer-timer" data-offer-id="auris"></div>
-              </div>
-            </div>
-
-            <div class="offer-item">
-              <img src="img/offer_fiter.jpg" alt="Membresía Fiter 3 meses" class="offer-img">
-              <div>
-                <div class="offer-text-title">Membresía Fiter 3 meses</div>
-                <div class="offer-text-price">
-                  $1.290/mes <span class="old">$1.900/mes</span>
-                </div>
-                <div class="offer-timer" data-offer-id="fiter"></div>
-              </div>
-            </div>
-
-            <div class="offer-item">
-              <img src="img/offer_zapatillas.jpg" alt="Zapatillas para correr" class="offer-img">
-              <div>
-                <div class="offer-text-title">Zapatillas para correr</div>
-                <div class="offer-text-price">
-                  $899 <span class="old">$2.000</span>
-                </div>
-                <div class="offer-timer" data-offer-id="zapatillas"></div>
-              </div>
-            </div>
-
-            <div class="offer-item">
-              <img src="img/offer_tcl_50.jpg" alt="Smart TV TCL 50&quot;" class="offer-img">
-              <div>
-                <div class="offer-text-title">Smart TV TCL 50"</div>
-                <div class="offer-text-price">
-                  U$S 325 <span class="old">U$S 480</span>
-                </div>
-                <div class="offer-timer" data-offer-id="tv"></div>
-              </div>
-            </div>
-          </div>
+          <button class="btn-girar" id="btn-girar" onclick="girarRuleta()">
+            Girar ruleta
+          </button>
         </div>
+        <p id="resultado"></p>
+        <p id="tiradas-info" class="tiradas-info">4 tiradas restantes</p>
+        <p id="cooldown-info" class="cooldown-info" style="display:none;">
+          Próxima recarga en <span id="cooldown-seconds">12:00:00</span>
+        </p>
+
+        <button class="btn-secondary" style="margin:10px auto 0;display:block;"
+                onclick="openInviteScreen()">
+          Invitar a un amigo
+        </button>
       </div>
 
       <!-- CATEGORÍAS -->
       <div class="categorias">
+        <!-- Commodities -->
         <div class="categoria" data-cat="commodities">
           <div class="cat-img cat-img-comodities">
             <div class="cat-discount-badge">
@@ -1430,6 +1283,7 @@
           <div class="cat-bottom"><span>Commodities</span></div>
         </div>
 
+        <!-- Insumos constructivos -->
         <div class="categoria" data-cat="insumos">
           <div class="cat-img cat-img-insumos">
             <div class="cat-discount-badge">
@@ -1439,6 +1293,7 @@
           <div class="cat-bottom"><span>Insumos constructivos</span></div>
         </div>
 
+        <!-- Celulares -->
         <div class="categoria" data-cat="celulares">
           <div class="cat-img cat-img-cell">
             <div class="cat-discount-badge">
@@ -1448,6 +1303,7 @@
           <div class="cat-bottom"><span>Celulares</span></div>
         </div>
 
+        <!-- Electrónica, Audio y Video -->
         <div class="categoria" data-cat="electronica">
           <div class="cat-img cat-img-electronica">
             <div class="cat-discount-badge">
@@ -1457,6 +1313,7 @@
           <div class="cat-bottom"><span>Electrónica, audio y video</span></div>
         </div>
 
+        <!-- Ropa -->
         <div class="categoria" data-cat="ropa">
           <div class="cat-img cat-img-ropa">
             <div class="cat-discount-badge">
@@ -1466,6 +1323,7 @@
           <div class="cat-bottom"><span>Ropa</span></div>
         </div>
 
+        <!-- Experiencias -->
         <div class="categoria" data-cat="experiencias">
           <div class="cat-img cat-img-experiencias">
             <div class="cat-discount-badge">
@@ -1475,6 +1333,7 @@
           <div class="cat-bottom"><span>Experiencias</span></div>
         </div>
 
+        <!-- Imperdibles < 1000 -->
         <div class="categoria" data-cat="imperdibles">
           <div class="cat-img cat-img-imperdibles">
             <div class="cat-discount-badge">
@@ -1484,6 +1343,7 @@
           <div class="cat-bottom"><span>Imperdibles &lt; $1000</span></div>
         </div>
 
+        <!-- Hoteles y viajes -->
         <div class="categoria" data-cat="hoteles">
           <div class="cat-img cat-img-hoteles">
             <div class="cat-discount-badge">
@@ -1493,6 +1353,7 @@
           <div class="cat-bottom"><span>Hoteles y viajes</span></div>
         </div>
 
+        <!-- Muebles y artículos del hogar -->
         <div class="categoria" data-cat="muebles">
           <div class="cat-img cat-img-muebles">
             <div class="cat-discount-badge">
@@ -1502,6 +1363,7 @@
           <div class="cat-bottom"><span>Muebles y hogar</span></div>
         </div>
 
+        <!-- Deportes y Fitness -->
         <div class="categoria" data-cat="deportes">
           <div class="cat-img cat-img-deportes">
             <div class="cat-discount-badge">
@@ -1511,6 +1373,7 @@
           <div class="cat-bottom"><span>Deportes y fitness</span></div>
         </div>
 
+        <!-- Comida -->
         <div class="categoria" data-cat="comida">
           <div class="cat-img cat-img-comida">
             <div class="cat-discount-badge">
@@ -1520,6 +1383,7 @@
           <div class="cat-bottom"><span>Comida</span></div>
         </div>
 
+        <!-- Electrodomésticos -->
         <div class="categoria" data-cat="electro">
           <div class="cat-img cat-img-electro">
             <div class="cat-discount-badge">
@@ -1543,10 +1407,12 @@
         Ofertas con 20% OFF por tiempo limitado. El descuento termina al final del día.
       </div>
 
-      <div class="cellphones-grid" id="cellphones-grid"></div>
+      <div class="cellphones-grid" id="cellphones-grid">
+        <!-- Se llenan por JS -->
+      </div>
     </div>
 
-    <!-- PANTALLA INVITAR AMIGOS -->
+    <!-- PANTALLA INVITAR AMIGO -->
     <div id="invite-screen" class="screen">
       <div class="back-bar">
         <button class="back-link" onclick="goToHome()">
@@ -1554,25 +1420,41 @@
         </button>
       </div>
 
-      <div class="invite-screen-title">Invitá amigos y ganen 8 tiradas</div>
-      <div class="invite-screen-text">
-        Por cada amigo que se registre con tu link y haga su primera compra o uso de beneficio,
-        <strong>vos y tu amigo reciben 8 tiradas extra</strong> para la ruleta.
+      <div class="cellphones-title">Invitá a un amigo</div>
+      <div class="cellphones-subtitle">
+        Cuando un amigo se registre con tu link y use la app, ambos reciben <strong>8 tiradas gratis</strong> de la ruleta.
       </div>
 
-      <div class="invite-card">
-        <h3>¿Cómo funciona?</h3>
-        <ol style="margin:0 0 8px 18px;padding:0;font-size:13px;">
-          <li>Copiá tu link de invitación.</li>
-          <li>Compartilo por WhatsApp, redes o donde quieras.</li>
-          <li>Cuando tu amigo se registre y use Comodity, se acreditan 8 tiradas para cada uno.</li>
-        </ol>
-
-        <div class="invite-link-box">
-          <div id="referral-link" class="invite-link-text">
-            Generando link...
+      <div class="invite-layout">
+        <div class="invite-info">
+          <label class="invite-label">Tu link de invitación</label>
+          <div class="invite-link-row">
+            <input id="invite-link" type="text" readonly />
+            <button class="btn-secondary" onclick="copyInviteLink()">Copiar</button>
           </div>
-          <button class="btn-copy" onclick="copyReferralLink()">Copiar</button>
+          <p class="invite-note">
+            Podés compartir este link por WhatsApp, Instagram o donde quieras.
+            Cuando tu amigo se registre desde ese link y use Comodity, se acreditan las tiradas.
+          </p>
+        </div>
+
+        <div class="invite-ruleta-wrap">
+          <div class="ruleta ruleta-decor">
+            <div class="ruleta-center">
+              <div class="logo-center">C</div>
+            </div>
+            <div class="ruleta-segment-icon wheel-coin-yellow seg-1">$</div>
+            <div class="ruleta-segment-icon wheel-percent     seg-2">%</div>
+            <div class="ruleta-segment-icon wheel-coin-blue   seg-3">$</div>
+            <div class="ruleta-segment-icon wheel-coin-yellow seg-4">$</div>
+            <div class="ruleta-segment-icon wheel-percent     seg-5">%</div>
+            <div class="ruleta-segment-icon wheel-coin-blue   seg-6">$</div>
+            <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
+            <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
+          </div>
+          <div class="invite-ruleta-caption">
+            Ruleta decorativa moviéndose lentamente.
+          </div>
         </div>
       </div>
     </div>
@@ -1611,6 +1493,27 @@
   </div>
 </div>
 
+<!-- POPUP SALDO LIGHTNING -->
+<div id="lightning-overlay" class="overlay">
+  <div class="popup">
+    <div class="popup-title">
+      <span>⚡</span><span>¿Dónde puedo usar mi saldo Lightning?</span>
+    </div>
+    <div class="popup-subtitle">
+      Tu saldo Lightning se puede canjear en comercios asociados especiales:
+    </div>
+    <ul class="lightning-list">
+      <li><strong>MuebleBox</strong> – muebles y artículos para el hogar.</li>
+      <li><strong>FerreBuceo</strong> – ferretería y materiales de construcción.</li>
+      <li><strong>PizzaRocket</strong> – próximamente saldo Lightning para combos seleccionados.</li>
+    </ul>
+    <div class="popup-subtitle">
+      Pronto sumaremos más comercios donde vas a poder usar tu saldo Lightning.
+    </div>
+    <button class="popup-close" onclick="closeLightningOverlay()">Cerrar</button>
+  </div>
+</div>
+
 <!-- POPUP DATOS PERSONALES -->
 <div id="profile-overlay" class="overlay">
   <div class="popup">
@@ -1627,6 +1530,9 @@
       </label>
       <label>Teléfono
         <input type="tel" id="profile-phone" />
+      </label>
+      <label>Foto de perfil
+        <input type="file" id="profile-photo" accept="image/*" />
       </label>
       <button type="submit" class="reward-close">Guardar</button>
       <button type="button" class="popup-close" onclick="closeProfileOverlay()">Cancelar</button>
@@ -1646,6 +1552,7 @@
 </div>
 
 <script>
+  /* Estado general */
   let saldoLibre = 0;
   let saldoLight = 0;
   let cupones = [];
@@ -1657,19 +1564,22 @@
   let currentUser = null;
   let currentUserName = null;
 
+  // datos adicionales de perfil
   let profileData = {
     nombre: "",
     direccion: "",
     fechaNacimiento: "",
-    telefono: ""
+    telefono: "",
+    foto: ""
   };
 
+  // modo login / registro
   let isRegisterMode = false;
 
+  // timers celulares
   let cellIntervals = [];
-  let offersInterval = null;
-  let lastReferralLink = "";
 
+  /* Lógica de premios */
   const outcomes = [
     { label: "Sin premio, suerte a la próxima 😢", type: "none", prob: 0.30 },
     { label: "$25 saldo libre", type: "saldoLibre", amount: 25, prob: 0.20 },
@@ -1679,11 +1589,30 @@
     { label: "$20 saldo lightning para gastar en FerreBuceo", amount: 20, type: "saldoLightFerre", prob: 0.10 }
   ];
 
-  /* LOGIN / USUARIO */
+  /* LOGIN */
 
   function applyUserName() {
     const el = document.getElementById("user-name");
     if (el && currentUserName) el.textContent = currentUserName;
+  }
+
+  function applyAvatarFromProfile() {
+    const avatar = document.getElementById("user-avatar");
+    const initialSpan = document.getElementById("user-avatar-initial");
+    if (!avatar || !initialSpan) return;
+
+    if (profileData.foto) {
+      avatar.style.backgroundImage = `url(${profileData.foto})`;
+      initialSpan.style.display = "none";
+    } else {
+      avatar.style.backgroundImage = "none";
+      initialSpan.style.display = "flex";
+      if (currentUserName && currentUserName.length > 0) {
+        initialSpan.textContent = currentUserName[0].toUpperCase();
+      } else {
+        initialSpan.textContent = "👤";
+      }
+    }
   }
 
   function getUserKey(suffix) {
@@ -1705,7 +1634,8 @@
       nombre: currentUserName,
       direccion: profileData.direccion || "",
       fechaNacimiento: profileData.fechaNacimiento || "",
-      telefono: profileData.telefono || ""
+      telefono: profileData.telefono || "",
+      foto: profileData.foto || ""
     };
     localStorage.setItem(key, JSON.stringify(data));
   }
@@ -1713,6 +1643,7 @@
   function loadUserData() {
     if (!currentUser) return;
 
+    // estado de la ruleta y saldos
     const stateKey = getUserKey("state");
     saldoLibre = 0;
     saldoLight = 0;
@@ -1732,8 +1663,9 @@
       }
     }
 
+    // datos de perfil
     const profileKey = getUserKey("profile");
-    profileData = { nombre: "", direccion: "", fechaNacimiento: "", telefono: "" };
+    profileData = { nombre: "", direccion: "", fechaNacimiento: "", telefono: "", foto: "" };
     if (profileKey) {
       const rawP = localStorage.getItem(profileKey);
       if (rawP) {
@@ -1743,16 +1675,17 @@
           profileData.direccion = p.direccion || "";
           profileData.fechaNacimiento = p.fechaNacimiento || "";
           profileData.telefono = p.telefono || "";
+          profileData.foto = p.foto || "";
           if (profileData.nombre) currentUserName = profileData.nombre;
         } catch (e) {}
       }
     }
 
     applyUserName();
+    applyAvatarFromProfile();
     actualizarSaldos();
     actualizarCuponesCount();
     actualizarTiradas();
-    updateReferralLink();
   }
 
   function handleUserLoggedIn(user, nameOverride) {
@@ -1777,6 +1710,7 @@
     document.getElementById("login-screen").style.display = "flex";
   }
 
+  // observar cambios de auth (para refrescar al recargar la página, etc.)
   auth.onAuthStateChanged(function(user) {
     if (user) {
       if (currentUser && currentUser.uid === user.uid) return;
@@ -1786,6 +1720,7 @@
     }
   });
 
+  // cambiar entre iniciar sesión y crear cuenta
   function toggleLoginMode() {
     isRegisterMode = !isRegisterMode;
     const nameGroup = document.getElementById("login-name-group");
@@ -1808,6 +1743,7 @@
 
   document.getElementById("toggle-login-mode").addEventListener("click", toggleLoginMode);
 
+  // LOGIN con Nombre (solo registro), Email + Contraseña
   document.getElementById("login-form").addEventListener("submit", async function(e) {
     e.preventDefault();
     const name  = document.getElementById("login-name").value.trim();
@@ -1848,6 +1784,7 @@
     }
   });
 
+  // LOGIN con Google (Gmail)
   async function loginWithGoogle() {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -1860,6 +1797,7 @@
     }
   }
 
+  // LOGOUT
   async function logout() {
     try {
       await auth.signOut();
@@ -1869,7 +1807,7 @@
     }
   }
 
-  /* SONIDOS */
+  /* sonidos */
 
   function getAudioCtx() {
     if (!window.AudioContext && !window.webkitAudioContext) return null;
@@ -1951,6 +1889,7 @@
     osc.start(now); osc.stop(now + 0.5);
   }
 
+  // sonido de “lluvia” de monedas
   function playCoinRainSound() {
     const ctx = getAudioCtx();
     if (!ctx) return;
@@ -1981,6 +1920,8 @@
     }
   }
 
+  /* utilidades */
+
   function getRandomOutcomeWeighted() {
     const r = Math.random();
     let acc = 0;
@@ -2005,6 +1946,8 @@
       tiradasRestantes + " tiradas restantes";
     saveStateForUser();
   }
+
+  /* countdown 12h solo visual */
 
   function formatTime(seconds) {
     const h = Math.floor(seconds / 3600);
@@ -2036,6 +1979,8 @@
     countdownTimer = null;
     document.getElementById("cooldown-info").style.display = "none";
   }
+
+  /* POPUP premios */
 
   function showRewardPopup(kind, outcome) {
     const overlay      = document.getElementById("reward-overlay");
@@ -2078,6 +2023,7 @@
     descEl.textContent  = outcome.label;
     companyWrap.style.display = showCompany ? "inline-flex" : "none";
 
+    // monedas
     coinsEl.innerHTML = "";
     const coinCount = 10;
 
@@ -2114,6 +2060,8 @@
     document.getElementById("reward-overlay").style.display = "none";
   }
 
+  /* Cupones */
+
   function agregarCupon(coupon) {
     cupones.push(coupon);
     actualizarCuponesCount();
@@ -2146,6 +2094,8 @@
   function closeCouponsPopup() {
     document.getElementById("coupons-overlay").style.display = "none";
   }
+
+  /* GIRO RULETA */
 
   function girarRuleta() {
     const ruleta    = document.getElementById("ruleta");
@@ -2210,18 +2160,23 @@
     }, 1500);
   }
 
+  /* Menú usuario (click en avatar) */
+
   document.getElementById("user-avatar").addEventListener("click", function (e) {
     e.stopPropagation();
     const menu = document.getElementById("user-menu");
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
   });
 
+  // cerrar menú si se hace click fuera
   window.addEventListener("click", function(e) {
     const menu = document.getElementById("user-menu");
     if (!e.target.closest("#user-menu") && !e.target.closest("#user-avatar")) {
       menu.style.display = "none";
     }
   });
+
+  /* Datos personales */
 
   function openProfileOverlay() {
     const menu = document.getElementById("user-menu");
@@ -2235,6 +2190,8 @@
       profileData.fechaNacimiento || "";
     document.getElementById("profile-phone").value =
       profileData.telefono || "";
+    const fileInput = document.getElementById("profile-photo");
+    if (fileInput) fileInput.value = "";
 
     document.getElementById("profile-overlay").style.display = "flex";
   }
@@ -2249,27 +2206,45 @@
     const direccion = document.getElementById("profile-address").value.trim();
     const fechaNac = document.getElementById("profile-birthdate").value;
     const telefono = document.getElementById("profile-phone").value.trim();
+    const fileInput = document.getElementById("profile-photo");
+    const file = fileInput && fileInput.files && fileInput.files[0];
 
-    if (nombre) {
-      currentUserName = nombre;
-      applyUserName();
-      profileData.nombre = nombre;
-      if (currentUser) {
-        try {
-          await currentUser.updateProfile({ displayName: nombre });
-        } catch (e) {
-          console.error(e);
+    async function finishSave() {
+      if (nombre) {
+        currentUserName = nombre;
+        applyUserName();
+        profileData.nombre = nombre;
+        if (currentUser) {
+          try {
+            await currentUser.updateProfile({ displayName: nombre });
+          } catch (e) {
+            console.error(e);
+          }
         }
       }
+
+      profileData.direccion = direccion;
+      profileData.fechaNacimiento = fechaNac;
+      profileData.telefono = telefono;
+
+      applyAvatarFromProfile();
+      saveProfileForUser();
+      closeProfileOverlay();
     }
 
-    profileData.direccion = direccion;
-    profileData.fechaNacimiento = fechaNac;
-    profileData.telefono = telefono;
-
-    saveProfileForUser();
-    closeProfileOverlay();
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        profileData.foto = ev.target.result;
+        finishSave();
+      };
+      reader.readAsDataURL(file);
+    } else {
+      await finishSave();
+    }
   });
+
+  /* Navegación pantallas */
 
   function showScreen(id) {
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
@@ -2278,6 +2253,7 @@
   }
 
   function goToHome() {
+    // limpiar timers de celulares
     cellIntervals.forEach(i => clearInterval(i));
     cellIntervals = [];
     showScreen("home-screen");
@@ -2288,11 +2264,7 @@
     renderCellphones();
   }
 
-  function goToInviteScreen() {
-    showScreen("invite-screen");
-    updateReferralLink();
-  }
-
+  // click en categorías
   document.addEventListener("click", function(e) {
     const cat = e.target.closest(".categoria");
     if (!cat) return;
@@ -2303,6 +2275,48 @@
       alert("Esta categoría estará disponible próximamente en Comodity 👀");
     }
   });
+
+  /* INVITAR AMIGO */
+
+  function getOrCreateReferralCode() {
+    const key = getUserKey("ref");
+    if (!key) return null;
+    let code = localStorage.getItem(key);
+    if (!code) {
+      const base = currentUser ? currentUser.uid : ("u" + Math.random().toString(36).slice(2, 8));
+      code = "REF-" + base.slice(0, 8).toUpperCase();
+      localStorage.setItem(key, code);
+    }
+    return code;
+  }
+
+  function buildReferralLink(code) {
+    const origin = window.location.origin || "https://comodity.app";
+    return origin + "/?ref=" + encodeURIComponent(code);
+  }
+
+  function openInviteScreen() {
+    const code = getOrCreateReferralCode();
+    const link = code ? buildReferralLink(code) : "";
+    const input = document.getElementById("invite-link");
+    if (input) input.value = link;
+    showScreen("invite-screen");
+  }
+
+  function copyInviteLink() {
+    const input = document.getElementById("invite-link");
+    if (!input || !input.value) return;
+    input.select();
+    input.setSelectionRange(0, 99999);
+    try {
+      document.execCommand("copy");
+      alert("Link copiado al portapapeles");
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  /* CELULARES - datos de ejemplo */
 
   const cellphones = [
     {
@@ -2335,7 +2349,7 @@
     return Math.round(nowPrice / (1 - discountPercent / 100));
   }
 
-  function formatPriceUY(uy) {
+  function formatPrice(uy) {
     return uy.toLocaleString("es-UY", { minimumFractionDigits: 0 });
   }
 
@@ -2369,8 +2383,8 @@
         <div class="cell-body">
           <div class="cell-name">${cell.name}</div>
           <div class="cell-prices">
-            <div class="cell-price-old">$${formatPriceUY(priceOld)}</div>
-            <div class="cell-price-now">$${formatPriceUY(priceNow)}</div>
+            <div class="cell-price-old">$${formatPrice(priceOld)}</div>
+            <div class="cell-price-now">$${formatPrice(priceNow)}</div>
           </div>
           <div class="cell-discount-pill">
             <span>🔥</span><span>20% OFF hoy</span>
@@ -2388,6 +2402,7 @@
       grid.appendChild(card);
     });
 
+    // iniciar timers individuales
     document.querySelectorAll(".cell-timer").forEach(timerEl => {
       const dl = parseInt(timerEl.getAttribute("data-deadline"), 10);
       const interval = setInterval(() => {
@@ -2416,8 +2431,8 @@
 
     const nowPrice = cell.priceNow;
     pricesEl.innerHTML = `
-      <div><strong>Precio actual:</strong> $${formatPriceUY(nowPrice)} (20% OFF)</div>
-      <div>Antes: <span style="text-decoration:line-through;color:#888;">$${formatPriceUY(priceOld)}</span></div>
+      <div><strong>Precio actual:</strong> $${formatPrice(nowPrice)} (20% OFF)</div>
+      <div>Antes: <span style="text-decoration:line-through;color:#888;">$${formatPrice(priceOld)}</span></div>
     `;
 
     extraEl.innerHTML = `
@@ -2435,77 +2450,24 @@
     document.getElementById("cell-detail-overlay").style.display = "none";
   }
 
-  /* SORTEO FECHA (2 semanas en el futuro) */
+  /* Lightning overlay */
 
-  function updateSorteoDate() {
-    const el = document.getElementById("sorteo-date-text");
-    if (!el) return;
-    const now = new Date();
-    const future = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
-    const dia = future.getDate().toString().padStart(2, "0");
-    const mes = (future.getMonth() + 1).toString().padStart(2, "0");
-    const anio = future.getFullYear();
-    el.textContent = `${dia}/${mes}/${anio}`;
+  function openLightningOverlay() {
+    document.getElementById("lightning-overlay").style.display = "flex";
+  }
+  function closeLightningOverlay() {
+    document.getElementById("lightning-overlay").style.display = "none";
   }
 
-  /* OFERTAS - TIMERS */
-
-  const offersConfig = {
-    auris:   { hoursFromNow: 24 },   // hasta mañana
-    fiter:   { hoursFromNow: 70 },
-    zapatillas: { hoursFromNow: 30 },
-    tv:      { hoursFromNow: 16 }
-  };
-
-  function updateOffersTimers() {
-    const now = Date.now();
-    Object.entries(offersConfig).forEach(([id, cfg]) => {
-      const el = document.querySelector(`.offer-timer[data-offer-id="${id}"]`);
-      if (!el) return;
-      if (!cfg.deadline) {
-        cfg.deadline = now + cfg.hoursFromNow * 60 * 60 * 1000;
-      }
-      let diff = Math.max(0, cfg.deadline - now);
-      const h = Math.floor(diff / (1000 * 60 * 60));
-      diff %= (1000 * 60 * 60);
-      const m = Math.floor(diff / (1000 * 60));
-      diff %= (1000 * 60);
-      const s = Math.floor(diff / 1000);
-      el.textContent = `Termina en ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-    });
-  }
-
-  /* INVITAR – LINK REFERIDOS */
-
-  function updateReferralLink() {
-    const el = document.getElementById("referral-link");
-    if (!el) return;
-    const base = "https://comodity.app/invite";
-    const uid = currentUser ? currentUser.uid : "demo";
-    const link = `${base}?u=${encodeURIComponent(uid)}`;
-    lastReferralLink = link;
-    el.textContent = link;
-  }
-
-  async function copyReferralLink() {
-    if (!lastReferralLink) updateReferralLink();
-    try {
-      await navigator.clipboard.writeText(lastReferralLink);
-      alert("Link copiado al portapapeles");
-    } catch (e) {
-      console.error(e);
-      alert("No se pudo copiar el link. Copialo manualmente.");
-    }
-  }
-
-  /* INIT */
-
+  /* init */
   window.addEventListener("load", () => {
+    // por defecto, modo "iniciar sesión": ocultar campo nombre
     document.getElementById("login-name-group").style.display = "none";
-    updateSorteoDate();
-    updateReferralLink();
-    updateOffersTimers();
-    offersInterval = setInterval(updateOffersTimers, 1000);
+
+    const badgeLight = document.getElementById("badge-lightning");
+    if (badgeLight) {
+      badgeLight.addEventListener("click", openLightningOverlay);
+    }
   });
 </script>
 
