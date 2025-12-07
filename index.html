@@ -4,6 +4,7 @@
   <!-- Firebase compat (ideal para HTML puro sin build) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
   <script>
     const firebaseConfig = {
@@ -18,6 +19,7 @@
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+    const db   = firebase.firestore(); //
   </script>
 
   <meta charset="UTF-8" />
@@ -1762,6 +1764,99 @@
       </div>
       <div class="cellphones-grid" id="cellphones-grid"></div>
     </div>
+async function loadCategoryFromFirestore(catKey, catLabel) {
+  showScreen("category-screen");
+
+  const titleEl = document.getElementById("category-title");
+  const subEl   = document.getElementById("category-subtitle");
+  const grid    = document.getElementById("category-grid");
+
+  titleEl.textContent = catLabel;
+  subEl.textContent   = "Ofertas en " + catLabel + " cargadas desde el panel admin.";
+  grid.innerHTML      = "<p>Cargando publicaciones...</p>";
+
+  try {
+    const snap = await db
+      .collection("publicaciones")
+      .where("categoria", "==", catKey)
+      .orderBy("creadoEn", "desc")
+      .get();
+
+    if (snap.empty) {
+      grid.innerHTML = "<p style='padding:8px;'>Todavía no hay publicaciones para esta categoría.</p>";
+      return;
+    }
+
+    grid.innerHTML = "";
+
+    snap.forEach(doc => {
+      const d = doc.data();
+
+      const card = document.createElement("div");
+      card.className = "cell-card";
+
+      const precioAntes = d.precioAntes ? d.precioAntes.toLocaleString("es-UY") : null;
+      const precioDesp  = d.precioDespues ? d.precioDespues.toLocaleString("es-UY") : null;
+
+      card.innerHTML = `
+        <div class="cell-img-wrap">
+          <img src="${d.fotoUrl || "https://via.placeholder.com/200x200?text=Comodity"}" alt="${d.nombre || ""}">
+        </div>
+        <div class="cell-body">
+          <div class="cell-name">${d.nombre || ""}</div>
+          <div class="cell-prices">
+            ${precioAntes ? `<div class="cell-price-old">$${precioAntes}</div>` : ""}
+            ${precioDesp  ? `<div class="cell-price-now">$${precioDesp}</div>` : ""}
+          </div>
+          <div class="cell-discount-pill">
+            <span>🔥</span>
+            <span>${d.vendedor ? d.vendedor : "Comercio asociado"}</span>
+          </div>
+          <div class="cell-timer">
+            Restan aprox. ${d.horasRestantes || 24} h
+          </div>
+        </div>
+      `;
+
+      card.addEventListener("click", () => {
+        openCategoryDetail(d);
+      });
+
+      grid.appendChild(card);
+    });
+
+  } catch (err) {
+    console.error(err);
+    grid.innerHTML = "<p style='padding:8px;'>Error al cargar publicaciones.</p>";
+  }
+}
+
+function openCategoryDetail(d) {
+  const overlay = document.getElementById("cell-detail-overlay");
+  const tEl     = document.getElementById("cell-detail-title");
+  const imgEl   = document.getElementById("cell-detail-img");
+  const pricesEl= document.getElementById("cell-detail-prices");
+  const extraEl = document.getElementById("cell-detail-extra");
+
+  tEl.textContent = d.nombre || "";
+  imgEl.src = d.fotoUrl || "https://via.placeholder.com/400x300?text=Comodity";
+
+  const precioAntes = d.precioAntes ? d.precioAntes.toLocaleString("es-UY") : null;
+  const precioDesp  = d.precioDespues ? d.precioDespues.toLocaleString("es-UY") : null;
+
+  pricesEl.innerHTML = `
+    ${precioDesp ? `<div><strong>Precio actual:</strong> $${precioDesp}</div>` : ""}
+    ${precioAntes ? `<div>Antes: <span style="text-decoration:line-through;color:#888;">$${precioAntes}</span></div>` : ""}
+  `;
+
+  extraEl.innerHTML = `
+    <div><strong>Vendedor:</strong> ${d.vendedor || "Comercio asociado"}</div>
+    <div><strong>Descripción:</strong> ${d.descripcion || "Oferta especial de Comodity."}</div>
+    <div><strong>Duración:</strong> Aproximadamente ${d.horasRestantes || 24} horas desde su publicación.</div>
+  `;
+
+  overlay.style.display = "flex";
+}
 
     <!-- Pantalla Referidos -->
     <div id="referrals-screen" class="screen">
@@ -2573,21 +2668,39 @@ function handleUserLoggedIn(user, nameOverride) {
     showScreen("referrals-screen");
   }
 
-  document.addEventListener("click", function(e) {
-  const catEl = e.target.closest(".categoria");
-  if (!catEl) return;
+  // Mapa clave interna -> texto para el título
+const CATEGORY_LABELS = {
+  commodities:  "Commodities",
+  insumos:      "Insumos constructivos",
+  celulares:    "Celulares",
+  electronica:  "Electrónica, audio y video",
+  ropa:         "Ropa",
+  experiencias: "Experiencias",
+  imperdibles:  "Imperdibles < $1000",
+  hoteles:      "Hoteles y viajes",
+  muebles:      "Muebles y hogar",
+  deportes:     "Deportes y fitness",
+  comida:       "Comida",
+  electro:      "Electrodomésticos"
+};
 
-  const type = catEl.getAttribute("data-cat"); // ej: comida, electro, celulares, etc.
-  const label = catEl.querySelector(".cat-bottom span")?.textContent || type;
+document.addEventListener("click", function(e) {
+  const cat = e.target.closest(".categoria");
+  if (!cat) return;
 
-  if (type === "celulares") {
-    // Podés elegir: usar Firestore también o dejar la pantalla especial de celulares
+  const key = cat.getAttribute("data-cat");
+  if (!key) return;
+
+  // Celulares sigue usando la pantalla especial que ya tenés
+  if (key === "celulares") {
     goToCellphones();
-  } else {
-    // Cargar publicaciones dinámicas de Firestore para esa categoría
-    loadCategoryFromFirestore(type, label);
+    return;
   }
+
+  const label = CATEGORY_LABELS[key] || key;
+  loadCategoryFromFirestore(key, label);   // 👈 AHORA SÍ LEE DE FIRESTORE
 });
+
 
 
   const cellphones = [
