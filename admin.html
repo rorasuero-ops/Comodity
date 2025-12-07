@@ -3,165 +3,351 @@
 <head>
   <meta charset="UTF-8" />
   <title>Comodity – Admin publicaciones</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    :root {
-      --primary: #f44336;
-      --primary-dark: #c62828;
-      --bg: #f5f5f5;
-      --card: #ffffff;
-      --text-main: #222;
-      --text-soft: #666;
-    }
-
-    * { box-sizing: border-box; }
-
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text-main);
+      margin: 0;
+      background:#f5f5f5;
+      color:#222;
     }
-
-    /* HEADER */
     .admin-header {
-      background: var(--primary);
-      color: #fff;
-      padding: 12px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background:#f44336;
+      color:#fff;
+      padding:12px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
-
     .admin-title {
-      font-size: 18px;
-      font-weight: bold;
+      font-size:18px;
+      font-weight:bold;
     }
-
-    .admin-header a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 13px;
-    }
-
-    /* MAIN CARD */
     .admin-main {
-      max-width: 1100px;
-      margin: 20px auto;
-      background: var(--card);
-      border-radius: 12px;
-      padding: 18px 20px 22px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      max-width:1000px;
+      margin:20px auto;
+      background:#fff;
+      border-radius:12px;
+      padding:16px 18px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.15);
     }
-
     h2 {
-      margin-top: 0;
-      margin-bottom: 6px;
+      margin-top:0;
     }
-
-    .small {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 16px;
+    label {
+      display:block;
+      margin:8px 0 4px;
+      font-size:13px;
     }
-
-    /* FORM */
-    form label {
-      display: block;
-      margin: 8px 0 4px;
-      font-size: 13px;
-      font-weight: 600;
+    input, textarea, select {
+      width:100%;
+      padding:6px 8px;
+      font-size:13px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      box-sizing:border-box;
     }
-
-    form input,
-    form textarea,
-    form select {
-      width: 100%;
-      padding: 7px 9px;
-      font-size: 13px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
+    textarea {
+      resize:vertical;
+      min-height:60px;
     }
-
-    form textarea {
-      resize: vertical;
-      min-height: 70px;
+    .btn {
+      padding:8px 14px;
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      font-size:13px;
+      font-weight:bold;
     }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 10px 14px;
-      margin-bottom: 10px;
-    }
-
     .btn-primary {
-      margin-top: 12px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: none;
-      background: var(--primary);
-      color: #fff;
-      font-weight: bold;
-      font-size: 14px;
-      cursor: pointer;
+      background:#f44336;
+      color:#fff;
     }
-
-    .btn-primary:hover {
-      background: var(--primary-dark);
+    .btn-secondary {
+      background:#eee;
+      color:#333;
     }
-
-    /* LISTADO */
-    .list-title {
-      margin-top: 24px;
-      margin-bottom: 8px;
-      font-size: 16px;
-      font-weight: 700;
+    .small {
+      font-size:13px;
+      color:#555;
     }
-
-    .empty-msg {
-      font-size: 13px;
-      color: var(--text-soft);
-    }
-
     table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      margin-top: 4px;
+      width:100%;
+      border-collapse:collapse;
+      margin-top:14px;
+      font-size:12px;
     }
-
-    thead {
-      background: #fafafa;
-    }
-
     th, td {
-      border-bottom: 1px solid #eee;
-      padding: 6px 8px;
-      text-align: left;
-      vertical-align: top;
+      padding:6px 8px;
+      border-bottom:1px solid #eee;
+      text-align:left;
+      vertical-align:top;
     }
-
     th {
-      font-weight: 600;
-      color: var(--text-soft);
-      font-size: 12px;
+      background:#fafafa;
+      font-weight:bold;
+    }
+    .pill-cat {
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      background:#ffe3df;
+      font-size:11px;
+    }
+    .tag-active {
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      font-size:11px;
+      background:#c8e6c9;
+    }
+    .tag-inactive {
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      font-size:11px;
+      background:#ffcdd2;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="admin-header">
+    <div class="admin-title">Comodity – Admin publicaciones</div>
+    <div class="small">
+      Datos guardados localmente en este navegador (localStorage).
+    </div>
+  </header>
+
+  <div class="admin-main">
+    <h2>Nueva publicación</h2>
+    <p class="small">
+      Estas publicaciones se van a mostrar dentro de las categorías (como MercadoLibre):
+      nombre de producto, foto, precio antes/después, vendedor, horas restantes, etc.
+    </p>
+
+    <form id="pub-form">
+      <label>Categoría</label>
+      <select id="pub-category" required>
+        <option value="">Elegí una categoría…</option>
+        <option value="commodities">Commodities</option>
+        <option value="insumos">Insumos constructivos</option>
+        <option value="celulares">Celulares</option>
+        <option value="electronica">Electrónica, audio y video</option>
+        <option value="ropa">Ropa</option>
+        <option value="experiencias">Experiencias</option>
+        <option value="imperdibles">Imperdibles &lt; $1000</option>
+        <option value="hoteles">Hoteles y viajes</option>
+        <option value="muebles">Muebles y hogar</option>
+        <option value="deportes">Deportes y fitness</option>
+        <option value="comida">Comida</option>
+        <option value="electro">Electrodomésticos</option>
+      </select>
+
+      <label>Nombre del producto</label>
+      <input type="text" id="pub-title" placeholder="Ej: Zapatillas running XYZ" required />
+
+      <label>Nombre del vendedor</label>
+      <input type="text" id="pub-seller" placeholder="Ej: Tienda Deportes Buceo" />
+
+      <label>Horas restantes (para cuenta regresiva)</label>
+      <input type="number" id="pub-hours" min="1" max="240" value="24" />
+
+      <label>Precio antes</label>
+      <input type="number" id="pub-price-old" min="0" placeholder="Ej: 2000" />
+
+      <label>Precio ahora</label>
+      <input type="number" id="pub-price-now" min="0" placeholder="Ej: 899" required />
+
+      <label>URL de la foto</label>
+      <input type="text" id="pub-image" placeholder="https://…" />
+
+      <label>Descripción</label>
+      <textarea id="pub-description"
+        placeholder="Detalle que va a ver el usuario (talle, color, condiciones, etc.)"></textarea>
+
+      <label>
+        <input type="checkbox" id="pub-active" checked />
+        Publicación activa
+      </label>
+
+      <div style="margin-top:10px;display:flex;gap:8px;">
+        <button type="submit" class="btn btn-primary">Guardar publicación</button>
+        <button type="button" class="btn btn-secondary" id="btn-clear-all">
+          Borrar todo (local)
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="admin-main">
+    <h2>Publicaciones guardadas</h2>
+    <p class="small">
+      Se guardan en <strong>localStorage</strong> con la clave
+      <code>comodity_publicaciones_demo</code>.  
+      Es decir: quedan guardadas en este navegador.
+    </p>
+
+    <table id="pub-table">
+      <thead>
+        <tr>
+          <th>Categoría</th>
+          <th>Producto</th>
+          <th>Vendedor</th>
+          <th>Antes / Ahora</th>
+          <th>Horas</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="pub-table-body">
+        <!-- se llena por JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "comodity_publicaciones_demo";
+
+    function loadPublications() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return [];
+        const arr = JSON.parse(raw);
+        return Array.isArray(arr) ? arr : [];
+      } catch (e) {
+        console.error("Error leyendo publicaciones:", e);
+        return [];
+      }
     }
 
-    .thumb-img {
-      width: 70px;
-      height: 70px;
-      object-fit: cover;
-      border-radius: 8px;
-      background: #eee;
+    function savePublications(list) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
     }
 
-    .pill {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #ffe0e0;
-      color: #b71c1c;
-      font-size: 11px;
+    function catLabel(value) {
+      switch (value) {
+        case "commodities": return "Commodities";
+        case "insumos": return "Insumos constructivos";
+        case "celulares": return "Celulares";
+        case "electronica": return "Electrónica";
+        case "ropa": return "Ropa";
+        case "experiencias": return "Experiencias";
+        case "imperdibles": return "Imperdibles < $1000";
+        case "hoteles": return "Hoteles y viajes";
+        case "muebles": return "Muebles y hogar";
+        case "deportes": return "Deportes y fitness";
+        case "comida": return "Comida";
+        case "electro": return "Electrodomésticos";
+        default: return value || "-";
+      }
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById("pub-table-body");
+      tbody.innerHTML = "";
+      const pubs = loadPublications();
+
+      if (!pubs.length) {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = 6;
+        td.textContent = "Todavía no hay publicaciones.";
+        td.style.color = "#777";
+        tbody.appendChild(tr);
+        tr.appendChild(td);
+        return;
+      }
+
+      pubs.forEach(p => {
+        const tr = document.createElement("tr");
+
+        const tdCat = document.createElement("td");
+        tdCat.innerHTML = `<span class="pill-cat">${catLabel(p.category)}</span>`;
+        tr.appendChild(tdCat);
+
+        const tdTitle = document.createElement("td");
+        tdTitle.textContent = p.title || "-";
+        tr.appendChild(tdTitle);
+
+        const tdSeller = document.createElement("td");
+        tdSeller.textContent = p.seller || "-";
+        tr.appendChild(tdSeller);
+
+        const tdPrices = document.createElement("td");
+        let html = "";
+        if (p.priceOld) {
+          html += `<div style="text-decoration:line-through;color:#888;">$${p.priceOld}</div>`;
+        }
+        html += `<div><strong>$${p.priceNow}</strong></div>`;
+        tdPrices.innerHTML = html;
+        tr.appendChild(tdPrices);
+
+        const tdHours = document.createElement("td");
+        tdHours.textContent = p.hours ? p.hours + " h" : "-";
+        tr.appendChild(tdHours);
+
+        const tdStatus = document.createElement("td");
+        tdStatus.innerHTML = p.active
+          ? `<span class="tag-active">Activa</span>`
+          : `<span class="tag-inactive">Inactiva</span>`;
+        tr.appendChild(tdStatus);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById("pub-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const category   = document.getElementById("pub-category").value;
+      const title      = document.getElementById("pub-title").value.trim();
+      const seller     = document.getElementById("pub-seller").value.trim();
+      const hours      = Number(document.getElementById("pub-hours").value || 0);
+      const priceOld   = Number(document.getElementById("pub-price-old").value || 0);
+      const priceNow   = Number(document.getElementById("pub-price-now").value || 0);
+      const imageUrl   = document.getElementById("pub-image").value.trim();
+      const description= document.getElementById("pub-description").value.trim();
+      const active     = document.getElementById("pub-active").checked;
+
+      if (!category || !title || !priceNow) {
+        alert("Completá al menos categoría, nombre y precio ahora.");
+        return;
+      }
+
+      const pubs = loadPublications();
+      const pub = {
+        id: Date.now(),
+        category,
+        title,
+        seller,
+        hours,
+        priceOld,
+        priceNow,
+        imageUrl,
+        description,
+        active
+      };
+      pubs.push(pub);
+      savePublications(pubs);
+
+      this.reset();
+      document.getElementById("pub-category").value = "";
+      document.getElementById("pub-hours").value = 24;
+      document.getElementById("pub-active").checked = true;
+
+      renderTable();
+      alert("Publicación guardada en este navegador.");
+    });
+
+    document.getElementById("btn-clear-all").addEventListener("click", function() {
+      if (!confirm("¿Borrar TODAS las publicaciones guardadas en este navegador?")) return;
+      savePublications([]);
+      renderTable();
+    });
+
+    // inicializar
+    renderTable();
+  </script>
+
+</body>
+</html>
