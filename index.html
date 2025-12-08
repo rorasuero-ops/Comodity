@@ -2683,97 +2683,105 @@ document.addEventListener("DOMContentLoaded", startOfferRotation);
   }
 
   function showRewardPopup(kind, outcome) {
-    const overlay      = document.getElementById("reward-overlay");
-    const iconEl       = document.getElementById("reward-icon");
-    const titleEl      = document.getElementById("reward-title");
-    const descEl       = document.getElementById("reward-desc");
-    const coinsEl      = document.getElementById("reward-coins");
-    const companyWrap  = document.getElementById("reward-company");
-    const companyLogo  = document.getElementById("reward-company-logo");
-    const companyText  = document.getElementById("reward-company-text");
+  const overlay      = document.getElementById("reward-overlay");
+  const iconEl       = document.getElementById("reward-icon");
+  const titleEl      = document.getElementById("reward-title");
+  const descEl       = document.getElementById("reward-desc");
+  const coinsEl      = document.getElementById("reward-coins");
+  const companyWrap  = document.getElementById("reward-company");
+  const companyLogo  = document.getElementById("reward-company-logo");
+  const companyText  = document.getElementById("reward-company-text");
 
-    let icon = "💰";
-    let title = "¡Premio!";
-    let coinClass = "coin-yellow";
-    let showCompany = false;
+  let icon = "💰";
+  let title = "¡Premio!";
+  let coinClass = "coin-yellow";
+  let showCompany = false;
 
-    if (kind === "libre") {
-      icon = "💰";
-      title = "¡Saldo libre ganado!";
-      coinClass = "coin-yellow";
-    } else if (kind === "jackpot") {
-      icon = "🏆";
-      title = "¡JACKPOT de saldo libre!";
-      coinClass = "coin-yellow";
-    } else if (kind === "descuento") {
-      icon = "％";
-      title = "¡Descuento desbloqueado!";
-      coinClass = "coin-neutral";
-      showCompany = true;
-      companyLogo.textContent = "PR";
-      companyLogo.className = "company-logo company-pizza";
-      companyText.textContent = "PizzaRocket";
-    } else if (kind === "lightning-mueble") {
-      icon = "⚡";
-      title = "Saldo lightning MuebleBox";
-      coinClass = "coin-blue";
-      showCompany = true;
-      companyLogo.textContent = "MB";
-      companyLogo.className = "company-logo company-mueble";
-      companyText.textContent = "MuebleBox";
-    } else if (kind === "lightning-ferre") {
-      icon = "⚡";
-      title = "Saldo lightning FerreBuceo";
-      coinClass = "coin-blue";
-      showCompany = true;
-      companyLogo.textContent = "FB";
-      companyLogo.className = "company-logo company-ferre";
-      companyText.textContent = "FerreBuceo";
-    }
-
-    iconEl.textContent = icon;
-    titleEl.textContent = title;
-    descEl.textContent  = outcome.label;
-    companyWrap.style.display = showCompany ? "inline-flex" : "none";
-
-    coinsEl.innerHTML = "";
-    const coinCount = 10;
-
-    for (let i = 0; i < coinCount; i++) {
-      const c = document.createElement("div");
-      c.className = "coin " + coinClass;
-      const offsetX = (Math.random() - 0.5) * 120;
-      c.style.setProperty("--coin-x", offsetX + "px");
-      const delay = Math.random() * 0.25;
-      c.style.animationDelay = delay + "s";
-      c.textContent = kind === "descuento"
-        ? "%"
-        : (kind.startsWith("lightning") ? "⚡" : "$");
-      coinsEl.appendChild(c);
-    }
-
-    overlay.style.display = "flex";
-
-    // Lluvia de monedas SOLO cuando es saldo libre (incluye jackpot)
-    if (kind === "libre" || kind === "jackpot") {
-      showRuletaCoinRain();
-    }
-
-    // Sonido de monedas como antes
-    if (
-      kind === "libre" ||
-      kind === "jackpot" ||
-      kind === "lightning-mueble" ||
-      kind === "lightning-ferre"
-    ) {
-      playCoinRainSound();
-    }
+  if (kind === "libre") {
+    icon = "💰";
+    title = "¡Saldo libre ganado!";
+    coinClass = "coin-yellow";
+  } else if (kind === "jackpot") {
+    icon = "🏆";
+    title = "¡JACKPOT de saldo libre!";
+    coinClass = "coin-yellow";
+  } else if (kind === "descuento") {
+    icon = "％";
+    title = "¡Descuento desbloqueado!";
+    coinClass = "coin-neutral";
+    showCompany = true;
+    companyLogo.textContent = "PR";
+    companyLogo.className = "company-logo company-pizza";
+    companyText.textContent = "PizzaRocket";
+  } else if (kind === "lightning-mueble") {
+    icon = "⚡";
+    title = "Saldo lightning MuebleBox";
+    coinClass = "coin-blue";
+    showCompany = true;
+    companyLogo.textContent = "MB";
+    companyLogo.className = "company-logo company-mueble";
+    companyText.textContent = "MuebleBox";
+  } else if (kind === "lightning-ferre") {
+    icon = "⚡";
+    title = "Saldo lightning FerreBuceo";
+    coinClass = "coin-blue";
+    showCompany = true;
+    companyLogo.textContent = "FB";
+    companyLogo.className = "company-logo company-ferre";
+    companyText.textContent = "FerreBuceo";
   }
 
-    document.getElementById("reward-overlay").style.display = "none";
+  iconEl.textContent = icon;
+  titleEl.textContent = title;
+  descEl.textContent  = outcome.label;
+  companyWrap.style.display = showCompany ? "inline-flex" : "none";
+
+  coinsEl.innerHTML = "";
+  const coinCount = 10;
+
+  for (let i = 0; i < coinCount; i++) {
+    const c = document.createElement("div");
+    c.className = "coin " + coinClass;
+    const offsetX = (Math.random() - 0.5) * 120;
+    c.style.setProperty("--coin-x", offsetX + "px");
+    const delay = Math.random() * 0.25;
+    c.style.animationDelay = delay + "s";
+    c.textContent = kind === "descuento"
+      ? "%"
+      : (kind.startsWith("lightning") ? "⚡" : "$");
+    coinsEl.appendChild(c);
   }
 
-  function agregarCupon(coupon) {
+  overlay.style.display = "flex";
+
+  // Lluvia de monedas SOLO cuando es saldo libre (incluye jackpot)
+  if (kind === "libre" || kind === "jackpot") {
+    showRuletaCoinRain();
+  }
+
+  // Sonido de monedas
+  if (
+    kind === "libre" ||
+    kind === "jackpot" ||
+    kind === "lightning-mueble" ||
+    kind === "lightning-ferre"
+  ) {
+    playCoinRainSound();
+  }
+}
+
+function closeRewardPopup() {
+  const overlay = document.getElementById("reward-overlay");
+  if (overlay) {
+    overlay.style.display = "none";
+  }
+}
+
+function agregarCupon(coupon) {
+  cupones.push(coupon);
+  actualizarCuponesCount();
+}
+
     cupones.push(coupon);
     actualizarCuponesCount();
   }
