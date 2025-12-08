@@ -539,7 +539,42 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    position: relative;
   }
+  /* Capa que cubre la zona de la ruleta */
+.coin-rain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* para no bloquear clicks */
+  overflow: hidden;
+  z-index: 30; /* por encima de la ruleta, debajo del popup si lo hubiera */
+}
+
+/* Monedas individuales */
+.coin-rain .coin {
+  position: absolute;
+  background: #efef00 url("https://i.ibb.co/jwjS0RF/dollar.png") no-repeat center / 100% auto;
+  border-radius: 50%;
+  opacity: 0;
+  animation-name: coin-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* Animación: caen y giran */
+@keyframes coin-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, 140%, 0) rotate(360deg);
+    opacity: 0;
+  }
+}
 
   .ruleta-title {
     font-size: 17px;
@@ -1665,7 +1700,8 @@
               <div class="ruleta-segment-icon wheel-coin-yellow seg-7">$</div>
               <div class="ruleta-segment-icon wheel-coin-blue   seg-8">$</div>
             </div>
-
+ <!-- Capa de lluvia de monedas -->
+            <div class="coin-rain" id="coin-rain"></div>
             <button class="btn-girar" id="btn-girar" onclick="girarRuleta()">
               Girar ruleta
             </button>
@@ -3195,6 +3231,48 @@ document.addEventListener("DOMContentLoaded", startOfferRotation);
     initRaffleDate();
     generateReferralLink();
   });
+
+  function showCoinRain() {
+  const container = document.getElementById("coin-rain");
+  if (!container) return;
+
+  // Limpiar por si quedó algo
+  container.innerHTML = "";
+
+  const coinCount = 40; // cantidad de monedas (subí si querés más "lluvia")
+
+  for (let i = 0; i < coinCount; i++) {
+    const coin = document.createElement("div");
+    coin.classList.add("coin");
+
+    // Tamaño aleatorio entre 12 y 26 px
+    const size = 12 + Math.random() * 14;
+    coin.style.width = size + "px";
+    coin.style.height = size + "px";
+
+    // Posición horizontal aleatoria dentro del ancho
+    const left = Math.random() * 100; // 0 a 100%
+    coin.style.left = left + "%";
+
+    // Empiezan un poco por arriba de la ruleta
+    const top = -10 - Math.random() * 30; // -10% a -40%
+    coin.style.top = top + "%";
+
+    // Duración y delay aleatorios para que no caigan todas iguales
+    const duration = 0.8 + Math.random() * 0.7; // 0.8s a 1.5s
+    const delay = Math.random() * 0.4; // 0s a 0.4s
+    coin.style.animationDuration = duration + "s";
+    coin.style.animationDelay = delay + "s";
+
+    container.appendChild(coin);
+  }
+
+  // Limpiar luego de un rato para no dejar el DOM lleno
+  setTimeout(() => {
+    container.innerHTML = "";
+  }, 2000);
+}
+
 </script>
 
 
