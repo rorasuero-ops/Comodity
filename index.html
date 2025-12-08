@@ -25,7 +25,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Comodity</title>
-<style>
+
   .offers-list {
   transition: opacity 0.3s ease;
 }
@@ -1466,6 +1466,37 @@
   /* Columna derecha (ofertas) en tercer lugar */
   .home-top .home-column:nth-child(3) {
     order: 3;
+  }
+}
+/* --- MOBILE: reordenar layout en pantallas chicas --- */
+@media (max-width: 768px) {
+
+  /* El contenedor principal de las columnas */
+  .home-columns {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px;
+  }
+
+  /* Columna izquierda (sorteo + invita) → primero */
+  .home-columns .home-column:nth-child(1) {
+    order: 1;
+  }
+
+  /* Ruleta → segundo */
+  .home-columns .ruleta-container {
+    order: 2;
+  }
+
+  /* Columna derecha (ofertas) → tercero */
+  .home-columns .home-column:nth-child(3) {
+    order: 3;
+  }
+
+  /* Ajustar ancho para que nada quede recortado */
+  .home-column,
+  .ruleta-container {
+    width: 100% !important;
   }
 }
 
