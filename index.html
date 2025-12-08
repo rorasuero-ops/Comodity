@@ -26,6 +26,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Comodity</title>
 <style>
+  .offers-list {
+  transition: opacity 0.3s ease;
+}
+
   :root {
     --primary: #f44336;
     --accent: #c62828;
@@ -1673,20 +1677,57 @@
           </p>
         </div>
 
-      <div class="offers-list">
-  <div class="offer-item" id="offer-rotator">
-    <img src="" class="offer-img" alt="Oferta Comodity">
+     <div class="offers-list">
+  <!-- Zapatillas -->
+  <div class="offer-item">
+    <img src="img/banner_zapatillas.jpg" class="offer-img" alt="Zapatillas running">
     <div class="offer-info">
-      <div class="offer-name"></div>
+      <div class="offer-name">Zapatillas de running</div>
       <div class="offer-prices">
-        <span class="old"></span>
-        <span class="now"></span>
+        <span class="old">$ 2.000</span>
+        <span class="now">$ 899</span>
       </div>
-      <!-- si querés podés usar esto luego para un contador o texto -->
-      <div class="offer-timer"></div>
+      <div class="offer-timer" data-seconds="86400"></div>
+    </div>
+  </div>
+  <!-- Auriculares -->
+  <div class="offer-item">
+    <img src="img/banner_auriculares.jpg" class="offer-img" alt="Auriculares inalámbricos">
+    <div class="offer-info">
+      <div class="offer-name">Auriculares inalámbricos</div>
+      <div class="offer-prices">
+        <span class="old">$ 450</span>
+        <span class="now">$ 179</span>
+      </div>
+      <div class="offer-timer" data-seconds="252000"></div> <!-- 70h -->
+    </div>
+  </div>
+  <!-- Fiter -->
+  <div class="offer-item">
+    <img src="img/banner_fiter.jpg" class="offer-img" alt="Membresía Fiter">
+    <div class="offer-info">
+      <div class="offer-name">Membresía Fiter 3 meses</div>
+      <div class="offer-prices">
+        <span class="old">$ 1.900/mes</span>
+        <span class="now">$ 1.290/mes</span>
+      </div>
+      <div class="offer-timer" data-seconds="108000"></div> <!-- 30h -->
+    </div>
+  </div>
+  <!-- Smart TV -->
+  <div class="offer-item">
+    <img src="img/banner_tcl.jpg" class="offer-img" alt="Smart TV TCL">
+    <div class="offer-info">
+      <div class="offer-name">Smart TV TCL 50&quot; oferta relámpago</div>
+      <div class="offer-prices">
+        <span class="old">$ 499</span>
+        <span class="now">$ 325</span>
+      </div>
+      <div class="offer-timer" data-seconds="57600"></div> <!-- 16h -->
     </div>
   </div>
 </div>
+
 
             <!-- CATEGORÍAS -->
       <div class="categorias">
@@ -1918,67 +1959,90 @@
 </div>
 
 <script>
-  // BANNER ROTATIVO DE OFERTAS
-// ============================
-//
-// NOTA: completá los precios de MELI (meliPrice / oldPrice)
-// y las URLs de imagen (img) con lo que veas en las páginas.
-//
+// ======================================
+// ROTACIÓN DE OFERTAS (4 a la vez)
+//   - Grupo 1: 4 originales (los del HTML)
+//   - Grupo 2: 4 nuevos (MELI + Kentucky)
+//   - Cambian cada 10 segundos con fade
+// ======================================
 
-const rotatingOffers = [
+// Grupo 1: tus 4 productos originales
+const originalOffers = [
   {
-    // 1) iPhone 14 - nuevo = 10% menos que MELI
-    name: "iPhone 14 128 GB Medianoche",
-    img: "URL_IMAGEN_MELI_IPHONE_AQUI", // copiar URL de la imagen de MELI
-    meliPrice: 0, // <-- PONÉ acá el precio de MELI (ej: 29999)
-    discountType: "percent",
-    discountValue: 10,
-    extraText: "-10% vs MercadoLibre"
+    name: "Zapatillas de running",
+    img: "img/banner_zapatillas.jpg",
+    oldPrice: 2000,
+    newPrice: 899
   },
   {
-    // 2) Kentucky 2x1 Muzarela + Pizza + Fainá
-    name: "2x1 Kentucky Muzarella + Pizza + Fainá",
-    img: "img/kentucky_2x1.jpg", // podés usar una imagen tuya o de promo
+    name: "Auriculares inalámbricos",
+    img: "img/banner_auriculares.jpg",
+    oldPrice: 450,
+    newPrice: 179
+  },
+  {
+    name: "Membresía Fiter 3 meses",
+    img: "img/banner_fiter.jpg",
+    oldPrice: 1900, // podés ignorar el "/mes" en lógica y dejarlo en el texto
+    newPrice: 1290
+  },
+  {
+    name: "Smart TV TCL 50\" oferta relámpago",
+    img: "img/banner_tcl.jpg",
     oldPrice: 499,
-    newPrice: 349,
-    discountType: "fixed",
-    extraText: "Promo exclusiva Comodity"
+    newPrice: 325
+  }
+];
+
+// Grupo 2: los 4 nuevos productos
+const newOffers = [
+  {
+    // 1) iPhone 14 - precio nuevo = 10% menos que MELI
+    name: "iPhone 14 128 GB Medianoche",
+    img: "URL_IMAGEN_MELI_IPHONE_AQUI", // <-- pegá la URL de la imagen de MELI
+    meliPrice: 0, // <-- pegá acá el precio de MELI (ej: 29999)
+    discountPercent: 10
   },
   {
-    // 3) Mancuernas Lumax - nuevo = $850, viejo = MELI
+    // 2) Kentucky 2x1 Muzarella + Pizza + Fainá
+    name: "2x1 Kentucky Muzarella + Pizza + Fainá",
+    img: "img/kentucky_2x1.jpg", // o una imagen que elijas
+    oldPrice: 499,
+    newPrice: 349
+  },
+  {
+    // 3) Mancuernas Lumax - nuevo = $850, viejo = precio MELI
     name: "Set 2 mancuernas Lumax 30 kg",
-    img: "URL_IMAGEN_MELI_MANCUERNAS_AQUI", // URL imagen MELI
+    img: "URL_IMAGEN_MELI_MANCUERNAS_AQUI", // <-- URL imagen MELI
     oldPrice: 0, // <-- precio de MELI
-    newPrice: 850,
-    discountType: "fixed",
-    extraText: "Precio especial Comodity"
+    newPrice: 850
   },
   {
     // 4) Aire Everest 12000 BTU - 20% menos que MELI
     name: "Aire acondicionado Everest 12000 BTU",
-    img: "URL_IMAGEN_MELI_EVEREST_AQUI", // URL imagen MELI
+    img: "URL_IMAGEN_MELI_EVEREST_AQUI", // <-- URL imagen MELI
     meliPrice: 0, // <-- precio de MELI
-    discountType: "percent",
-    discountValue: 20,
-    extraText: "-20% vs MercadoLibre"
+    discountPercent: 20
   }
 ];
 
 function formatUyPrice(value) {
-  if (!value && value !== 0) return "";
+  if (value === null || value === undefined) return "";
   return "$ " + value.toLocaleString("es-UY");
 }
 
-function getOfferPrices(offer) {
+function computePrices(offer) {
   let oldP = null;
   let newP = null;
 
-  if (offer.discountType === "percent" && offer.meliPrice) {
+  // Si viene de MELI con porcentaje
+  if (offer.meliPrice && offer.discountPercent) {
     oldP = offer.meliPrice;
     newP = Math.round(
-      offer.meliPrice * (1 - offer.discountValue / 100)
+      offer.meliPrice * (1 - offer.discountPercent / 100)
     );
   } else {
+    // Si ya trae precios directo
     oldP = offer.oldPrice ?? null;
     newP = offer.newPrice ?? null;
   }
@@ -1986,65 +2050,79 @@ function getOfferPrices(offer) {
   return { oldP, newP };
 }
 
-let currentOfferIndex = 0;
-let offerRotationIntervalId = null;
+function renderOffers(offersArray) {
+  const cards = document.querySelectorAll(".offers-list .offer-item");
+  cards.forEach((card, index) => {
+    const offer = offersArray[index];
+    if (!offer) return;
 
-function renderRotatingOffer(index) {
-  const container = document.getElementById("offer-rotator");
-  if (!container) return;
+    const imgEl = card.querySelector(".offer-img");
+    const nameEl = card.querySelector(".offer-name");
+    const oldEl = card.querySelector(".old");
+    const nowEl = card.querySelector(".now");
 
-  const offer = rotatingOffers[index];
-  const imgEl = container.querySelector(".offer-img");
-  const nameEl = container.querySelector(".offer-name");
-  const oldEl = container.querySelector(".old");
-  const nowEl = container.querySelector(".now");
-  const timerEl = container.querySelector(".offer-timer");
-
-  if (imgEl) {
-    imgEl.src = offer.img || "";
-    imgEl.alt = offer.name || "Oferta Comodity";
-  }
-  if (nameEl) {
-    nameEl.textContent = offer.name || "";
-  }
-
-  const { oldP, newP } = getOfferPrices(offer);
-
-  if (oldEl) {
-    if (oldP) {
-      oldEl.style.display = "inline";
-      oldEl.textContent = formatUyPrice(oldP);
-    } else {
-      oldEl.style.display = "none";
-      oldEl.textContent = "";
+    if (imgEl) {
+      imgEl.src = offer.img || "";
+      imgEl.alt = offer.name || "Oferta Comodity";
     }
-  }
 
-  if (nowEl) {
-    nowEl.textContent = newP ? formatUyPrice(newP) : "";
-  }
+    if (nameEl) {
+      nameEl.textContent = offer.name || "";
+    }
 
-  if (timerEl) {
-    // Por ahora lo usamos como texto de apoyo
-    timerEl.textContent = offer.extraText || "Oferta limitada";
-  }
+    const { oldP, newP } = computePrices(offer);
+
+    if (oldEl) {
+      if (oldP !== null && oldP !== undefined) {
+        oldEl.style.display = "inline";
+        oldEl.textContent = formatUyPrice(oldP);
+      } else {
+        oldEl.style.display = "none";
+        oldEl.textContent = "";
+      }
+    }
+
+    if (nowEl) {
+      nowEl.textContent =
+        newP !== null && newP !== undefined ? formatUyPrice(newP) : "";
+    }
+  });
 }
+
+let showingOriginal = true;
 
 function startOfferRotation() {
-  // mostrar la primera
-  renderRotatingOffer(currentOfferIndex);
+  const listEl = document.querySelector(".offers-list");
+  if (!listEl) return;
 
-  // cambiar cada 6 segundos
-  offerRotationIntervalId = setInterval(() => {
-    currentOfferIndex = (currentOfferIndex + 1) % rotatingOffers.length;
-    renderRotatingOffer(currentOfferIndex);
-  }, 6000);
+  // Mostrar primero las 4 originales
+  renderOffers(originalOffers);
+  listEl.style.opacity = 1;
+
+  // Cambiar cada 10 segundos
+  setInterval(() => {
+    if (!listEl) return;
+
+    // Fade out
+    listEl.style.opacity = 0;
+
+    setTimeout(() => {
+      // Cambiar el grupo
+      if (showingOriginal) {
+        renderOffers(newOffers);
+      } else {
+        renderOffers(originalOffers);
+      }
+      showingOriginal = !showingOriginal;
+
+      // Fade in
+      listEl.style.opacity = 1;
+    }, 300); // 300ms de fade-out antes de cambiar
+  }, 10000); // 10 segundos
 }
 
-// Aseguramos que arranque cuando carga la página
-document.addEventListener("DOMContentLoaded", function () {
-  startOfferRotation();
-});
+document.addEventListener("DOMContentLoaded", startOfferRotation);
+
   let saldoLibre = 0;
   let saldoLight = 0;
   let cupones = [];
