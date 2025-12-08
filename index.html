@@ -2680,41 +2680,136 @@ function showRuletaCoinRain() {
     document.getElementById("cooldown-info").style.display = "none";
   }
 
-  function showRewardPopup(kind, outcome) {
-    const overlay      = document.getElementById("reward-overlay");
-    const iconEl       = document.getElementById("reward-icon");
-    const titleEl      = document.getElementById("reward-title");
-    const descEl       = document.getElementById("reward-desc");
-    const coinsEl      = document.getElementById("reward-coins");
-    const companyWrap  = document.getElementById("reward-company");
-    const companyLogo  = document.getElementById("reward-company-logo");
-    const companyText  = document.getElementById("reward-company-text");
+ function showRewardPopup(kind, outcome) {
+  const overlay      = document.getElementById("reward-overlay");
+  const iconEl       = document.getElementById("reward-icon");
+  const titleEl      = document.getElementById("reward-title");
+  const descEl       = document.getElementById("reward-desc");
+  const coinsEl      = document.getElementById("reward-coins");
+  const companyWrap  = document.getElementById("reward-company");
+  const companyLogo  = document.getElementById("reward-company-logo");
+  const companyText  = document.getElementById("reward-company-text");
 
-    let icon = "💰";
-    let title = "¡Premio!";
-    let coinClass = "coin-yellow";
-    let showCompany = false;
+  let icon = "💰";
+  let title = "¡Premio!";
+  let coinClass = "coin-yellow";
+  let showCompany = false;
 
-    if (kind === "libre") {
-      icon = "💰"; title = "¡Saldo libre ganado!"; coinClass="coin-yellow";
-    } else if (kind === "jackpot") {
-      icon = "🏆"; title = "¡JACKPOT de saldo libre!"; coinClass="coin-yellow";
-    } else if (kind === "descuento") {
-      icon = "％"; title = "¡Descuento desbloqueado!"; coinClass="coin-neutral"; showCompany = true;
-      companyLogo.textContent = "PR";
-      companyLogo.className = "company-logo company-pizza";
-      companyText.textContent = "PizzaRocket";
-    } else if (kind === "lightning-mueble") {
-      icon = "⚡"; title = "Saldo lightning MuebleBox"; coinClass="coin-blue"; showCompany = true;
-      companyLogo.textContent = "MB";
-      companyLogo.className = "company-logo company-mueble";
-      companyText.textContent = "MuebleBox";
-    } else if (kind === "lightning-ferre") {
-      icon = "⚡"; title = "Saldo lightning FerreBuceo"; coinClass="coin-blue"; showCompany = true;
-      companyLogo.textContent = "FB";
-      companyLogo.className = "company-logo company-ferre";
-      companyText.textContent = "FerreBuceo";
-    }
+  if (kind === "libre") {
+    icon = "💰"; 
+    title = "¡Saldo libre ganado!"; 
+    coinClass = "coin-yellow";
+  } else if (kind === "jackpot") {
+    icon = "🏆"; 
+    title = "¡JACKPOT de saldo libre!"; 
+    coinClass = "coin-yellow";
+  } else if (kind === "descuento") {
+    icon = "％"; 
+    title = "¡Descuento desbloqueado!"; 
+    coinClass = "coin-neutral"; 
+    showCompany = true;
+    companyLogo.textContent = "PR";
+    companyLogo.className = "company-logo company-pizza";
+    companyText.textContent = "PizzaRocket";
+  } else if (kind === "lightning-mueble") {
+    icon = "⚡"; 
+    title = "Saldo lightning MuebleBox"; 
+    coinClass = "coin-blue"; 
+    showCompany = true;
+    companyLogo.textContent = "MB";
+    companyLogo.className = "company-logo company-mueble";
+    companyText.textContent = "MuebleBox";
+  } else if (kind === "lightning-ferre") {
+    icon = "⚡"; 
+    title = "Saldo lightning FerreBuceo"; 
+    coinClass = "coin-blue"; 
+    showCompany = true;
+    companyLogo.textContent = "FB";
+    companyLogo.className = "company-logo company-ferre";
+    companyText.textContent = "FerreBuceo";
+  }
+
+  iconEl.textContent = icon;
+  titleEl.textContent = title;
+  descEl.textContent  = outcome.label;
+  companyWrap.style.display = showCompany ? "inline-flex" : "none";
+
+  coinsEl.innerHTML = "";
+  const coinCount = 10;
+
+  for (let i = 0; i < coinCount; i++) {
+    const c = document.createElement("div");
+    c.className = "coin " + coinClass;
+    const offsetX = (Math.random() - 0.5) * 120;
+    c.style.setProperty("--coin-x", offsetX + "px");
+    const delay = Math.random() * 0.25;
+    c.style.animationDelay = delay + "s";
+    c.textContent = kind === "descuento"
+      ? "%"
+      : (kind.startsWith("lightning") ? "⚡" : "$");
+    coinsEl.appendChild(c);
+  }
+
+  overlay.style.display = "flex";
+
+  // 🌧 Lluvia de monedas SOLO cuando es saldo libre (incluye jackpot)
+  if (kind === "libre" || kind === "jackpot") {
+    showRuletaCoinRain();
+  }
+
+  // 🎵 Sonido de monedas como antes
+  if (
+    kind === "libre" ||
+    kind === "jackpot" ||
+    kind === "lightning-mueble" ||
+    kind === "lightning-ferre"
+  ) {
+    playCoinRainSound();
+  }
+}
+function showRuletaCoinRain() {
+  const container = document.getElementById("coin-rain");
+  if (!container) return;
+
+  // Limpiamos por si quedó algo de antes
+  container.innerHTML = "";
+  container.style.display = "block";
+
+  const numCoins = 40; // cantidad de monedas que caen
+
+  for (let i = 0; i < numCoins; i++) {
+    const coin = document.createElement("div");
+    coin.className = "coin";
+
+    // Posición horizontal aleatoria dentro de la ruleta
+    const leftPercent = Math.random() * 100; // 0–100%
+    // Empezar un poquito por arriba
+    const topPercent  = -10 + Math.random() * 15; // -10% a +5%
+
+    coin.style.left = leftPercent + "%";
+    coin.style.top  = topPercent + "%";
+
+    // Tamaño aleatorio
+    const size = 14 + Math.random() * 10; // 14–24 px
+    coin.style.width  = size + "px";
+    coin.style.height = size + "px";
+
+    // Duración y delay de la caída
+    const duration = 1.5 + Math.random() * 0.8; // 1.5–2.3 s
+    const delay    = Math.random() * 0.4;       // 0–0.4 s
+    coin.style.animationDuration = duration + "s";
+    coin.style.animationDelay    = delay + "s";
+
+    container.appendChild(coin);
+  }
+
+  // Después de un rato limpiamos todo
+  setTimeout(() => {
+    container.innerHTML = "";
+    container.style.display = "none";
+  }, 2600);
+}
+
 
     iconEl.textContent = icon;
     titleEl.textContent = title;
