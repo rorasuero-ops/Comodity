@@ -2646,7 +2646,6 @@ function playCoinsFileSound() {
       companyLogo.className = "company-logo company-ferre";
       companyText.textContent = "FerreBuceo";
     }
-
     iconEl.textContent = icon;
     titleEl.textContent = title;
     descEl.textContent  = outcome.label;
@@ -2677,10 +2676,14 @@ function playCoinsFileSound() {
       kind === "lightning-ferre"
     ) {
       playCoinRainSound();
-     setTimeout(() => {
-    playCoinsFileSound();
-  }, 400);
-}
+
+      setTimeout(() => {
+        playCoinsFileSound();
+      }, 400);
+    }   // <- cierra el if
+
+  }     // <- cierra function showRewardPopup
+
 
   function closeRewardPopup() {
     document.getElementById("reward-overlay").style.display = "none";
