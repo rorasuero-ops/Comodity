@@ -2493,6 +2493,50 @@ document.addEventListener("DOMContentLoaded", startOfferRotation);
       osc.start(start); osc.stop(end);
     }
   }
+  // Lluvia de monedas sobre la ruleta (solo saldo libre)
+function showRuletaCoinRain() {
+  const container = document.getElementById("coin-rain");
+  if (!container) return;
+
+  // Limpiamos por si quedó algo de antes
+  container.innerHTML = "";
+
+  const coinCount = 35; // cantidad de monedas
+  for (let i = 0; i < coinCount; i++) {
+    const coin = document.createElement("div");
+    coin.className = "coin"; // se usará el CSS .coin-rain .coin
+
+    // Posición horizontal aleatoria dentro del contenedor
+    const left = Math.random() * 100; // 0 a 100 %
+    coin.style.left = left + "%";
+
+    // Arrancan un poco arriba de la ruleta
+    coin.style.top = "-15%";
+
+    // Tamaño aleatorio
+    const size = 18 + Math.random() * 14; // 18–32 px aprox
+    coin.style.width = size + "px";
+    coin.style.height = size + "px";
+
+    // Duración y delay de la caída
+    const duration = 1.5 + Math.random() * 0.8; // 1.5–2.3 s
+    const delay    = Math.random() * 0.4;       // 0–0.4 s
+    coin.style.animationDuration = duration + "s";
+    coin.style.animationDelay    = delay + "s";
+
+    container.appendChild(coin);
+  }
+
+  // Mostramos el contenedor (por si en algún momento lo ocultás)
+  container.style.display = "block";
+
+  // Después de un rato limpiamos todo
+  setTimeout(() => {
+    container.innerHTML = "";
+    container.style.display = "none";
+  }, 2600);
+}
+
 
   function playWinSound() {
     const ctx = getAudioCtx(); if (!ctx) return;
@@ -2694,7 +2738,10 @@ document.addEventListener("DOMContentLoaded", startOfferRotation);
     }
 
     overlay.style.display = "flex";
-
+  // Lluvia de monedas SOLO cuando es saldo libre
+    if (kind === "libre" || kind === "jackpot") {
+      showRuletaCoinRain();
+    }
     if (
       kind === "libre" ||
       kind === "jackpot" ||
