@@ -2683,6 +2683,7 @@ document.addEventListener("DOMContentLoaded", startOfferRotation);
   }
 
   function showRewardPopup(kind, outcome) {
+ function showRewardPopup(kind, outcome) {
   const overlay      = document.getElementById("reward-overlay");
   const iconEl       = document.getElementById("reward-icon");
   const titleEl      = document.getElementById("reward-title");
@@ -2759,7 +2760,7 @@ document.addEventListener("DOMContentLoaded", startOfferRotation);
     showRuletaCoinRain();
   }
 
-  // Sonido de monedas
+  // Sonido de monedas para saldos y lightning
   if (
     kind === "libre" ||
     kind === "jackpot" ||
@@ -2772,19 +2773,15 @@ document.addEventListener("DOMContentLoaded", startOfferRotation);
 
 function closeRewardPopup() {
   const overlay = document.getElementById("reward-overlay");
-  if (overlay) {
-    overlay.style.display = "none";
-  }
+  overlay.style.display = "none";
 }
 
 function agregarCupon(coupon) {
+  // Lógica para guardar el cupón y refrescar la UI
   cupones.push(coupon);
-  actualizarCuponesCount();
+  renderCupones();
 }
 
-    cupones.push(coupon);
-    actualizarCuponesCount();
-  }
 
   function openCouponsPopup() {
     const overlay = document.getElementById("coupons-overlay");
