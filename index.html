@@ -358,14 +358,18 @@
   /* ----- LAYOUT HOME TOP (banners + ruleta) ----- */
   /* Aumentar tamaño SOLO del item señalado */
 .offer-item {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transform-origin: center;
+  overflow: visible; /* evita que el zoom se corte */
 }
 
 .offer-item:hover {
-  transform: scale(1.06);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-  z-index: 2;
+  transform: scale(1.35); /* << ZOOM fuerte */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  z-index: 20;
 }
+
 
 
   .home-top {
