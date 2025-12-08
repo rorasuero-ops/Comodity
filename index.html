@@ -2429,6 +2429,17 @@ document.addEventListener("DOMContentLoaded", startOfferRotation);
   }
 
   /* ------------------------  SONIDOS RULETA  ------------------------ */
+// ------------------------ SONIDO EXTRA DE MONEDAS (coinssound.wav) ------------------------
+const coinsFileSound = new Audio("img/coinssound.wav"); 
+
+function playCoinsFileSound() {
+  try {
+    coinsFileSound.currentTime = 0;  
+    coinsFileSound.play().catch(() => {});
+  } catch (e) {
+    console.error("Error reproduciendo coinssound.wav:", e);
+  }
+}
 
   function getAudioCtx() {
     if (!window.AudioContext && !window.webkitAudioContext) return null;
@@ -2666,8 +2677,10 @@ document.addEventListener("DOMContentLoaded", startOfferRotation);
       kind === "lightning-ferre"
     ) {
       playCoinRainSound();
-    }
-  }
+     setTimeout(() => {
+    playCoinsFileSound();
+  }, 400);
+}
 
   function closeRewardPopup() {
     document.getElementById("reward-overlay").style.display = "none";
