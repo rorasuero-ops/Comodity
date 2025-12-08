@@ -1490,37 +1490,76 @@
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-card">
+
     <div class="login-logo">
       <div class="login-logo-icon">C</div>
     </div>
-    <div class="login-title">Ingresá a Comodity</div>
-    <div class="login-subtitle">Girá la ruleta y acumulá saldo y cupones para tus compras.</div>
 
+    <div class="login-title">Ingresá a Comodity</div>
+    <div class="login-subtitle">
+      Girá la ruleta y acumulá saldo y cupones para tus compras.
+    </div>
+
+    <!-- ========= FORMULARIO DE LOGIN ========= -->
     <form id="login-form" class="login-form">
-      <div id="login-name-group">
-        <label for="login-name">Nombre</label>
-        <input id="login-name" type="text" placeholder="Ej: Javier Araujo" />
+      <div>
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="tucorreo@example.com" required>
       </div>
       <div>
-        <label for="login-email">Email</label>
-        <input id="login-email" type="email" placeholder="tucorreo@example.com" required />
+        <label>Contraseña</label>
+        <input type="password" id="login-password" placeholder="••••••••" required>
       </div>
-      <div>
-        <label for="login-password">Contraseña</label>
-        <input id="login-password" type="password" placeholder="●●●●●●●●" required />
-      </div>
-      <button type="submit" class="login-button" id="login-submit-btn">Entrar</button>
-      <button type="button" class="login-button google" onclick="loginWithGoogle()">
-        Continuar con Google
+      <button type="submit" class="login-button">
+        Entrar
       </button>
     </form>
 
-    <div class="login-note">
-      <span id="login-mode-message">¿No tenés cuenta?</span>
-      <button type="button" id="toggle-login-mode" class="link-like">Crear cuenta</button>
+    <button class="login-button google" onclick="loginWithGoogle()">
+      Continuar con Google
+    </button>
+
+    <!-- Nota abajo del login -->
+    <div class="login-note" id="login-note-row">
+      <span>¿No tenés cuenta?</span>
+      <button type="button" class="link-like" onclick="showSignup()">
+        Crear cuenta
+      </button>
     </div>
+
+    <!-- ========= SECCIÓN REGISTRO (OCULTA AL INICIO) ========= -->
+    <div id="signup-section" style="display:none; margin-top:16px; text-align:left;">
+      <div style="font-size:14px; font-weight:bold; margin-bottom:8px;">
+        Crear cuenta nueva
+      </div>
+
+      <label>Nombre</label>
+      <input type="text" id="signup-nombre" placeholder="Ej: Javier">
+
+      <label>Apellido</label>
+      <input type="text" id="signup-apellido" placeholder="Ej: Araujo">
+
+      <label>Email</label>
+      <input type="email" id="signup-email" placeholder="tucorreo@example.com">
+
+      <label>Contraseña</label>
+      <input type="password" id="signup-password" placeholder="Mínimo 6 caracteres">
+
+      <button type="button" class="login-button" style="margin-top:10px;" onclick="signupWithEmail()">
+        Registrarme
+      </button>
+
+      <div class="login-note" style="margin-top:8px;">
+        <span>¿Ya tenés cuenta?</span>
+        <button type="button" class="link-like" onclick="showLogin()">
+          Iniciar sesión
+        </button>
+      </div>
+    </div>
+
   </div>
 </div>
+
 
 <!-- APP -->
 <div id="app">
@@ -1959,7 +1998,6 @@
     photoDataUrl: ""
   };
 
-  let isRegisterMode = false;
   let cellIntervals = [];
 
   const outcomes = [
@@ -1970,6 +2008,8 @@
     { label: "$80 saldo lightning para gastar en MuebleBox", type: "saldoLightMueble", amount: 80, prob: 0.10 },
     { label: "$20 saldo lightning para gastar en FerreBuceo", amount: 20, type: "saldoLightFerre", prob: 0.10 }
   ];
+
+  /* ------------------------  PERFIL / LOCALSTORAGE  ------------------------ */
 
   function applyUserHeader() {
     const nameEl = document.getElementById("user-name");
@@ -2061,7 +2101,9 @@
     actualizarCuponesCount();
     actualizarTiradas();
   }
-  
+
+  /* ------------------------  LOGIN / SIGNUP  ------------------------ */
+
   function handleUserLoggedIn(user, nameOverride) {
     currentUser = user;
     currentUserName = nameOverride || user.displayName || user.email;
@@ -2095,68 +2137,119 @@
     }
   });
 
-  function toggleLoginMode() {
-    isRegisterMode = !isRegisterMode;
-    const nameGroup = document.getElementById("login-name-group");
-    const submitBtn = document.getElementById("login-submit-btn");
-    const msg = document.getElementById("login-mode-message");
-    const toggleBtn = document.getElementById("toggle-login-mode");
+  /* ---- Cambiar entre pantalla LOGIN y pantalla REGISTRO ---- */
 
-    if (isRegisterMode) {
-      nameGroup.style.display = "block";
-      submitBtn.textContent = "Crear cuenta y entrar";
-      msg.textContent = "¿Ya tenés cuenta?";
-      toggleBtn.textContent = "Iniciar sesión";
-    } else {
-      nameGroup.style.display = "none";
-      submitBtn.textContent = "Entrar";
-      msg.textContent = "¿No tenés cuenta?";
-      toggleBtn.textContent = "Crear cuenta";
+  function showSignup() {
+    const loginForm     = document.getElementById("login-form");
+    const googleBtn     = document.querySelector(".login-button.google");
+    const loginNoteRow  = document.getElementById("login-note-row");
+    const signupSection = document.getElementById("signup-section");
+
+    if (loginForm)     loginForm.style.display = "none";
+    if (googleBtn)     googleBtn.style.display = "none";
+    if (loginNoteRow)  loginNoteRow.style.display = "none";
+    if (signupSection) signupSection.style.display = "block";
+  }
+
+  function showLogin() {
+    const loginForm     = document.getElementById("login-form");
+    const googleBtn     = document.querySelector(".login-button.google");
+    const loginNoteRow  = document.getElementById("login-note-row");
+    const signupSection = document.getElementById("signup-section");
+
+    if (loginForm)     loginForm.style.display = "flex";
+    if (googleBtn)     googleBtn.style.display = "block";
+    if (loginNoteRow)  loginNoteRow.style.display = "flex";
+    if (signupSection) signupSection.style.display = "none";
+  }
+
+  /* ---- REGISTRO CON EMAIL (NOMBRE + APELLIDO) ---- */
+
+  async function signupWithEmail() {
+    const nombreEl   = document.getElementById("signup-nombre");
+    const apellidoEl = document.getElementById("signup-apellido");
+    const emailEl    = document.getElementById("signup-email");
+    const passEl     = document.getElementById("signup-password");
+
+    const nombre   = nombreEl   ? nombreEl.value.trim()   : "";
+    const apellido = apellidoEl ? apellidoEl.value.trim() : "";
+    const email    = emailEl    ? emailEl.value.trim()    : "";
+    const pass     = passEl     ? passEl.value.trim()     : "";
+
+    if (!nombre || !apellido || !email || !pass) {
+      alert("Completá nombre, apellido, email y contraseña.");
+      return;
+    }
+
+    try {
+      const cred = await auth.createUserWithEmailAndPassword(email, pass);
+      const user = cred.user;
+
+      const nombreCompleto = `${nombre} ${apellido}`.trim();
+      try {
+        await user.updateProfile({ displayName: nombreCompleto });
+      } catch (e) {
+        console.error("Error al actualizar displayName:", e);
+      }
+
+      profileData.nombre = nombreCompleto;
+      profileData.email  = email;
+      currentUserName    = nombreCompleto;
+
+      // Guardar también en Firestore (colección "usuarios")
+      try {
+        await db.collection("usuarios").doc(user.uid).set({
+          nombre,
+          apellido,
+          nombreCompleto,
+          email,
+          creadoEn: firebase.firestore.FieldValue.serverTimestamp(),
+          saldoLibre: 0,
+          saldoLightning: 0,
+          cupones: []
+        });
+      } catch (e) {
+        console.error("Error guardando usuario en Firestore:", e);
+      }
+
+      handleUserLoggedIn(user, nombreCompleto);
+      saveProfileForUser();
+    } catch (e) {
+      console.error(e);
+      alert("Error al registrarte: " + e.message);
     }
   }
 
-  document.getElementById("toggle-login-mode").addEventListener("click", toggleLoginMode);
+  /* ---- LOGIN CON EMAIL ---- */
 
-  document.getElementById("login-form").addEventListener("submit", async function(e) {
-    e.preventDefault();
-    const name  = document.getElementById("login-name").value.trim();
-    const email = document.getElementById("login-email").value.trim();
-    const pass  = document.getElementById("login-password").value.trim();
+  const loginFormEl = document.getElementById("login-form");
+  if (loginFormEl) {
+    loginFormEl.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value.trim();
+      const pass  = document.getElementById("login-password").value.trim();
 
-    if (isRegisterMode) {
-      if (!name || !email || !pass) {
-        alert("Completá nombre, email y contraseña para crear la cuenta.");
-        return;
-      }
-      try {
-        const credNew = await auth.createUserWithEmailAndPassword(email, pass);
-        await credNew.user.updateProfile({ displayName: name });
-        profileData.nombre = name;
-        profileData.email = email;
-        handleUserLoggedIn(credNew.user, name);
-        saveProfileForUser();
-      } catch (err2) {
-        alert("Error al crear usuario: " + err2.message);
-      }
-    } else {
       if (!email || !pass) {
         alert("Completá email y contraseña.");
         return;
       }
+
       try {
         const cred = await auth.signInWithEmailAndPassword(email, pass);
         handleUserLoggedIn(cred.user);
       } catch (err) {
         if (err.code === "auth/user-not-found") {
-          alert("Usuario no encontrado. Cambiá a 'Crear cuenta' para registrarte.");
+          alert("Usuario no encontrado. Pasá a 'Registrarme' para crear tu cuenta.");
         } else if (err.code === "auth/wrong-password") {
           alert("Contraseña incorrecta.");
         } else {
           alert("Error al iniciar sesión: " + err.message);
         }
       }
-    }
-  });
+    });
+  }
+
+  /* ---- LOGIN CON GOOGLE ---- */
 
   async function loginWithGoogle() {
     try {
@@ -2178,6 +2271,8 @@
       console.error(e);
     }
   }
+
+  /* ------------------------  SONIDOS RULETA  ------------------------ */
 
   function getAudioCtx() {
     if (!window.AudioContext && !window.webkitAudioContext) return null;
@@ -2288,6 +2383,8 @@
       osc.stop(end);
     }
   }
+
+  /* ------------------------  RULETA / PREMIOS  ------------------------ */
 
   function getRandomOutcomeWeighted() {
     const r = Math.random();
@@ -2516,6 +2613,8 @@
     }, 1500);
   }
 
+  /* ------------------------  MENÚ DE USUARIO / PERFIL  ------------------------ */
+
   document.getElementById("user-avatar").addEventListener("click", function (e) {
     e.stopPropagation();
     const menu = document.getElementById("user-menu");
@@ -2593,6 +2692,8 @@
     reader.readAsDataURL(file);
   });
 
+  /* ------------------------  NAVEGACIÓN DE PANTALLAS  ------------------------ */
+
   function showScreen(id) {
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
     const el = document.getElementById(id);
@@ -2646,6 +2747,8 @@
     const label = CATEGORY_LABELS[key] || key;
     loadCategoryFromFirestore(key, label);
   });
+
+  /* ------------------------  CELULARES DEMO  ------------------------ */
 
   const cellphones = [
     {
@@ -2778,6 +2881,8 @@
     document.getElementById("cell-detail-overlay").style.display = "none";
   }
 
+  /* ------------------------  POPUPS INFO LIGHTNING  ------------------------ */
+
   function openLightningInfo() {
     document.getElementById("lightning-overlay").style.display = "flex";
   }
@@ -2785,6 +2890,8 @@
   function closeLightningInfo() {
     document.getElementById("lightning-overlay").style.display = "none";
   }
+
+  /* ------------------------  REFERIDOS  ------------------------ */
 
   function generateReferralLink() {
     const input = document.getElementById("ref-link-input");
@@ -2802,6 +2909,8 @@
     document.execCommand("copy");
     alert("Link copiado al portapapeles");
   }
+
+  /* ------------------------  OFERTAS DESTACADAS  ------------------------ */
 
   function initOfferCountdowns() {
     document.querySelectorAll(".offer-timer").forEach(timerEl => {
@@ -2826,12 +2935,7 @@
     label.textContent = "Sorteo: " + draw.toLocaleDateString("es-UY", opts);
   }
 
-  window.addEventListener("load", () => {
-    document.getElementById("login-name-group").style.display = "none";
-    initOfferCountdowns();
-    initRaffleDate();
-    generateReferralLink();
-  });
+  /* ------------------------  FIRESTORE CATEGORÍAS  ------------------------ */
 
   async function loadCategoryFromFirestore(catKey, catLabel) {
     showScreen("category-screen");
@@ -2848,7 +2952,6 @@
       const snap = await db
         .collection("publicaciones")
         .where("categoria", "==", catKey)
-      
         .get();
 
       if (snap.empty) {
@@ -2926,7 +3029,18 @@
 
     overlay.style.display = "flex";
   }
+
+  /* ------------------------  INIT AL CARGAR LA PÁGINA  ------------------------ */
+
+  window.addEventListener("load", () => {
+    // Por si existe la sección de registro, arrancamos mostrando login
+    showLogin();
+    initOfferCountdowns();
+    initRaffleDate();
+    generateReferralLink();
+  });
 </script>
+
 
 </body>
 </html>
