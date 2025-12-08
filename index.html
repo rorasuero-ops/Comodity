@@ -11,7 +11,7 @@
       apiKey: "AIzaSyC7QcScbqc5dWL4WCatnemf_KGCaZtjCT4",
       authDomain: "comodity-9a7be.firebaseapp.com",
       projectId: "comodity-9a7be",
-      storageBucket: "comodity-9a7be.firebasestorage.app",
+      storageBucket: "comodity-9a7be.appspot.com",   // ✅ corregido
       messagingSenderId: "560121634288",
       appId: "1:560121634288:web:e02bdad21bd4ee06255135",
       measurementId: "G-PYNZCB10T0"
@@ -19,8 +19,10 @@
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
-    const db   = firebase.firestore(); //
+    const db   = firebase.firestore();
   </script>
+</head>
+
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
